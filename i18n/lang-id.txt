@@ -1,0 +1,2597 @@
+1	Sesi
+2	Pengaturan
+3	Kemampuan
+4	baru saja
+5	{n} menit lalu
+6	{n} jam lalu
+7	{n} hari lalu
+8	Kesalahan skrip antarmuka: {msg}
+9	Tidak bisa dibaca: {path}
+10	Disalin
+11	Gagal menyalin
+12	Salin
+13	Anda
+14	Perintah
+15	Kirim ulang
+16	Bagikan
+17	Bantuan
+18	Kembali ke daftar isi
+19	{n} langkah
+20	Sebagian gagal
+21	{n} karakter
+22	{n}rb karakter
+23	Tampilkan lagi ({left} tersisa)
+24	… ({left} tidak ditampilkan)
+25	Selesai
+26	Gagal
+27	Dihentikan
+28	(tidak ada keluaran)
+29	Masukan
+30	Hasil
+31	Berjalan
+32	Berpikir
+33	Konteks {used} / dipadatkan di {line} · {pct}%
+34	Konteks {used} / {total} · {pct}%
+35	Sesi baru
+36	Memuat…
+37	Muat pesan sebelumnya
+38	Gagal membaca riwayat: {msg}
+39	Sesi: {title}
+40	Siap
+41	<p>Hai, saya <strong>Claude Code CLI</strong> yang berjalan di perangkat ini.</p>
+42	Terputus dari gateway, menyambung ulang… (pekerjaan yang berjalan tidak terpengaruh)
+43	Antarmuka diperbarui, memuat ulang…
+44	Tersambung
+45	Dihentikan
+46	Membuat jawaban
+47	Membuat jawaban · Enter = antrekan · ⚡ = sela (tanpa menghentikan)
+48	Kirim pesan ke Claude, / untuk perintah, @ untuk merujuk file…
+49	Membuat jawaban…
+50	Konteks dibersihkan, memulai sesi baru
+51	{n} dalam antrean · dikirim satu per satu setelah giliran ini selesai
+52	Hapus semua
+53	Sela: masukkan ke giliran yang sedang berjalan tanpa menghentikannya
+54	Hapus yang ini
+55	Memulai proses masuk…
+56	Tidak bisa memulai proses masuk
+57	Belum ada sesi
+58	Nama diubah
+59	Disela: Claude akan melihatnya setelah langkah saat ini selesai
+60	Giliran ini sedang diselesaikan, jadi tidak bisa disela — dipindahkan ke depan antrean
+61	Diantrekan; akan dikirim setelah giliran ini selesai
+62	Gagal mengirim
+63	Tidak ada yang cocok
+64	Perintah garis miring
+65	 · cocok dengan “{q}”
+66	Rujuk file · {path}
+67	Gagal melampirkan “{name}”: {msg}
+68	{n} file dilampirkan
+69	{name} dilampirkan
+70	Konten yang dibagikan sudah disisipkan
+71	Gagal membuka direktori: {msg}
+72	Hapus
+73	Dir
+74	File
+75	{n} item
+76	{n} item · {path}
+77	(direktori kosong)
+78	Membaca…
+79	… (dipotong)
+80	Tidak bisa dibaca
+81	tidak ada pratinjau
+82	Sisipkan @path
+83	Unduh
+84	Path direktori disisipkan
+85	Path file disisipkan
+86	Belum ada sesi sebelumnya.
+87	Proyek saat ini
+88	Nama diubah
+89	Pindah ke sesi ini
+90	Ganti nama
+91	Hapus
+92	Nama sesi baru
+93	Dihapus
+94	Muat ulang daftar
+95	Putuskan yang sekarang
+96	Pihak ketiga (tambahkan kunci, langsung pakai)
+97	Endpoint kustom
+98	 · tanpa kunci
+99	{n}
+100	Dipakai: <b>{name}</b> <code>{url}</code>
+101	Gagal membaca daftar endpoint: {msg}
+102	Tambahkan kunci dan simpan dulu
+103	Beralih ke {name} (berlaku mulai pesan berikutnya)
+104	Kueri gagal: {msg}
+105	✓ Sudah masuk: <b>{email}</b>
+106	✓ Sudah masuk
+107	Menunggu otorisasi di browser…
+108	Belum masuk
+109	Tidak bisa memulai
+110	Gagal masuk: {msg}
+111	✓ Sudah masuk: {email}
+112	, ketuk “Pakai endpoint ini” untuk beralih
+113	Proses masuk tidak selesai
+114	Keluar dari akun Claude di perangkat ini?
+115	Sudah keluar
+116	Gagal keluar: {msg}
+117	Hapus kunci untuk {name}?
+118	Dihapus
+119	Tersimpan
+120	Menguji…
+121	Rute
+122	Endpoint
+123	Model bawaan
+124	Buat kunci di situs penyedia ↗
+125	Kunci hanya disimpan di direktori privat aplikasi ini dan dibaca saat diperlukan oleh apiKeyHelper milik claude (tidak pernah ditaruh di variabel lingkungan); kunci dipakai untuk memanggil endpoint penyedia yang kompatibel dengan Anthropic secara langsung.
+126	Tempel API key
+127	Tersimpan (…{tail}); kosongkan untuk mempertahankan
+128	Simpan
+129	Uji
+130	Hapus kunci
+131	● Dipakai
+132	Pakai endpoint ini
+133	Membaca…
+134	Memeriksa status masuk…
+135	Masuk dengan akun lain
+136	Masuk ke Claude
+137	Pakai akun Console
+138	Keluar
+139	Batalkan proses masuk
+140	Halaman otorisasi sudah terbuka di browser. Setelah Anda menyetujui, browser kembali ke perangkat ini dan proses masuk selesai otomatis.
+141	Tidak terbuka? 
+142	Buka di sini
+143	Tambah endpoint kustom
+144	Nama (mis. Gateway kantor)
+145	Autentikasi: Authorization: Bearer (sebagian besar pihak ketiga)
+146	Autentikasi: x-api-key (gaya Anthropic)
+147	Nama model bawaan (wajib — claude tidak mengenal model pihak ketiga)
+148	Nama model cepat (opsional, dipakai subagen; kosong = sama dengan di atas)
+149	URL daftar model (opsional, /models berformat OpenAI)
+150	URL endpoint, mis.
+151	Tambah
+152	Endpoint harus mendukung protokol <b>Anthropic Messages</b> (URL yang oleh penyedia disebut “integrasi Claude Code”).
+153	Jangan tambahkan <code>/v1</code> di akhir — claude menambahkan <code>/v1/messages</code> sendiri.
+154	Hapus endpoint “{name}”?
+155	Nama model bawaan wajib diisi
+156	Ditambahkan
+157	Shizuku belum terpasang
+158	Shizuku terpasang tetapi layanannya tidak berjalan (jalankan di aplikasi Shizuku setelah reboot)
+159	Shizuku berjalan tetapi belum memberi izin ke cccodroid
+160	Tidak bisa menghubungi layanan latar aplikasi
+161	RedMagic / Nubia: Info aplikasi → Penggunaan baterai → Optimasi baterai → <b>Berjalan di latar: izinkan</b> (izinkan juga <b>mulai otomatis</b> — itulah yang mengaktifkan ulang Shizuku saat boot dan memulihkan setelah pembaruan)
+162	ZTE: Info aplikasi → Penggunaan baterai → Optimasi baterai → <b>Berjalan di latar: izinkan</b>, <b>mulai otomatis: izinkan</b>
+163	Xiaomi / Redmi: Info aplikasi → <b>Penghemat baterai: tanpa batasan</b>, aktifkan <b>mulai otomatis</b> (jalur umum; bisa beda tergantung versi OS)
+164	OPPO / OnePlus / Realme: Info aplikasi → Hemat daya → <b>Izinkan aktivitas latar</b>, <b>Izinkan mulai otomatis</b> (jalur umum)
+165	vivo / iQOO: Setelan → Baterai → Manajemen daya latar → izinkan <b>penggunaan daya latar tinggi</b> untuk cccodroid; di iManager izinkan <b>mulai otomatis</b> (jalur umum)
+166	Huawei / Honor: Setelan → Peluncuran aplikasi → matikan “Kelola otomatis” untuk cccodroid, lalu izinkan manual <b>mulai otomatis</b> dan <b>aktivitas latar</b> (jalur umum)
+167	cccodroid sudah dibekukan di latar sebanyak {n} kali (terakhir sekitar {sec} detik, {at}).
+168	Saat dibekukan, gateway dan semua tugas yang berjalan berhenti total dan baru lanjut saat aplikasi di depan. Layanan latar depan tidak bisa mencegah pembeku bawaan vendor seperti ini.
+169	Di setelan sistem, izinkan berjalan di latar, matikan optimasi baterai, dan izinkan mulai otomatis untuk cccodroid (istilahnya berbeda tiap vendor).
+170	✓ Siap · menjalankan perintah sebagai {who}
+171	Status tidak diketahui
+172	 (permintaan terakhir ditolak)
+173	Pairing debugging nirkabel untuk cccodroid dicabut: sekarang masih berfungsi, tetapi setelah reboot tidak bisa diaktifkan ulang otomatis.
+174	Shizuku tidak dijalankan oleh cccodroid, jadi cccodroid tidak bisa mengaktifkannya ulang setelah reboot. Lakukan pairing sekali untuk memperbaikinya.
+175	Sistem tidak memberi tahu cccodroid saat boot (diblokir manajemen mulai otomatis), jadi tidak bisa aktif otomatis; membuka cccodroid akan menyusulkannya.
+176	Agar aktif saat boot: izinkan mulai otomatis / mulai di latar untuk cccodroid di detail aplikasi. Berlaku mulai boot berikutnya.
+177	Jalankan layanan di aplikasi Shizuku (aktifkan “Mulai saat boot (debugging nirkabel)”) dan pastikan aplikasi ini sudah diberi izin.
+178	Diminta
+179	Kode pairing terdiri dari 6 digit
+180	Kode pairing 6 digit
+181	Port (opsional)
+182	Pairing
+183	Pairing ulang
+184	Pasang dan aktifkan
+185	Aktifkan (debugging nirkabel)
+186	Buka Shizuku
+187	Beri izin ke cccodroid
+188	Unduh manual
+189	Izinkan mulai otomatis
+190	Muat ulang
+191	Berjalan di latar
+192	Buka setelan sistem
+193	Selesai, hapus pemberitahuan ini
+194	Shizuku (hak akses debug)
+195	Aktifkan ulang otomatis setelah reboot (butuh Wi-Fi; menjalankan layanan latar cccodroid saat boot)
+196	Penguat keep-alive: naikkan batas “phantom process” Android (agar build paralel tidak dimatikan subprosesnya), tambahkan ke daftar putih baterai, izinkan berjalan di latar
+197	Setelah aktif, <code>priv 'perintah'</code> berjalan di terminal sebagai pengguna shell (pm / am / settings / dumpsys / logcat / screencap…), dan Claude juga bisa memakainya. Tanpa Shizuku fitur pengembangan dasar tetap berfungsi — hanya kemampuan debug ini yang tidak tersedia.
+198	Sudah terbaru
+199	Ada pembaruan
+200	Mengunduh
+201	Sudah diunduh, siap dipasang
+202	Memasang
+203	Kesalahan
+204	Belum diperiksa
+205	Perbarui
+206	Unduh dan pasang
+207	Pasang
+208	Coba lagi
+209	Memeriksa…
+210	Terakhir diperiksa: {at}
+211	Belum pernah diperiksa
+212	Periksa pembaruan
+213	CLI: stabil
+214	CLI: terbaru
+215	Perbarui paket pengembangan?\n\nUkuran unduhan tertera di sebelah item ini (bisa dilanjutkan); pemasangan menjeda layanan selama 1–2 menit.\nApa pun yang Anda pasang ke paket dengan pip / npm -g tetap dipertahankan.
+216	Dimulai
+217	Pembaruan otomatis (aktif secara bawaan): Claude Code diperbarui diam-diam; versi aplikasi baru diunduh lalu meminta Anda memasangnya (dipasang otomatis saat menganggur jika Shizuku tersedia); paket pengembangan hanya diunduh lebih dulu lewat Wi-Fi dan dipasang saat aplikasi dibuka berikutnya
+218	Aktifkan penguat keep-alive?\n\nIni mengubah beberapa setelan sistem: batas phantom process (berpengaruh ke semua aplikasi), serta daftar putih baterai dan batas berjalan di latar aplikasi ini. Mematikan sakelar akan memulihkan dua yang pertama.
+219	Menerapkan…
+220	Memulihkan…
+221	✓ Diterapkan
+222	 (batas phantom process {n})
+223	✓ Dipulihkan
+224	(bawaan: {model})
+225	(bawaan — claude yang menentukan)
+226	(bawaan — claude menentukan per model)
+227	(penyedia ini tidak menyediakan daftar model)
+228	Konteks {n} · keluaran maks {out} · masukan {mods}
+229	 | Ini bawaan; pilih yang lain untuk satu sesi lewat label model di bawah kotak masukan
+230	Tidak ada model dipilih → <b>claude yang menentukan</b> (akun resmi saat ini memakai <code>{model}</code> secara bawaan).
+231	bawaan claude
+232	<br>Daftar di atas adalah semua model yang bisa dipakai akun ini; pilih satu untuk menguncinya.
+233	Penyedia ini membiarkan claude memilih model dan tidak menyediakan daftar. Untuk menetapkan satu, atur <code>defaultModel</code> di <code>ccapp-providers.json</code>.
+234	Gagal mengambil daftar model: {msg}
+235	Level lebih tinggi berpikir lebih lama. Ini bawaan; pilih yang lain untuk satu sesi di bawah kotak masukan
+236	(bawaan)
+237	Bawaan
+238	(tidak ada direktori tambahan)
+239	Gagal menyimpan
+240	Menjalankan claude doctor…
+241	(tidak ada keluaran)
+242	Gagal: {msg}
+243	Lainnya
+244	(belum ada data — kirim pesan dan data diambil dari CLI)
+245	Claude Code {ver} · model {model} · izin {perm} · gaya keluaran {style}
+246	Belum ada daftar kemampuan dari CLI — terisi setelah pesan pertama Anda.
+247	Meminta data…
+248	(tidak ada server MCP)
+249	Dimuat ulang
+250	Terputus; pesan berikutnya memulai sesi baru
+251	Sesi baru dimulai
+252	Tersambung ke gateway
+253	Runtime tidak ada
+254	API key wajib diisi
+255	Tidak bisa menghubungi gateway: {msg}
+256	Gateway offline
+257	Menyambung ke gateway…
+258	Model
+259	Diambil langsung dari <code>/models</code> penyedia; Anda juga bisa mengetik <code>/model &lt;id&gt;</code> di kotak masukan.
+260	Mode izin
+261	acceptEdits · terima suntingan otomatis
+262	auto · putuskan otomatis
+263	plan · hanya rencana, tanpa eksekusi
+264	Direktori tambahan (--add-dir)
+265	/sdcard/suatu/direktori
+266	Izinkan claude membaca dan menulis direktori di luar workspace. Direktori ini juga muncul sebagai pintasan di penjelajah file.
+267	Gaya keluaran
+268	Upaya berpikir (--effort)
+269	Level berbeda tiap model. Anda juga bisa mengetik <code>/effort &lt;level&gt;</code> di kotak masukan.
+270	Ambang padat-otomatis (token)
+271	Kosong = biarkan claude menentukan dari jendela konteks
+272	Riwayat diringkas otomatis saat pemakaian mendekati nilai ini. Kosong berarti tidak diatur; Anda juga bisa mengetik <code>/autocompact &lt;n&gt;k</code> di kotak masukan.
+273	Status runtime
+274	Jalankan doctor
+275	Alat
+276	Skill
+277	Subagen
+278	Server MCP
+279	Kueri MCP
+280	Plugin
+281	Sesi dan pengaturan
+282	Menyambung…
+283	Penjelajah file
+284	Palet perintah
+285	Lainnya
+286	Lampirkan gambar atau file
+287	Sela
+288	Kirim
+289	Tutup
+290	Endpoint
+291	Direktori induk
+292	Saring direktori ini…
+293	Item tersembunyi
+294	Pilih file…
+295	Sisipkan ke kotak masukan
+296	Lampirkan gambar / file
+297	Jelajahi file…
+298	Sesi baru
+299	Ganti model /model
+300	Upaya berpikir /effort
+301	Lihat pemakaian konteks /context
+302	Lihat biaya /cost
+303	Padatkan konteks /compact
+304	Lihat konfigurasi /config
+305	Pemakaian /usage
+306	Server MCP /mcp
+307	Subagen /agents
+308	Buka panel kemampuan
+309	Lepaskan untuk melampirkan
+310	＋ Tambah endpoint kustom…
+311	Gateway
+312	Runtime
+313	tidak ada
+314	Penyedia
+315	Upstream
+316	Kredensial
+317	masuk resmi
+318	kunci sudah diatur
+319	belum diatur
+320	Jembatan DNS
+321	belum dimulai
+322	(claude yang menentukan)
+323	Membuat jawaban
+324	berjalan
+325	menganggur
+326	 · {n} dalam antrean
+327	Workspace
+328	Memadatkan konteks…
+329	Konteks dipadatkan: {pre} → {post} token
+330	Konteks dipadatkan
+331	Dihentikan — {n} ditahan, tidak dikirim otomatis · ketuk ⚡ untuk mengirim
+332	Kirim yang ini
+333	Dalam antrean
+334	Dijeda
+335	Kirim sekarang
+336	Batal
+337	Tampilan
+338	Sistem
+339	Terang
+340	Gelap
+341	Memakan waktu {d}
+342	Memverifikasi
+343	Rusak
+344	Perbaiki
+345	Verifikasi
+346	Perbaiki paket pengembangan?\n\nBagian versi saat ini yang sudah Anda pasang akan diunduh ulang (bisa dilanjutkan) dan dipasang ulang; layanan dijeda 1–2 menit selama pemasangan.\nApa pun yang Anda pasang ke paket pengembangan dengan pip / npm -g tetap dipertahankan.
+347	Batalkan pilihan
+348	Pilih
+349	Kembali ke sesi
+350	Tempat sampah
+351	Jangan pilih apa pun
+352	Pilih semua
+353	{n} dipilih
+354	Ekspor yang dipilih
+355	Hapus yang dipilih
+356	Sesi yang dihapus disimpan di sini selama {n} hari, lalu dihapus otomatis.
+357	Kosongkan tempat sampah
+358	Tempat sampah kosong.
+359	Dihapus {time}
+360	Pulihkan
+361	Hapus permanen
+362	Mengimpor…
+363	{n} sesi diimpor, {m} yang sudah ada dilewati
+364	{n} sesi diimpor
+365	Gagal mengimpor: {msg}
+366	Transkrip sesi bisa berisi kunci, token, atau isi file yang Anda tempel. Kirim arsip ekspor hanya ke tempat yang Anda percaya. Lanjutkan?
+367	Gagal mengekspor: {msg}
+368	{n} sesi diekspor: {file}
+369	Pindahkan {n} sesi yang dipilih ke tempat sampah? Bisa dipulihkan dalam {d} hari.
+370	{n} dihapus, {m} masih membuat jawaban dan tidak dihapus
+371	Dipindahkan ke tempat sampah
+372	Hapus permanen semua {n} sesi di tempat sampah? Tindakan ini tidak bisa dibatalkan.
+373	Gagal memulihkan: {msg}
+374	Sesi dengan ID yang sama sudah ada
+375	Dipulihkan
+376	Hapus permanen sesi ini? Tindakan ini tidak bisa dibatalkan.
+377	Dipindahkan ke tempat sampah (bisa dipulihkan selama {d} hari)
+378	Nonaktif
+379	Nonaktifkan
+380	Aktifkan
+381	Copot
+382	Belum ada plugin terpasang. Cari di bawah untuk memasangnya.
+383	Mengambil direktori plugin…
+384	{n} ditemukan
+385	Tampilkan 40 lagi
+386	Memasang…
+387	Memasang plugin ini akan menjalankan perintah berikut di perangkat ini. Lanjutkan hanya jika Anda memercayai sumbernya:\n\n{cmd}
+388	Dibatalkan
+389	{name} terpasang; berlaku mulai pesan berikutnya
+390	Gagal memasang: {msg}
+391	Hanya direktori resmi bawaan. Anda bisa menambah marketplace plugin lain (repo GitHub atau URL).
+392	Belum ada skill di ~/.claude/skills. Plugin juga bisa membawa skill sendiri.
+393	Konektor akun
+394	Belum ada server MCP.
+395	Skill {name} terpasang
+396	Menambahkan marketplace…
+397	Gagal menambahkan: {msg}
+398	{name} ditambahkan
+399	Copot plugin {name}?
+400	Hapus skill {name}? Seluruh foldernya akan dihapus.
+401	Hapus server MCP {name}?
+402	Hapus marketplace plugin {name}? Plugin yang dipasang darinya juga akan dicopot.
+403	Mode aman: kustomisasi (CLAUDE.md, skill, plugin, hook, MCP) tidak dimuat
+404	Keluar dari mode aman
+405	Mode aman aktif; berlaku mulai pesan berikutnya
+406	Mode aman nonaktif; berlaku mulai pesan berikutnya
+407	Mengemas log…
+408	Tidak bisa membagikan: {msg}
+409	Mode aman
+410	Log
+411	Versi ini tidak punya catatan perbaikan.
+412	Belum ada entri. Pemasangan, verifikasi, perbaikan, dan pemulihan saat startup dicatat di sini.
+413	Pemakaian: ditampilkan setelah Anda mengirim pesan (5 jam / mingguan)
+414	direset {time}
+415	5 jam
+416	Mingguan
+417	Pemakaian baru saja diperbarui
+418	Pemakaian diperbarui {n} menit lalu (diperbarui setelah tiap giliran)
+419	Ekstensi
+420	Impor
+421	Pemecahan masalah
+422	Mode aman: jalankan claude dengan --safe-mode bawaannya — CLAUDE.md, skill, plugin, hook, MCP, perintah kustom, dan gaya keluaran tidak dimuat. Login, kunci, sesi, dan model tetap; tidak ada file yang diubah, dan mematikannya memulihkan semuanya
+423	Catatan perbaikan
+424	Perubahan berlaku mulai pesan berikutnya. Plugin dan MCP dipasang dan dihapus oleh perintah claude sendiri — halaman ini hanya mengetikkannya untuk Anda.
+425	Cari plugin (direktori resmi dan marketplace yang ditambahkan)
+426	Cari
+427	Marketplace plugin
+428	Repo GitHub (owner/repo) atau URL
+429	Tambah marketplace
+430	Pasang skill dari zip
+431	Memeriksa… (tiap server diuji koneksinya, butuh beberapa detik)
+432	Tambah server MCP
+433	Nama (huruf, angka, - _ .)
+434	Perintah (stdio) atau URL (http / sse)
+435	Variabel env / header, opsional, dipisah koma (KEY=nilai atau Header: nilai)
+436	Buka / sunting
+437	Buka
+438	Buang perubahan yang belum disimpan?
+439	Tidak ada pratinjau bawaan untuk jenis file ini.
+440	Buka sebagai teks
+441	File terlalu besar ({size}); unduh untuk melihatnya.
+442	Sunting
+443	Pratinjau
+444	Bungkus baris
+445	Gagal menyimpan: {msg}
+446	File berubah setelah Anda membukanya (mungkin oleh Claude).\nOK: timpa dengan versi Anda\nBatal: buang suntingan Anda dan muat ulang
+447	Kata sandi salah, coba lagi:
+448	PDF ini dilindungi kata sandi:
+449	Tidak bisa membuka PDF: {msg}
+450	Gagal memuat terminal: {msg}
+451	Tidak bisa membuka terminal: {msg}
+452	Pembantu pseudo-terminal tidak ditemukan (ptyhost / python3)
+453	Tidak bisa membuka terminal baru: {msg}
+454	Tutup terminal ini? Semua yang berjalan di dalamnya akan dihentikan.
+455	[proses keluar, kode {code}]
+456	[terputus dari gateway]
+457	Tempel ke terminal:
+458	Pilihan disalin
+459	Semua disalin
+460	Ke paling bawah
+461	Terminal
+462	Lihat sebagai teks (pilih dan salin)
+463	Terminal baru
+464	Tekan lama untuk memilih teks
+465	Buka di penampil
+466	Lokasi ini dilindungi dan tidak bisa dibuka di sini: {p}
+467	File tidak ditemukan: {p}
+468	Tidak bisa dibuka: {msg}
+469	Sekitar {a} diunduh, {b} terpasang
+470	Belum terpasang
+471	Belum ada build untuk toolchain Anda saat ini
+472	Memasang ke toolchain…
+473	Terpasang
+474	Toolchain sudah diperbarui — perlu dipasang ulang
+475	Pemasangan tidak lengkap — perlu dipasang ulang
+476	Gagal memasang
+477	Unduh & pasang
+478	Batal
+479	Pasang ulang
+480	Gagal memuat daftar komponen: {msg}
+481	Belum ada komponen yang tersedia.
+482	Copot komponen {name}? File-nya di toolchain dihapus; file milik Anda tidak disentuh.
+483	Dicopot
+484	Browser
+485	Komponen opsional
+486	Alat berukuran besar tidak disertakan dalam aplikasi — unduh di sini saat dibutuhkan. Mencopot hanya menghapus file milik komponen itu.
+487	Komunitas
+488	Belum diverifikasi di perangkat
+489	Sebagian daftar komponen gagal dimuat: {msg}
+490	Belum ada yang memverifikasi {name} di perangkat sungguhan. Bisa gagal dipasang atau tidak berfungsi. Tetap pasang?
+491	Hanya perangkat Snapdragon (GPU Adreno) — tidak didukung di perangkat ini
+492	Hanya Snapdragon
+493	Pasang dulu: {names}
+494	Dibutuhkan oleh {names} — copot itu dulu
+495	Sudah masuk ke GitHub; git push sudah diatur
+496	Sudah masuk ke GitHub, tetapi kredensial git belum diatur. Jalankan gh auth setup-git di terminal
+497	Meminta kode sekali pakai dari GitHub…
+498	Masukkan kode sekali pakai ini di browser. Proses selesai otomatis setelah Anda memberi izin:
+499	Salin dan buka browser
+500	Saat ini
+501	Sesi masuk kedaluwarsa
+502	Pindah ke ini
+503	Keluar
+504	Belum masuk ke GitHub. Masuk untuk memakai gh dan git push.
+505	Kode sekali pakai sudah kedaluwarsa. Silakan masuk lagi
+506	Masuk dengan akun lain
+507	Masuk ke GitHub
+508	Kode sekali pakai disalin — tempel di halaman yang terbuka
+509	Keluar dari akun GitHub {name}? gh akan menghapus token yang tersimpan.
+510	Tanya setiap kali
+511	Terima suntingan otomatis
+512	Hanya rencana
+513	Otomatis
+514	Jangan tanya
+515	Izinkan semuanya
+516	… (total {n} baris)
+517	Atau ketik jawaban Anda sendiri…
+518	Path terkait: {p}
+519	Alasan: {r}
+520	Setujui, konfirmasi tiap langkah
+521	Setujui, terima suntingan otomatis
+522	Revisi ▾
+523	Kirim jawaban
+524	Jangan jawab ▾
+525	Izinkan
+526	Selalu izinkan
+527	Izinkan, dan jangan tanya lagi soal suntingan
+528	Tolak ▾
+529	Rencana menunggu persetujuan
+530	Claude punya pertanyaan
+531	Perlu konfirmasi
+532	Sebutkan apa yang perlu diubah (dikirim kembali ke Claude)
+533	Opsional: beri tahu Claude alasannya / apa yang sebaiknya dilakukan
+534	Kirim masukan
+535	Tolak
+536	Tolak dan hentikan
+537	Pilih opsi atau tulis jawaban Anda dulu
+538	✓ Rencana disetujui
+539	✓ Dijawab
+540	✓ Diizinkan (selalu)
+541	✓ Diizinkan
+542	✗ Ditolak dan dihentikan
+543	✗ Ditolak
+544	Ditarik
+545	Dihentikan (giliran berakhir)
+546	Kedaluwarsa
+547	Mode izin sekarang “Tanya setiap kali”, sama dengan bawaan resmi: Claude bertanya sebelum menyunting file atau menjalankan perintah. Untuk mengizinkan semuanya lagi, ketuk label izin di bawah.
+548	Claude menunggu persetujuan Anda
+549	Lihat
+550	{n} lagi
+551	Izinkan semua
+552	Menunggu Anda…
+553	Membaca bebas; bertanya sebelum menyunting file, menjalankan perintah, atau mengakses internet
+554	Menyunting tanpa bertanya; tetap bertanya sebelum menjalankan perintah
+555	Hanya membaca dan merencanakan; bertindak setelah Anda menyetujui rencananya
+556	Pengklasifikasi Claude memutuskan apa yang perlu ditanyakan (eksperimental)
+557	Tidak pernah bertanya. Claude bisa menghapus file dan menjalankan perintah apa pun tanpa persetujuan Anda
+558	Beralih ke “Izinkan semuanya”?\n\nClaude akan berhenti bertanya dan bisa menyunting atau menghapus file, menjalankan perintah apa pun, dan mengakses jaringan. Pakai hanya jika Anda memercayai tugasnya dan siap menanggung akibatnya.
+559	Beralih ke “{m}” — langsung berlaku untuk giliran ini
+560	Beralih ke “{m}”
+561	Ganti mode izin
+562	default · tanya setiap kali (bawaan)
+563	dontAsk · jangan tanya (tolak semua yang butuh konfirmasi)
+564	bypassPermissions · izinkan semuanya
+565	Secara bawaan bertanya setiap kali, seperti CLI resmi: Claude bertanya di chat sebelum menyunting file atau menjalankan perintah. “Izinkan semuanya” berarti Claude bisa menghapus file dan menjalankan perintah apa pun tanpa bertanya. Anda juga bisa beralih kapan saja lewat label izin di bawah kotak masukan.
+566	↩ Dikembalikan untuk direvisi
+567	Buka tautan di bawah di browser untuk memberi izin. Setelah itu browser kembali ke perangkat ini dan proses masuk selesai otomatis:
+568	Jika browser tidak bisa kembali (mis. Anda memberi izin di perangkat lain): buka terminal, jalankan {cmd}, lalu tempel kode yang tampil di halaman langsung ke claude.
+569	Browser tidak kembali (atau memberi izin di perangkat lain)? Masuk lewat terminal: Anda menempel kodenya langsung ke claude; aplikasi ini tidak pernah menyentuhnya.
+570	Masuk lewat terminal
+571	Alat pengembang
+572	Dokumen & perkantoran
+573	Gambar, audio & video
+574	Komputasi ilmiah
+575	Desain elektronik
+576	3D & pemodelan
+577	Inferensi AI
+578	GPU & driver
+579	Jaringan
+580	Semua
+581	Terpasang
+582	Perlu diperbarui
+583	Aktif
+584	Resmi
+585	Dari komponen
+586	Dipasang oleh Anda
+587	Tidak terjangkau
+588	Lokal
+589	Jarak jauh
+590	Mengambil katalog skill resmi…
+591	Sumber & lisensi
+592	Katalog resmi kosong.
+593	Mencari di registry…
+594	Juga tersedia sebagai {kinds}, yang tidak bisa dijalankan perangkat ini
+595	Butuh npx (sudah ada di toolkit cccodroid)
+596	Tidak bisa dipasang di perangkat ini
+597	Tidak ditemukan. Coba kata kunci lain (bahasa Inggris paling cocok).
+598	Tampilkan 30 lagi
+599	Tambahkan
+600	Isi dulu: {names}
+601	Server MCP ini akan menjalankan paket npm di bawah pada perangkat ini (siapa pun bisa menerbitkan ke registry; tidak ada yang ditinjau). Lanjutkan hanya jika Anda memercayai sumbernya:\n\n{cmd}
+602	Skill resmi (anthropics/skills)
+603	Repositori skill resmi Anthropic, dipasang ke ~/.claude/skills; hapus dari daftar di atas. Lisensi berbeda tiap skill — buka tautannya untuk memeriksa sebelum memasang.
+604	Registry MCP resmi
+605	registry.modelcontextprotocol.io: siapa pun bisa menerbitkan dan tidak ada yang ditinjau. Perangkat ini bisa memasang server jarak jauh dan paket npm; paket npm berjalan lokal, jadi periksa perintah dan sumbernya dulu.
+606	Cari server MCP (nama atau kegunaan)
+607	Notifikasi
+608	Beri tahu saat tugas selesai (hanya saat aplikasi di latar)
+609	Beri tahu saat Claude membutuhkan Anda (perintah, rencana, pertanyaan; dari notifikasi Anda hanya bisa menolak — untuk mengizinkan, buka aplikasi dan baca permintaannya lengkap dulu)
+610	Buka setelan notifikasi sistem
+611	Notifikasi aplikasi ini dimatikan di setelan sistem, jadi sakelar ini tidak berpengaruh.
+612	Salah satu jenis notifikasi ("Membutuhkan Anda" atau "Tugas selesai") dimatikan di setelan sistem.
+613	Giliran ini belum selesai: sistem menutup aplikasi di latar (dimulai {when}).
+614	Semua yang sudah dikerjakan ada di percakapan. Ketuk "Lanjutkan" agar Claude melanjutkan dari titik berhenti.
+615	Percakapan belum sempat dibuat, jadi Claude tidak pernah menerima pesan ini. Ketuk "Kirim ulang" untuk mengembalikannya ke kotak masukan.
+616	Lanjutkan
+617	Tutup
+618	Giliran sebelumnya terhenti oleh sistem. Silakan lanjutkan dari titik terakhir dan selesaikan.
+619	Giliran sebelumnya terhenti oleh sistem; {n} pesan dalam antrean ditahan dan tidak dikirim otomatis · ketuk ⚡ untuk mengirim
+620	Tersimpan: {name}
+621	File tidak ditemukan
+622	Tidak ada pemilih file di sistem ini
+623	{n} sesi diekspor
+624	Simpan ke…
+625	Bagikan…
+626	Gagal membagikan
+627	Lampirkan gambar atau file — bisa juga ditempel atau diseret ke sini
+628	Ketik / untuk perintah garis miring, @ untuk merujuk path file
+629	Bilah atas: penjelajah file, terminal, palet perintah
+630	Kiri atas: sesi sebelumnya, pengaturan, kemampuan, ekstensi
+631	Label izin di bawah kotak masukan: apakah Claude bertanya dulu sebelum menyunting file atau menjalankan perintah — ketuk untuk mengubah
+632	Tetap ketik saat Claude bekerja: Enter mengantrekan, ⚡ menyela (tanpa menghentikan, ikut ke giliran saat ini)
+633	Tunjukkan alat pengembang apa saja yang terpasang di perangkat ini dan peragakan tiga di antaranya
+634	Pakai Python untuk menghitung file di workspace menurut jenis dan total ukurannya, lalu tampilkan dalam tabel
+635	Buat halaman web game Ular dalam satu file, lalu buka di browser untuk saya
+636	Bingung mulai dari mana? Ketuk salah satu untuk mencoba (hanya mengisi kotak masukan, tidak ada yang dikirim):
+637	Sebelum mulai, sambungkan model (pilih salah satu dari dua cara):
+638	Masuk dengan akun Claude
+639	Punya langganan Claude Pro / Max atau akun Anthropic Console: beri izin sekali di browser, tidak perlu kunci.
+640	Masuk
+641	Masukkan API key
+642	Pakai kunci Anthropic, atau kunci API yang kompatibel seperti DeepSeek, Zhipu GLM, Qwen, atau Kimi; bayar sesuai pemakaian.
+643	Pilih API dan masukkan kunci
+644	Keduanya ada di ☰ → Pengaturan → API, dan bisa diganti kapan saja.
+645	Buat paket diagnostik dan kirim lewat menu bagikan sistem.\n\nYang disertakan:\n· Versi dan perangkat: cccodroid / versi Android, model, chip, ruang kosong\n· Paket pengembangan: build yang terpasang, status pembaruan dan pemeriksaan mandiri\n· Log terbaru: log sistem aplikasi ini, bagian akhir log gateway\n· Catatan perbaikan: pemasangan, pemeriksaan, dan perbaikan, serta berhasil tidaknya\n\nYang dihapus:\n· Kunci, token, kredensial login, alamat email\n· Isi pesan Anda ke Claude\n· Transkrip percakapan tidak disertakan\n\nLanjutkan?
+646	Saya buntu · kemas diagnostik
+647	Tidak bisa memasang, tidak ada yang berjalan, atau ada error yang tidak Anda pahami: buat paket diagnostik dan bagikan ke orang yang membantu Anda (atau lampirkan ke issue GitHub). Anda bisa melihat isinya sebelum dibuat; kunci, token, alamat email, dan isi pesan Anda dihapus lebih dulu.
+648	Seret untuk mengubah ukuran, ketuk dua kali untuk mengatur ulang
+649	File baru
+650	Folder baru
+651	Sudah ada yang bernama sama
+652	Gagal: {msg}
+653	Nama folder
+654	Nama file (ganti ekstensi untuk jenis lain)
+655	Teks baru
+656	Nama tidak boleh mengandung /
+657	Ganti nama menjadi
+658	Lepas beku (ketuk jika gulir macet)
+659	Memasang ulang antarmuka…
+660	Versi aplikasi ini belum bisa melepas beku. Silakan perbarui aplikasi; untuk sementara, mulai ulang gateway
+661	Gulir sepertinya macet. Ketuk tombol kepingan salju di bilah atas untuk melepas beku
+662	Pengelola memori
+663	Aktif: izinkan menghentikan aplikasi latar yang tidak ada di daftar izin (butuh Shizuku)
+664	Tidak pernah dihentikan: apa pun yang sedang Anda lihat, aplikasi layar terpisah, aplikasi dengan notifikasi latar depan (proxy, musik), launcher, keyboard, layanan aksesibilitas, VPN, Shizuku, komponen yang mereka butuhkan, dan daftar izin di bawah. Di terminal, jalankan pekerjaan berat dengan <code>cc-mem run -- perintah</code>: ia membersihkan dulu dan menghentikan apa pun yang muncul lagi selama pekerjaan berjalan.
+665	Daftar izin: satu nama paket per baris, mis. com.tencent.mm
+666	Simpan daftar izin
+667	Periksa memori
+668	Bersihkan sekarang
+669	Aktifkan pengelola memori?\n\nPembersihan akan menghentikan aplikasi latar yang tidak ada di daftar izin. Aplikasi itu tetap berhenti sampai Anda membukanya lagi atau sistem membangunkannya, jadi Anda bisa melewatkan pesannya sementara. Tambahkan aplikasi yang pesannya selalu Anda butuhkan (seperti aplikasi chat) ke daftar izin.
+670	✓ Aktif
+671	✓ Nonaktif
+672	Bukan nama paket yang valid: {list}
+673	✓ Daftar izin disimpan ({n} aplikasi)
+674	Mengukur…
+675	{avail} tersedia dari {total}. Aplikasi latar yang bisa dihentikan: {n}, memakai sekitar {sum}: {list}
+676	Aktifkan sakelar di atas dulu
+677	Membersihkan…
+678	✓ {n} dihentikan. Memori tersedia {a} → {b}
+679	Tidak ada aplikasi latar untuk dihentikan
+680	Jika halaman berhenti bergulir dan seperti macet, ketuk kepingan salju di bilah atas untuk memulihkan — tidak perlu memulai ulang aplikasi
+681	{name} masih punya {size} data runtime ({path}: cache unduhan, runtime yang diekstrak, dll.). Hapus juga? Pemasangan ulang nanti akan mengunduhnya lagi.
+682	Data runtime dihapus
+683	(saat ini — tidak ada di daftar penyedia)
+684	Endpoint kustom setidaknya butuh base URL
+685	URL harus diawali http:// atau https://
+686	Penyedia tidak ditemukan
+687	Masuk dengan akun tidak punya kunci untuk diuji — periksa status masuk saja
+688	Belum ada kunci yang dimasukkan
+689	Kunci valid ({how}, {n} model)
+690	Kunci valid ({how})
+691	Tidak bisa tersambung: {err}
+692	Bukan file zip
+693	Direktori zip rusak
+694	Metode kompresi tidak didukung: {name}
+695	Tidak ada sesi untuk diekspor
+696	manifest.json tidak ada — ini bukan arsip sesi
+697	Bukan arsip sesi cccodroid
+698	(Percakapan sebelumnya dipadatkan menjadi ringkasan)
+699	Paket pengembangan belum terpasang lengkap (atau dipasang dari file lokal tanpa identitas versi), jadi komponen tidak bisa dipasang
+700	Komponen tidak ditemukan
+701	Komponen ini hanya berfungsi di perangkat Qualcomm Snapdragon (GPU Adreno), jadi tidak bisa dipakai di sini
+702	Belum ada build komponen ini untuk paket pengembangan Anda saat ini. Perbarui paketnya atau coba lagi nanti
+703	Penyimpanan tidak cukup: butuh sekitar {n} MB
+704	File yang diunduh gagal diverifikasi (dihapus; mencoba lagi akan mengunduh ulang)
+705	File hilang dari paket komponen: {file}
+706	File dalam paket komponen gagal diverifikasi: {file}
+707	Sedang menempatkan file ke paket pengembangan — langkah ini tidak bisa diinterupsi
+708	gh belum terpasang
+709	gh keluar dengan kode {code}
+710	Kesalahan internal: {err}
+711	Tidak mendapat URL masuk
+712	Belum ada API key. Masukkan kunci {name} Anda di Pengaturan.
+713	Jembatan DNS lokal gagal dimulai, jadi API tidak bisa dihubungi.
+714	Tidak bisa menjalankan claude: {err}
+715	cc-mem tidak ditemukan
+716	Di build pengembang, Shizuku dikelola oleh aplikasi Shizuku sendiri (priv lewat rish)
+717	Waktu habis
+718	String versi tidak terduga: {v}
+719	Tidak bisa menghubungi downloads.claude.ai: {err}
+720	Manifest tidak punya build linux-arm64
+721	sha256 tidak cocok (seharusnya {want}…, didapat {got}…)
+722	Versi baru gagal saat uji coba (--version mengembalikan "{v}")
+723	Build pengembang hanya memperbarui Claude Code (aplikasinya sendiri Anda build dan pasang di perangkat ini)
+724	Tidak ada versi baru untuk dipasang — periksa pembaruan dulu
+725	Memperbarui Claude Code
+726	Tidak didukung di build pengembang: {op}
+727	Nama hanya boleh berisi huruf, angka, titik, garis bawah, dan tanda hubung
+728	Perintah atau URL belum diisi
+729	Gagal mengambil katalog skill resmi: {err}
+730	Skill itu tidak ada di katalog resmi
+731	Skill dengan nama itu sudah ada — hapus dulu
+732	Terlalu besar (lebih dari 50 MB)
+733	Gagal mengambil registry MCP: {err}
+734	Arsip tidak berisi SKILL.md
+735	Nama skill tidak valid
+736	Skill bernama "{name}" sudah ada — hapus yang lama dulu
+737	Penyedia ini sedang dipakai — tunggu giliran saat ini selesai sebelum menghapusnya.
+738	Giliran ini masih membuat jawaban. Ganti penyedia setelah selesai (mengganti akan menukar kunci dan model yang dipakai).
+739	Sesi ini masih membuat jawaban.
+740	Belum ada kunci untuk "{name}". Tambahkan di Pengaturan → Endpoint lalu simpan, atau pindah ke endpoint lain.
+741	Terlalu banyak pesan dalam antrean.
+742	Operasi tidak dikenal
+743	Giliran ini masih membuat jawaban. Keluar setelah selesai.
+744	Giliran ini sudah berakhir
+745	Ini sudah dijawab
+746	Selesai, periksa saat boot berikutnya
+747	Oke, akan diperiksa lagi setelah boot berikutnya.
+748	Percakapan lain yang berjalan: {n}
+749	Percakapan lain menunggu Anda · buka daftar percakapan
+750	Batas percakapan berjalan tercapai ({max}); akan dikirim saat ada slot kosong · {n} menunggu
+751	Batas percakapan berjalan tercapai. Diantrekan; akan dikirim saat ada slot kosong
+752	Membutuhkan Anda
+753	Maksimal percakapan berjalan bersamaan
+754	Percakapan yang berbeda bisa bekerja bersamaan; dalam satu percakapan, pesan tetap berjalan bergiliran. Tiap tambahan memakai beberapa ratus MB memori, jadi turunkan jika memori ponsel terbatas. 1 = satu per satu.
+755	Memeriksa saldo…
+756	Gagal memeriksa saldo: {msg}
+757	Diberikan
+758	Diisi ulang
+759	Voucher
+760	Tunai
+761	Saldo
+762	Tidak tersedia
+763	Terpakai
+764	Kunci ini tidak punya batas pengeluaran, jadi tidak ada saldo untuk ditampilkan
+765	Bulanan
+766	Kuota Coding Plan (Zhipu tidak punya API saldo publik; kunci bayar sesuai pemakaian tidak bisa diperiksa)
+767	Kunci ini tidak punya kuota Coding Plan. Zhipu tidak punya API saldo bayar sesuai pemakaian yang publik; periksa di konsol
+768	Saldo Model Studio milik akun utama Alibaba Cloud dan tidak bisa dibaca dengan API key; periksa di konsol Model Studio. Di bawah ini pemakaian token yang tercatat di perangkat ini.
+769	Platform ini tidak menyediakan API saldo. Di bawah ini pemakaian token yang tercatat di perangkat ini.
+770	Pengeluaran hari ini
+771	Total pengeluaran
+772	Dihitung dari perubahan saldo sejak {date}; isi ulang tidak dihitung sebagai pengeluaran. Pemakaian kunci yang sama di tempat lain ikut terhitung.
+773	Masuk {i} · Keluar {o} · Cache {c}
+774	Token hari ini
+775	Total token
+776	Pencatatan dimulai setelah giliran pertama dengan penyedia ini
+777	Dikonversi dengan 1 USD ≈ {r} CNY ({src}, {time})
+778	Saldo & pengeluaran
+779	Diubah
+780	File baru
+781	Nama diubah
+782	Konflik
+783	Biner
+784	Folder ini belum menjadi repositori git.
+785	Setelah menjadi repositori, Anda bisa melihat persis baris mana yang berubah tiap kali dan kembali ke versi sebelumnya kapan saja.
+786	Buat repositori di sini
+787	Repositori dibuat
+788	Perubahan di {n} file
+789	Tidak ada perubahan
+790	Working tree bersih: tidak ada yang berubah sejak commit terakhir.
+791	Ketuk file untuk melihat baris yang berubah
+792	Kembalikan file ini seperti pada commit terakhir
+793	Pesan commit: apa yang berubah (wajib)
+794	Commit {n} file terpilih
+795	Biarkan Claude menulis pesan dan melakukan commit
+796	{f} adalah file baru, jadi membatalkan berarti menghapusnya. Lanjutkan?
+797	Kembalikan {f} ke commit terakhir? Perubahan yang belum di-commit akan hilang.
+798	Dibatalkan
+799	Silakan lihat perubahan pada file-file ini di {root}, tulis pesan commit yang ringkas, dan commit hanya file tersebut: {files}
+800	(semua perubahan)
+801	Tulis pesan commit
+802	Sudah di-commit
+803	Sebelum commit pertama, beri tahu git nama dan email Anda (masuk ke catatan commit dan disimpan di perangkat ini).
+804	Nama
+805	Email
+806	Simpan dan commit
+807	Tidak ada perbedaan
+808	File biner; tidak bisa dibandingkan per baris
+809	← Kembali ke commit ini
+810	← Kembali ke perubahan
+811	Riwayat file ini
+812	Terlalu banyak perubahan; hanya bagian awal yang ditampilkan
+813	Belum ada commit.
+814	Hanya menampilkan riwayat {f}
+815	Tampilkan semua
+816	Muat lebih banyak
+817	← Kembali ke riwayat
+818	Lihat diff seluruh commit
+819	Diff
+820	Riwayat
+821	Sama dengan commit terakhir
+822	Anda punya suntingan yang belum disimpan; ini membandingkan versi di disk dengan commit terakhir.
+823	Path tidak ada
+824	Git belum tahu nama dan email Anda (dipakai untuk menandai commit).
+825	Commit {hash} selesai
+826	Isi nama dan email
+827	Versi (git)
+828	Perubahan
+829	Versi
+830	Diperiksa {time}. Tagihan tercatat beberapa menit terlambat; diperiksa ulang otomatis setelah tiap proses
+831	{n} dipilih
+832	Mulai menulis…
+833	Tebal
+834	Miring
+835	Coret
+836	Kode
+837	teks tautan
+838	deskripsi gambar
+839	path gambar
+840	Ulangi
+841	Judul
+842	Kutipan
+843	Daftar berpoin
+844	Daftar bernomor
+845	Daftar tugas
+846	Tautan
+847	Gambar
+848	Pemisah
+849	Cari dan ganti
+850	Cari
+851	Ganti
+852	Berikutnya
+853	Sebelumnya
+854	Cocokkan huruf besar/kecil
+855	Regex
+856	Kata utuh
+857	Ganti semua
+858	Ada perubahan yang belum disimpan dari sebelumnya ({time}). Pulihkan?\nOK: pulihkan\nBatal: buang draf
+859	Editor gagal dimuat, memakai teks biasa: {msg}
+860	Semua proyek
+861	Proyek ini ({name})
+862	Proyek ini · hanya perangkat ini
+863	Disimpan di ~/.claude/settings.json dan berlaku untuk semua proyek.
+864	Disimpan di .claude/settings.json milik proyek dan hanya berlaku di sini; jika proyek memakai git, ikut terbawa bersama repositori.
+865	Disimpan di .claude/settings.local.json milik proyek dan hanya berlaku untuk proyek ini di perangkat ini.
+866	Buka file pengaturan
+867	Jeda semua hook (aturan tetap disimpan, hanya tidak dijalankan)
+868	File pengaturan ini bukan JSON yang valid ({msg}). Buka dan perbaiki dulu, baru bisa disunting di sini.
+869	Cocok: {m}
+870	Batas waktu {n} dtk
+871	Uji jalankan
+872	Sunting
+873	Belum ada aturan di sini. Tambahkan dari Aturan umum di bawah.
+874	Tambah…
+875	Kapan dijalankan
+876	Lainnya (lanjutan)
+877	Kosong = semua
+878	Perintah yang dijalankan
+879	(dibuat dari kolom di atas; bisa juga disunting langsung)
+880	mis. echo hello >> ~/log.txt
+881	Batas waktu (detik; kosong = bawaan 60)
+882	Simpan perubahan
+883	Alat mana (nama alat, dipisah | atau regex; kosong = semua)
+884	Hanya dalam kasus ini (kosong = semua)
+885	Tersimpan. Berlaku mulai pesan berikutnya.
+886	Waktu habis: perintah dihentikan sebelum selesai.
+887	Selesai: apa yang dicetaknya akan diteruskan ke Claude sebagai konteks tambahan.
+888	Diizinkan: Claude melanjutkan seperti biasa.
+889	Selesai dengan normal.
+890	Diblokir (kode keluar 2): Claude tidak akan melakukan langkah ini, dan teks stderr diteruskan kepadanya.
+891	Kode keluar 2: Claude tetap lanjut, dan teks stderr diteruskan kepadanya.
+892	Kode keluar 2: teks stderr diumpankan kembali ke Claude.
+893	Kesalahan (kode keluar {n}): tidak ada yang diblokir, Claude tetap lanjut.
+894	Keluaran (stdout)
+895	Keluaran kesalahan (stderr)
+896	Masukan simulasi (sunting lalu coba lagi)
+897	Coba lagi
+898	Perintahnya kosong
+899	Menjalankan…
+900	Hapus aturan ini?
+901	Semua hook dijeda
+902	Hook dilanjutkan
+903	Sebelum alat dijalankan
+904	Sebelum setiap pemanggilan alat oleh Claude (menyunting file, menjalankan perintah, mengakses internet…). Kode keluar 2 memblokir pemanggilan, dan alasan yang ditulis ke stderr diteruskan ke Claude.
+905	Setelah alat dijalankan
+906	Setelah alat berhasil. Cocok untuk format, pencatatan, dan pemeriksaan; tindakannya sudah terjadi, jadi kode keluar 2 hanya mengumpankan stderr kembali ke Claude.
+907	Saat Anda mengirim pesan
+908	Setiap kali Anda mengirim pesan. Apa pun yang dicetak perintah diteruskan ke Claude sebagai konteks tambahan; kode keluar 2 memblokir pesan.
+909	Saat Claude menyelesaikan giliran
+910	Saat balasan Claude untuk giliran ini berakhir. Cocok untuk simpan otomatis dan pengingat; kode keluar 2 membuatnya terus lanjut (hati-hati perulangan tanpa akhir).
+911	Saat sesi dimulai
+912	Saat sesi dimulai: baru, dilanjutkan, dibersihkan, atau setelah pemadatan. Apa pun yang dicetak perintah diberikan ke Claude sebagai latar belakang.
+913	Saat sesi berakhir
+914	Saat sesi berakhir. Cocok untuk bersih-bersih.
+915	Saat Claude mengirim notifikasi
+916	Saat Claude butuh izin dari Anda, atau menganggur menunggu balasan Anda.
+917	Saat meminta izin
+918	Sebelum permintaan izin muncul. Lanjutan: mencetak JSON bisa mengizinkan atau menolak otomatis untuk Anda.
+919	Setelah alat gagal
+920	Setelah pemanggilan alat gagal.
+921	Saat subagen dimulai
+922	Saat subagen berhenti
+923	Saat subagen selesai; kode keluar 2 membuatnya terus lanjut.
+924	Sebelum memadatkan konteks
+925	Setelah memadatkan konteks
+926	Lindungi file penting
+927	Mencegah Claude menyunting file .env, kunci, dan file penandatanganan, serta memberi tahu alasannya.
+928	File yang dilindungi (satu per baris; * adalah wildcard; pola dengan / mencocokkan path lengkap)
+929	Blokir perintah berbahaya
+930	Menolak perintah seperti force-push, hard reset, atau menghapus folder root, dan meminta Claude mencari cara lain.
+931	Teks terlarang (satu per baris; /…/ berarti regex)
+932	Simpan otomatis tiap giliran (git)
+933	Setiap kali Claude menyelesaikan giliran, perubahan apa pun di proyek di-commit, jadi Anda bisa kembali ke langkah mana saja. Hanya commit, tidak pernah push; proyek yang bukan repositori git dibiarkan.
+934	Awalan pesan commit
+935	Simpan otomatis
+936	Tambahkan instruksi tetap ke setiap pesan
+937	Setiap pesan yang Anda kirim otomatis menyertakan teks ini untuk Claude, mis. “balas dalam bahasa Indonesia” atau “jelaskan rencanamu sebelum menyunting”.
+938	Teks yang ditambahkan
+939	Balas dalam bahasa Indonesia; sebelum mengubah apa pun, jelaskan singkat apa yang akan dilakukan.
+940	Baca file progres saat sesi dimulai
+941	Setiap sesi baru (atau setelah pemadatan), sebuah file dari proyek dibacakan ke Claude: catatan progres, kerangka, daftar tokoh… Dilewati jika file tidak ada.
+942	File (relatif terhadap folder proyek)
+943	progress.md
+944	Catat perintah yang dijalankan Claude
+945	Menambahkan setiap perintah, beserta waktu dan foldernya, ke ~/.claude/bash-history.log agar bisa ditinjau nanti.
+946	Format kode otomatis setelah disunting
+947	Setelah Claude menyunting file kode, file dirapikan dengan formatter apa pun yang terpasang (ruff / black, prettier, gofmt, clang-format…); tidak terjadi apa-apa jika tidak ada. Markdown dan teks biasa tidak pernah disentuh.
+948	Hook (aturan otomatis)
+949	Hook artinya “saat momen ini tiba, jalankan perintah ini”: sebelum atau sesudah Claude memakai alat, saat Anda mengirim pesan, saat giliran selesai… Perintahnya bisa memblokir apa yang akan dilakukan Claude, memberinya konteks tambahan, atau mengurus pekerjaan rutin (menyimpan, mencatat, memformat).
+950	Aturan umum (ketuk Tambah lalu sesuaikan pengaturannya)
+951	Tulis sendiri
+952	Cara kerja hook
+953	Perintah dijalankan dengan bash di folder proyek. Claude meneruskan detail momennya (alat apa, argumen apa, apa yang Anda katakan…) sebagai JSON di standard input.<br>Kode keluar menentukan hasilnya: <b>0</b> meloloskan; <b>2</b> memblokir langkah tersebut (untuk “Sebelum alat dijalankan” dan “Saat Anda mengirim pesan”) dan alasan yang ditulis ke stderr diteruskan ke Claude; kode keluar lain dianggap kesalahan, tidak ada yang diblokir dan Claude tetap lanjut.<br>Untuk “Saat Anda mengirim pesan” dan “Saat sesi dimulai”, apa pun yang dicetak perintah diberikan ke Claude sebagai konteks tambahan.<br>Perubahan berlaku mulai pesan berikutnya. Aturan adalah perintah shell biasa dan bisa melakukan apa saja yang bisa Anda lakukan di terminal, jadi jangan tambahkan perintah yang tidak Anda percayai.
+954	Baterai
+955	Jam
+956	Hari
+957	Minggu
+958	Perkiraan sistem (butuh Shizuku)
+959	24 jam terakhir
+960	14 hari terakhir
+961	12 minggu terakhir
+962	CPU aplikasi {d}
+963	Latar depan {d}
+964	Layar menyala {d}
+965	Konsumsi perangkat {p}
+966	Level baterai
+967	Mengisi daya
+968	Konsumsi baterai perangkat
+969	Waktu CPU aplikasi
+970	Waktu layar menyala
+971	Layar menyala
+972	Aplikasi di latar depan
+973	Pencatatan baru dimulai — sampel diambil tiap 5 menit. Periksa lagi nanti.
+974	Build ini tidak punya lapisan native, jadi hanya waktu CPU yang dicatat (level baterai, layar, dan waktu latar depan butuh cccodroid).
+975	Baterai {p}
+976	Mengisi daya
+977	Memakai baterai
+978	Perkiraan sistem (sejak pengisian penuh terakhir, {ago}): aplikasi ini memakai sekitar {mah} mAh, {pct} dari {used} mAh yang dipakai perangkat; {scr} mAh di antaranya untuk layar. Peringkat {rank} dari {n} aplikasi.
+979	Perkiraan sistem (sejak pengisian penuh terakhir, {ago}): perangkat memakai {used} mAh; tidak ada catatan untuk aplikasi ini.
+980	Android membebankan daya layar ke aplikasi mana pun yang di latar depan, jadi makin lama aplikasi dibuka makin tinggi peringkatnya; bagian CPU adalah yang dipakai aplikasi itu sendiri. Diperiksa {time}.
+981	Menanyakan ke sistem…
+982	Tidak bisa didapat: {msg} (atur Shizuku di atas dulu)
+983	Tidak ada data yang dikembalikan
+984	Hari ini
+985	7 hari sebelumnya
+986	30 hari sebelumnya
+987	Sematkan
+988	Lepas sematan
+989	Cari percakapan…
+990	Mencari percakapan…
+991	Tidak ada percakapan yang berisi “{q}”.
+992	{n} hasil
+993	Diperbarui {time}
+994	Dibuat {time}
+995	Kompatibilitas biner statis
+996	Lindungi setiap program yang dijalankan claude
+997	Program statis yang diunduh dari web (kebanyakan alat baris perintah Go dan server MCP) memakai system call baru yang dilarang Android, dan sistem langsung mematikannya. Dengan opsi ini aktif, panggilan tersebut mengembalikan “tidak didukung”, lalu program beralih ke cara lama dan tetap berjalan. Menjalankan tiap program anak sedikit lebih lambat; jika ada yang aneh, coba matikan. Berlaku mulai pesan berikutnya.
+998	Pindah atau buat branch
+999	Belum ada branch upstream
+1000	Periksa commit baru di remote (tidak menyentuh file Anda)
+1001	Fetch
+1002	Tarik commit baru dari remote (fast-forward saja)
+1003	Pull
+1004	Kirim commit lokal baru Anda ke remote
+1005	Push
+1006	Push pertama untuk {b}: branch dengan nama sama akan dibuat di remote dan ditautkan. Lanjutkan?
+1007	Minta Claude menggabungkan commit remote untuk Anda?
+1008	Branch saat ini di {root} sudah bercabang dari remote. Jalankan git fetch dulu, beri tahu saya commit apa saja yang dimiliki tiap sisi, lalu masukkan commit remote (rebase jika bisa; jika ada konflik, berhenti dan tanya saya dulu), dan terakhir beri tahu hasilnya. Jangan push.
+1009	Sudah hilang di remote
+1010	Checkout
+1011	Pindah
+1012	Nama branch baru, mis. fix/login
+1013	Buat dan pindah
+1014	Branch baru dimulai dari commit saat ini; perubahan yang belum di-commit ikut terbawa.
+1015	Branch lokal
+1016	Belum ada commit, jadi belum ada branch juga.
+1017	Branch yang hanya ada di remote
+1018	Repositori ini belum punya remote, jadi push dan pull tidak tersedia.
+1019	Sudah pindah
+1020	Masukkan nama branch
+1021	{n} baris dihapus di sini
+1022	Baris {n} baru (tidak ada di commit terakhir)
+1023	{n} baris dihapus di sini:
+1024	Diubah; di commit terakhir isinya:
+1025	Lihat diff seluruh file
+1026	Tidak ada koneksi setelah tiga menit; jaringan mungkin terputus.
+1027	Remote meminta Anda masuk. Untuk repositori GitHub, masuk sekali di Ekstensi → GitHub (ini juga mengatur push https git); untuk situs lain, atur kredensial di terminal.
+1028	Kunci SSH tidak diterima. Tambahkan public key perangkat ini ke akun remote Anda, atau ganti URL remote ke https dan masuk dengan GitHub.
+1029	Tidak bisa menghubungi remote. Periksa jaringan atau proxy Anda.
+1030	Remote punya commit yang tidak ada di lokal. Pull dulu, lalu push.
+1031	Lokal dan remote masing-masing punya commit baru (sudah bercabang), jadi fast-forward tidak bisa dilakukan. Anda bisa meminta Claude melakukan merge atau rebase.
+1032	Perubahan yang belum di-commit akan tertimpa. Commit atau buang file tersebut dulu, lalu coba lagi.
+1033	Repositori ini belum punya remote.
+1034	Branch saat ini belum punya upstream. Push sekali untuk menautkannya.
+1035	Ada konflik yang belum diselesaikan. Selesaikan sebelum pull.
+1036	Anda tidak berada di branch mana pun. Pindah ke sebuah branch sebelum push.
+1037	Fetch selesai: {n} commit baru di remote
+1038	Fetch selesai: tidak ada commit baru
+1039	Sudah terbaru
+1040	Pull selesai
+1041	Tidak ada yang perlu di-push
+1042	Push selesai
+1043	Nama branch tidak valid
+1044	Ada konflik yang belum diselesaikan. Selesaikan sebelum pindah.
+1045	Pindah ke {b} ({n} perubahan yang belum di-commit ikut terbawa)
+1046	Pindah ke {b}
+1047	Branch
+1048	“{q}” tidak ditemukan di pesan yang sudah dimuat
+1049	Pasang dari file toolkit yang sudah Anda unduh
+1050	File lokal…
+1051	Pasang toolkit pengembangan dari file lokal?\n\nPilih devkit-cc.codroid.tar.gz (atau .tar); bisa diunduh dari halaman rilis GitHub atau cccodroid.net. File diperiksa terhadap rilis yang diterbitkan sebelum dipasang, dan layanan dijeda 1–2 menit selama pemasangan.\nApa pun yang Anda pasang ke toolkit dengan pip / npm -g tetap dipertahankan.
+1052	Log perintah istimewa
+1053	Belum ada perintah yang dijalankan lewat priv
+1054	{n} entri terakhir (terbaru di atas). Hanya disimpan di perangkat ini, tidak pernah diunggah.
+1055	Tangkapan layar dalam {n} dtk — pindah ke aplikasi yang ingin ditangkap
+1056	Tangkapan layar dilampirkan
+1057	Tangkapan layar gagal (apakah Shizuku tersedia? Pengaturan → Shizuku)
+1058	Tangkapan layar diambil
+1059	Tangkapan layar ke Claude
+1060	Tangkapan layar dalam 5 dtk (pindah ke aplikasinya dulu)
+1061	Gagal memuat: {src}
+1062	Konversi ke PDF dengan LibreOffice
+1063	Tata letak asli
+1064	Tidak bisa membaca dokumen ini: {msg}
+1065	(Dokumen kosong)
+1066	Tidak bisa membaca spreadsheet ini: {msg}
+1067	(Sheet ini kosong)
+1068	Sheet terlalu besar; menampilkan {r} baris dan {c} kolom pertama. Pakai “Tata letak asli” atau unduh untuk melihat semuanya.
+1069	Tata letak web
+1070	Mengonversi ke PDF dengan LibreOffice…
+1071	Pertama kali butuh waktu; hasilnya disimpan di cache
+1072	Konversi gagal
+1073	Jenis file ini perlu dikonversi LibreOffice sebelum dilihat, dan LibreOffice tidak tersedia di sini.
+1074	Untuk melihat jenis file ini, pasang LibreOffice dulu (unduhan sekitar 190 MB, terpasang sekitar 830 MB). Pasang sekali dan file PowerPoint, Word, dan Excel langsung bisa dibuka.
+1075	Pasang LibreOffice
+1076	Memasang LibreOffice… Silakan lakukan hal lain dan kembali setelah selesai.
+1077	LibreOffice terpasang
+1078	LibreOffice tidak terpasang: {msg}
+1079	LibreOffice tidak bisa mengonversinya
+1080	Di perangkat
+1081	{name} dimuat (dilepas setelah {min} menit menganggur)
+1082	Memuat {name}…
+1083	Gagal dimulai terakhir kali: {msg}
+1084	Tidak berjalan (dimuat otomatis saat Anda mengirim pesan)
+1085	llama.cpp terpasang
+1086	llama.cpp belum terpasang: pasang komponen llama-cpp di halaman Ekstensi
+1087	Inferensi GPU (Vulkan)
+1088	Hanya inferensi CPU (memasang komponen driver GPU membuatnya beberapa kali lebih cepat)
+1089	Memori {total}, {avail} kosong; konteks {ctx} token, {n} thread
+1090	Model ({dir})
+1091	Mode
+1092	Chat
+1093	dimuat dalam {s} dtk
+1094	Lepas model
+1095	Sudah diganti (berlaku mulai pesan berikutnya)
+1096	Belum ada model di perangkat: taruh file .gguf di {dir}
+1097	Memuat model di perangkat {name} ({how})…
+1098	Model di perangkat membaca prompt: {pct}%
+1099	Model di perangkat gagal dimulai
+1100	Model di perangkat dimuat ({s} dtk)
+1101	Waktu habis saat memuat model di perangkat
+1102	Unduh model
+1103	Sudah diunduh
+1104	Dipakai
+1105	Gagal mengunduh: {msg}
+1106	Hapus model {name}?
+1107	Silakan baca {skill} dan bantu saya mengatur mode kustom untuk model di perangkat.
+1108	Belum ada model. Unduh di “Unduh model” pada komponen llama-cpp di halaman Ekstensi, atau taruh file .gguf di folder di atas.
+1109	Tanpa alat; prompt terpendek, balasan tercepat
+1110	Kustom
+1111	Alat: {tools}
+1112	Tanpa alat
+1113	Belum diatur
+1114	File konfigurasi bermasalah; berjalan dalam mode chat: {msg}
+1115	Ponsel tidak cukup bertenaga agar model kecil bisa mengerjakan tugas sungguhan, jadi hanya chat yang tersedia bawaan. Jika ingin bereksperimen, tulis {file} untuk mengaktifkan mode kustom (alat, prompt sistem, flag llama-server). Cara termudah: pindah ke model cloud dan kirimkan ini:
+1116	Level teratas harus berupa objek
+1117	{k} harus berupa teks maksimal {n} karakter
+1118	llamaArgs harus berupa array string (maksimal 40)
+1119	ctx harus bilangan bulat antara 512 dan 262144
+1120	llamaArgs tidak boleh mengatur {k} (dikelola oleh gateway)
+1121	llama-server keluar tiba-tiba (rc={code})
+1122	Tidak bisa menulis ke folder model
+1123	Model ini tidak ada di katalog
+1124	Model tidak ditemukan
+1125	Tidak ada di folder model
+1126	Berpikir dulu
+1127	Fokus kode
+1128	Besar
+1129	Model disimpan di /sdcard/cccodroid/models; pakai di Pengaturan → Layanan model → Model di perangkat. Perangkat ini punya RAM {ram} GB. Semua terkuantisasi Q4_K_M; 1–4B masih layak di ponsel, di atas 6B jadi sangat lambat.
+1130	{n} sudah diunduh
+1131	Tidak ada di daftar? Tempel tautan unduhan file .gguf (HuggingFace, ModelScope, dll.). Checksum tidak diverifikasi, hanya header file.
+1132	{name} punya sekitar {p}B parameter ({size}). Akan sangat lambat di ponsel dan mungkin tidak muat di memori. Tetap unduh?
+1133	Tempel tautan dulu
+1134	Model dengan nama ini sudah ada
+1135	File yang diunduh bukan model GGUF (dihapus)
+1136	Tautan tidak valid
+1137	Hanya tautan https yang didukung
+1138	Tautan harus menunjuk ke file .gguf
+1139	Model terpisah (…-00001-of-0000N.gguf) tidak didukung; cari versi satu file
+1140	mmproj adalah file proyektor multimodal dan tidak bisa dipakai untuk chat sendirian
+1141	Siap · {n} tugas latar berjalan
+1142	Tugas latar
+1143	Cabangkan dari sini
+1144	Sesi ini belum disimpan; cabangkan setelah satu balasan selesai
+1145	Tidak ada pesan Anda sebelum balasan ini, jadi tidak bisa dicabangkan dari sini
+1146	Dicabangkan: {n} giliran pertama dipertahankan. Lanjutkan dari sini
+1147	Sesi tidak ditemukan.
+1148	Giliran ini tidak ditemukan di catatan sesi. Muat ulang dan coba lagi.
+1149	Giliran ini masih membuat jawaban. Cabangkan setelah selesai.
+1150	cabang
+1151	Menyambung
+1152	Tersambung, menunggu keluaran
+1153	Kesalahan koneksi, coba ulang {a}/{m}
+1154	Berpikir
+1155	Menulis masukan {name}
+1156	Alur kerja
+1157	Pantau
+1158	Tujuan
+1159	diperiksa {n}×
+1160	{d} berlalu
+1161	Menyerah
+1162	Masih kurang: 
+1163	{n} putaran
+1164	Tujuan tercapai
+1165	Tujuan tidak bisa dicapai
+1166	Hentikan
+1167	{n} berjalan di latar
+1168	{n} lagi
+1169	{n} lagi
+1170	{i} dari {n}
+1171	Percakapan ini menganggur hampir satu jam dan cache prompt-nya hampir kedaluwarsa, jadi konteks dipadatkan otomatis; pesan berikutnya tidak akan memproses ulang seluruh riwayat. Anda bisa mematikan ini di Pengaturan.
+1172	Tugas latar ini sudah berakhir
+1173	↩ Pulihkan yang baru saja dibersihkan
+1174	Pemadatan saat menganggur
+1175	Padatkan percakapan panjang yang menganggur hampir satu jam
+1176	Hanya berlaku untuk akun Claude atau API key Anthropic. Saat percakapan di atas 200K token menganggur sekitar 54 menit dan cache prompt 1 jamnya hampir kedaluwarsa, percakapan dipadatkan sekali, sehingga saat dilanjutkan tidak memproses ulang seluruh riwayat dengan harga penuh: kuota langganan lebih hemat, biaya API key lebih kecil. Claude Code di desktop melakukan hal yang sama.
+1177	Tugas
+1178	Tugas selesai
+1179	menunggu {ids}
+1180	Langkah subagen
+1181	Dihentikan
+1182	Tidak ada catatan
+1183	Mundur ke sini
+1184	Percakapan ini belum disimpan; mundur setelah balasan pertama
+1185	Masih membuat jawaban; mundur setelah selesai
+1186	Memeriksa file mana yang berubah setelah ini…
+1187	Perubahan pada {n} file dikembalikan; percakapan kembali ke sebelum pesan ini
+1188	Percakapan kembali ke sebelum pesan ini; aslinya tetap disimpan
+1189	Perubahan pada {n} file dikembalikan
+1190	Ini mengembalikan perubahan Claude pada {n} file yang dibuat setelah titik ini
+1191	Claude belum menyunting file apa pun dengan alat suntingnya sejak saat itu.
+1192	Tidak ada snapshot file setelah titik ini (pesan dari sebelum versi ini tidak didukung), jadi hanya percakapan yang bisa dimundurkan.
+1193	Mundur ke sebelum pesan ini
+1194	Hanya perubahan dengan alat sunting (Edit / Write) yang dikembalikan; file yang diubah perintah dan paket yang dipasang tidak dipulihkan.
+1195	Kembalikan kode dan tanya lagi dari sini
+1196	Tanya lagi dari sini
+1197	Kembalikan kode saja
+1198	Bertanya lagi membuka percakapan baru; aslinya tetap disimpan.
+1199	mundur
+1200	Waktu mundur habis
+1201	Percakapan ini masih membuat jawaban; mundur setelah selesai.
+1202	Tidak ada snapshot file setelah pesan ini, jadi perubahannya tidak bisa dikembalikan.
+1203	Perintah:
+1204	Tanda tangan indeks tidak valid; ditolak
+1205	Indeks tidak ditandatangani; ditolak
+1206	{cmd} keluar dengan kode {code}: {err}
+1207	Laporkan di GitHub
+1208	"Laporkan di GitHub" membuka issue baru dengan perangkat, versi Android, dan hasil uji mandiri Anda sudah terisi; Anda cukup menjelaskan masalahnya. Butuh akun GitHub. Tidak ada log atau percakapan yang disertakan.
+1209	Ini membuka issue GitHub baru dengan isian berikut. Anda bisa menyuntingnya sebelum mengirim:
+1210	Apa yang terjadi
+1211	Apa yang Anda lakukan, apa yang Anda harapkan, apa yang sebenarnya terjadi. Anda bisa menyeret tangkapan layar ke sini.
+1212	Langkah untuk mereproduksi
+1213	Sumber
+1214	Buka di browser
+1215	Tidak bisa membuka pratinjau
+1216	Pratinjau menampilkan file seperti yang tersimpan di disk. Simpan perubahan Anda dulu?
+1217	Yang baru
+1218	Mengerti
+1219	Gagal mengambil indeks repositori glibc: {msg}
+1220	Tidak ada file yang diberikan
+1221	File tidak ditemukan: {p}
+1222	Pilih file (programnya sendiri atau arsip)
+1223	Ekstraksi gagal: {msg}
+1224	Paket .{ext} belum didukung: pakai programnya sendiri atau arsip .tar.gz / .zip
+1225	File tidak dikenali: bukan program (ELF), skrip, atau arsip yang didukung
+1226	Symlink yang menunjuk ke luar paket dihapus: {p}
+1227	Kosong
+1228	{p} butuh GLIBC_{need} tetapi perangkat ini punya {have}; mungkin tidak berjalan
+1229	Ini program {arch}; tidak bisa berjalan di perangkat ini (arm64)
+1230	Interpreter tidak dikenal {i}
+1231	Program musl belum didukung: cari build statis atau glibc dari program yang sama
+1232	Tidak ditemukan program yang bisa dijalankan (ELF arm64 atau skrip)
+1233	Mengunduh {pkg} ({mb} MB)
+1234	Gagal mengunduh {pkg}: {msg}
+1235	{pkg} gagal pemeriksaan checksum
+1236	{pkg} punya struktur paket yang tidak terduga
+1237	Gagal membongkar {pkg}: {msg}
+1238	Analisisnya kedaluwarsa; impor lagi
+1239	ID hanya boleh memakai huruf kecil, angka, dan -
+1240	Komponen kustom bernama {id} sudah ada; pilih ID lain atau copot dulu
+1241	Nama perintah tidak valid: {c}
+1242	Nama perintah duplikat: {c}
+1243	Toolkit sudah punya perintah {c}; pilih nama lain
+1244	Perintah {c} sudah dipakai komponen kustom lain
+1245	Pilih setidaknya satu perintah
+1246	patchelf gagal pada {p}: {msg}
+1247	Program Linux (glibc)
+1248	Program native Android
+1249	Program statis
+1250	Skrip
+1251	Tidak bisa berjalan
+1252	launcher tidak ada
+1253	{n} pustaka ditambahkan
+1254	Masih kekurangan pustaka ini, jadi mungkin tidak berjalan: {libs}
+1255	Mengunggah dan menganalisis {name}…
+1256	Menganalisis…
+1257	Toolkit sudah punya perintah dengan nama ini; ganti namanya
+1258	Komponen kustom lain memakai nama ini
+1259	Ganti nama (hanya huruf, angka, dan ._+-)
+1260	Perintah
+1261	Pakai GPU
+1262	Tulis ulang interpreter program alih-alih menjalankannya lewat loader. Pakai ini jika program mencari file datanya relatif terhadap lokasinya sendiri
+1263	Kurang: {libs}
+1264	Pustaka ini akan diambil dari repositori glibc Termux (sekitar {size}): {libs}
+1265	Tidak ada sumber untuk pustaka ini; program yang membutuhkannya mungkin tidak berjalan: {libs}
+1266	{src}: {n} file, {size}
+1267	Nama
+1268	Deskripsi
+1269	Opsional: kegunaannya (Claude akan melihat ini)
+1270	Perintah yang ditambahkan
+1271	Anda bertanggung jawab atas asal program ini: ia bisa membaca dan menulis setiap file di aplikasi ini.
+1272	Mengambil pustaka dan memasang…
+1273	Memasang…
+1274	Terpasang, tetapi {n} pustaka masih kurang
+1275	Terpasang. Claude dan terminal sudah bisa memakainya
+1276	Copot komponen kustom {name}? Ini menghapus program yang diimpor, pustaka yang ditambahkan untuknya, dan perintah-perintahnya.
+1277	(tidak ada keluaran, kode keluar {c})
+1278	Komponen kustom
+1279	Tidak ada di pasar? Impor sendiri program Linux arm64: satu program, atau arsip .tar.gz / .zip. Pustaka yang kurang diambil dan perintah dibuat, siap untuk Claude dan terminal.
+1280	Impor program…
+1281	Analisis
+1282	Atau masukkan path di perangkat ini, mis. /sdcard/Download/foo.tar.gz
+1283	dari {src}
+1284	Statistik pemakaian
+1285	Laporan bulanan
+1286	percakapan
+1287	Sebulan bersama Claude
+1288	{p} dibanding bulan lalu
+1289	Hari aktif
+1290	{n} / {d} hari
+1291	Rentetan terpanjang
+1292	{n} hari
+1293	Hari tersibuk · {n}
+1294	Hari tersibuk
+1295	Pemanggilan alat
+1296	{n}
+1297	Ditulis Claude
+1298	Harian
+1299	Waktu dalam sehari
+1300	Puncak sekitar pukul {h}:00
+1301	Model teratas
+1302	{t} balasan · {i} token dibaca
+1303	Kemarin
+1304	Minggu ini
+1305	Minggu lalu
+1306	Bulan ini
+1307	Bulan lalu
+1308	{p}: {n}
+1309	Pencatatan dijeda.
+1310	Dicatat langsung sejak {d}.
+1311	Data sebelumnya disusun ulang dari sesi lama (sesi yang dihapus tidak bisa dipulihkan).
+1312	Hanya jumlah dan pemakaian yang disimpan, tidak pernah isi percakapan; data tetap di perangkat ini.
+1313	Menyusun ulang dari sesi lama…
+1314	Selesai: {f} file sesi, {n} pesan.
+1315	Susun ulang statistik sebelum {d} dari sesi yang masih ada? Sesi yang dihapus tidak bisa dihitung, jadi angkanya bisa turun.
+1316	Hapus statistik {m}?
+1317	Hapus semua statistik pemakaian? Pencatatan dimulai lagi dari sekarang.
+1318	Bulan sebelumnya
+1319	Bulan berikutnya
+1320	Simpan gambar
+1321	Bagikan
+1322	Kelola data
+1323	Catat statistik pemakaian
+1324	Susun ulang dari sesi lama
+1325	Hapus bulan ini
+1326	Hapus semua
+1327	Grup QQ
+1328	Ketuk untuk menyalin nomor grup
+1329	Kode QR
+1330	Sembunyikan kode QR
+1331	Kode QR grup QQ
+1332	Ada pertanyaan atau ide? Mari ngobrol. Untuk bug, gunakan Pengaturan → Laporkan di GitHub: perangkat dan hasil pemeriksaan mandiri Anda terisi otomatis, dan laporan tidak hilang di chat.
+1333	cccodroid dikelola satu orang dan sangat butuh bantuan: perbaikan terjemahan, laporan perangkat, resep komponen, dokumentasi, dan kode sangat diterima, dan Anda bisa membantu tanpa menulis kode. Panduan kontribusi di repositori menjelaskan caranya.
+1334	Diskusi
+1335	Laporkan masalah
+1336	Berkontribusi
+1337	Nomor grup {n} disalin
+1338	Komunitas & kontribusi
+1339	Komunitas & masukan
+1340	{n} file tidak bisa dipulihkan
+1341	Tidak terpasang: {msg}
+1342	Arsip terlalu besar setelah diekstrak (lebih dari {n} MB), jadi tidak diimpor
+1343	Bukan zip, juga bukan SKILL.md yang punya nama
+1344	Skill dengan nama ini sudah ada
+1345	Komponen ini hanya berfungsi di perangkat dengan GPU ARM Mali (Dimensity, Exynos, dan lainnya); tidak bisa berjalan di sini
+1346	Hanya GPU ARM Mali (Dimensity, Exynos…); tidak bisa berjalan di sini
+1347	Hanya Mali
+1348	Alat perangkat
+1349	Izinkan Claude memakai alat perangkat (notifikasi, papan klip, membuka tautan / kalender / alarm, membagikan file…)
+1350	Pemanggilan dikonfirmasi seperti alat lain, sesuai mode izin Anda. Apa pun yang membuka aplikasi lain hanya mengisinya lebih dulu; Anda sendiri yang mengetuk simpan, kirim, atau panggil di aplikasi itu.
+1351	Membaca dan mengetuk layar (aksesibilitas)
+1352	Nonaktif (bawaan)
+1353	Aktif saat dibutuhkan, nonaktif saat menganggur (butuh Shizuku aktif)
+1354	Selalu aktif (lebih boros baterai)
+1355	Matikan setelah menganggur (menit)
+1356	Buka setelan aksesibilitas sistem
+1357	Layanan aksesibilitas: tersambung
+1358	Layanan aksesibilitas: nonaktif
+1359	Layanan aksesibilitas: nonaktif untuk sementara (diaktifkan saat dibutuhkan)
+1360	Shizuku belum aktif, jadi aplikasi tidak bisa menyalakan layanan aksesibilitas sendiri: aktifkan cccodroid di setelan aksesibilitas sistem. Di Android 13+, aplikasi yang dipasang manual harus lebih dulu: Info aplikasi → menu kanan atas → Izinkan setelan terbatas.
+1361	Status perangkat
+1362	Notifikasi
+1363	Baca papan klip
+1364	Tulis papan klip
+1365	Buka aplikasi / tautan / kalender…
+1366	Bagikan file
+1367	Aplikasi terpasang
+1368	Baca layar
+1369	Ketuk
+1370	Geser / gulir
+1371	Ketik teks
+1372	Kembali / beranda dan tombol lain
+1373	Tangkapan layar
+1374	Nonaktif secara bawaan. Aktifkan saat Anda ingin Claude menguji aplikasi yang sedang Anda buat atau mengirim file buatannya ke aplikasi lain; selama aktif, setiap giliran membawa satu hingga dua ribu token tambahan untuk deskripsi alat.
+1375	Model & upaya berpikir
+1376	Upaya berpikir
+1377	Cari model
+1378	Berlaku mulai pesan berikutnya.
+1379	Model ini tidak punya level upaya untuk dipilih
+1380	Baru saja dipakai
+1381	Semua {n}
+1382	Tidak ada model yang cocok
+1383	Ganti model & upaya berpikir
+1384	Native · Ikuti sistem
+1385	Native · Terang
+1386	Native · Gelap
+1387	Seeker · Ikuti sistem
+1388	Seeker · Terang
+1389	Seeker · Gelap
+1390	Claude Code itu sendiri
+1391	Panel Git
+1392	Mulai Shizuku sekali ketuk (debugging nirkabel)
+1393	Claude mencari kode dan membaca diff
+1394	Mengompilasi program native
+1395	Membangun APK
+1396	Debugging USB
+1397	Komponen GPU (Blender, browser, …)
+1398	Pemrosesan audio dan video
+1399	Tata letak dokumen, analisis tabel, pemrosesan gambar
+1400	Wajib
+1401	Pustaka bersama
+1402	Memakai {b}
+1403	Dipakai di aplikasi oleh: {list}
+1404	Bergantung pada: {list}
+1405	Dipakai oleh modul ini: {list}
+1406	Saat ini dipakai oleh: {list}
+1407	{n} perintah, {p} paket
+1408	Sumber: repositori resmi Termux · snapshot {s}
+1409	Pasang (sekitar {a})
+1410	{names} masih membutuhkannya — copot itu dulu
+1411	Copot modul ini? Perintah-perintahnya dihapus dari toolkit; file yang masih dipakai modul atau komponen lain dipertahankan. Anda bisa memasangnya lagi kapan saja.
+1412	Ini juga akan memasang: {list}. Lanjutkan?
+1413	Pasang modul toolkit ini dulu: {names} (di “Modul toolkit” bagian atas Ekstensi)
+1414	Modul tidak ditemukan: {id}
+1415	Ini toolkit lengkap; tidak ada modul untuk dipasang
+1416	Modul lain sedang dipasang; coba lagi setelah selesai
+1417	Toolkit dipasang dari file lokal, jadi tidak ada rilis untuk mengunduh modul. Perbarui toolkit sekali di Pengaturan dulu
+1418	Penyimpanan tidak cukup: butuh sekitar {need} MB, hanya {free} MB kosong
+1419	Paket modul kekurangan file: {file}
+1420	File dalam paket modul gagal diverifikasi: {file}
+1421	Ini toolkit lengkap; tidak ada modul untuk dicopot
+1422	Modul dasar tidak bisa dicopot
+1423	Pustaka bersama datang dan pergi bersama modul yang memakainya dan tidak bisa dicopot sendiri
+1424	Sebuah modul sedang dipasang; coba lagi setelah selesai
+1425	Modul toolkit
+1426	Toolkit pengembangan dibagi menjadi modul berdasarkan kegunaan — pasang hanya yang Anda butuhkan. Modul dasar wajib; pustaka bersama dipasang dan dihapus otomatis bersama modul yang memakainya.
+1427	Perintah utama:
+1428	{n} menunggu · giliran sebelumnya di percakapan ini belum benar-benar selesai (tugas latar masih berjalan atau sedang diselesaikan); akan dikirim setelah berakhir
+1429	Diantrekan: giliran sebelumnya di percakapan ini belum benar-benar selesai; akan dikirim setelahnya
+1430	Copot paket pengembangan?\n\nIni menghapus seluruh paket, termasuk komponen yang terpasang di dalamnya, modul tambahan, dan apa pun yang Anda pasang dengan pip / npm -g / pkg, lalu kembali ke penyiapan awal agar Anda bisa memilih sumber unduhan dan modul lagi.\n\nPercakapan, workspace, status masuk, dan pengaturan tetap disimpan. Terminal yang terbuka akan ditutup.
+1431	Copot Claude Code?\n\nProgram Claude Code yang diunduh dihapus dan tidak akan dipasang ulang otomatis. Saat dibutuhkan, ketuk "Pasang…" di sini dan pilih versi (stable, latest, atau nomor versi tertentu).\n\nStatus masuk, percakapan, dan pengaturan tetap disimpan; mengirim pesan saat belum terpasang akan meminta Anda memasangnya dulu.
+1432	{n} program sisa dari paket lama ({size}) dikarantina dan akan dihapus otomatis dalam {d} hari.
+1433	Hapus sekarang
+1434	Hapus {n} program lama yang dikarantina sekarang? Tindakan ini tidak bisa dibatalkan.
+1435	{n} dihapus
+1436	Pasang…
+1437	Versi mana yang dipasang?\nMasukkan stable, latest, atau nomor versi tertentu (mis. {v}).
+1438	Claude Code belum terpasang. Buka Pengaturan → Pembaruan dan ketuk "Pasang…" untuk memilih versi.
+1439	CLI: dikunci {v}
+1440	CLI: kunci versi…
+1441	Versi…
+1442	Versi Claude Code
+1443	Ikuti kanal (pembaruan otomatis mengikutinya)
+1444	Kunci versi (pembaruan otomatis tidak mengubahnya)
+1445	Cari versi
+1446	Status masuk, sesi, dan pengaturan tetap disimpan; versi lama mungkin tidak punya fitur yang lebih baru.
+1447	Ikuti {ch}
+1448	Kanal stabil resmi
+1449	Rilis terbaru — lebih baru dari stable, mungkin kurang stabil
+1450	Terpasang
+1451	Dikunci
+1452	Tidak ada versi yang cocok
+1453	Tidak bisa mengambil daftar versi
+1454	Sudah diatur seperti ini
+1455	Dikunci ke {v}, beralih sekarang
+1456	Sekarang mengikuti {ch}
+1457	Build pengembang tidak bisa mengunci versi (hanya stable / latest)
+1458	Tidak bisa mengambil daftar versi: {err}
+1459	Detail
+1460	Catatan dan disk tidak cocok di {n} tempat:
+1461	Catatan cocok dengan disk
+1462	Yang harus dilakukan: 
+1463	Memeriksa…
+1464	Pemeriksaan gagal
+1465	Tidak ada toolkit di sini, tidak ada yang diperiksa
+1466	Penanda pemasangan toolkit (.devkit-ok) tidak ada; toolkit mungkin belum selesai dipasang
+1467	Pengaturan → Pembaruan: perbaiki toolkit
+1468	Program Claude Code tidak ditemukan
+1469	Pengaturan → Pembaruan: pasang ulang Claude Code
+1470	Tidak bisa membaca catatan pemasangan komponen "{id}"
+1471	Pasang ulang komponen ini di halaman Ekstensi
+1472	Komponen "{id}" belum selesai dipasang terakhir kali
+1473	Copot lalu pasang ulang di halaman Ekstensi
+1474	Komponen "{id}" dipasang pada toolkit lama; file-nya hilang saat toolkit berganti
+1475	Pasang ulang di halaman Ekstensi (atau nanti, saat dibutuhkan)
+1476	Catatan komponen "{id}" berisi {n} path yang rusak
+1477	Kirim paket diagnostik ke pengembang
+1478	Perintah komponen "{id}" hilang: {cmds}
+1479	Komponen "{id}" kehilangan {n} dari {total} file-nya
+1480	{n} entri daftar paket menunjuk ke luar aplikasi ini
+1481	{n} paket tidak lengkap ({m} file hilang)
+1482	Modul "{name}" ditandai terpasang tetapi tidak punya manifest
+1483	Copot lalu pasang ulang di Ekstensi → Modul toolkit
+1484	Modul "{name}" belum selesai dipasang terakhir kali
+1485	Pasang ulang di Ekstensi → Modul toolkit
+1486	Modul "{name}" tidak punya daftar file (FILES); mencopotnya akan meninggalkan file
+1487	Modul "{name}" kehilangan {n} dari {total} file-nya
+1488	Tidak bisa membaca catatan komponen kustom "{id}"
+1489	Hapus di Ekstensi → Komponen kustom lalu impor lagi
+1490	Program atau pustaka komponen kustom "{id}" hilang
+1491	Periksa catatan
+1492	Sesi ini belum disimpan. Hapus setelah satu balasan lengkap
+1493	Masih membuat jawaban. Tunggu selesai sebelum menghapus
+1494	Tidak ada pesan Anda sebelum balasan ini, jadi tidak bisa dihapus sendirian
+1495	Hapus pesan ini? Claude tidak akan melihatnya lagi (balasannya tetap ada).
+1496	Hapus balasan ini? Pemanggilan alat dan hasilnya ikut terhapus, dan Claude tidak akan melihatnya lagi.
+1497	Enter mengirim
+1498	Enter menambah baris baru. Ctrl + Enter atau tombol kirim untuk mengirim
+1499	Sesi ini sedang membuat jawaban. Tunggu selesai sebelum menghapus.
+1500	Tidak ada yang bisa dihapus di catatan sesi untuk pesan ini.
+1501	Hanya penghapusan terakhir yang bisa dibatalkan.
+1502	Cadangannya sudah tidak ada.
+1503	Sesi punya konten baru sejak penghapusan, jadi tidak bisa dibatalkan.
+1504	Tombol Enter
+1505	Kirim (Shift + Enter untuk baris baru)
+1506	Baris baru (Ctrl + Enter atau tombol kirim untuk mengirim)
+1507	Pemakaian
+1508	Sesuaikan item yang disematkan…
+1509	Ciutkan bilah samping
+1510	Chat baru
+1511	Chat
+1512	Kelola chat
+1513	Kembali ke chat
+1514	Menu kiri atas: chat baru dan chat sebelumnya; Ekstensi, Kemampuan, Pemakaian, dan Bantuan ada di Lainnya, Pengaturan ada di bagian bawah bilah samping
+1515	Tetap ketik saat Claude bekerja: Enter mengantrekan, tombol petir menyela (tanpa menghentikan, ikut ke giliran saat ini)
+1516	{n} tidak tersambung
+1517	{n} berjalan
+1518	Sebelumnya
+1519	Semua chat
+1520	Ekspor
+1521	Hapus (ke tempat sampah)
+1522	Ganti penyedia / akun
+1523	Komunitas · Diskusi
+1524	Umum
+1525	Penyedia & model
+1526	Perilaku Claude
+1527	Latar & paralel
+1528	Perangkat & izin
+1529	Warna Native atau Qiusuo
+1530	Keyboard ponsel tidak punya Shift; pilih baris baru jika Anda mengetik beberapa baris
+1531	Item bilah samping yang disematkan
+1532	Sisanya ada di Lainnya
+1533	Kanal Claude Code yang diikuti
+1534	Pembaruan otomatis
+1535	Paket diagnostik
+1536	Apakah komponen, modul, daftar paket, dan disk saling cocok
+1537	Apa yang sudah dilakukan pemasangan, verifikasi, dan perbaikan
+1538	Kuota langganan
+1539	Cari perintah, alat, skill…
+1540	Cari bantuan…
+1541	Tidak ada menu bagikan sistem di sini — disalin ke papan klip
+1542	Berjalan
+1543	Pilih beberapa
+1544	Impor chat (.zip)
+1545	Putuskan chat saat ini
+1546	{n} modul
+1547	{n} komponen
+1548	Devkit
+1549	Komponen
+1550	kosong
+1551	Butuh GPU Mali
+1552	Butuh Snapdragon
+1553	Ada pembaruan
+1554	Belum terpasang
+1555	Belum ada build yang kompatibel
+1556	Tidak bisa dipakai di perangkat ini
+1557	Terverifikasi di perangkat
+1558	Dipakai: {name}
+1559	Ciutkan
+1560	Detail
+1561	Cukup dengan laju saat ini
+1562	Dengan laju ini akan habis lebih awal
+1563	Kuota mingguan · akun Claude
+1564	token · {n} giliran
+1565	token · {n} chat
+1566	Cache hit
+1567	Bulan ini · makin tinggi makin hemat
+1568	Kuota mingguan {p}%
+1569	Hari ini {n} token
+1570	Tanggal
+1571	Giliran
+1572	Tidak terpakai
+1573	(chat dihapus)
+1574	Belum ada yang tercatat bulan ini
+1575	CPU aplikasi
+1576	Baterai adalah berapa banyak seluruh perangkat turun hari ini; CPU adalah waktu kerja aplikasi ini (termasuk Claude dan perintah yang dijalankannya).
+1577	Build ini tidak punya lapisan native, jadi hanya waktu CPU yang dicatat (baterai dan layar menyala butuh cccodroid).
+1578	Pesan
+1579	Giliran balasan
+1580	Token masukan
+1581	Token keluaran
+1582	Token baca cache
+1583	Berpikir {e}
+1584	Tanya
+1585	Sesuai aturan
+1586	Claude Code {ver} · tersedia di giliran ini
+1587	Yang bisa dipakai Claude di giliran ini
+1588	Mode izin: {m} · {n} aturan
+1589	Tidak tersambung
+1590	Tekan lama chat: sematkan, ganti nama, ekspor, hapus
+1591	Pilih, impor, tempat sampah, muat ulang, dan putuskan ada di ⋯ di sebelah judul; untuk satu chat, ketuk ⋯ miliknya atau tekan lama.
+1592	Pemakaian harian
+1593	14 hari terakhir · token
+1594	Grafik
+1595	Tabel
+1596	Per model
+1597	Porsi token bulan ini
+1598	Chat termahal
+1599	Rincian
+1600	Buat gambar laporan bulanan
+1601	Ekspor CSV
+1602	Rincian energi
+1603	Laporan bulanan
+1604	Semua yang bisa dipakai Claude di giliran ini (dari laporan init saat startup). Ketuk perintah garis miring untuk menyisipkannya; izin / tanya / tolak tiap alat mengikuti mode izin dan aturan.
+1605	Sunting aturan
+1606	MCP
+1607	Pasang/hapus di Ekstensi → MCP
+1608	Kembali
+1609	Pemakaian & energi
+1610	Native
+1611	Qiusuo
+1612	Terang / gelap
+1613	Terang
+1614	Gelap
+1615	Bawaan untuk chat baru; ganti kapan saja di bawah bilah masukan
+1616	Padatkan saat konteks mencapai jumlah token ini
+1617	Direktori tambahan
+1618	--add-dir: izinkan claude membaca dan menulis di luar workspace
+1619	Lewati CLAUDE.md, skill, plugin, hook, dan MCP
+1620	Tiap tambahan memakai beberapa ratus MB RAM
+1621	Kuota mingguan
+1622	Per hari / per model / laporan bulanan
+1623	Waktu CPU aplikasi ini dan penurunan baterai perangkat
+1624	Tanya saya
+1625	Terima suntingan
+1626	Rencana
+1627	Otomatis
+1628	Tolak tanpa bertanya
+1629	Tidak dalam proyek
+1630	Tugas terjadwal
+1631	Pembaruan komponen sudah diperiksa
+1632	Proyek
+1633	Memahami gambar
+1634	Bersihkan
+1635	Pindahkan ke proyek…
+1636	Hari ini {t}
+1637	Besok {t}
+1638	Kemarin {t}
+1639	Setiap hari {t}
+1640	Hari kerja {t}
+1641	Setiap {d} {t}
+1642	Hari terakhir tiap bulan {t}
+1643	Tiap bulan tanggal {d} {t}
+1644	Setiap {h} jam ({a}–{b})
+1645	Sekali · {d} {t}
+1646	{n} dtk
+1647	{m} mnt {s} dtk
+1648	{n} percakapan
+1649	Folder tidak ada
+1650	Proyek baru
+1651	Proyek = satu folder kerja dengan instruksi sendiri (CLAUDE.md), model bawaan, dan izin. Percakapan yang dimulai dalam proyek berjalan di folder itu.
+1652	Belum ada proyek. Buat satu, atau masukkan folder yang sudah Anda punya.
+1653	Ikuti global
+1654	Belum ada percakapan
+1655	Instruksi · CLAUDE.md
+1656	Disertakan di setiap percakapan
+1657	Apa proyek ini, cara membangunnya, aturan main…
+1658	Kembalikan
+1659	Bawaan
+1660	(hanya untuk percakapan baru di proyek ini)
+1661	Model
+1662	.mcp.json milik proyek: {list}
+1663	Tidak ada .mcp.json; memakai server global
+1664	Buka di penjelajah file
+1665	Memori
+1666	{n} item
+1667	Hal-hal yang dicatat Claude di proyek ini
+1668	Baru
+1669	Aktif
+1670	Nonaktif
+1671	Tidak ada
+1672	Nama proyek
+1673	Ganti warna
+1674	Buka folder di penjelajah file
+1675	Buka folder ini di terminal
+1676	Hapus proyek…
+1677	Proyek baru
+1678	Buat di workspace
+1679	Pakai folder yang sudah ada
+1680	Percakapan yang sebelumnya dimulai di folder ini ditambahkan otomatis
+1681	Clone dari git
+1682	Masukkan URL repositori; akan di-clone ke workspace
+1683	Instruksi (ditulis ke CLAUDE.md, opsional)
+1684	Buat
+1685	Nama proyek tidak boleh kosong
+1686	Meng-clone…
+1687	Membuat…
+1688	Proyek dibuat
+1689	Hapus proyek “{n}”
+1690	Hapus proyeknya saja; pertahankan folder dan percakapan
+1691	Percakapan kembali ke “Tidak dalam proyek”; folder tetap di {p}
+1692	Hapus foldernya juga
+1693	Percakapan dipindah ke tempat sampah (bisa dipulihkan); folder dihapus permanen
+1694	Folder {p} akan dihapus permanen. Lanjutkan?
+1695	Proyek dihapus
+1696	Tanpa proyek
+1697	Proyek mana? (Berjalan di folder proyek dengan instruksi dan bawaannya)
+1698	Percakapan ini masih berjalan; pindahkan setelah berhenti
+1699	Pindahkan ke proyek (catatan percakapan dipindah ke folder proyek)
+1700	Dipindahkan ke “{n}”
+1701	Dikeluarkan dari proyek
+1702	{n} aktif
+1703	Berikutnya {w}
+1704	Terlewat sekali: 
+1705	Jalankan sekarang
+1706	Lewati
+1707	Belum pernah dijalankan
+1708	Tidak akan berjalan lagi
+1709	Nonaktif
+1710	Aktif/nonaktif
+1711	Pada waktu yang ditentukan, Claude berjalan sekali di perangkat ini dalam folder yang dipilih; Anda diberi tahu sesuai pengaturan dan hasilnya disimpan sebagai percakapan. Tidak ada yang mengawasi, jadi apa pun yang butuh persetujuan Anda akan ditolak. Proses yang terlewat tidak pernah dikejar diam-diam; pengaturan tiap tugas yang menentukan.
+1712	Aktif
+1713	Nonaktif
+1714	Belum ada tugas terjadwal. Misalnya, minta ia memeriksa CI setiap pagi.
+1715	Biaya & anggaran
+1716	Hari ini {a} / batas harian {b}
+1717	Hari ini {a} · tanpa batas harian
+1718	Setelah batas tercapai, sisa tugas hari itu dilewati dan Anda diberi tahu. Sebagian besar API pihak ketiga tidak melaporkan biaya, jadi dihitung 0.
+1719	Ubah batas
+1720	Bulan ini {c} · {n} kali jalan
+1721	Berhasil {a} · gagal {b} · dilewati {c}
+1722	Bangun perangkat
+1723	Berjalan tepat waktu selama aplikasi hidup
+1724	Penghitung waktu ada di gateway: tugas berjalan tepat waktu selama aplikasi terbuka atau berjalan di latar. Jika sistem mematikannya atau perangkat mati, proses terlewat dan ditangani oleh pengaturan “Jika terlewat” tugas tersebut saat Anda membuka aplikasi berikutnya.
+1725	Agar tetap selesai saat layar terkunci, izinkan berjalan di latar dan keluarkan dari optimasi baterai
+1726	Pengaturan
+1727	Ya
+1728	Tidak
+1729	Di mana
+1730	Lanjutkan percakapan yang sama (mempertahankan konteks sebelumnya)
+1731	Percakapan baru setiap kali
+1732	Ikuti proyek / global
+1733	Izin
+1734	Boleh menyunting file di folder proyek
+1735	Hanya izinkan: {l}
+1736	Hanya baca
+1737	; apa pun yang butuh persetujuan Anda ditolak
+1738	Syarat
+1739	Hanya saat Wi-Fi
+1740	Hanya saat mengisi daya
+1741	Lewati jika baterai di bawah {p}%
+1742	Berjalan kapan pun online
+1743	Jika ada percakapan lain yang berjalan
+1744	Tunggu giliran
+1745	Lewati proses ini
+1746	Tetap jalankan (memakai slot paralel)
+1747	Batas
+1748	Tanpa batas biaya
+1749	{n} mnt
+1750	Coba ulang {n} kali
+1751	Tanpa coba ulang
+1752	Jika terlewat
+1753	Tanya saya saat aplikasi dibuka berikutnya
+1754	Jalankan sekali tepat setelah startup
+1755	Lewati
+1756	Beri tahu setiap kali
+1757	Hanya jika gagal
+1758	Hanya jika ada temuan (balasannya bukan “{q}”)
+1759	Jangan beri tahu
+1760	Simpan hasil sebagai percakapan
+1761	Berlaku sampai
+1762	Nonaktif setelah dijalankan
+1763	Sampai {d}
+1764	Nonaktif setelah {n} kali jalan ({m} sejauh ini)
+1765	Tanpa tanggal akhir
+1766	Aktif
+1767	Nonaktif
+1768	Tidak akan berjalan sendiri
+1769	Jeda sementara
+1770	Dijeda sampai {w}; dilanjutkan otomatis
+1771	Dilanjutkan otomatis
+1772	Jangan jeda
+1773	Lewati proses berikutnya
+1774	Jeda 1 hari
+1775	Jeda 1 minggu
+1776	Dijeda
+1777	Yang dikerjakan
+1778	Cara berjalan
+1779	Riwayat proses
+1780	Tidak OK
+1781	Berjalan…
+1782	Jalankan sekarang
+1783	Uji coba
+1784	Coba ulang {n}
+1785	Belum dijalankan
+1786	Batas harian (USD, 0 = tanpa batas). Setelah tugas terjadwal mencapai ini dalam sehari, sisanya dilewati.
+1787	Proses susulan dimulai
+1788	Dilewati kali ini
+1789	Diaktifkan: {f}
+1790	Dinonaktifkan
+1791	Tidak bisa dimulai (syarat tidak terpenuhi atau anggaran hari ini habis; lihat riwayat proses)
+1792	Uji coba dimulai: tidak dicatat; hasilnya ada di percakapan baru
+1793	Dimulai: percakapan muncul di Terbaru; Anda diberi tahu sesuai pengaturan
+1794	Duplikat
+1795	(salinan)
+1796	Ekspor JSON (salin ke papan klip)
+1797	Hapus tugas terjadwal “{n}”? Riwayat prosesnya tetap ada, dan percakapan yang tersimpan tidak terpengaruh.
+1798	Setiap hari pukul {time}
+1799	pada hari-hari ini pukul {time}
+1800	Setiap bulan tanggal {day} pukul {time}
+1801	Tanggal {n}
+1802	Hari terakhir
+1803	Setiap {h} jam, hanya antara {a} dan {b}
+1804	Nonaktif setelah dijalankan.
+1805	Cron standar lima kolom: menit jam tanggal bulan hari.
+1806	mis. Periksa CI setiap pagi
+1807	Apa yang harus dilakukan Claude
+1808	Sebutkan dengan jelas apa yang harus dilakukan dan cara melaporkannya. Tidak ada orang di sana: ia tidak bisa bertanya kepada Anda.
+1809	Mau “jangan ganggu kecuali ada masalah”? Minta ia membalas dengan satu frasa tetap saat tidak ada temuan (mis. “Semua aman”), lalu atur notifikasi di bawah menjadi “Hanya jika ada temuan”.
+1810	Tempat menjalankan
+1811	Proyek: {n}
+1812	Kapan
+1813	Setiap beberapa jam
+1814	Sekali
+1815	Proses tidak saling mengganggu; satu hasil per proses, mudah ditelusuri
+1816	Lanjutkan percakapan yang sama
+1817	Mempertahankan konteks sebelumnya (cocok untuk “apa yang berubah sejak terakhir kali”); makin panjang seiring waktu dan dipadatkan otomatis
+1818	Bisa membaca file dan menjalankan perintah baca-saja; tidak mengubah apa pun (coba ini beberapa hari dulu)
+1819	Menulis di luar folder, memasang perangkat lunak, menghapus, dan sejenisnya semua ditolak
+1820	Pilih alat yang diizinkan
+1821	mis. hanya Bash(git *) dan WebFetch; selain itu ditolak
+1822	Pengaturan lainnya
+1823	Syarat (jika tidak terpenuhi, proses ini dilewati dan dicatat)
+1824	Lewati jika baterai di bawah
+1825	Tidak peduli
+1826	Jika ada percakapan lain yang berjalan saat itu
+1827	Tetap jalankan
+1828	“Tetap jalankan” memakai slot paralel (Pengaturan → Latar & paralel). Menunggu paling lama 30 menit, lalu proses dilewati.
+1829	Batas
+1830	Batas biaya per proses
+1831	Tanpa batas
+1832	Berhenti jika terlampaui dan dihitung gagal; sebagian besar API pihak ketiga tidak melaporkan biaya
+1833	Batas waktu per proses
+1834	{n} jam
+1835	Jika gagal
+1836	Coba ulang sekali
+1837	Coba ulang dua kali
+1838	Jaringan putus, error API, batas terlampaui
+1839	Jika terlewat
+1840	Perangkat mati, dibekukan sistem, tidak ada jaringan
+1841	Setelah dijalankan
+1842	Hanya jika ada temuan
+1843	Frasa yang dibalasnya saat tidak ada temuan
+1844	Tidak ada notifikasi jika balasannya persis ini
+1845	Semua aman
+1846	Ditandai jam di daftar; jika nonaktif, hanya riwayat proses yang menyimpannya
+1847	Sertakan hasil sebelumnya
+1848	Agar ia tahu apa yang dikatakannya terakhir kali (hanya untuk “Percakapan baru setiap kali”)
+1849	Sampai tanggal tertentu
+1850	Nonaktif setelah N kali jalan
+1851	Sunting tugas terjadwal
+1852	Tugas terjadwal baru
+1853	Uji coba
+1854	Tidak bisa diurai: {e}
+1855	Berikutnya {a}
+1856	; lalu {b}
+1857	Tidak bisa menentukan proses berikutnya (apakah waktunya sudah lewat?)
+1858	Nama dan apa yang dikerjakan wajib diisi
+1859	Pilih setidaknya satu hari
+1860	“Hanya jika ada temuan” butuh frasa yang dibalasnya saat tidak ada temuan
+1861	Dibuat: {f}
+1862	Waktu clone habis (5 menit)
+1863	Percakapan tidak ditemukan
+1864	Proyek tidak ditemukan
+1865	Folder tidak ada: {d}
+1866	URL repositori harus diawali https:// atau git@
+1867	Clone gagal: {msg}
+1868	Folder ini sudah menjadi proyek
+1869	Folder ini tidak bisa dihapus
+1870	Cron butuh lima kolom: menit jam tanggal bulan hari
+1871	Melewati tanggal akhirnya; tugas dinonaktifkan
+1872	Proses ini dilewati sesuai pengaturan
+1873	Pengeluaran hari ini sudah mencapai batas
+1874	Tugas terjadwal dilewati
+1875	“{n}”: pengeluaran hari ini sudah mencapai batas
+1876	Tidak terhubung ke Wi-Fi
+1877	Tidak sedang mengisi daya
+1878	Baterai {b}%, di bawah {m}%
+1879	Ada percakapan yang berjalan
+1880	Ada percakapan yang berjalan; setelah 30 menit masih belum gilirannya
+1881	(Hasil sebelumnya, sebagai referensi)
+1882	(tidak ada balasan)
+1883	Melebihi batas waktu {m} menit; dihentikan
+1884	Dihentikan
+1885	Terjadi kesalahan
+1886	Biaya ${c} melebihi batas per proses ${m}
+1887	({n} tindakan yang butuh persetujuan ditolak)
+1888	Uji coba selesai
+1889	Tugas terjadwal selesai: {n}
+1890	Tugas terjadwal gagal: {n}
+1891	Terlewat (aplikasi tidak berjalan); dilewati sesuai pengaturan
+1892	Terlewat; tidak disusulkan
+1893	Tugas tidak ditemukan
+1894	Alat berukuran besar tidak dipasang bersama aplikasi; mencopot hanya menghapus file milik komponen itu. Komponen bertanda perisai sudah diverifikasi di perangkat sungguhan dengan versi toolkit ini.
+1895	Lampirkan file
+1896	Tangkapan layar dalam 5 dtk
+1897	Jelajahi file
+1898	Pemakaian konteks
+1899	Padatkan konteks
+1900	Biaya
+1901	Konfigurasi
+1902	Larut malam, waktu terbaik untuk ide
+1903	Selamat pagi. Mau bikin apa hari ini?
+1904	Tengah hari. Apa yang sedang dipikirkan?
+1905	Selamat siang. Ayo lanjut
+1906	Selamat malam. Masih ada yang tersisa hari ini?
+1907	Tips
+1908	Ada yang bisa saya bantu hari ini?
+1909	Ketik / untuk skill dan perintah
+1910	Font antarmuka
+1911	Bawaan memakai Inter dan Source Han Sans yang disertakan, tidak terpengaruh tema font sistem
+1912	Font balasan
+1913	Font untuk balasan Claude
+1914	Serif
+1915	Sans
+1916	Ukuran teks
+1917	Percakapan dan kotak masukan
+1918	Kecil
+1919	Sedang
+1920	Besar
+1921	Baterai tinggal sedikit. Yang cepat-cepat dulu
+1922	Sedang dicas. Silakan kerjakan yang besar
+1923	Larut malam, layar masih menyala
+1924	Masih bekerja selarut ini? Pasti idenya bagus
+1925	Bangun pagi. Mulai dengan yang mudah
+1926	Senin. Mulai dengan satu hal kecil
+1927	Pagi. Meja kerja sakumu sudah siap
+1928	Pikiran segar. Saatnya bagian yang sulit?
+1929	Tidak bisa diam saat makan siang?
+1930	Sudah makan siang? Ayo kerjakan sedikit
+1931	Sore. Lanjutkan yang tadi?
+1932	Seduh teh dulu. Santai saja
+1933	Jumat malam. Bikin sesuatu yang seru
+1934	Malam. Beres-beres, atau mulai yang baru?
+1935	Selamat malam. Waktu yang pas untuk menulis
+1936	Malam yang tenang. Ceritakan apa saja yang terlintas
+1937	Akhir pekan. Kerjakan sesuatu untuk dirimu sendiri
+1938	Tidak bisa membaca gambar ini
+1939	Avatar & nama panggilan
+1940	Bahasa
+1941	Ditampilkan di bagian bawah bilah samping, dan di laporan bulanan yang diekspor
+1942	Ganti avatar
+1943	Catatan rilis
+1944	Cari catatan rilis…
+1945	Belum dirilis
+1946	Saat ini
+1947	Tidak ada versi yang cocok
+1948	Saldo {v}
+1949	Terpakai {v}
+1950	Gagal memeriksa saldo
+1951	{n} token hari ini
+1952	Lihat di Pemakaian
+1953	Batas {win} terpakai {n}%
+1954	Saldo {name} tinggal {v}
+1955	Tidak ada kuota atau saldo untuk penyedia ini
+1956	Lihat pemakaian
+1957	Penyedia lain
+1958	Ditampilkan setelah Anda mengirim pesan
+1959	Kuota dan saldo
+1960	Kuota dan pengeluaran
+1961	Ingatkan saya di 80% dan 95% dari batas
+1962	Ingatkan saya saat saldo turun di bawah
+1963	Zhuyue
+1964	Zhuyue · Ikuti sistem
+1965	Zhuyue · Terang
+1966	Zhuyue · Gelap
+1967	Warna Native, Qiusuo, atau Zhuyue
+1968	Hanya sesi ini yang berubah, mulai pesan berikutnya; sesi yang belum Anda atur mengikuti bawaan di Pengaturan.
+1969	Kembali mengikuti bawaan
+1970	Mengikuti bawaan: {model}
+1971	Ketuk model untuk memindahkan sesi ini ke “{name}”
+1972	Sesi ini sekarang memakai “{name}”, mulai pesan berikutnya
+1973	Lanjutkan sesi ini di “{name}”?\n\nSeluruh percakapan sejauh ini akan dibaca ulang oleh model penyedia baru: cache prompt mulai dari awal dan tagihan mengikuti penyedia baru. Sebagian catatan pemanggilan alat mungkin tidak dipahami model penyedia lain.
+1974	Mode eksekusi
+1975	Otomatis: ditentukan oleh paket yang terpasang. Langsung: program toolkit dijalankan langsung (paket targetSdk 28). Lewat loader: program dijalankan lewat loader sistem — satu-satunya cara di paket targetSdk 36; paket 28 juga bisa memilihnya untuk pemecahan masalah. Berlaku setelah gateway dimulai ulang.
+1976	Langsung
+1977	Lewat loader
+1978	Saat ini: {mode}
+1979	Mode eksekusi disimpan. Mulai ulang gateway sekarang untuk menerapkannya? Terminal yang terbuka akan terputus.
+1980	Memulai ulang gateway…
+1981	Build ini (targetSdk {n}) hanya bisa berjalan lewat loader; tidak bisa beralih ke eksekusi langsung
+1982	Tugas masih berjalan; mulai ulang setelah selesai
+1983	Loader glibc di paket ini bukan build yang sama dengan milik toolkit, jadi “lewat loader” belum bisa dipakai: perbarui toolkit dulu
+1984	Paket pemasangan
+1985	targetSdk 28 adalah build bawaan dan paling kompatibel; targetSdk 36 untuk ponsel baru yang sistemnya tidak mau memasang 28. Keduanya berfungsi sama dan berbagi data, jadi memasang yang satu di atas yang lain tidak menghilangkan apa pun. Otomatis: tetap pada yang terpasang sekarang, dan beralih ke 36 jika sistem menolak 28.
+1986	Terpasang sekarang: targetSdk {n}
+1987	Pembaruan berikutnya beralih ke targetSdk {n}
+1988	Sistem tidak lagi mengizinkan targetSdk 28; hanya 36 yang bisa di sini
+1989	Beralih ke paket targetSdk {n}?\n\nIni mengunduh paket lain dari versi yang sama (sekitar 14 MB) dan memasangnya di atas yang ini. Percakapan, pengaturan, dan toolkit dipertahankan. Aplikasi dimulai ulang sekali saat pemasangan.
+1990	{n} pembaruan tersedia
+1991	Batas pemadatan
+1992	Biarkan claude menentukan
+1993	Riwayat diringkas otomatis saat pemakaian mendekati batas ini. Lebih rendah menghemat token tetapi ingatannya lebih sedikit; lebih tinggi mengingat lebih banyak tetapi tiap giliran lebih mahal dan lambat.
+1994	{line} · {pct}% dari jendela
+1995	Belum diatur; claude menentukan dari jendela
+1996	Ambil foto
+1997	Tekan lama: tangkapan layar dalam 5 dtk
+1998	Tampilkan alat
+1999	Sembunyikan alat
+2000	Lihat pemakaian jendela konteks dan skill yang dimuat
+2001	Padatkan percakapan untuk mengosongkan konteks
+2002	Bersihkan konteks sesi ini dan mulai dari awal
+2003	Biaya dan durasi sesi ini
+2004	Pemakaian dan batas langganan
+2005	Lingkungan dan konfigurasi saat ini
+2006	Periksa kesehatan pemasangan
+2007	Lihat atau ganti model
+2008	Lihat atau ubah pengaturan
+2009	Atur upaya berpikir
+2010	Aktifkan/nonaktifkan mode cepat
+2011	Kelola server MCP
+2012	Kelola subagen
+2013	Sunting file memori CLAUDE.md
+2014	Buat CLAUDE.md untuk proyek ini
+2015	Tinjau perubahan saat ini
+2016	Tinjauan keamanan
+2017	Tinjauan kode
+2018	Ganti nama sesi ini
+2019	Lanjutkan sesi sebelumnya
+2020	Rangkum poin penting sesi ini
+2021	Laporan wawasan pemakaian
+2022	Tetapkan tujuan jangka panjang
+2023	Jalankan tugas berulang
+2024	Pemrosesan massal
+2025	Verifikasi perubahan
+2026	Debug masalah
+2027	Sederhanakan kode
+2028	Riset mendalam
+2029	Atur alur kerja multi-agen
+2030	Konteks
+2031	Status
+2032	Tugas terjadwal tidak berjalan di akun langganan secara bawaan
+2033	"{n}" akan berjalan di akun langganan. Aktifkan di "Akun langganan" di bagian bawah halaman Terjadwal (pemakaian tanpa pengawasan tunduk pada ketentuan Anthropic), atau beri tugas ini penyedia yang memakai API key
+2034	Akun langganan
+2035	Izinkan berjalan di akun langganan
+2036	Tugas terjadwal tidak berjalan di akun langganan yang sedang masuk secara bawaan. Sebelum mengaktifkannya, periksa sendiri: pemakaian tanpa pengawasan tunduk pada ketentuan Anthropic. Penyedia yang memakai API key tidak terpengaruh.
+2037	{n} tugas akan memakai akun langganan dan untuk sementara tidak akan berjalan
+2038	Langganan · tidak akan berjalan
+2039	Jalankan tugas terjadwal di akun langganan Anda?\n\nTugas terjadwal berjalan sendiri saat tidak ada yang mengawasi. Pemakaian tanpa pengawasan tunduk pada ketentuan Anthropic — pastikan pemakaian Anda mematuhinya. Jika ketentuannya diperketat, Anda mungkin perlu mematikan ini.
+2040	Tugas terjadwal sekarang boleh berjalan di akun langganan
+2041	Nonaktif: tugas terjadwal tidak akan berjalan di akun langganan
+2042	"Terverifikasi": pengelola sudah menjalankan versi ini di perangkat sungguhan (unduhan, pemanggilan alat, melanjutkan sesi). Versi bertanda "masalah diketahui" dilewati oleh pembaruan otomatis.
+2043	Diverifikasi di: {who}
+2044	Masalah diketahui: {why}
+2045	diperbaiki di {v}
+2046	Terverifikasi
+2047	belum diverifikasi
+2048	{v} punya masalah yang diketahui: {why}\n\nTetap beralih ke versi ini?
+2049	({n} perangkat)
+2050	Menghitung kata…
+2051	Work Island (ColorOS)
+2052	Tampilkan apa yang sedang dikerjakan Claude di Fluid Cloud ColorOS 16
+2053	Butuh aplikasi Work Island terpisah. Jika aktif, “bekerja”, “menunggu Anda”, dan “selesai” muncul di kapsul island, yang menyembunyikan diri 8 detik setelah tugas selesai. Sejauh ini baru diuji di ColorOS 16 / Android 16.
+2054	Silsilah
+2055	Pindahkan ke Lain-lain
+2056	Keluarkan dari Lain-lain
+2057	Lain-lain
+2058	Pindahkan semua ke Tempat sampah
+2059	Pindahkan {n} sesi di Lain-lain ke Tempat sampah?
+2060	{n} dipindahkan ke Tempat sampah (bisa dipulihkan selama {d} hari)
+2061	Sesi ini belum punya catatan
+2062	Dimundurkan dari “{t}” · {d}
+2063	Dicabangkan dari “{t}” · {d}
+2064	Belum ada judul
+2065	Sunting judul
+2066	Judul baru
+2067	Lihat di Silsilah
+2068	Segera hadir
+2069	Kembali ke sekarang
+2070	Sekarang
+2071	Dimundurkan dari “{t}”
+2072	Dicabangkan dari “{t}”
+2073	Dari sesi yang dihapus
+2074	Digabung dari {list}
+2075	Dilanjutkan dari {list}
+2076	{n} sesi bercabang
+2077	{n} bab
+2078	Belum ada sesi
+2079	Bab & judul
+2080	Gabungkan…
+2081	Gagal memuat silsilah: {e}
+2082	Mengindeks sesi… {d}/{n}
+2083	Folder lain
+2084	Tampilan silsilah gagal dimuat. Coba buka ulang aplikasi.
+2085	Belum ada sesi. Setelah beberapa chat, peta ini akan menunjukkan hubungan antarsesi.
+2086	{n} sesi · {m} tautan
+2087	sejak {d}
+2088	Tampilkan lain-lain
+2089	Bab {n}
+2090	Awal bab ini tidak ditemukan; dibuka di bagian terbaru
+2091	Memberi judul {d}/{n} · Hentikan
+2092	Pengisian judul tidak berjalan: {e}
+2093	{n} bab diberi judul
+2094	, {n} gagal
+2095	Isi judul · {n}
+2096	Pakai bawaan global {m} ({p}) untuk memberi judul {c} bab di {s} sesi.
+2097	Bekerja dari ringkasan pemadatan di akhir tiap bab, bukan transkrip lengkap. Sekitar {k} panggilan, kira-kira {i} token masukan dan {o} token keluaran (perkiraan atas; biasanya lebih sedikit).
+2098	Anda bisa mengubah judul ini kapan saja, dan pengarsipan AI sendiri akan menimpanya nanti. Mulai?
+2099	Tidak ada bab tersisa untuk diberi judul
+2100	Proyek contoh
+2101	Refaktor gateway
+2102	Pecah modul routing
+2103	Sambungkan event bus
+2104	Selesaikan lanjut-setelah-putus
+2105	Uji beban dan rampungkan
+2106	Coba pendekatan routing lain
+2107	Kembalikan dan pikirkan ulang
+2108	Ambil alih panduan pengguna
+2109	Gabungkan dua pendekatan
+2110	Satukan API setelah penggabungan
+2111	Tambah tes
+2112	Eksperimen yang ditinggalkan
+2113	Coba model baru
+2114	Pemeriksaan harian
+2115	Tulis catatan mingguan
+2116	Rapikan progres minggu ini
+2117	Urutkan foto saya ke folder berdasarkan tanggal
+2118	Di silsilah Anda yang sebenarnya, ini melompat ke awal bab {n} di sesi tersebut.
+2119	Di silsilah Anda yang sebenarnya, ini membuka bab-bab "{t}"; ketuk salah satu untuk melompat ke awalnya.
+2120	Tombol tidak berfungsi dalam tur; pakai di silsilah Anda yang sebenarnya.
+2121	Langkah {n} dari {m}
+2122	Keluar dari tur
+2123	Selesai
+2124	Kembali
+2125	Mulai ulang
+2126	Lihat silsilah saya
+2127	Berikutnya
+2128	Peta kereta bawah tanah untuk sesi Anda
+2129	Seret
+2130	Seret peta
+2131	Cubit untuk memperbesar waktu
+2132	Perbesar sekali
+2133	Ketuk sebuah jalur
+2134	Pilih "Refaktor gateway"
+2135	Stasiun = pemadatan = bab
+2136	Ketuk sebuah stasiun
+2137	Jenis-jenis jalur
+2138	Pilih "Gabungkan dua pendekatan"
+2139	Tugas terjadwal, lain-lain, dan tempat sampah
+2140	Pilih "Pemeriksaan harian"
+2141	Anda sudah paham
+2142	Dalam mode potret, tampilannya berupa pohon berindentasi
+2143	Gulir ke atas dan bawah
+2144	Gulir daftar
+2145	Ketuk sebuah baris
+2146	Cara membaca baris
+2147	Waktu berjalan dari kiri ke kanan, yang terbaru di kanan. Tiap jalur adalah satu sesi, dikelompokkan dalam pita per proyek.
+2148	Lingkaran di jalur adalah stasiun — penjelasannya sebentar lagi. Titik biru yang berdenyut berarti sesi sedang berjalan.
+2149	Tekan dan seret peta ke arah mana pun; lepaskan dan peta meluncur sebentar.
+2150	Tanggal hanya bergerak ke samping dan nama proyek hanya naik-turun, jadi Anda tidak pernah kehilangan posisi.
+2151	Cubit masuk atau keluar dengan dua jari untuk memperbesar sumbu waktu saja; ketebalan jalur tetap.
+2152	Dengan mouse, tahan Ctrl lalu gulir.
+2153	Ketuk dua kali di area kosong, atau ketuk "Kembali ke sekarang" di kanan atas, untuk kembali ke tepi kanan dengan zoom normal.
+2154	Ketuk jalur "Refaktor gateway". Keluarganya menyala — yang bercabang darinya, digabung darinya, atau mengambil alihnya — dan yang lain memudar.
+2155	Sebuah kartu muncul di kanan bawah berisi asal-usulnya dan tiap babnya.
+2156	Setiap kali sesi dipadatkan, satu bab berakhir dan stasiun digambar. Di atas jalur yang dipilih Anda bisa melihat judul tiap bab.
+2157	"a1b2·3" di depan tiap bab pada kartu adalah nomor arsipnya — empat karakter pertama ID sesi · bab — agar Anda bisa merujuknya.
+2158	Coba ketuk stasiun mana pun di jalur itu.
+2159	Jalur yang bercabang di tengah adalah fork; yang berbelok turun tepat di persimpangan adalah rewind (kembali ke satu titik dan mengulanginya).
+2160	Panah yang mengalir masuk adalah penggabungan: sesi baru mengambil dari beberapa jalur. Garis titik-titik tipis adalah serah terima gaya lama "baca sesi itu dan ambil alih".
+2161	Ketuk "Gabungkan dua pendekatan" untuk melihat asal-usulnya.
+2162	Garis putus-putus berisi titik-titik adalah tugas terjadwal; tiap titik adalah satu kali proses.
+2163	Garis putus-putus abu-abu adalah sesi di tempat sampah; pilih untuk memulihkannya dari kartu. Sesi lain-lain (mencoba model, sekadar menyapa) dan tanya-jawab sekali pakai disembunyikan sampai Anda mengaktifkan "Tampilkan lain-lain" di bilah alat.
+2164	Ketuk "Pemeriksaan harian".
+2165	Judul abu-abu berarti bab itu belum punya judul arsip, jadi prompt pertamanya yang dipakai. "Isi judul" di bilah alat mengisi semuanya sekaligus.
+2166	Mulai sekarang AI memberi judul sesi baru sendiri, satu bab per pemadatan.
+2167	Satu sesi per baris, terbaru di atas. Sesi yang bercabang atau digabung diindentasi di bawah sumbernya.
+2168	Putar tablet Anda ke samping untuk peta kereta lengkap.
+2169	Dalam mode potret hanya bisa digulir naik-turun, jadi tidak bentrok dengan gestur lain.
+2170	Di silsilah Anda yang sebenarnya, mengetuk baris menampilkan bab-bab sesi itu; ketuk salah satu untuk melompat ke awalnya.
+2171	Coba ketuk "Refaktor gateway".
+2172	"a1b2·4" adalah nomor arsip: empat karakter pertama ID sesi · bab. Lalu tanggal dan jumlah bab.
+2173	Setelah "←" adalah apa yang diambil alih atau digabungkannya. Judul abu-abu belum diarsipkan; prompt pertamanya yang dipakai.
+2174	Lingkaran putus-putus adalah tugas terjadwal, diikuti berapa kali ia berjalan. Sesi di tempat sampah tampak abu-abu.
+2175	Sesi lain-lain (mencoba model, sekadar menyapa) dan tanya-jawab sekali pakai disembunyikan sampai Anda mengaktifkan "Tampilkan lain-lain".
+2176	"Isi judul" di bilah alat memberi judul semua bab lama yang belum berjudul sekaligus. Mulai sekarang AI memberi judul sesi baru sendiri, satu bab per pemadatan.
+2177	Pertama kali di sini? Ketuk "Cara membaca" di kanan atas — dua menit untuk memahami peta silsilah
+2178	Cara membaca
+2179	Animasi antarmuka
+2180	Bilah samping, menu, dan halaman bergeser masuk-keluar, ditambah isyarat selesai. Saat mengikuti sistem, animasi mati jika Kurangi gerakan aktif
+2181	DevTools
+2182	Pilih elemen
+2183	Ketuk bagian mana pun di halaman untuk memasukkannya ke kotak pesan
+2184	Ditambahkan ke kotak pesan — sekarang sebutkan apa yang harus diubah
+2185	{sel} di {path}:
+2186	Masuk
+2187	Ukuran catatan lokal
+2188	Seberapa besar file catatan percakapan ini di perangkat, termasuk pesan dan pemanggilan alat. Ini bukan panjang konteks model saat ini, bukan pula pemakaian token atau biaya. Catatan asli tetap disimpan setelah pemadatan konteks, jadi terus bertambah.
+2189	Penanda
+2190	Penanda dihapus
+2191	Ditandai
+2192	Percakapan ini belum disimpan. Tambahkan penanda setelah balasan pertama selesai.
+2193	Percakapan ini sudah punya {n} penanda. Hapus beberapa dulu.
+2194	Pesan ini tidak ditemukan di catatan percakapan. Coba lagi sebentar lagi.
+2195	Posisi yang ditandai tidak ditemukan. Dibuka di pesan terbaru.
+2196	Belum ada penanda. Ketuk tombol penanda di bawah prompt atau balasan untuk menandai posisi itu.
+2197	Prompt
+2198	Balasan
+2199	(Tanpa judul)
+2200	Tata letak lipat (eksperimental)
+2201	Saat dibuka, tata letak dibagi mengikuti lipatan: bilah samping, chat, dan panel samping masing-masing dapat satu panel. Saat setengah terbuka, dialog menghindari lipatan; saat berdiri di meja, kotak masukan pindah ke bagian bawah.
+2202	{n} berjalan
+2203	{n} selesai
+2204	{n} gagal
+2205	{n} langkah
+2206	Arahan
+2207	Laporan
+2208	{n} pesan
+2209	tidak terkirim
+2210	Ringkasan
+2211	utama
+2212	Langkah subagen ini belum dimuat
+2213	{n} langkah sebelumnya
+2214	Construct
+2215	Construct · Ikuti sistem
+2216	Construct · Terang
+2217	Construct · Gelap
+2218	Warna Native, Qiusuo, Zhuyue, atau Construct
+2219	Kustom…
+2220	Font monospace
+2221	Kode, kartu alat, dan terminal
+2222	Font yang diimpor
+2223	ttf, otf, woff, atau woff2, maksimal 40 MB per file, paling banyak 10. Setelah diimpor, pilih lewat "Kustom…" di atas; karakter yang tidak ada di font itu memakai font bawaan
+2224	Impor font…
+2225	File font tidak boleh lebih dari 40 MB
+2226	Mengimpor {name}…
+2227	Font ini sudah diimpor: {name}
+2228	{name} diimpor
+2229	Hapus font {name}? Tempat yang memakainya kembali ke font bawaan.
+2230	Hapus font {name}?
+2231	Anda bisa mengimpor maksimal 10 font. Hapus satu dulu
+2232	Ini koleksi font (.ttc), yang tidak bisa dipakai tampilan web. Silakan pakai ttf / otf tunggal
+2233	Bukan file font yang bisa dipakai. Hanya ttf, otf, woff, dan woff2 yang didukung
+2234	Prompt tersimpan
+2235	Prompt
+2236	Simpan prompt panjang yang sering Anda kirim sebagai perintah, lalu pilih dengan mengetik / di kotak masukan. Apa pun setelah /nama mengisi $ARGUMENTS di teks. Disimpan sebagai file perintah standar Claude Code, jadi claude di terminal juga bisa memakainya.
+2237	Prompt baru
+2238	Sisipkan
+2239	Belum ada prompt tersimpan. Ketuk "Prompt baru" untuk menyimpan satu.
+2240	Proyek ini belum punya prompt sendiri. Prompt yang disimpan di sini masuk ke .claude/commands milik proyek, dan ikut terbawa bersama repositori jika memakai git.
+2241	Nama (ketik /nama di kotak masukan untuk memakainya; huruf, angka, - dan _)
+2242	Deskripsi (ditampilkan di daftar /, opsional)
+2243	mis. Ubah masalah menjadi issue
+2244	Petunjuk argumen (opsional)
+2245	mis. <deskripsi masalah>
+2246	Prompt (yang dikirim ke Claude; $ARGUMENTS diganti dengan apa yang ada setelah /nama)
+2247	mis. Ubah masalah di bawah menjadi issue GitHub: judul satu baris, dan isi dengan "Apa yang terjadi", "Langkah untuk mereproduksi", dan "Yang diharapkan".\n\n$ARGUMENTS
+2248	Hapus /{name}?
+2249	/{name} tersimpan. Ketik / di kotak masukan untuk memakainya
+2250	Kelola prompt tersimpan…
+2251	Simpan prompt yang sering dikirim sebagai /perintah
+2252	Nama hanya boleh memakai huruf, angka, - dan _, maksimal 40 karakter
+2253	Itu nama perintah bawaan. Pilih yang lain
+2254	Prompt tidak boleh kosong
+2255	Prompt terlalu panjang (maksimal 64 KB)
+2256	Prompt dengan nama itu sudah ada
+2257	Tombol bilah atas
+2258	Untuk tiap tombol pilih Disematkan (selalu di bilah atas), Dilipat (di dalam ⋯), atau Disembunyikan. Tahan pegangan di kiri dan seret untuk mengubah urutan
+2259	Seret untuk mengubah urutan
+2260	Disematkan
+2261	Disembunyikan
+2262	Kembalikan bawaan
+2263	Di ⋯
+2264	Untuk tiap tombol pilih Disematkan (selalu di bilah atas), Di ⋯ (tampil saat Anda mengetuk ⋯), atau Disembunyikan. Tahan pegangan di kiri dan seret untuk mengubah urutan
+2265	Warna aksen
+2266	Warna tombol, tautan, dan item terpilih. Dibuat lebih terang atau gelap sesuai tampilan saat ini agar tetap terbaca
+2267	Tombol di bawah pesan
+2268	Ketuk untuk menampilkan atau menyembunyikan masing-masing; sembunyikan yang tidak Anda pakai
+2269	Pesan Anda
+2270	Balasan Claude
+2271	Warna kustom
+2272	Biru
+2273	Hijau toska
+2274	Hijau
+2275	Kuning tua
+2276	Oranye
+2277	Merah
+2278	Magenta
+2279	Ungu
+2280	Sebuah sesi di proyek ini masih membuat jawaban. Tunggu selesai sebelum menghapus.
+2281	Tidak bisa menulis file arsip (penyimpanan penuh atau tidak ada izin); perubahan ini tidak disimpan
+2282	Model dengan nama yang sama sedang diunduh
+2283	Sesi yang dipilih totalnya lebih dari {n} MB. Ekspor dalam kelompok yang lebih kecil.
+2284	[Koneksi ke gateway terputus, menyambung ulang…]
+2285	Ditemukan beberapa layanan pairing dan tidak bisa dipastikan mana yang asli. Masukkan juga port-nya (angka setelah titik dua di "Alamat IP & port" pada dialog pairing), mis. {0}
+2286	Beberapa layanan pairing: masukkan kode dan port bersamaan, mis. {0} (port ada di dialog pairing)
+2287	Unduhan dialihkan ke http tanpa enkripsi, jadi tidak diunduh
+2288	Anda berpindah sesi, jadi pesan ini tidak dikirim
+2289	Tidak terkirim: {msg}
+2290	Pulihkan
+2291	Gagal menghapus: {msg}
+2292	Gagal memuat daftar skill: {msg}
+2293	Gagal memuat log perbaikan: {msg}
+2294	Tempel API key dulu, lalu simpan
+2295	Gagal memuat pemakaian: {msg}
+2296	Gagal memuat kemampuan: {msg}
+2297	Gagal memuat proyek: {msg}
+2298	Gagal memuat instruksi: {msg}. Penyuntingan dinonaktifkan agar aslinya tidak tertimpa.
+2299	Gagal memuat tugas terjadwal: {msg}
+2300	Gagal memuat detail tugas: {msg}
+2301	Ada percakapan lain yang berjalan: diantrekan, dan akan berjalan saat gilirannya tiba
+2302	Tidak bisa menentukan proses berikutnya: {e}
+2303	Jumlahnya minimal 1
+2304	File masih dimuat. Simpan lagi sebentar lagi.
+2305	Tidak bisa menampilkan gambar (file rusak atau format tidak didukung)
+2306	Tidak bisa menutup terminal: {msg}
+2307	[Masukan tidak sampai ke terminal. Gateway mungkin sedang dimulai ulang.]
+2308	Gagal memuat ulang: {msg}
+2309	“{n}” {w}
+2310	Tugas dinonaktifkan atau dihapus saat masih dalam antrean
+2311	Waktu terjadwal untuk proses sekali jalan sudah lewat, jadi tugas dinonaktifkan
+2312	Tugas ini sudah berjalan
+2313	(Model ini tidak mendukung protokol Anthropic di endpoint ini: pilih model yang mendukung, atau pindah ke endpoint yang disediakan platform untuk Claude Code)
+2314	Ekstra besar
+2315	Agar aplikasi lain tidak bisa menyamar sebagai layanan pairing, masukkan kode bersama port-nya: port adalah angka setelah titik dua di “Alamat IP & port” pada dialog pairing, mis. {0}
+2316	Masukkan kode dan port bersamaan, mis. {0} (port ada di dialog pairing)
+2317	Pertama kali, Anda perlu pairing: di Setelan yang terbuka, buka Debugging nirkabel → aktifkan → Sambungkan perangkat dengan kode pairing. Notifikasi cccodroid tetap tampil di atas layar; ketuk Masukkan kode lalu ketik kode 6 digit beserta port yang tampil di dialog, mis. 123456 37285 (atau masukkan di sini)
+2318	Port (dari dialog)
+2319	Masukkan juga port dari dialog pairing (angka setelah titik dua)
+2320	Konfirmasi tindakan sensitif
+2321	Bertanya sebelum menyentuh kunci atau mengendalikan layar, bahkan dalam mode Izinkan semuanya
+2322	Saat Claude akan membaca kunci atau kredensial masuk (.env, kunci SSH, API key, token gateway, dan sejenisnya), membaca layar atau mengetuk di aplikasi lain, membaca papan klip, atau membagikan file keluar, kartu persetujuan terpisah muncul, bahkan dalam mode Izinkan semuanya. Setelah Anda mengizinkan satu jenis tindakan, tidak ditanyakan lagi di giliran yang sama. Ini melindungi dari instruksi tersembunyi di halaman web atau file yang menyesatkan Claude. Ini hanya jaring pengaman: perintah yang sengaja disamarkan tidak dikenali.
+2323	Jika Anda tidak memintanya, kemungkinan ini dipicu instruksi tersembunyi di halaman web atau file yang dibacanya; disarankan untuk menolak. Setelah diizinkan, jenis tindakan yang sama tidak ditanyakan lagi di giliran ini.
+2324	Ingin membaca layar atau mengoperasikan aplikasi lain ({w})
+2325	Ingin membaca papan klip
+2326	Ingin membagikan file ke aplikasi lain
+2327	Menyentuh kunci atau kredensial masuk: {w}
+2328	Tindakan sensitif
+2329	Pemeriksaan tanda tangan komponen nonaktif (ada file sakelar allow-unsigned di direktori privat). Hapus setelah selesai debugging
+2330	Pesan sebelumnya belum sampai ke gateway, jadi pesan ini tidak dikirim. Coba lagi sebentar lagi
+2331	Pilih tanggal akhir
+2332	Gagal memuat ulang; menampilkan angka terakhir yang dimuat: {msg}
+2333	Gagal memuat ulang; menampilkan daftar terakhir yang dimuat: {msg}
+2334	Gagal memuat ulang; menampilkan data terakhir yang dimuat: {msg}
+2335	Pesan identik di bawahnya belum dipastikan tersimpan. Tambahkan penanda setelah giliran itu selesai (atau buka ulang percakapan ini)
+2336	Daftar model masih dimuat; tunggu sebentar sebelum menyimpan
+2337	Di tempat sampah; ketuk untuk memulihkan
+2338	Pesan ini muncul beberapa kali di percakapan, jadi tidak jelas giliran mana yang dimaksud. Buka ulang percakapan lalu coba lagi.
+2339	Kirim gambar di dalam pesan (kompatibilitas): centang ini hanya jika model tidak bisa melihat gambar yang dilampirkan dan mengarang. Sebagian penyiapan API pihak ketiga melewatkan gambar yang dibaca ulang oleh alat Read; dengan opsi ini aktif, setiap gambar lampiran juga dikirim langsung di dalam pesan.
+2340	Tip: atur batas pengeluaran harian dan peringatan saldo di konsol penyedia. Jika Anda curiga kunci bocor, cabut di sana dan buat yang baru.
+2341	Ingin mengubah file yang mengatur instruksi atau pemeriksaan keamanan Claude: {w}
+2342	Masukan pesan
+2343	Ringkasan pemakaian
+2344	Pemeriksaan tanda tangan komponen nonaktif (gateway dijalankan dengan sakelar uji)
+2345	Impor lain masih berjalan. Tunggu sampai selesai.
+2346	Paket sesi akan melebihi 4 GB. Ekspor dalam kelompok yang lebih kecil.
+2347	Arsip terlalu besar setelah dibongkar. Tidak ada yang diimpor.
+2348	Ruang penyimpanan tidak cukup
+2349	Gambar eksternal · {host} · ketuk untuk memuat
+2350	Muat gambar eksternal saat diketuk
+2351	Gambar web yang dirujuk di file Markdown ditampilkan sebagai tombol dulu dan baru diambil saat diketuk, sehingga servernya tidak tahu kapan Anda membaca
+2352	Ketuk sesi di peta untuk memilih semua yang ingin digabung
+2353	Ketuk sesi di peta untuk memilih sumbernya
+2354	{n} sesi dipilih
+2355	Tambah sumber ke “{t}” · {n} dipilih
+2356	Tautkan
+2357	{n} sumber ditambahkan
+2358	Tambah sumber…
+2359	Hapus sumber: {t}
+2360	Berhenti mencatat “{a}” sebagai sumber “{b}”? Sesinya sendiri tidak terpengaruh.
+2361	Dihapus
+2362	Gabungkan {n} sesi
+2363	Sesi baru tidak bisa melihat percakapan aslinya, hanya bahan yang Anda bawa. Ringkasan pemadatan tidak memakan biaya; kutipan berisi beberapa putaran teks asli (secara bawaan putaran terakhir).
+2364	Ringkasan pemadatan
+2365	Kutipan
+2366	Sesi ini belum dipadatkan, jadi hanya kutipan yang tersedia
+2367	Tidak ada putaran tanya-jawab yang bisa dikutip
+2368	Centang putaran yang dibawa ({n} terakhir)
+2369	Kutipan {n} putaran
+2370	Total bahan: {c}
+2371	Apa yang harus terjadi selanjutnya
+2372	Satu atau dua kalimat, mis. gabungkan kesimpulan keduanya dan tetapkan satu rencana
+2373	Taruh di mana
+2374	Bawaannya “{p}”: sebagian besar bahan berasal dari sana.
+2375	(ringkasan pemadatan)
+2376	(kutipan percakapan terbaru)
+2377	Di bawah ini bahan yang dibawa dari {n} sesi. Baca semuanya dulu, lalu lanjutkan menuju tujuan di bagian akhir; tunjukkan dulu jika ada kontradiksi antarbahan.
+2378	(Tidak ada tujuan: pertama rangkum sejauh mana tiap bahan berjalan, lalu tanyakan kepada saya langkah berikutnya)
+2379	Ini pesan pertama sesi baru, dan Anda bisa menyuntingnya langsung. Pertahankan baris tanda tangan di bagian akhir: itulah cara sumber dikenali saat berpindah perangkat.
+2380	Mulai sesi baru
+2381	Mengambil bahan…
+2382	Satu sesi tidak punya ringkasan pemadatan; ganti ke kutipan
+2383	Pesan pertama kosong
+2384	Bawa pemikiran dari beberapa sesi ke satu sesi baru
+2385	Lainnya…
+2386	“{name}” berukuran besar ({s}); menyimpannya ke workspace…
+2387	Sesi ini belum punya pesan dari Anda, jadi tidak bisa dicabangkan.
+2388	Tidak bisa membaca direktori arsip; mungkin rusak
+2389	Setelah dibongkar menjadi {n} MB, melebihi batas {max} MB
+2390	Giliran {n}
+2391	Tutup rincian
+2392	Membaca bab ini…
+2393	Tidak bisa dibaca: {e}
+2394	Dimundurkan ke
+2395	Digabung ke
+2396	Dicabangkan ke
+2397	Bab tidak ditemukan
+2398	Bab ini belum punya giliran yang lengkap.
+2399	Sibuk selama {d}
+2400	{n} pemanggilan alat
+2401	{n} subagen
+2402	{n} kesalahan
+2403	bab sedang berjalan
+2404	{d} kemudian
+2405	Alat {n}
+2406	Dijawab langsung
+2407	Subagen {n}
+2408	Kesalahan {n}
+2409	(melanjutkan giliran dari bab sebelumnya)
+2410	Bab ini punya terlalu banyak giliran; hanya {n} pertama yang ditampilkan.
+2411	Sesi ini ada di tempat sampah
+2412	Membaca giliran ini…
+2413	Berpikir sebelum pemanggilan
+2414	Alat berjalan
+2415	Lihat giliran ini di chat
+2416	Tidak ada akhir yang tercatat
+2417	{n} langkah gagal
+2418	latar
+2419	Tidak ada alat yang dipanggil di giliran ini; dijawab langsung.
+2420	{n} pemanggilan alat lain tidak ditampilkan.
+2421	Berpikir {a} · berjalan {b}
+2422	(dengan lampiran)
+2423	Tidak ada alat yang dipanggil.
+2424	Rincian
+2425	Lihat bagaimana sesi ini berjalan, giliran demi giliran
+2426	Ekspor peta ini
+2427	Gambar (PNG)
+2428	Vektor (SVG)
+2429	Halaman web interaktif (HTML)
+2430	Belum ada sesi di peta
+2431	Gagal mengekspor: {e}
+2432	Gambar tidak bisa dibuat
+2433	Diekspor: {name}
+2434	Gabungkan dua sesi sendiri
+2435	Saat beberapa jalur masing-masing sudah setengah jalan dan Anda ingin melanjutkan di satu sesi baru: pilih "Refaktor gateway", ketuk "Gabungkan…" di kartunya, lalu ketuk "Coba pendekatan routing lain" agar keduanya tercentang.
+2436	Di halaman Silsilah yang sebenarnya Anda akan mengetuk "Berikutnya" lalu muncul panduan tiga langkah: untuk tiap sumber, ringkasan pemadatan atau beberapa giliran teks asli → satu kalimat tentang langkah berikutnya → pratinjau pesan pertama, yang bisa Anda sunting. Setelah dikirim, jadilah sesi baru, dengan jalur yang mengalir dari tiap sumber.
+2437	Tur hanya melatih cara memilih; tidak benar-benar memulai sesi.
+2438	Centang dua sesi
+2439	Rincian: bagaimana berjalan, giliran demi giliran
+2440	"Rincian" di kartu menjabarkan sebuah sesi: kapan tiap giliran dalam bab berjalan, berapa pemanggilan alat, berapa subagen yang dikirim; sesi yang dicabangkan dari sebuah giliran digantung di bawah giliran itu.
+2441	Ketuk sebuah giliran untuk melihat berapa lama tiap pemanggilan alat dan tiap subagen berjalan.
+2442	Coba "Rincian" di kartu "Refaktor gateway".
+2443	Ketuk "Rincian"
+2444	"Ekspor" di bilah alat menyimpan peta ini sebagai gambar, file vektor, atau halaman web yang bisa digeser dan diketuk.
+2445	Tulis nomor arsip seperti "a1b2·3" di chat dan AI akan mendapat ringkasan dari akhir bab itu, tanpa perlu salin-tempel.
+2446	Gabungkan dan rincian
+2447	Menu yang muncul saat Anda mengetuk baris juga berisi "Gabungkan…" dan "Rincian": menggabungkan mencentang beberapa sesi dan membawa pemikirannya ke satu sesi baru; rincian menjabarkan sesi giliran demi giliran, menunjukkan berapa lama tiap giliran dan berapa subagen yang dikirim.
+2448	Tulis nomor arsip seperti "a1b2·3" di chat dan AI akan mendapat ringkasan dari akhir bab itu. "Ekspor" di bilah alat menyimpan silsilah sebagai gambar atau halaman web.
+2449	{n} dipilih. Di halaman Silsilah yang sebenarnya Anda sekarang akan mengetuk "Berikutnya" di bawah untuk membuka panduan.
+2450	Di halaman Silsilah yang sebenarnya, ini membuka rincian untuk "{t}".
+2451	Lompat ke bab ini
+2452	Silsilah masih diindeks. Coba lagi sebentar lagi.
+2453	Tidak ada sesi untuk {r}
+2454	{n} sesi diawali {s}. Pilih salah satu di peta.
+2455	{r}: bab tidak ditemukan
+2456	Disimpan di {dir}. Aplikasi apa pun dengan akses penyimpanan bisa membacanya.
+2457	Disimpan di folder privat aplikasi. Aplikasi lain tidak bisa membacanya.
+2458	Sesi ini sudah mencapai jumlah maksimal sumber tambahan ({n}).
+2459	Pesan penggabungan tidak dikirim karena Anda berpindah sesi. Pesannya sudah disalin, jadi bisa ditempel ke chat baru.
+2460	Izinkan halaman ini terhubung ke internet?\n\nSetelah online, skrip di halaman bisa mengirim file dari foldernya ke tempat lain. Izinkan hanya halaman yang Anda percayai.
+2461	Online
+2462	File ini tidak bisa diekspor
+2463	Halaman ini mencoba mengakses internet ({hosts}) dan diblokir. Ketuk “Online” di atas jika memang dibutuhkan.
+2464	CLAUDE.md terlalu besar (lebih dari 4 MB)
+2465	Ada baris di file yang lebih dari {n} MB dan tidak bisa diproses
+2466	Sebuah entri di arsip ini akan ditulis di luar arsip ({p}), jadi tidak diekstrak demi keamanan
+2467	CLAUDE.md proyek ini bukan file biasa (mungkin symlink), jadi tidak dibaca atau ditulis di sini
+2468	Pesan ini terlalu panjang (lebih dari 2.000.000 karakter). Kirim sebagai file saja.
+2469	Terlalu banyak file dengan nama yang sama di folder ekspor
+2470	Membukanya di browser menghilangkan perlindungan “Offline”: skrip di halaman bisa mengirim file dari foldernya ke tempat lain. Lakukan hanya untuk halaman yang Anda percayai.
+2471	Jembatan OpenAI lokal belum siap, jadi permintaan ini dihentikan. Periksa konfigurasi atau status runtime komponennya.
+2472	Mencopot…
+2473	Sedang mencopot. Langkah ini tidak bisa dibatalkan; tunggu sampai selesai.
+2474	Jembatan OpenAI lokal tidak bisa dinonaktifkan. File komponen dipertahankan. Periksa status runtime-nya, lalu coba copot lagi.
+2475	Formulir konfigurasi belum siap. Muat ulang halaman dan coba lagi.
+2476	Masukkan URL API HTTPS lengkap, misalnya https://api.example.com/v1.
+2477	Gunakan URL API HTTPS tanpa nama pengguna, kata sandi, parameter kueri, atau fragmen.
+2478	URL Chat Completions wajib di sini. Responses API belum didukung.
+2479	Path ini tidak bisa dilengkapi otomatis. Masukkan URL /chat/completions lengkap dari penyedia Anda.
+2480	Kembali ke Ekstensi
+2481	Jembatan protokol lokal OpenAI API
+2482	Konfigurasikan di sini, di Ekstensi. Cukup isi tiga kolom ini.
+2483	Sambungkan ke API Anda
+2484	URL API
+2485	Masukkan URL API penyedia Anda, bukan situs web atau halaman masuknya.
+2486	API Key
+2487	Tampilkan kunci
+2488	Nama model
+2489	Masukkan nama model dari penyedia Anda
+2490	Masukkan nama persis yang diberikan penyedia Anda.
+2491	Percakapan, hasil alat, dan gambar akan dikirim ke layanan yang Anda masukkan.
+2492	Simpan konfigurasi
+2493	Tidak ada pemanggilan model jarak jauh; sesi saat ini tidak berubah
+2494	Konfigurasi tersimpan
+2495	Sudah diatur · tidak pernah ditampilkan
+2496	API jarak jauh belum diuji
+2497	Ditambahkan ke “Penyedia & model”. Sesi saat ini tidak berubah.
+2498	Pakai di sesi baru
+2499	Sunting konfigurasi
+2500	Hanya OpenAI Chat Completions API yang didukung. Responses API belum didukung.
+2501	Sembunyikan kunci
+2502	URL permintaan: {url}
+2503	URL layanan berubah. Masukkan API Key lagi; kunci lama tidak akan dikirim ke URL baru.
+2504	Kunci yang tersimpan tidak pernah ditampilkan. Kosongkan untuk mempertahankannya, atau masukkan kunci baru untuk menggantinya.
+2505	Kunci tidak pernah ditampilkan setelah disimpan.
+2506	Menyiapkan jembatan lokal…
+2507	Menyimpan dan memeriksa jembatan lokal, tanpa memanggil model jarak jauh…
+2508	Tersimpan; kosongkan untuk mempertahankannya
+2509	Tempel kunci dari penyedia Anda
+2510	Jembatan lokal siap
+2511	Konfigurasi tersimpan, tetapi jembatan lokal belum siap
+2512	Pasang atau perbarui komponen jembatan protokol lokal OpenAI API dulu.
+2513	Konfigurasi jembatan gagal dimuat. Kembali ke Ekstensi dan coba lagi.
+2514	Masukkan API Key dari penyedia Anda.
+2515	API Key tidak boleh berisi spasi atau baris baru.
+2516	Masukkan nama model yang persis, tanpa koma atau baris baru.
+2517	Konfigurasi belum lengkap. Periksa kolom-kolomnya lalu coba lagi.
+2518	Konfigurasi tersimpan, tetapi jembatan lokal belum siap. Penyedia tidak akan diganti; sunting konfigurasi lalu coba lagi.
+2519	URL API gagal divalidasi. Periksa URL dari penyedia Anda.
+2520	Masukkan API Key lagi. Kunci lama tidak bisa dipakai ulang saat URL layanan berubah.
+2521	Jembatan lokal sedang dipakai atau sedang dicopot. Coba lagi nanti; sesi saat ini tidak berubah.
+2522	Konfigurasi tidak tersimpan sepenuhnya. Periksa status lokal lalu coba lagi; sesi saat ini tidak berubah.
+2523	Penyedia ini tidak bisa dipilih untuk sesi baru. Coba lagi; tidak ada pesan yang dikirim.
+2524	Konfigurasi jembatan belum lengkap. Periksa kolom atau status komponen lalu coba lagi; sesi saat ini tidak berubah.
+2525	Pemasangan jembatan yang ada tidak bisa dimigrasikan otomatis. Cadangkan dan tangani pemasangan lama sendiri; tidak ada yang ditimpa atau dicopot.
+2526	Simpan konfigurasi API ini?\n\nSaat Anda memakainya nanti, percakapan, hasil alat, dan gambar akan dikirim ke {origin}.\nMenyimpan saja tidak memanggil model jarak jauh atau mengganti sesi saat ini.
+2527	Mengonfigurasi… Tunggu sampai selesai.
+2528	Izinkan penemuan model otomatis (mengirim API Key Anda ke layanan yang dimasukkan, tetapi tanpa percakapan atau pemanggilan model)
+2529	Coba ulang penemuan model
+2530	Cari atau masukkan nama model
+2531	Cari di daftar atau masukkan nama model persis dari penyedia Anda.
+2532	Menyimpan tidak memanggil model jarak jauh atau mengganti sesi saat ini
+2533	Inferensi model belum diuji
+2534	Tujuan: masukkan URL API HTTPS yang valid dulu.
+2535	Tujuan: {origin}
+2536	Penemuan sudah menghubungi layanan, tetapi inferensi belum diuji. Menyimpan tidak memanggil model atau mengganti sesi saat ini.
+2537	Aktifkan penemuan untuk memuat daftar otomatis, atau masukkan model secara manual.
+2538	Masukkan URL API HTTPS yang valid dulu.
+2539	Masukkan API Key yang valid untuk memuat daftar model otomatis.
+2540	Penemuan dibatalkan. Coba lagi atau masukkan model secara manual.
+2541	Menyiapkan penemuan model…
+2542	API Key tidak diizinkan. Periksa lalu coba lagi.
+2543	Layanan menolak penemuan model. Periksa izin atau masukkan model secara manual.
+2544	Layanan tidak mendukung penemuan model. Masukkan nama model secara manual.
+2545	Penemuan model dibatasi (rate limit). Coba lagi nanti.
+2546	Waktu penemuan model habis. Coba lagi atau masukkan model secara manual.
+2547	Masukkan API Key lagi, lalu coba ulang penemuan model.
+2548	Daftar model tidak tersedia. Coba lagi atau masukkan model secara manual.
+2549	Memuat daftar model…
+2550	Daftar model kosong. Masukkan nama model secara manual atau coba lagi.
+2551	{count} model dimuat (maksimal 500). Cari atau masukkan nama lain secara manual.
+2552	{count} model dimuat. Ketik untuk mencari atau masukkan nama secara manual.
+2553	Penemuan sudah menghubungi layanan; inferensi model belum diuji.
+2554	Simpan konfigurasi API ini?\n\nSaat Anda memakainya nanti, percakapan, hasil alat, dan gambar akan dikirim ke {origin}.\n{verification}\nMenyimpan saja tidak memanggil model jarak jauh atau mengganti sesi saat ini.
+2555	Material
+2556	Material · Ikuti sistem
+2557	Material · Terang
+2558	Material · Gelap
+2559	Warna Native, Qiusuo, Zhuyue, Construct, atau Material
+2560	Sesuaikan dengan wallpaper
+2561	Judul otomatis
+2562	Beri judul chat baru di latar setelah balasan pertama
+2563	Judul ditulis dari pertanyaan Anda dan balasan pertama, lalu muncul beberapa detik kemudian. Memakai sedikit token tambahan; Anda bisa memilih model murah dan cepat khusus untuk memberi nama. Jika nonaktif, model di chat memberi nama saat Anda mengirim pesan kedua.
+2564	Model yang sama dengan chat
+2565	Nonaktif
+2566	Tampilkan di pemilih model
+2567	Jika nonaktif, penyedia ini tidak ditampilkan di pemilih model di bawah kotak masukan. Pengaturan dan kuncinya tetap disimpan, dan bisa diaktifkan lagi kapan saja. Akun Claude yang belum masuk, atau model di perangkat yang belum diunduh, memang tidak pernah ditampilkan.
+2568	Penyedia yang sedang dipakai selalu ditampilkan
+2569	Penyedia ini belum siap (belum masuk, atau belum ada model yang diunduh). Atur di Pengaturan dulu.
+2570	Jendela konteks (opsional)
+2571	Berapa token yang bisa dibaca model. Jika kosong, dianggap 200k dan batas padat-otomatis tidak bisa lebih tinggi.
+2572	Jendela konteks
+2573	Belum diatur (dianggap 200k)
+2574	Masukkan bilangan bulat dari 1024 sampai 16777216, atau mis. 256k / 1m. Kosongkan jika tidak yakin.
+2575	Jendela konteks (opsional, token, mis. 1048576; kosong = 200k)
+2576	Jendela konteks harus bilangan bulat dari 1024 sampai 16777216, atau mis. 256k / 1m
+2577	dari pengaturan penyedia
+2578	Chat lain juga bisa memakainya: ketuk label model di bawah kotak masukan dan pilih di baris penyedia.
+2579	Isi alamat, kunci, dan model, lalu selesai; jendela konteks opsional.
+2580	Buat paket diagnostik dan kirim lewat menu bagikan sistem.\n\nYang disertakan:\n· Versi dan perangkat: cccodroid / versi Android, model, chip, ruang kosong\n· Paket pengembangan: build yang terpasang, status pembaruan dan pemeriksaan mandiri\n· Log terbaru: log sistem aplikasi ini, bagian akhir log gateway\n· Catatan perbaikan: pemasangan, pemeriksaan, dan perbaikan, serta berhasil tidaknya\n· Jaringan: apakah VPN aktif dan apakah aplikasi bisa menjangkau beberapa sumber unduhan (hanya hasilnya)\n\nYang dihapus:\n· Kunci, token, kredensial login, alamat email\n· Isi pesan Anda ke Claude\n· Transkrip percakapan tidak disertakan\n\nLanjutkan?
+2581	Daftar model
+2582	Konteks {used} · kapasitas tidak diketahui
+2583	Tampilkan {n} baris lagi (total {total})
+2584	Proses panjang: hanya bagian terbaru yang ditampilkan
+2585	{n} percakapan lain terhenti pada saat yang sama; ditandai "Dihentikan" di daftar percakapan.
+2586	{name} di arsip rusak; tidak diimpor
+2587	Waktu git habis ({s} dtk); git dan hook yang dijalankannya dihentikan
+2588	Penyedia ini sedang dipakai. Ubah URL atau kuncinya setelah giliran saat ini selesai.
+2589	Balasan ini tidak cocok dengan catatan sesi. Buka ulang sesi lalu coba lagi.
+2590	Pertanyaan untuk balasan ini sudah dihapus, jadi sekarang digabung dengan balasan sebelumnya dan tidak bisa dihapus sendirian.
+2591	Pertanyaan untuk balasan ini sudah dihapus, jadi balasannya tidak bisa dihapus sendirian. Batalkan penghapusan itu, atau hapus balasannya dulu baru pertanyaannya.
+2592	{n} file dilampirkan ke draf sesi yang baru Anda tinggalkan
+2593	Bukan UTF-8
+2594	File ini berenkode {enc}. Menyimpannya akan merusak aslinya, jadi hanya bisa dilihat.
+2595	Format nama tidak valid
+2596	Parameter permintaan tidak valid
+2597	Membukanya di browser menghilangkan perlindungan penampil: skrip di halaman bisa mengirim file dari foldernya ke tempat lain dan menjangkau layanan lain di perangkat ini. Lakukan hanya untuk halaman yang Anda percayai.

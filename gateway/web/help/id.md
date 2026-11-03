@@ -51,6 +51,15 @@ Semua pilihan ini disimpan di data aplikasi sendiri, jadi menghapus cache WebVie
 - `/goal <syarat>` membuat Claude terus bekerja giliran demi giliran sampai syaratnya terpenuhi. Tugas latar dan daftar tugas tampil di atas kotak masukan, dan masing-masing bisa dihentikan; beberapa tugas latar diringkas menjadi satu baris, ketuk untuk membukanya.
 - Halaman Chat bisa mencari isi pesan, menyaring, serta mengekspor atau mengimpor zip. Chat yang dihapus disimpan di tempat sampah selama 30 hari.
 
+## Tanya Aure dari aplikasi mana pun
+
+- **Blok teks di aplikasi apa saja** (WhatsApp, Chrome, PDF, catatan…), lalu pilih **Tanya Aure** di menu yang muncul (kadang ada di balik ⋮). Panel Aure muncul di atas aplikasi itu, jadi Anda tidak perlu pindah aplikasi.
+- Aure langsung menebak yang Anda perlukan: kode → *Jelaskan kode*, teks sangat panjang → *Ringkas*, sisanya memakai pilihan terakhir Anda. Ketuk tombol lain (**Jelaskan, Terjemahkan, Ringkas, Perbaiki tulisan, Buat balasan, Jelaskan kode, Perbaiki kode**) untuk mengganti; jawaban lama langsung dihentikan.
+- Ketik di **Tanya lanjutan…** untuk bertanya lagi soal teks yang sama.
+- **Ganti teks** menulis jawaban kembali ke kotak teks asal (muncul hanya kalau teksnya bisa diedit, misalnya saat mengetik pesan). **Salin**, **Bagikan**, dan **Lanjut di Aure** (membuka percakapan ini di aplikasi) ada di bawah jawaban.
+- Tutup dengan mengetuk di luar panel, menyeret panel ke bawah, atau tombol kembali. Jawaban yang belum selesai langsung dihentikan supaya kuota tidak terbuang.
+- **Aman:** dalam mode ini Claude **tidak diberi alat apa pun** (tidak bisa menjalankan perintah, membaca file, atau membuka internet), dan teks yang dipilih diperlakukan sebagai data, bukan perintah. Teks dari aplikasi lain jadi tidak bisa memerintah perangkat Anda.
+
 ## Izin dan keamanan
 
 | Mode | Perilaku |

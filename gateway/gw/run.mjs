@@ -71,6 +71,8 @@ export async function startRun(item) {
     log: [], pend: null, pendTimer: null,
     sched: item.sched || null,         // 定时任务跑的：{ taskId, runKey }（结束时 sched.mjs 记运行记录）
     unattended: !!item.unattended,     // 没人看着：要确认的一律拒绝
+    // 「问 Aure」（别的应用里选中文字递进来，见 ask.mjs）：不给任何工具、不挂设备工具，只用它自己那段短提示
+    ask: item.ask ? { prompt: String(item.ask.prompt || "") } : null,
   };
   run.lane = laneOfItem(item);
   RUNS.set(run.id, run);                 // 同步占槽，中间不许有 await
@@ -187,7 +189,7 @@ export async function startRun(item) {
   if (run.sessionId) argv.push("--resume", String(run.sessionId));
   // 设备工具（通知、剪贴板、打开应用、读屏点按…）：只有 Aure Code 有 Java 那一层。开关在应用里，
   // 这里只看总开关决定挂不挂；具体哪些工具出现由 device-mcp.mjs 现问应用。端侧小模型不挂（读不起）
-  const devMcp = deviceMcpConfig();
+  const devMcp = run.ask ? null : deviceMcpConfig();
   if (devMcp && !P.local && (await privCall({ op: "dev_status" }, 3000)).on) argv.push("--mcp-config", devMcp);
 
   // 告诉 claude 这台设备上有什么现成工具 —— 不说它就不会去用。
@@ -196,15 +198,17 @@ export async function startRun(item) {
   // 内置只有聊天（不给工具）；自定义模式的工具清单和提示由用户的配置文件给（见 localCustom）
   const lcust = P.local ? localCustomActive() : null;
   if (P.local) argv.push("--bare", "--tools", lcust ? lcust.tools : "");
+  // 问 Aure：递进来的文字来自别的应用，谁都能塞指令进去 —— 一个工具都不给，最多只是答错，动不了本机
+  else if (run.ask) argv.push("--tools", "");
   // 端侧只补一句身份（--bare 的提示自称 Claude，小模型会照着说），几十 token，不拖慢首字
   const localHint = !P.local ? "" : lcust && lcust.systemPrompt ? lcust.systemPrompt
     : `You are ${model}, a small open model running locally on the user's Android device through llama.cpp (not Claude). Reply in the user's language; keep answers short.`;
   // 建档（脉络）：常驻规则 + 这一轮该不该先建档（见 archive.mjs）
-  const arch = P.local ? null : await archiveHint(run.sessionId).catch(() => null);
-  const appendPrompt = [P.local ? localHint : toolsHint(), !P.nativeModels && !P.local ? TASKS_HINT : "", P.local ? "" : previewHint(cwd), P.local ? "" : integrityHint(), arch?.rule].filter(Boolean).join("\n\n");
+  const arch = P.local || run.ask ? null : await archiveHint(run.sessionId).catch(() => null);
+  const appendPrompt = run.ask ? (P.local ? localHint + "\n\n" : "") + run.ask.prompt : [P.local ? localHint : toolsHint(), !P.nativeModels && !P.local ? TASKS_HINT : "", P.local ? "" : previewHint(cwd), P.local ? "" : integrityHint(), arch?.rule].filter(Boolean).join("\n\n");
   if (appendPrompt) argv.push("--append-system-prompt", appendPrompt);
   // 子代理（连孙代理）统一的联络规矩：用 agentId 发消息、summary 写事由、长内容落文件只发路径（见 agents.mjs）
-  if (!P.local && !message.trim().startsWith("/")) argv.push("--append-subagent-system-prompt", SUBAGENT_HINT + "\n\n" + integrityHint());
+  if (!P.local && !run.ask && !message.trim().startsWith("/")) argv.push("--append-subagent-system-prompt", SUBAGENT_HINT + "\n\n" + integrityHint());
   // claude 没有 --output-style 参数（传了直接 unknown option，整条消息失败）；它是 settings 里的 outputStyle。
   // 密钥读取器也在这里（见 settingsArgs）
   argv.push(...settingsArgs(P));

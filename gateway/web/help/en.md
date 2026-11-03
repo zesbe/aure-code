@@ -51,6 +51,15 @@ These choices are stored in the app's own data, so clearing the WebView cache wo
 - `/goal <condition>` keeps Claude working turn after turn until the condition is met. Background tasks and the task list appear above the input box, and each can be stopped; several background tasks fold into one line, tap it to expand.
 - The Chats page searches message content, filters, and exports or imports zips. Deleted chats stay in the trash for 30 days.
 
+## Ask Aure from any app
+
+- **Select text in any app** (WhatsApp, Chrome, a PDF, notes…) and pick **Ask Aure** in the menu that appears (sometimes behind ⋮). The Aure panel opens over that app, so you don't need to switch apps.
+- Aure guesses what you need right away: code → *Explain code*, very long text → *Summarize*, otherwise your last choice. Tap another button (**Explain, Translate, Summarize, Improve writing, Draft reply, Explain code, Fix code**) to switch; the previous answer stops at once.
+- Type in **Ask a follow-up…** to ask more about the same text.
+- **Replace text** writes the answer back into the original text box (shown only when the text is editable, e.g. while typing a message). **Copy**, **Share** and **Continue in Aure** (opens this conversation in the app) sit under the answer.
+- Close by tapping outside the panel, dragging it down, or pressing back. An unfinished answer stops right away so no quota is wasted.
+- **Safe:** in this mode Claude gets **no tools at all** (it can't run commands, read files or go online), and the selected text is treated as data, not instructions. Text from another app can't make your device do anything.
+
 ## Permissions and safety
 
 | Mode | Behaviour |

@@ -9,4 +9,15 @@
     <!-- 不随系统深浅变的两份底色：安卓 13+ 用 setSplashScreenTheme 按界面里选的外观指定启动画面（见 MainActivity.syncSplash） -->
     <color name="launch_light">#faf9f5</color>
     <color name="launch_dark">#1f1e1d</color>
+    <!-- 「问 Aure」面板：透明窗口压暗背后的应用，面板自己画（AskActivity） -->
+    <style name="Ask" parent="@android:style/Theme.Material.Light.NoActionBar">
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:backgroundDimEnabled">true</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowAnimationStyle">@null</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:navigationBarColor">@android:color/transparent</item>
+        <item name="android:colorAccent">#22D3EE</item>
+    </style>
 </resources>

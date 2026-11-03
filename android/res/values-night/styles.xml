@@ -5,4 +5,14 @@
         <item name="android:colorAccent">#d97757</item>
     </style>
     <color name="launch_bg">#1f1e1d</color>
+    <style name="Ask" parent="@android:style/Theme.Material.NoActionBar">
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:backgroundDimEnabled">true</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowAnimationStyle">@null</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:navigationBarColor">@android:color/transparent</item>
+        <item name="android:colorAccent">#22D3EE</item>
+    </style>
 </resources>

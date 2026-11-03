@@ -105,6 +105,27 @@
             </intent-filter>
         </activity>
 
+        <!-- 「问 Aure」：别的应用里选中文字，系统文字菜单里出现「Tanya Aure」，在那个应用上面弹底部面板（AskActivity.java）。
+             单独的任务栈、不进最近任务：用完就走，不把主界面拉到前台 -->
+        <activity
+            android:name=".AskActivity"
+            android:label="@string/ask_label"
+            android:exported="true"
+            android:theme="@style/Ask"
+            android:taskAffinity="cc.codtest.ask"
+            android:excludeFromRecents="true"
+            android:noHistory="false"
+            android:launchMode="standard"
+            android:resizeableActivity="true"
+            android:windowSoftInputMode="adjustResize|stateHidden"
+            android:configChanges="orientation|keyboardHidden|keyboard|screenSize|screenLayout|smallestScreenSize|uiMode|density|fontScale|navigation">
+            <intent-filter>
+                <action android:name="android.intent.action.PROCESS_TEXT" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:mimeType="text/plain" />
+            </intent-filter>
+        </activity>
+
         <!-- Shizuku-API（MIT）：Shizuku 经这个 provider 把 binder 递给我们 -->
         <meta-data android:name="moe.shizuku.client.V3_SUPPORT" android:value="true" />
         <provider

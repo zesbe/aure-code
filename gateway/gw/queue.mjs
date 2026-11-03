@@ -313,7 +313,8 @@ export function enqueue(body) {
     at: Date.now(),
     // 只有网关自己（定时任务）会带的：前端发来的 /api/chat 不许设这些
     ...(body.internal ? { cwd: body.cwd || null, effort: body.effort || null, provider: body.provider || null, sched: body.sched || null, unattended: !!body.unattended,
-      allowedTools: body.allowedTools || null, disallowedTools: body.disallowedTools || null, timeoutMs: body.timeoutMs || 0 } : {}),
+      allowedTools: body.allowedTools || null, disallowedTools: body.disallowedTools || null, timeoutMs: body.timeoutMs || 0,
+      ask: body.ask && typeof body.ask === "object" ? { prompt: String(body.ask.prompt || "").slice(0, 8000) } : null } : {}),
     ...(body.auto ? { auto: body.auto } : {}),
   };
   // 插话（"inject"，旧前端叫 "interrupt"）：不打断。消息直接写进正在跑的 claude 的 stdin，
@@ -321,8 +322,8 @@ export function enqueue(body) {
   // 塞不进去（这一轮已在收尾、或者不是同一个会话）就排到队首，这一轮一结束马上发。
   const busyRun = laneRun(laneOfItem(item));
   // 定时任务不走这条：塞进别人的轮次，它自己的工具限制、无人值守、时长上限都没了，结束时也认不出是它（审查 B05）。排队等那一轮结束
-  if (busyRun && busyRun.idle && !item.sched && tryInject(busyRun, item)) { item.injected = true; publishState(); return item; }
-  if ((body.mode === "inject" || body.mode === "interrupt") && busyRun) {
+  if (busyRun && busyRun.idle && !item.sched && !item.ask && tryInject(busyRun, item)) { item.injected = true; publishState(); return item; }
+  if ((body.mode === "inject" || body.mode === "interrupt") && busyRun && !item.ask) {
     if (tryInject(busyRun, item)) { item.injected = true; return item; }
     QUEUE.unshift(item);
   } else {

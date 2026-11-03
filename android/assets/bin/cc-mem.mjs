@@ -16,19 +16,19 @@ const HOME = process.env.CCAPP_HOME || process.env.HOME || HERE;
 const SETTINGS_FILE = path.join(HOME, "ccapp-settings.json");
 const STATE_FILE = path.join(HOME, ".cc-mem-state.json");
 
-const HELP = `用法:
-  cc-mem status [--json]          内存账：可用多少、谁占着、哪些受保护、哪些可以停
+const HELP = `Penggunaan:
+  cc-mem status [--json]          neraca memori: berapa yang tersedia, siapa yang memakai, mana yang dilindungi, mana yang bisa dihentikan
   cc-mem clear [--hard] [--dry-run] [--json]
-                                  停掉白名单以外的后台应用（默认 stop-app，--hard 用 force-stop）
-  cc-mem run [--] <命令…>         重活专用：清场（force-stop）+ 系统内存压缩，跑命令期间
-                                  每 2 秒巡视一次，复活的立刻再停；结束后打印报告
-  cc-mem protected                列出受保护的应用及原因
-  cc-mem tame <包名…>             长期限制后台（治反复复活的）；cc-mem untame <包名…> 恢复原状
-  cc-mem tamed                    列出被限制的应用
+                                  hentikan aplikasi latar di luar daftar izin (bawaan stop-app, --hard memakai force-stop)
+  cc-mem run [--] <perintah…>     untuk pekerjaan berat: bersihkan dulu (force-stop) + pemadatan memori sistem; selama perintah berjalan
+                                  diperiksa tiap 2 detik, yang hidup lagi langsung dihentikan; laporan dicetak di akhir
+  cc-mem protected                daftar aplikasi yang dilindungi beserta alasannya
+  cc-mem tame <paket…>            batasi latar jangka panjang (untuk yang terus hidup lagi); cc-mem untame <paket…> mengembalikannya
+  cc-mem tamed                    daftar aplikasi yang dibatasi
   cc-mem jobs [--per <MB>] [--explain]
-                                  按现在的可用内存算安全的并行数，只打印一个数字：make -j$(cc-mem jobs)
-                                  --per 每个任务估多少 MB（默认 700，C++ 编译的量级；轻活给 200～300）
-内存管家默认关闭：status / protected / jobs / clear --dry-run 随时可用，其余要先在设置里打开。`;
+                                  hitung jumlah paralel yang aman dari memori yang tersedia saat ini, hanya mencetak satu angka: make -j$(cc-mem jobs)
+                                  --per perkiraan MB per tugas (bawaan 700, ukuran kompilasi C++; pekerjaan ringan 200–300)
+Pengelola memori nonaktif secara bawaan: status / protected / jobs / clear --dry-run selalu bisa dipakai, sisanya harus diaktifkan dulu di Pengaturan.`;
 
 // ── 基础 ──────────────────────────────────────────────────────────────
 function privArgv() {
@@ -39,9 +39,9 @@ function privArgv() {
 function priv(cmd, timeout = 30000) {
   // 两路合成一路再读：开发端的 rish 客户端会把输出随机拆到 stdout / stderr 两个管道，分开接收各得一半
   const r = spawnSync("/system/bin/sh", ["-c", `exec "$@" 2>&1`, "sh", ...privArgv(), `{ ${cmd}\n} 2>&1`], { encoding: "utf8", timeout, maxBuffer: 64 << 20 });
-  if (r.error) throw new Error(`priv 调用失败：${r.error.message}`);
+  if (r.error) throw new Error(`Pemanggilan priv gagal: ${r.error.message}`);
   // 125 连不上 Aure Code、126 Shizuku 没运行/没授权、127 起进程失败：都不能当成「没有输出」往下走，否则会显示「可停的应用 0 个」
-  if (r.status >= 125 && r.status <= 127) throw new Error((r.stdout || "").replace(/^priv: /gm, "").trim() || "priv 不可用（Shizuku 没启动或没授权）");
+  if (r.status >= 125 && r.status <= 127) throw new Error((r.stdout || "").replace(/^priv: /gm, "").trim() || "priv tidak tersedia (Shizuku belum berjalan atau belum diberi izin)");
   return { out: r.stdout || "", err: r.stdout || "", code: r.status };
 }
 const sh = (s) => "'" + String(s).replace(/'/g, "'\\''") + "'";
@@ -72,7 +72,7 @@ const GB = (b) => `${(b / 1073741824).toFixed(1)}G`;
 // ── 进程与保护名单 ────────────────────────────────────────────────────
 // dumpsys activity lru 的分档：这些档里的应用可以停（服务、缓存、上一个应用、备份、重量级）
 const KILLABLE = /^(svc|svcb|cch.*|prev|bkup|hvy|psvc)$/;
-const CLASS_NAME = { pers: "常驻", sys: "系统", fg: "前台", vis: "可见", prcp: "可感知", prcl: "可感知", impf: "可感知", home: "桌面", svc: "服务", svcb: "服务", prev: "上一个应用", bkup: "备份", hvy: "重量级" };
+const CLASS_NAME = { pers: "menetap", sys: "sistem", fg: "latar depan", vis: "terlihat", prcp: "terasa", prcl: "terasa", impf: "terasa", home: "launcher", svc: "layanan", svcb: "layanan", prev: "aplikasi sebelumnya", bkup: "cadangan", hvy: "berat" };
 // 动了会出事的系统组件（多数本来就在常驻档，这里兜底）
 const CORE = [/^android$/, /^android\./, /^com\.android\.(systemui|phone|providers\..*|networkstack.*|bluetooth|nfc|se|shell|server\..*|inputdevices|location\.fused|externalstorage|mtp|settings|permissioncontroller|packageinstaller|vending)$/,
   /^com\.google\.android\.(permissioncontroller|packageinstaller)$/,      // 权限弹窗、安装确认被停掉会打断用户（审查 10-29 第六份 低1）
@@ -100,7 +100,7 @@ function processes() {
     if (c && cur) cur.pkgs.push(c[1]);
   }
   // 一行进程都没读到：dumpsys 被拒或格式不认识。直接报错，别让界面说「0 个」
-  if (!/^\s*#\s*\d+:/m.test(lru)) throw new Error("读不到进程列表（dumpsys activity lru）：" + (lru.replace(/^@LRU\s*/, "").trim().slice(0, 200) || "没有输出"));
+  if (!/^\s*#\s*\d+:/m.test(lru)) throw new Error("Daftar proses tidak terbaca (dumpsys activity lru): " + (lru.replace(/^@LRU\s*/, "").trim().slice(0, 200) || "tidak ada keluaran"));
   const list = [];
   for (const l of lru.split("\n")) {
     const m = l.match(/^\s*#\s*\d+:\s+(\S+).*?\s(\d+):([^\s/]+)\/(\S+)/);
@@ -132,10 +132,10 @@ function autoProtected() {
     if (l.startsWith("@")) { sec = l.slice(1).trim(); continue; }
     const t = l.trim();
     if (!t || t === "null") continue;
-    if (sec === "HOME") add(t.split("/")[0], "桌面");
-    else if (sec === "IME") add(t.split("/")[0], "输入法");
-    else if (sec === "A11Y") for (const s of t.split(":")) add(s.split("/")[0], "无障碍服务");
-    else if (sec === "WEBVIEW") add(t.replace(/.*\(/, ""), "WebView 提供者");
+    if (sec === "HOME") add(t.split("/")[0], "launcher");
+    else if (sec === "IME") add(t.split("/")[0], "keyboard");
+    else if (sec === "A11Y") for (const s of t.split(":")) add(s.split("/")[0], "layanan aksesibilitas");
+    else if (sec === "WEBVIEW") add(t.replace(/.*\(/, ""), "penyedia WebView");
     else if (sec === "VPN") { const m = t.match(/(\d+)/); if (m) vpnUids.push(m[1]); }
   }
   if (vpnUids.length) {
@@ -159,9 +159,9 @@ function plan() {
   const apps = [];
   for (const e of byPkg.values()) {
     let reason = null;
-    if (cfg.whitelist.includes(e.pkg)) reason = "白名单";
+    if (cfg.whitelist.includes(e.pkg)) reason = "daftar izin";
     else if (auto.has(e.pkg)) reason = auto.get(e.pkg);
-    else if (CORE.some((r) => r.test(e.pkg))) reason = "系统核心";
+    else if (CORE.some((r) => r.test(e.pkg))) reason = "inti sistem";
     else {
       const keep = e.procs.find((p) => !KILLABLE.test(p.cls.replace(/\+.*$/, "")));
       if (keep) { const c = keep.cls.replace(/\+.*$/, ""); reason = CLASS_NAME[c] || c; }
@@ -178,7 +178,7 @@ function plan() {
       for (const p of lp.pkgs) {
         if (!doomed.has(p)) continue;
         const a = apps.find((x) => x.pkg === p);
-        a.protect = true; a.reason = `被 ${procName.get(lp.pid) || "pid " + lp.pid} 依赖`;
+        a.protect = true; a.reason = `dibutuhkan oleh ${procName.get(lp.pid) || "pid " + lp.pid}`;
         doomed.delete(p); changed = true;
       }
     }
@@ -207,7 +207,7 @@ function stopPkgs(pkgs, hard) {
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 function requireEnabled(cfg) {
   if (cfg.enabled) return;
-  console.error("cc-mem: 内存管家没有打开。到 Aure Code「设置 → 内存管家」里打开后再用（status / protected / clear --dry-run 不受限）。");
+  console.error("cc-mem: pengelola memori belum aktif. Aktifkan di Aure Code: Pengaturan → Pengelola memori, lalu coba lagi (status / protected / clear --dry-run tidak dibatasi).");
   process.exit(3);
 }
 
@@ -219,21 +219,21 @@ async function cmdStatus(json) {
   for (const a of apps) a.pss = a.pids.reduce((s, p) => s + (pss[p] || 0), 0);
   apps.sort((x, y) => y.pss - x.pss);
   if (json) return console.log(JSON.stringify({ enabled: cfg.enabled, whitelist: cfg.whitelist, mem, apps }, null, 1));
-  console.log(`内存管家：${cfg.enabled ? "已开启" : "未开启（设置里打开）"}`);
-  console.log(`总量 ${GB(mem.total)}  可用 ${GB(mem.available)}（空闲 ${GB(mem.free)} + 可回收缓存）  进程匿名内存 ${GB(mem.anon)}  文件缓存 ${GB(mem.fileCache)}  swap 已用 ${GB(mem.swapUsed)}`);
+  console.log(`Pengelola memori: ${cfg.enabled ? "aktif" : "nonaktif (aktifkan di Pengaturan)"}`);
+  console.log(`Total ${GB(mem.total)}  tersedia ${GB(mem.available)} (kosong ${GB(mem.free)} + cache yang bisa diambil kembali)  memori anonim proses ${GB(mem.anon)}  cache file ${GB(mem.fileCache)}  swap terpakai ${GB(mem.swapUsed)}`);
   const stop = apps.filter((a) => !a.protect), keep = apps.filter((a) => a.protect);
-  console.log(`\n可以停的 ${stop.length} 个，合计约 ${MB(stop.reduce((s, a) => s + a.pss, 0))}：`);
+  console.log(`\nBisa dihentikan ${stop.length} aplikasi, total sekitar ${MB(stop.reduce((s, a) => s + a.pss, 0))}: `);
   for (const a of stop) console.log(`  ${MB(a.pss).padStart(6)}  ${a.pkg}`);
-  console.log(`\n受保护的 ${keep.length} 个：`);
-  for (const a of keep) console.log(`  ${MB(a.pss).padStart(6)}  ${a.pkg}  （${a.reason}）`);
+  console.log(`\nDilindungi ${keep.length} aplikasi:`);
+  for (const a of keep) console.log(`  ${MB(a.pss).padStart(6)}  ${a.pkg}   (${a.reason})`);
 }
 
 async function cmdProtected() {
   const { cfg, auto } = plan();
-  console.log("自动识别：");
-  for (const [p, r] of auto) console.log(`  ${p}  （${r}）`);
-  console.log("白名单：" + (cfg.whitelist.length ? "\n  " + cfg.whitelist.join("\n  ") : "（空）"));
-  console.log("另外：安卓判为前台 / 可见 / 可感知 / 常驻的进程、系统核心组件，一律不动。");
+  console.log("Dikenali otomatis:");
+  for (const [p, r] of auto) console.log(`  ${p}   (${r})`);
+  console.log("Daftar izin:" + (cfg.whitelist.length ? "\n  " + cfg.whitelist.join("\n  ") : "(kosong)"));
+  console.log("Selain itu: proses yang oleh Android dianggap latar depan / terlihat / terasa / menetap, serta komponen inti sistem, tidak pernah disentuh.");
 }
 
 async function cmdClear(hard, dry, json) {
@@ -245,9 +245,9 @@ async function cmdClear(hard, dry, json) {
   const after = meminfo();
   const res = { dryRun: dry, mode: hard ? "force-stop" : "stop-app", stopped: targets, availableBefore: before.available, availableAfter: after.available };
   if (json) return console.log(JSON.stringify(res));
-  if (!targets.length) return console.log("没有可停的后台应用。");
-  console.log(`${dry ? "（演练，没真停）将要" : "已"}${hard ? "强制停止" : "停止"} ${targets.length} 个：${targets.join("、")}`);
-  if (!dry) console.log(`可用内存 ${GB(before.available)} → ${GB(after.available)}`);
+  if (!targets.length) return console.log("Tidak ada aplikasi latar yang bisa dihentikan.");
+  console.log(`${dry ? "(simulasi, tidak benar-benar dihentikan) akan " : ""}${hard ? "memaksa berhenti" : "menghentikan"} ${targets.length} aplikasi:${targets.join(", ")}`);
+  if (!dry) console.log(`Memori tersedia ${GB(before.available)} → ${GB(after.available)}`);
 }
 
 async function cmdRun(argv) {
@@ -261,7 +261,7 @@ async function cmdRun(argv) {
   try { priv("am compact system", 20000); } catch {}
   await sleep(800);
   const ready = meminfo();
-  console.error(`cc-mem: 清场 ${first.length} 个应用，可用内存 ${GB(start.available)} → ${GB(ready.available)}；开始执行`);
+  console.error(`cc-mem: membersihkan ${first.length} aplikasi, memori tersedia ${GB(start.available)} → ${GB(ready.available)}; mulai menjalankan`);
 
   const revived = new Map();            // 包名 → 复活被压次数
   const tamedNow = new Set();
@@ -290,14 +290,14 @@ async function cmdRun(argv) {
   for (const s of ["SIGINT", "SIGTERM", "SIGHUP"]) process.on(s, () => child.kill(s));
   const code = await new Promise((r) => {
     child.on("exit", (c, sig) => r(c ?? (sig ? 128 : 1)));
-    child.on("error", (e) => { console.error(`cc-mem: 启动失败：${e.message}`); r(127); });
+    child.on("error", (e) => { console.error(`cc-mem: gagal memulai: ${e.message}`); r(127); });
   });
   done = true; clearInterval(tick);
   const end = meminfo();
   const rv = [...revived].map(([p, n]) => `${p}×${n}`);
-  console.error(`cc-mem: 结束（退出码 ${code}）。可用内存 开跑 ${GB(ready.available)}，最低 ${GB(minAvail)}，结束 ${GB(end.available)}` +
-    (rv.length ? `；期间压下复活 ${rv.length} 个：${rv.join("、")}` : "；期间没有应用复活") +
-    (tamedNow.size ? `；反复复活、已限制后台：${[...tamedNow].join("、")}（cc-mem untame <包名> 恢复）` : ""));
+  console.error(`cc-mem: selesai (kode keluar ${code}). Memori tersedia: awal ${GB(ready.available)}, terendah ${GB(minAvail)}, akhir ${GB(end.available)}` +
+    (rv.length ? `; selama berjalan menahan yang hidup lagi: ${rv.length} aplikasi:${rv.join(", ")}` : "; selama berjalan tidak ada aplikasi yang hidup lagi") +
+    (tamedNow.size ? `; terus hidup lagi, latarnya sudah dibatasi: ${[...tamedNow].join(", ")} (pulihkan dengan cc-mem untame <paket>)` : ""));
   process.exit(code);
 }
 
@@ -316,17 +316,17 @@ function cmdTame(pkgs, undo) {
   requireEnabled(cfg);
   const st = readJson(STATE_FILE, { tamed: {} });
   for (const p of pkgs) {
-    if (!PKG_RE.test(p)) { console.error(`跳过非法包名：${p}`); continue; }
+    if (!PKG_RE.test(p)) { console.error(`Lewati nama paket tidak valid: ${p}`); continue; }
     if (!undo) {
-      if (CORE.some((r) => r.test(p))) { console.error(`跳过系统核心：${p}`); continue; }
+      if (CORE.some((r) => r.test(p))) { console.error(`Lewati inti sistem: ${p}`); continue; }
       const { r, prev } = tame(p);
       if (r.code === 0) st.tamed[p] = prev;
-      console.log(r.code === 0 ? `已限制后台：${p}（原来是 ${prev}）` : `失败：${p} ${r.err.trim()}`);
+      console.log(r.code === 0 ? `Latar dibatasi: ${p} (sebelumnya ${prev})` : `Gagal: ${p} ${r.err.trim()}`);
     } else {
       const prev = st.tamed[p] || "adaptive_bucket";
       const r = priv(`am set-bg-restriction-level ${sh(p)} ${sh(prev)}`);
-      if (r.code === 0) { delete st.tamed[p]; console.log(`已恢复：${p} → ${prev}`); }
-      else console.log(`失败：${p} ${r.err.trim()}`);
+      if (r.code === 0) { delete st.tamed[p]; console.log(`Dipulihkan: ${p} → ${prev}`); }
+      else console.log(`Gagal: ${p} ${r.err.trim()}`);
     }
   }
   fs.writeFileSync(STATE_FILE, JSON.stringify(st, null, 2), { mode: 0o600 });
@@ -340,8 +340,8 @@ function cmdJobs(argv) {
   const n = Math.max(1, Math.min(cpus, Math.floor((m.available - reserve) / per)));
   if (argv.includes("--explain")) {
     const g = (b) => (b / 1073741824).toFixed(1) + " GB";
-    console.error(`可用 ${g(m.available)} − 预留 ${g(reserve)}，每个任务按 ${Math.round(per / 1048576)} MB 算 → ${n}（CPU ${cpus} 核）` +
-      (n === 1 && m.available - reserve < per ? "。内存紧：先 cc-mem status 看谁占着，或单线程跑" : ""));
+    console.error(`Tersedia ${g(m.available)} − cadangan ${g(reserve)}, tiap tugas dihitung ${Math.round(per / 1048576)} MB → ${n} (CPU ${cpus} inti)` +
+      (n === 1 && m.available - reserve < per ? ". Memori sempit: cek dulu siapa yang memakai dengan cc-mem status, atau jalankan satu thread" : ""));
   }
   console.log(n);
 }
@@ -358,7 +358,7 @@ try {
   else if (cmd === "jobs") cmdJobs(rest);
   else if (cmd === "tame") cmdTame(rest, false);
   else if (cmd === "untame") cmdTame(rest, true);
-  else if (cmd === "tamed") { const st = readJson(STATE_FILE, { tamed: {} }); const e = Object.entries(st.tamed); console.log(e.length ? e.map(([p, v]) => `${p}（原来 ${v}）`).join("\n") : "（无）"); }
+  else if (cmd === "tamed") { const st = readJson(STATE_FILE, { tamed: {} }); const e = Object.entries(st.tamed); console.log(e.length ? e.map(([p, v]) => `${p} (sebelumnya ${v})`).join("\n") : "(tidak ada)"); }
   else { console.error(HELP); process.exit(2); }
 } catch (e) {
   console.error(`cc-mem: ${e.message}`);

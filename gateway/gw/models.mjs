@@ -1,6 +1,6 @@
 import fs from "node:fs";
 import path from "node:path";
-import { CFG, PATHS, log } from "./config.mjs";
+import { CFG, PATHS, log, tz } from "./config.mjs";
 import { SETTINGS } from "./settings-store.mjs";
 import { PROVIDER, fetchKeyed, keyOf, modelsUrlOk, providerBrief, providerById } from "./providers.mjs";
 import { NEXT, fetchJsonCapped, sendJson } from "./http.mjs";
@@ -95,7 +95,13 @@ const LOGIN_MODELS = [
   ["claude-opus-5-5", "Opus 5.5"], ["claude-fable-5-1", "Fable 5.1"],
   ["claude-sonnet-5-5", "Sonnet 5.5"], ["claude-sonnet-5", "Sonnet 5"],
   ["claude-haiku-5-5", "Haiku 5.5"], ["claude-haiku-4-5-20251001", "Haiku 4.5"],
-].map(([id, name]) => ({ id, name, context_window: 0, max_output_tokens: 0, input_modalities: ["text", "image"] }));
+].map(([id, name]) => {
+  const m = { id, name, context_window: 0, max_output_tokens: 0, input_modalities: ["text", "image"] };
+  // 「Opus（最新）」这类别名：按当时的界面语言现取（模块加载时语言还没定，写死就成了中文）
+  const base = /（最新）$/.test(name) ? name.replace(/（最新）$/, "") : "";
+  if (base) Object.defineProperty(m, "name", { enumerable: true, get: () => tz("{m}（最新）", { m: base }) });
+  return m;
+});
 
 // claude --effort 认的全部档位（claude --help 原文：low, medium, high, xhigh, max）。
 // 原生厂商的模型不带档位信息时就用这一套 —— 以前回落成 DeepSeek 的三档，medium/xhigh 凭空消失。

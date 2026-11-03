@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="a11y_label">Alat perangkat Aure Code</string>
+    <string name="a11y_summary">Memungkinkan Claude membaca layar, mengetuk, mengetik, dan mengambil tangkapan layar saat Anda memintanya.</string>
+    <string name="a11y_desc">Hanya dipakai oleh alat perangkat Aure Code: saat Anda meminta Claude mengoperasikan aplikasi lain, layanan ini membaca layar saat ini, mengetuk, mengetik, menggulir, dan mengambil tangkapan layar. Tidak ada yang dikumpulkan di latar. Dalam mode \"otomatis\" (Pengaturan → Alat perangkat), layanan hanya dinyalakan saat dibutuhkan dan mati sendiri setelah beberapa menit tidak dipakai.</string>
+</resources>

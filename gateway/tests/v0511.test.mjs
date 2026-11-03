@@ -50,7 +50,7 @@ test("自检对账：端口上是冒牌的（身份核验不过）就停，不�
   const r = await run(selftestSnippet(), srv.address().port);
   srv.close();
   assert.equal(r.code, 1);
-  assert.match(r.err, /身份核验没过/);
+  assert.match(r.err, /verifikasi identitas gagal/);
   assert.deepEqual(seen.map((u) => u.split("?")[0]), ["/__proof"]);
 });
 

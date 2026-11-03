@@ -1,13 +1,13 @@
 #!/usr/bin/env python3
-"""usb-adb —— 让 adb 用上 OTG 线连着的另一台安卓设备。
+"""usb-adb — memakai adb untuk perangkat Android lain yang tersambung lewat kabel OTG.
 
-  usb-adb                  授权并接管唯一一台开了 USB 调试的设备，启动 adb 服务
-  usb-adb --name /dev/bus/usb/003/004   指定设备
-  usb-adb list             列出 USB 设备（JSON）
+  usb-adb                  beri izin dan ambil alih satu-satunya perangkat dengan debugging USB aktif, lalu jalankan layanan adb
+  usb-adb --name /dev/bus/usb/003/004   pilih perangkat tertentu
+  usb-adb list             daftar perangkat USB (JSON)
 
-普通进程打不开 /dev/bus/usb，必须经系统 UsbManager 授权（平板上会弹对话框，点「确定」）。
-Aure Code 拿到设备后把 fd 递过来，这里带着 TERMUX_USB_FD 启动 adb 服务；之后照常 adb devices / install / shell。
-一次接管一台设备；拔插后重新运行。被测设备上第一次连接还要点「允许 USB 调试」。
+Proses biasa tidak bisa membuka /dev/bus/usb, jadi harus diberi izin lewat UsbManager sistem (akan muncul dialog, ketuk "OK").
+Setelah Aure Code mendapatkan perangkatnya, fd-nya diteruskan ke sini dan layanan adb dijalankan dengan TERMUX_USB_FD; setelah itu pakai adb devices / install / shell seperti biasa.
+Satu perangkat setiap kali; jalankan ulang setelah kabel dicabut-pasang. Pada sambungan pertama, perangkat yang diuji juga perlu mengetuk "Izinkan debugging USB".
 """
 import json, os, socket, subprocess, sys
 
@@ -20,7 +20,7 @@ def call(req, want_fd=False):
     try:
         s.connect(SOCK)
     except OSError as e:
-        sys.exit(f"usb-adb: 连不上 Aure Code（{e}）—— 只能在 Aure Code 的终端里用")
+        sys.exit(f"usb-adb: tidak bisa tersambung ke Aure Code ({e}) — hanya bisa dipakai di terminal Aure Code")
     s.sendall((json.dumps(req) + "\n").encode())
     buf, fds = b"", []
     while not buf.endswith(b"\n"):
@@ -33,7 +33,7 @@ def call(req, want_fd=False):
             break
         buf += data
     s.close()
-    return (json.loads(buf) if buf else {"ok": False, "message": "Aure Code 没有回复"}), fds
+    return (json.loads(buf) if buf else {"ok": False, "message": "Aure Code tidak membalas"}), fds
 
 
 def main(argv):
@@ -46,18 +46,18 @@ def main(argv):
         return 0
     i = argv.index("--name") if "--name" in argv else -1
     if i >= 0 and i + 1 >= len(argv):
-        print("usb-adb: --name 后面要跟设备名", file=sys.stderr)
+        print("usb-adb: --name harus diikuti nama perangkat", file=sys.stderr)
         return 2
     name = argv[i + 1] if i >= 0 else ""
-    print("usb-adb: 申请 USB 授权（请在弹出的系统对话框里点「确定」）…", file=sys.stderr)
+    print("usb-adb: meminta izin USB (ketuk \"OK\" di dialog sistem yang muncul)…", file=sys.stderr)
     r, fds = call({"op": "usb_open", "name": name, "timeout": 90}, want_fd=True)
     if not r.get("ok") or not fds:
         for f in fds:
             os.close(f)
-        sys.exit("usb-adb: " + r.get("message", "没拿到设备 fd"))
+        sys.exit("usb-adb: " + r.get("message", "fd perangkat tidak didapat"))
     fd = fds[0]
     os.set_inheritable(fd, True)
-    print(f"usb-adb: 已接管 {r.get('manufacturer')} {r.get('product')}（{r.get('name')}）", file=sys.stderr)
+    print(f"usb-adb: mengambil alih {r.get('manufacturer')} {r.get('product')} ({r.get('name')})", file=sys.stderr)
     # adb 服务只在启动时读一次 TERMUX_USB_FD，所以先停掉旧服务
     subprocess.run(["adb", "kill-server"], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
     env = dict(os.environ, TERMUX_USB_FD=str(fd))

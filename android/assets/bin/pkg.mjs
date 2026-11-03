@@ -20,7 +20,7 @@ import { TERMUX_KEYS, verifyDetached } from "./pgp.mjs";     // 正本在 devkit
 
 const PREFIX = process.env.PREFIX || process.env.CCAPP_PREFIX;
 if (!PREFIX || !fs.existsSync(path.join(PREFIX, ".devkit-ok"))) {
-  console.error("pkg：工具包还没装好（找不到 $PREFIX/.devkit-ok）");
+  console.error("pkg: toolkit belum terpasang lengkap ($PREFIX/.devkit-ok tidak ditemukan)");
   process.exit(1);
 }
 const FILES = path.dirname(PREFIX);
@@ -30,7 +30,7 @@ const INFO = path.join(PREFIX, "var/lib/dpkg/info");
 const TERMUX = "/data/data/com.termux/";
 const TARGET = "/data/data/" + (FILES.match(/^\/data\/(?:data|user\/\d+)\/([^/]+)\/files$/) || [])[1] + "/";
 const BIN = (n) => path.join(PREFIX, "bin", n);
-if (TARGET.length !== TERMUX.length) { console.error(`pkg：本应用的包名必须恰好 10 个字符才能等长改写（现在是 ${TARGET}）`); process.exit(1); }
+if (TARGET.length !== TERMUX.length) { console.error(`pkg: nama paket aplikasi ini harus tepat 10 karakter agar bisa ditulis ulang dengan panjang sama (sekarang ${TARGET})`); process.exit(1); }
 // 经加载器（targetSdk 36）时 dpkg 脚本等仍要 termux-exec 的 linker 版，才能起数据目录里的程序
 const ENV = { ...process.env, PATH: [path.join(PREFIX, "bin"), process.env.PATH].join(":"), LD_PRELOAD: process.env.CCAPP_BIONIC_PRELOAD || "" };
 
@@ -79,19 +79,19 @@ const VERIFIED = {
   libreoffice: "soffice --headless --version",  // 无头转 PDF（文件查看器看 ppt/doc 用），2026-10-17 实测
 };
 
-const HELP = `用法：pkg <命令> [参数]
-  install <包…>        安装（连同依赖）。不在白名单里的包要加 --unverified
-  uninstall <包…>      卸载用 pkg 装的包（remove 同义）；不再被需要的依赖一并卸掉
-  list                 列出用 pkg 装的包
-  search <关键词>      在仓库里搜（名字和简介）
-  show <包>            包的信息：版本、大小、依赖、装没装、谁装的
-  files <包>           列出用 pkg 装的包放了哪些文件
-  update               重新下载仓库索引（平时一天自动刷新一次）
-  upgrade [包…]        把用 pkg 装的包升到仓库里的新版
-  restore              工具包更新后，把之前用 pkg 装的包重新装回
-  verified             列出本机实测过的包（白名单）
-说明：包来自 Termux 官方仓库，按本应用路径改写后安装。工具包自带的包（clang、python、node…）
-不经 pkg 升级，更新工具包时一起换新。`;
+const HELP = `Penggunaan: pkg <perintah> [argumen]
+  install <paket…>     pasang (beserta dependensinya). Paket di luar daftar izin perlu --unverified
+  uninstall <paket…>   copot paket yang dipasang dengan pkg (remove sama saja); dependensi yang tidak dibutuhkan lagi ikut dicopot
+  list                 daftar paket yang dipasang dengan pkg
+  search <kata kunci>  cari di repositori (nama dan deskripsi)
+  show <paket>         info paket: versi, ukuran, dependensi, terpasang atau belum, siapa yang memasang
+  files <paket>        daftar file yang dipasang paket dari pkg
+  update               unduh ulang indeks repositori (biasanya diperbarui otomatis sehari sekali)
+  upgrade [paket…]     naikkan paket dari pkg ke versi baru di repositori
+  restore              setelah toolkit diperbarui, pasang lagi paket yang dulu dipasang dengan pkg
+  verified             daftar paket yang sudah diuji di perangkat (daftar izin)
+Catatan: paket berasal dari repositori resmi Termux dan dipasang setelah path-nya ditulis ulang untuk aplikasi ini. Paket bawaan toolkit (clang, python, node…)
+tidak diperbarui lewat pkg; paket itu ikut diperbarui saat toolkit diperbarui.`;
 
 // ── 小工具 ─────────────────────────────────────────────────────────────
 const sha256 = (b) => crypto.createHash("sha256").update(b).digest("hex");
@@ -102,7 +102,7 @@ function writeJson(f, v) {
   fs.writeFileSync(f + ".tmp", JSON.stringify(v, null, 1));
   fs.renameSync(f + ".tmp", f);
 }
-const die = (msg, code = 1) => { console.error("pkg：" + msg); process.exit(code); };
+const die = (msg, code = 1) => { console.error("pkg: " + msg); process.exit(code); };
 function hashFile(f) {
   const h = crypto.createHash("sha256"), fd = fs.openSync(f, "r"), buf = Buffer.alloc(1 << 20);
   try { for (let n; (n = fs.readSync(fd, buf, 0, buf.length, null)) > 0;) h.update(buf.subarray(0, n)); } finally { fs.closeSync(fd); }
@@ -110,7 +110,7 @@ function hashFile(f) {
 }
 function curlBuf(url, timeout = 120) {
   const r = spawnSync(BIN("curl"), ["-fsSL", "--proto", "=https", "--proto-redir", "=https", "--retry", "2", "--max-time", String(timeout), url], { env: ENV, maxBuffer: 256 << 20 });
-  if (r.status !== 0) throw new Error(`${url}：${String(r.stderr || "").trim().split("\n").pop() || "curl rc=" + r.status}`);
+  if (r.status !== 0) throw new Error(`${url}: ${String(r.stderr || "").trim().split("\n").pop() || "curl rc=" + r.status}`);
   return r.stdout;
 }
 
@@ -161,11 +161,11 @@ function lock() {
     try { fs.writeFileSync(f, String(process.pid), { flag: "wx" }); break; }
     catch (e) { if (e.code !== "EEXIST" || i >= 2) throw e; }
     let pid = 0; try { pid = Number(fs.readFileSync(f, "utf8")); } catch {}
-    if (pid && pid !== process.pid && pkgAlive(pid)) die(`另一个 pkg（pid ${pid}）正在运行，等它结束再试`);
+    if (pid && pid !== process.pid && pkgAlive(pid)) die(`pkg lain (pid ${pid}) sedang berjalan, tunggu selesai lalu coba lagi`);
     try { fs.unlinkSync(f); } catch {}
   }
   process.on("exit", () => { try { if (fs.readFileSync(f, "utf8") === String(process.pid)) fs.unlinkSync(f); } catch {} });
-  for (const s of ["SIGINT", "SIGTERM", "SIGHUP"]) process.on(s, () => { console.error("\npkg：被中断（再跑一次同样的命令会接着来）"); process.exit(130); });
+  for (const s of ["SIGINT", "SIGTERM", "SIGHUP"]) process.on(s, () => { console.error("\npkg: terhenti (jalankan perintah yang sama lagi untuk melanjutkan)"); process.exit(130); });
 }
 
 // ── 已装的是什么 ───────────────────────────────────────────────────────
@@ -195,7 +195,7 @@ function absentModulePkgs() {
   for (const b of (mj && mj.modules) || []) {
     if (b.kind === "base" || fs.existsSync(path.join(PREFIX, b.dir, ".ok"))) continue;
     // 共享层不单独露面：报给用它的模块
-    const name = b.kind === "shared" ? (b.users || []).map((u) => ((mj.modules.find((x) => x.id === u) || {}).name || {}).zh || u).join("、") : (b.name || {}).zh || b.id;
+    const name = b.kind === "shared" ? (b.users || []).map((u) => (((mj.modules.find((x) => x.id === u) || {}).name || {}).en || ((mj.modules.find((x) => x.id === u) || {}).name || {}).zh) || u).join(", ") : (b.name || {}).en || (b.name || {}).zh || b.id;
     for (const p of b.packages || []) if (!m.has(p.name)) m.set(p.name, name);
   }
   return m;
@@ -204,8 +204,8 @@ function dieForModules(names) {
   const mods = absentModulePkgs(), hit = new Map();
   for (const n of names) if (mods.has(n)) hit.set(mods.get(n), [...(hit.get(mods.get(n)) || []), n]);
   if (!hit.size) return;
-  die([...hit].map(([mod, ns]) => `${ns.slice(0, 6).join("、")}${ns.length > 6 ? " 等" : ""} 在工具包的「${mod}」模块里`).join("\n") +
-    "\n先到 扩展 → 工具包模块 装上它，再来 pkg install（不另装一份，免得和模块撞）");
+  die([...hit].map(([mod, ns]) => `${ns.slice(0, 6).join(", ")}${ns.length > 6 ? " dll." : ""} ada di modul toolkit "${mod}"`).join("\n") +
+    "\nPasang dulu modul itu di Ekstensi → Modul toolkit, lalu pkg install lagi (tidak dipasang dobel agar tidak bentrok dengan modul)");
 }
 
 /** 盘上所有包（工具包、组件、pkg 装的）：名字来自 var/lib/dpkg/info/*.list */
@@ -241,14 +241,14 @@ function loadRepo(repo) {
     try {
       const relBuf = curlBuf(`${base}dists/${repo.dist}/Release`);
       let sig = null; try { sig = curlBuf(`${base}dists/${repo.dist}/Release.gpg`, 60).toString(); } catch {}
-      if (!sig) throw new Error("Release 的签名取不到");
+      if (!sig) throw new Error("Tanda tangan Release tidak bisa diambil");
       verifyDetached(relBuf, sig, TERMUX_KEYS);              // 签名不对直接抛，换下一个源
       const rel = relBuf.toString();
       const rp = `${repo.component}/binary-${repo.arch}/Packages.gz`;
       const want = (rel.split("SHA256:")[1] || "").split("\n").find((l) => l.trim().endsWith(" " + rp));
-      if (!want) throw new Error("Release 里没有 " + rp);
+      if (!want) throw new Error("Release tidak berisi " + rp);
       const gz = curlBuf(`${base}dists/${repo.dist}/${rp}`, 300);
-      if (sha256(gz) !== want.trim().split(/\s+/)[0]) throw new Error("Packages.gz 和 Release 记的哈希对不上");
+      if (sha256(gz) !== want.trim().split(/\s+/)[0]) throw new Error("Hash Packages.gz tidak cocok dengan catatan Release");
       const pkgs = {};
       for (const blk of zlib.gunzipSync(gz).toString().split("\n\n")) {
         const f = {};
@@ -262,7 +262,7 @@ function loadRepo(repo) {
       return out;
     } catch (e) { lastErr = e; }
   }
-  if (c) { console.error(`pkg：仓库 ${repo.name} 刷新失败（${lastErr.message}），先用旧索引`); return c; }
+  if (c) { console.error(`pkg: repositori ${repo.name} gagal diperbarui (${lastErr.message}), memakai indeks lama dulu`); return c; }
   throw lastErr;
 }
 let FORCE_UPDATE = false, IDX = null;
@@ -274,7 +274,7 @@ function index() {
   for (const repo of REPOS) {
     let r;
     try { r = loadRepo(repo); okRepos++; repo.from = r.from; }
-    catch (e) { lastErr = e; console.error(`pkg：仓库 ${repo.name} 的索引取不到（${e.message}），这次先不用它`); continue; }
+    catch (e) { lastErr = e; console.error(`pkg: repositori ${repo.name} indeksnya tidak bisa diambil (${e.message}), kali ini tidak dipakai`); continue; }
     for (const [n, p] of Object.entries(r.pkgs)) {
       if (pkgs.has(n)) continue;
       pkgs.set(n, { name: n, ...p, repo });
@@ -302,7 +302,7 @@ function solve(roots, { upgrade = false } = {}) {
       const v = installedVer(a.name);
       if (!v || verOk(v, a.op, a.ver)) return true;
       if (mine[a.name]) return false;                          // 自己装的旧版：升级
-      problems.push(`${a.name} 要 ${a.op} ${a.ver}，工具包里是 ${v}（等工具包更新）`);
+      problems.push(`${a.name} butuh ${a.op} ${a.ver}, di toolkit ada ${v} (tunggu toolkit diperbarui)`);
       return true;
     }
     return (ix.provides.get(a.name) || []).some((p) => have.has(p));
@@ -312,15 +312,15 @@ function solve(roots, { upgrade = false } = {}) {
     seen.add(n);
     if (EXCLUDE.has(n)) return;
     const p = ix.pkgs.get(n);
-    if (!p) { problems.push(`仓库里没有 ${n}${from ? `（${from} 要的）` : ""}`); return; }
+    if (!p) { problems.push(`Repositori tidak punya ${n}${from ? ` (${from} butuhkan)` : ""}`); return; }
     for (const d of p.d.split(",")) {
       if (!d.trim()) continue;
       const alts = d.split("|").map(atom);
       if (alts.some(satisfied)) continue;
       const pick = alts.map((a) => (ix.pkgs.has(a.name) ? a.name : (ix.provides.get(a.name) || [])[0])).find(Boolean);
-      if (!pick) { problems.push(`${d.trim()}（${n} 要的）仓库里没有`); continue; }
+      if (!pick) { problems.push(`${d.trim()} (${n} butuhkan) tidak ada di repositori`); continue; }
       const a = alts.find((x) => x.name === pick);
-      if (a && a.op && !verOk(ix.pkgs.get(pick).v, a.op, a.ver)) problems.push(`${n} 要 ${pick} ${a.op} ${a.ver}，仓库里是 ${ix.pkgs.get(pick).v}`);
+      if (a && a.op && !verOk(ix.pkgs.get(pick).v, a.op, a.ver)) problems.push(`${n} butuh ${pick} ${a.op} ${a.ver}, di repositori ada ${ix.pkgs.get(pick).v}`);
       visit(pick, n);
     }
     order.push(n);                                             // 依赖在前
@@ -357,10 +357,10 @@ function download(p) {
         fs.rmSync(part, { force: true });                      // 坏了：从头再来
       } else if (r.status === 0) fs.rmSync(part, { force: true });
     }
-    console.error(`  ${new URL(base).host} 下载不顺，换镜像…`);
+    console.error(`  ${new URL(base).host} lambat diunduh, ganti mirror…`);
   }
-  if (gone === 1 + p.repo.mirrors.length) { const e = new Error(`${p.name} ${p.v}：仓库里已经没有这个文件（索引过期）`); e.stale = true; throw e; }
-  throw new Error(`${p.name}：下载失败或文件校验不符`);
+  if (gone === 1 + p.repo.mirrors.length) { const e = new Error(`${p.name} ${p.v}: file ini sudah tidak ada di repositori (indeks kedaluwarsa)`); e.stale = true; throw e; }
+  throw new Error(`${p.name}: unduhan gagal atau file tidak lolos verifikasi`);
 }
 
 // ── 解包 + 改写 ────────────────────────────────────────────────────────
@@ -369,7 +369,7 @@ function arMembers(file) {
   const fd = fs.openSync(file, "r"), st = fs.fstatSync(fd), out = [];
   try {
     const magic = Buffer.alloc(8); fs.readSync(fd, magic, 0, 8, 0);
-    if (magic.toString() !== "!<arch>\n") throw new Error("不是 deb（ar 归档）");
+    if (magic.toString() !== "!<arch>\n") throw new Error("bukan deb (arsip ar)");
     const h = Buffer.alloc(60);
     for (let off = 8; off + 60 <= st.size;) {
       fs.readSync(fd, h, 0, 60, off);
@@ -385,7 +385,7 @@ function extractMember(file, m, dst) {
   try {
     for (let done = 0; done < m.size;) {
       const n = fs.readSync(fd, buf, 0, Math.min(buf.length, m.size - done), m.offset + done);
-      if (n <= 0) throw new Error("deb 被截断");
+      if (n <= 0) throw new Error("deb terpotong");
       fs.writeSync(out, buf, 0, n); done += n;
     }
   } finally { fs.closeSync(fd); fs.closeSync(out); }
@@ -486,11 +486,11 @@ function unpack(p, deb) {
   fs.mkdirSync(stage, { recursive: true });
   const members = arMembers(deb);
   const dm = members.find((m) => m.name.startsWith("data.tar"));
-  if (!dm) throw new Error(`${p.name}：deb 里没有 data.tar`);
+  if (!dm) throw new Error(`${p.name}: data.tar tidak ada di dalam deb`);
   const dt = path.join(stage, dm.name);
   extractMember(deb, dm, dt);
   const r = spawnSync(BIN("tar"), ["-xf", dt, "-C", stage, "--no-same-owner"], { env: ENV, encoding: "utf8" });
-  if (r.status !== 0) throw new Error(`${p.name}：解包失败：${(r.stderr || "").trim().split("\n").pop()}`);
+  if (r.status !== 0) throw new Error(`${p.name}: gagal membongkar: ${(r.stderr || "").trim().split("\n").pop()}`);
   fs.rmSync(dt);
   const root = path.join(stage, TERMUX.slice(1), "files", "usr");
   const files = [], dirs = [];
@@ -599,7 +599,7 @@ function runScript(name, kind, ...args) {
   const f = path.join(STATE, "scripts", name, kind);
   if (!fs.existsSync(f)) return;
   const r = spawnSync(BIN("sh"), [f, ...args], { env: ENV, stdio: "inherit", cwd: process.env.HOME || FILES });
-  if (r.status !== 0) console.error(`  （${name} 的 ${kind} 退出码 ${r.status}，继续）`);
+  if (r.status !== 0) console.error(`   (${name} milik ${kind} kode keluar ${r.status}, lanjut)`);
 }
 
 function install(names, { unverified = false, auto = false, upgrade = false } = {}) {
@@ -607,11 +607,11 @@ function install(names, { unverified = false, auto = false, upgrade = false } = 
   const roots = [];
   for (const n of names) {
     const real = ix.pkgs.has(n) ? n : (ix.provides.get(n) || [])[0];
-    if (!real) { const near = [...ix.pkgs.keys()].filter((k) => k.includes(n)).slice(0, 6); die(`仓库里没有 ${n}${near.length ? "。相近的：" + near.join(" ") : ""}`); }
-    if (EXCLUDE.has(real)) die(`${real} 是给 Termux App 本身用的，在 Aure Code 里没有意义`);
-    if (have.has(real) && !mine[real]) { console.log(`${real} 已在工具包里（${baseVersions().get(real) || "版本未知"}），不用装`); continue; }
-    if (have.has(real) && mine[real] && !upgrade) { console.log(`${real} ${mine[real].version} 已经装了`); continue; }
-    if (!VERIFIED[real] && !unverified && !auto) die(`${real} 还没在 Aure Code 上验证过。确定要试就加 --unverified：pkg install --unverified ${real}\n本机实测过的：${Object.keys(VERIFIED).join(" ")}`);
+    if (!real) { const near = [...ix.pkgs.keys()].filter((k) => k.includes(n)).slice(0, 6); die(`Repositori tidak punya ${n}${near.length ? ". Yang mirip: " + near.join(" ") : ""}`); }
+    if (EXCLUDE.has(real)) die(`${real} khusus untuk aplikasi Termux, tidak ada gunanya di Aure Code`);
+    if (have.has(real) && !mine[real]) { console.log(`${real} sudah ada di toolkit (${baseVersions().get(real) || "versi tidak diketahui"}), tidak perlu dipasang`); continue; }
+    if (have.has(real) && mine[real] && !upgrade) { console.log(`${real} ${mine[real].version} sudah terpasang`); continue; }
+    if (!VERIFIED[real] && !unverified && !auto) die(`${real} belum diverifikasi di Aure Code. Kalau yakin ingin mencoba, tambahkan --unverified: pkg install --unverified ${real}\nYang sudah diuji di perangkat: ${Object.keys(VERIFIED).join(" ")}`);
     roots.push(real);
   }
   if (!roots.length) return;
@@ -619,50 +619,50 @@ function install(names, { unverified = false, auto = false, upgrade = false } = 
   const { order, problems } = solve(roots, { upgrade });
   dieForModules(order);
   if (problems.length) {
-    console.error("依赖有问题：\n  " + problems.join("\n  "));
-    if (!unverified) die("没有装（加 --unverified 可以硬装，后果自负）");
+    console.error("Ada masalah dependensi:\n  " + problems.join("\n  "));
+    if (!unverified) die("tidak dipasang (tambahkan --unverified untuk memaksa, risiko ditanggung sendiri)");
   }
-  if (!order.length) { console.log("没有要装的"); return; }
+  if (!order.length) { console.log("Tidak ada yang perlu dipasang"); return; }
   const dl = order.reduce((s, n) => s + ix.pkgs.get(n).s, 0), inst = order.reduce((s, n) => s + ix.pkgs.get(n).i, 0);
-  console.log(`要装 ${order.length} 个包：${order.map((n) => n + " " + ix.pkgs.get(n).v).join("、")}`);
-  console.log(`下载约 ${mb(dl)}，装好占约 ${mb(inst)}`);
+  console.log(`Akan memasang ${order.length} paket: ${order.map((n) => n + " " + ix.pkgs.get(n).v).join(", ")}`);
+  console.log(`Unduhan sekitar ${mb(dl)}, setelah terpasang sekitar ${mb(inst)}`);
   try {
     const sf = fs.statfsSync(FILES), free = sf.bavail * sf.bsize;
-    if (free < (dl * 2 + inst) * 1.1) die(`存储空间不够：要约 ${mb((dl * 2 + inst) * 1.1)}，剩 ${mb(free)}`);
+    if (free < (dl * 2 + inst) * 1.1) die(`Ruang penyimpanan tidak cukup: butuh sekitar ${mb((dl * 2 + inst) * 1.1)}, tersisa ${mb(free)}`);
   } catch {}
   const debs = [];
   for (const [i, n] of order.entries()) {
     const p = ix.pkgs.get(n);
-    console.log(`下载 [${i + 1}/${order.length}] ${n} ${p.v}（${mb(p.s)}）`);
+    console.log(`Mengunduh [${i + 1}/${order.length}] ${n} ${p.v} (${mb(p.s)})`);
     try { debs.push([p, download(p)]); }
     catch (e) {
       // 索引是一天一刷，期间仓库发了新版、旧文件被删就会 404：刷新索引重新求解，只重来一次
       if (!e.stale || FORCE_UPDATE) throw e;
-      console.error(`${e.message}，刷新仓库索引后重试…`);
+      console.error(`${e.message}, memperbarui indeks repositori lalu mencoba lagi…`);
       FORCE_UPDATE = true; IDX = null;
       return install(names, { unverified, auto, upgrade });
     }
   }
   const d = db(), placed = [];
   for (const [p, deb] of debs) {
-    process.stdout.write(`安装 ${p.name} … `);
+    process.stdout.write(`Memasang ${p.name} … `);
     const u = unpack(p, deb);
     const rec = placeOne(p, u, { auto: auto || !roots.includes(p.name), upgrade }, d);
-    console.log(`${rec.files.length} 个文件${u.patched ? `，改写 ${u.patched} 个` : ""}${rec.shared.length ? `，${rec.shared.length} 个已存在、保留原样` : ""}`);
+    console.log(`${rec.files.length} file${u.patched ? `, menulis ulang ${u.patched}` : ""}${rec.shared.length ? `, ${rec.shared.length} sudah ada, dibiarkan apa adanya` : ""}`);
     fs.rmSync(u.stage, { recursive: true, force: true });
     placed.push(p);
   }
   relinkAlts(d);
   for (const p of placed) {                                    // 依赖在前，与 dpkg 一致
-    if (fs.existsSync(path.join(STATE, "scripts", p.name, "postinst"))) { console.log(`配置 ${p.name}`); runScript(p.name, "postinst", "configure"); }
+    if (fs.existsSync(path.join(STATE, "scripts", p.name, "postinst"))) { console.log(`Mengonfigurasi ${p.name}`); runScript(p.name, "postinst", "configure"); }
     d.pkgs[p.name].state = "ok"; writeJson(DB, d);
   }
   for (const [, deb] of debs) fs.rmSync(deb, { force: true });
   for (const p of placed) if (roots.includes(p.name) && VERIFIED[p.name]) {
     const r = spawnSync(BIN("sh"), ["-c", VERIFIED[p.name]], { env: ENV, encoding: "utf8", timeout: 30000 });
-    console.log(r.status === 0 ? `✓ ${p.name}：${(r.stdout || r.stderr).trim().split("\n")[0]}` : `⚠ ${p.name} 装上了，但「${VERIFIED[p.name]}」失败：${(r.stderr || r.stdout || "").trim().split("\n").pop()}`);
+    console.log(r.status === 0 ? `✓ ${p.name}: ${(r.stdout || r.stderr).trim().split("\n")[0]}` : `⚠ ${p.name} terpasang, tetapi "${VERIFIED[p.name]}" gagal: ${(r.stderr || r.stdout || "").trim().split("\n").pop()}`);
   }
-  console.log("完成");
+  console.log("Selesai");
 }
 
 // ── 卸 ─────────────────────────────────────────────────────────────────
@@ -682,7 +682,7 @@ function removeFiles(name, rec, own, keep = new Set()) {
 function uninstall(names, { force = false } = {}) {
   const d = db(), ix = index();
   for (const n of names) {
-    if (!d.pkgs[n]) { onDisk().has(n) ? die(`${n} 是工具包（或扩展组件）带的，不能用 pkg 卸`) : die(`${n} 没有用 pkg 装过`); }
+    if (!d.pkgs[n]) { onDisk().has(n) ? die(`${n} bawaan toolkit (atau komponen ekstensi), tidak bisa dicopot dengan pkg`) : die(`${n} tidak pernah dipasang dengan pkg`); }
   }
   const gone = new Set(names);
   // 剩下的 pkg 包里还有谁依赖要卸的
@@ -690,7 +690,7 @@ function uninstall(names, { force = false } = {}) {
   for (const n of Object.keys(d.pkgs)) {
     if (gone.has(n)) continue;
     const hit = needs(n).filter((x) => gone.has(x));
-    if (hit.length && !force) die(`${n} 要用 ${hit.join("、")}，先卸 ${n}（或加 --force）`);
+    if (hit.length && !force) die(`${n} dibutuhkan oleh ${hit.join(", ")}, copot dulu ${n} (atau tambahkan --force)`);
   }
   // 自动装上的依赖：没人要了就一起卸
   for (let changed = true; changed;) {
@@ -699,8 +699,8 @@ function uninstall(names, { force = false } = {}) {
     for (const n of Object.keys(d.pkgs)) if (!gone.has(n)) for (const x of needs(n)) { wanted.add(x); for (const pv of (ix.provides.get(x) || [])) wanted.add(pv); }
     for (const n of Object.keys(d.pkgs)) if (d.pkgs[n].auto && !gone.has(n) && !wanted.has(n)) { gone.add(n); changed = true; }
   }
-  if (!gone.size) { console.log("没有要卸的"); return; }
-  console.log(`卸载：${[...gone].join("、")}`);
+  if (!gone.size) { console.log("Tidak ada yang perlu dicopot"); return; }
+  console.log(`Mencopot: ${[...gone].join(", ")}`);
   for (const n of gone) runScript(n, "prerm", "remove");
   for (const n of gone) {
     const own = owners();
@@ -711,7 +711,7 @@ function uninstall(names, { force = false } = {}) {
     delete d.pkgs[n]; writeJson(DB, d);
   }
   relinkAlts(d);
-  console.log("完成");
+  console.log("Selesai");
 }
 
 // ── 工具包换了版本 ─────────────────────────────────────────────────────
@@ -727,12 +727,12 @@ function pendingRestore() {
 }
 function restore() {
   const d = db(), gone = lost(), pend = pendingRestore();
-  if (!gone.length && !pend.length) { console.log("没有要装回的"); return; }
+  if (!gone.length && !pend.length) { console.log("Tidak ada yang perlu dipasang ulang"); return; }
   const manual = [...new Set([...pend, ...gone.filter((n) => !d.pkgs[n].auto)])];
   writeJson(PENDING(), manual);
   for (const n of gone) delete d.pkgs[n];                      // 旧记录作废，按新工具包重新求解
   writeJson(DB, d);
-  console.log(`工具包更新后要装回：${manual.join("、")}`);
+  console.log(`Setelah toolkit diperbarui, pasang ulang: ${manual.join(", ")}`);
   if (manual.length) install(manual, { unverified: true, upgrade: true });
   fs.rmSync(PENDING(), { force: true });
 }
@@ -749,73 +749,73 @@ const MUT = ["install", "add", "uninstall", "remove", "purge", "autoremove", "up
 if (MUT.includes(sub)) lock();
 if (sub !== "restore") {
   const l = lost();
-  if (l.length) console.error(`提示：工具包换过版本，之前用 pkg 装的 ${l.filter((n) => !db().pkgs[n].auto).join("、") || l.join("、")} 已不在，运行 pkg restore 装回`);
-  else if (pendingRestore().length) console.error(`提示：上次 pkg restore 没装完（${pendingRestore().join("、")}），再运行一次 pkg restore 接着装`);
+  if (l.length) console.error(`Tips: versi toolkit sudah berganti, paket yang dulu dipasang dengan pkg ${l.filter((n) => !db().pkgs[n].auto).join(", ") || l.join(", ")} sudah tidak ada, jalankan pkg restore untuk memasangnya lagi`);
+  else if (pendingRestore().length) console.error(`Tips: pkg restore terakhir belum selesai (${pendingRestore().join(", ")}), jalankan pkg restore sekali lagi untuk melanjutkan`);
 }
 try {
   switch (sub) {
     case "install": case "add": case "reinstall":
-      if (!args.length) die("要装什么？pkg install <包>");
+      if (!args.length) die("Pasang apa? pkg install <paket>");
       if (sub === "reinstall") for (const n of args) if (db().pkgs[n]) { uninstall([n], { force: true }); }
       install(args, { unverified });
       break;
     case "uninstall": case "remove": case "purge": case "rm":
-      if (!args.length) die("要卸什么？pkg uninstall <包>");
+      if (!args.length) die("Copot apa? pkg uninstall <paket>");
       uninstall(args, { force });
       break;
     case "autoremove": uninstall([], {}); break;
     case "list": case "list-installed": {
       const d = db().pkgs, ks = Object.keys(d).sort();
       if (json) { console.log(JSON.stringify(d, (k, v) => (k === "files" || k === "shared" ? v.length : v), 1)); break; }
-      if (!ks.length) { console.log("还没有用 pkg 装过包（工具包自带的不算）"); break; }
-      for (const n of ks) console.log(`${n.padEnd(28)} ${d[n].version.padEnd(16)} ${d[n].auto ? "（依赖）" : ""}${d[n].state !== "ok" ? " ⚠ 没装完，重装或卸掉" : ""}`);
+      if (!ks.length) { console.log("Belum ada paket yang dipasang dengan pkg (bawaan toolkit tidak dihitung)"); break; }
+      for (const n of ks) console.log(`${n.padEnd(28)} ${d[n].version.padEnd(16)} ${d[n].auto ? " (dependensi)" : ""}${d[n].state !== "ok" ? " ⚠ belum terpasang lengkap, pasang ulang atau copot" : ""}`);
       break;
     }
     case "list-all": for (const n of [...index().pkgs.keys()].sort()) console.log(n); break;
     case "search": {
-      if (!args.length) die("搜什么？pkg search <关键词>");
+      if (!args.length) die("Cari apa? pkg search <kata kunci>");
       const q = args.join(" ").toLowerCase(), have = onDisk(), mine = db().pkgs;
       const hits = [...index().pkgs.values()].filter((p) => p.name.toLowerCase().includes(q) || p.t.toLowerCase().includes(q))
         .sort((a, b) => (b.name.includes(q) - a.name.includes(q)) || a.name.localeCompare(b.name));
       for (const p of hits.slice(0, 60)) {
-        const tag = mine[p.name] ? "[已装]" : have.has(p.name) ? "[工具包]" : VERIFIED[p.name] ? "[实测]" : "";
+        const tag = mine[p.name] ? "[terpasang]" : have.has(p.name) ? "[toolkit]" : VERIFIED[p.name] ? "[teruji]" : "";
         console.log(`${p.name} ${p.v} ${tag}\n  ${p.t}`);
       }
-      if (hits.length > 60) console.log(`…共 ${hits.length} 个，只列前 60 个`);
-      if (!hits.length) console.log("没找到");
+      if (hits.length > 60) console.log(`…total ${hits.length}, hanya 60 pertama yang ditampilkan`);
+      if (!hits.length) console.log("Tidak ditemukan");
       break;
     }
     case "show": case "info": {
       for (const n of args) {
         const p = index().pkgs.get(n), mine = db().pkgs[n], base = onDisk().has(n) && !mine;
-        if (!p && !mine) { console.log(`仓库里没有 ${n}`); continue; }
-        console.log(`包：${n}`);
-        if (p) console.log(`仓库版本：${p.v}（${p.repo.name}）\n下载：${mb(p.s)}  装好：${mb(p.i)}\n简介：${p.t}\n主页：${p.hp}\n依赖：${p.d || "无"}`);
-        console.log(`状态：${mine ? `已用 pkg 装 ${mine.version}${mine.auto ? "（作为依赖）" : ""}` : base ? `工具包自带 ${baseVersions().get(n) || ""}` : "没装"}`);
-        console.log(`本机实测：${VERIFIED[n] ? "是" : "否（装要加 --unverified）"}\n`);
+        if (!p && !mine) { console.log(`Repositori tidak punya ${n}`); continue; }
+        console.log(`Paket: ${n}`);
+        if (p) console.log(`Versi di repositori: ${p.v} (${p.repo.name})\nUnduhan: ${mb(p.s)}  terpasang: ${mb(p.i)}\nDeskripsi: ${p.t}\nSitus: ${p.hp}\nDependensi: ${p.d || "tidak ada"}`);
+        console.log(`Status: ${mine ? `Dipasang dengan pkg ${mine.version}${mine.auto ? " (sebagai dependensi)" : ""}` : base ? `Bawaan toolkit ${baseVersions().get(n) || ""}` : "belum terpasang"}`);
+        console.log(`Teruji di perangkat: ${VERIFIED[n] ? "ya" : "tidak (perlu --unverified untuk memasang)"}\n`);
       }
       break;
     }
     case "files": {
       const r = db().pkgs[args[0]];
-      if (!r) die(`${args[0] || "?"} 没有用 pkg 装过`);
+      if (!r) die(`${args[0] || "?"} tidak pernah dipasang dengan pkg`);
       for (const f of r.files) console.log(path.join(PREFIX, f));
       break;
     }
-    case "update": FORCE_UPDATE = true; index(); console.log("仓库索引已更新"); break;
+    case "update": FORCE_UPDATE = true; index(); console.log("Indeks repositori sudah diperbarui"); break;
     case "upgrade": case "full-upgrade": {
       FORCE_UPDATE = sub === "upgrade" && !args.length;
       const d = db().pkgs, ix = index();
       const want = (args.length ? args : Object.keys(d).filter((n) => !d[n].auto)).filter((n) => d[n]);
       const stale = Object.keys(d).filter((n) => ix.pkgs.has(n) && verCmp(ix.pkgs.get(n).v, d[n].version) > 0);
-      if (!stale.length) { console.log("用 pkg 装的包都是最新的（工具包自带的包随工具包更新）"); break; }
-      console.log(`有新版：${stale.map((n) => `${n} ${d[n].version}→${ix.pkgs.get(n).v}`).join("、")}`);
+      if (!stale.length) { console.log("Semua paket dari pkg sudah versi terbaru (paket bawaan toolkit diperbarui bersama toolkit)"); break; }
+      console.log(`Ada versi baru: ${stale.map((n) => `${n} ${d[n].version}→${ix.pkgs.get(n).v}`).join(", ")}`);
       install(want.filter((n) => stale.includes(n)).concat(stale.filter((n) => !want.includes(n) && !args.length)), { unverified: true, upgrade: true });
       break;
     }
     case "restore": restore(); break;
     case "verified": for (const [n, c] of Object.entries(VERIFIED)) console.log(`${n.padEnd(16)} ${c}`); break;
-    default: die(`不认识的命令 ${sub}\n\n${HELP}`, 2);
+    default: die(`Perintah tidak dikenal ${sub}\n\n${HELP}`, 2);
   }
 } catch (e) {
   die(e.message);

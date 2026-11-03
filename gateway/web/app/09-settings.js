@@ -5,11 +5,12 @@
   // 下拉框只决定"看哪一家的配置卡"；真正切换要在卡上点「使用这个接口」——
   // 配置和切换分开，免得填密钥填到一半就把正在用的接口换掉了。
   // 选接口这张单子：界面不是中文时整张用英文（厂商名、线路名本来就是英文世界的叫法，逐语言翻反而对不上官网）
-  const provEn = () => !/^zh/.test((window.I18N && I18N.lang) || "zh");
-  const pLabel = (x) => (provEn() && x.labelEn) || x.label;
+  const provEn = () => !/^(zh|id)/.test((window.I18N && I18N.lang) || "zh");   // 印尼语走 t()（词典）和 *Id 字段，不用写死的英文
+  const provId = () => /^id/.test((window.I18N && I18N.lang) || "");
+  const pLabel = (x) => (provId() && x.labelId) || (provEn() && x.labelEn) || x.label;
   // 状态里的当前接口名：同上规则（旧网关没有 providerLabelEn 就用中文名）
-  const provName = (s) => (s && ((provEn() && s.providerLabelEn) || s.providerLabel || s.provider)) || "";
-  const pHint = (x) => (provEn() && x.hintEn) || x.hint || "";
+  const provName = (s) => (s && ((provId() && s.providerLabelId) || (provEn() && s.providerLabelEn) || s.providerLabel || s.provider)) || "";
+  const pHint = (x) => (provId() && x.hintId) || (provEn() && x.hintEn) || x.hint || "";
   const GROUP_NAME = provEn() ? { claude: "Claude", third: "Third-party (just add a key)", local: "On-device", custom: "Custom endpoints" }
     : { claude: "Claude", third: t("第三方（填 Key 即用）"), local: t("端侧（本机运行）"), custom: t("自定义接口") };
   const post = (p, body) => api(p, {

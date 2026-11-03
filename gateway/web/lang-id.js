@@ -2598,4 +2598,6 @@ window.I18N_DICT["id"] = {
   "名字格式不对": "Format nama tidak valid",
   "请求参数不对": "Parameter permintaan tidak valid",
   "在浏览器里打开就没有查看器的保护了：网页里的脚本能把它所在文件夹里的文件发到别处，也能访问本机上的其他服务。只对你信得过的网页这样做。": "Membukanya di browser menghilangkan perlindungan penampil: skrip di halaman bisa mengirim file dari foldernya ke tempat lain dan menjangkau layanan lain di perangkat ini. Lakukan hanya untuk halaman yang Anda percayai.",
+  "昵称": "Nama panggilan",
+  "{m}（最新）": "{m} (terbaru)",
 };

@@ -43,15 +43,16 @@ export const BUILTIN_PROVIDER = {
 //   美团 LongCat longcat.chat/platform/docs/zh/ClaudeCode.html
 //   xAI Grok  docs.x.ai/openapi.json（POST /v1/messages "compatible with the Anthropic API"）
 //   Meta Muse dev.meta.ai/docs/coding-agents
-// 名字规矩：界面不是中文时显示 labelEn，所以厂商、线路都给英文名；模型显示名一律英文。
+// 名字规矩：界面不是中文时显示 labelEn（印尼语界面优先 labelId），所以厂商、线路都给英文名；模型显示名一律英文。
 // claude 直连这些端点（ANTHROPIC_BASE_URL + 密钥变量），不需要协议转换。
 // 配置文件只存用户自己的东西（密钥、选的线路、改过的默认模型）；目录本身随版本更新。
 const PRESETS = {
   anthropic: {
-    label: "Claude 账户登录", labelEn: "Claude account sign-in", group: "claude", login: true, nativeModels: true,
+    label: "Claude 账户登录", labelEn: "Claude account sign-in", labelId: "Masuk dengan akun Claude", group: "claude", login: true, nativeModels: true,
     baseUrl: "https://api.anthropic.com", authStyle: "x-api-key", defaultModel: null,
     hint: "用 Claude 订阅账户（Pro / Max / Team）。登录由 Claude Code 自己完成，网关不碰凭据。",
     hintEn: "Use a Claude subscription (Pro / Max / Team). Claude Code signs in by itself; the gateway never touches your credentials.",
+    hintId: "Pakai langganan Claude (Pro / Max / Team). Claude Code masuk sendiri; gateway tidak pernah menyentuh kredensial Anda.",
   },
   "anthropic-key": {
     label: "Claude API Key", group: "claude", nativeModels: true,
@@ -60,6 +61,7 @@ const PRESETS = {
     keyUrl: "https://platform.claude.com/settings/keys",
     hint: "Claude 开发者平台的 API Key，按量计费。",
     hintEn: "An API key from the Claude Developer Platform, billed per use.",
+    hintId: "API key dari Claude Developer Platform, ditagih per pemakaian.",
   },
   deepseek: {
     label: "DeepSeek", group: "third", authStyle: "bearer", modelsAuth: "bearer",
@@ -72,13 +74,13 @@ const PRESETS = {
     ],
   },
   glm: {
-    label: "智谱 GLM", labelEn: "Zhipu GLM", group: "third", authStyle: "bearer", modelsAuth: "bearer",
+    label: "智谱 GLM", labelEn: "Zhipu GLM", labelId: "Zhipu GLM", group: "third", authStyle: "bearer", modelsAuth: "bearer",
     defaultModel: "glm-5.2", fastModel: "glm-4.7",
     extraEnv: { API_TIMEOUT_MS: "3000000" },
     endpoints: [
-      { id: "cn", label: "国内 · open.bigmodel.cn", labelEn: "China · open.bigmodel.cn", baseUrl: "https://open.bigmodel.cn/api/anthropic",
+      { id: "cn", label: "国内 · open.bigmodel.cn", labelEn: "China · open.bigmodel.cn", labelId: "Tiongkok · open.bigmodel.cn", baseUrl: "https://open.bigmodel.cn/api/anthropic",
         modelsUrl: "https://open.bigmodel.cn/api/paas/v4/models", keyUrl: "https://bigmodel.cn/usercenter/proj-mgmt/apikeys" },
-      { id: "intl", label: "国际 · z.ai", labelEn: "International · z.ai", baseUrl: "https://api.z.ai/api/anthropic",
+      { id: "intl", label: "国际 · z.ai", labelEn: "International · z.ai", labelId: "Internasional · z.ai", baseUrl: "https://api.z.ai/api/anthropic",
         modelsUrl: "https://api.z.ai/api/paas/v4/models", keyUrl: "https://z.ai/manage-apikey/apikey-list" },
     ],
     fallbackModels: [
@@ -87,10 +89,10 @@ const PRESETS = {
     ],
   },
   qwen: {
-    label: "通义千问 Qwen", labelEn: "Alibaba Qwen", group: "third", authStyle: "bearer", modelsAuth: "bearer",
+    label: "通义千问 Qwen", labelEn: "Alibaba Qwen", labelId: "Alibaba Qwen", group: "third", authStyle: "bearer", modelsAuth: "bearer",
     keyUrl: "https://bailian.console.aliyun.com/?tab=model#/api-key",
     endpoints: [
-      { id: "payg", label: "按量计费 · dashscope", labelEn: "Pay as you go · dashscope", baseUrl: "https://dashscope.aliyuncs.com/apps/anthropic",
+      { id: "payg", label: "按量计费 · dashscope", labelEn: "Pay as you go · dashscope", labelId: "Bayar sesuai pemakaian · dashscope", baseUrl: "https://dashscope.aliyuncs.com/apps/anthropic",
         modelsUrl: "https://dashscope.aliyuncs.com/compatible-mode/v1/models", defaultModel: "qwen3.7-max", fastModel: "qwen3.6-flash" },
       { id: "coding", label: "Coding Plan", baseUrl: "https://coding.dashscope.aliyuncs.com/apps/anthropic",
         defaultModel: "qwen3.7-plus", fastModel: "qwen3.7-plus" },
@@ -107,9 +109,9 @@ const PRESETS = {
     label: "Kimi", group: "third", authStyle: "bearer", modelsAuth: "bearer",
     defaultModel: "kimi-k3", fastModel: "kimi-k2.7-code-highspeed",
     endpoints: [
-      { id: "cn", label: "国内 · moonshot.cn", labelEn: "China · moonshot.cn", baseUrl: "https://api.moonshot.cn/anthropic",
+      { id: "cn", label: "国内 · moonshot.cn", labelEn: "China · moonshot.cn", labelId: "Tiongkok · moonshot.cn", baseUrl: "https://api.moonshot.cn/anthropic",
         modelsUrl: "https://api.moonshot.cn/v1/models", keyUrl: "https://platform.kimi.com/console/api-keys" },
-      { id: "intl", label: "国际 · moonshot.ai", labelEn: "International · moonshot.ai", baseUrl: "https://api.moonshot.ai/anthropic",
+      { id: "intl", label: "国际 · moonshot.ai", labelEn: "International · moonshot.ai", labelId: "Internasional · moonshot.ai", baseUrl: "https://api.moonshot.ai/anthropic",
         modelsUrl: "https://api.moonshot.ai/v1/models", keyUrl: "https://platform.moonshot.ai/console/api-keys" },
     ],
     fallbackModels: [
@@ -122,26 +124,28 @@ const PRESETS = {
     label: "MiniMax", group: "third", authStyle: "bearer", modelsAuth: "bearer",
     defaultModel: "MiniMax-M3.1-Flash", fastModel: "MiniMax-M3",
     endpoints: [
-      { id: "cn", label: "国内 · minimax.cn", labelEn: "China · minimax.cn", baseUrl: "https://api.minimax.cn/anthropic",
+      { id: "cn", label: "国内 · minimax.cn", labelEn: "China · minimax.cn", labelId: "Tiongkok · minimax.cn", baseUrl: "https://api.minimax.cn/anthropic",
         modelsUrl: "https://api.minimax.cn/v1/models", keyUrl: "https://platform.minimax.cn/user-center/basic-information/interface-key" },
-      { id: "intl", label: "国际 · minimax.io", labelEn: "International · minimax.io", baseUrl: "https://api.minimax.io/anthropic",
+      { id: "intl", label: "国际 · minimax.io", labelEn: "International · minimax.io", labelId: "Internasional · minimax.io", baseUrl: "https://api.minimax.io/anthropic",
         modelsUrl: "https://api.minimax.io/v1/models", keyUrl: "https://platform.minimax.io/user-center/basic-information/interface-key" },
     ],
     hint: "按量计费的 Key 和 M Plan / Token Plan 订阅 Key 都填这里。M3.1 Flash 总是开着思考，关不掉。",
     hintEn: "Works with both pay-as-you-go keys and M Plan / Token Plan subscription keys. M3.1 Flash always thinks; it can't be turned off.",
+    hintId: "Bisa dengan kunci bayar sesuai pemakaian maupun kunci langganan M Plan / Token Plan. M3.1 Flash selalu berpikir; tidak bisa dimatikan.",
     fallbackModels: [
       { id: "MiniMax-M3.1-Flash", name: "MiniMax M3.1 Flash", context_window: 1000000 },
       { id: "MiniMax-M3", name: "MiniMax M3", context_window: 1000000 },
     ],
   },
   ark: {
-    label: "火山方舟（豆包）", labelEn: "Volcengine Ark (Doubao)", group: "third", authStyle: "bearer", modelsAuth: "bearer",
+    label: "火山方舟（豆包）", labelEn: "Volcengine Ark (Doubao)", labelId: "Volcengine Ark (Doubao)", group: "third", authStyle: "bearer", modelsAuth: "bearer",
     baseUrl: "https://ark.cn-beijing.volces.com/api/coding",
     keyUrl: "https://console.volcengine.com/ark/region:ark+cn-beijing/apiKey",
     defaultModel: "ark-code-latest", fastModel: "doubao-seed-2.1-lite",
     extraEnv: { API_TIMEOUT_MS: "3000000" },
     hint: "火山方舟 Coding Plan（个人版）。ark-code-latest 用的是你在方舟控制台里选的模型，切换后 3–5 分钟生效；套餐额度只能在编程工具里用。",
     hintEn: "Volcengine Ark Coding Plan (personal). ark-code-latest uses whichever model you picked in the Ark console; switching takes 3–5 minutes. Plan quota only works inside coding tools.",
+    hintId: "Volcengine Ark Coding Plan (pribadi). ark-code-latest memakai model apa pun yang Anda pilih di konsol Ark; pergantian butuh 3–5 menit. Kuota paket hanya berlaku di alat coding.",
     fallbackModels: [
       { id: "ark-code-latest", name: "Ark Code Latest (model picked in console)" },
       { id: "doubao-seed-2.1-pro", name: "Doubao Seed 2.1 Pro" },
@@ -153,36 +157,38 @@ const PRESETS = {
     ],
   },
   mimo: {
-    label: "小米 MiMo", labelEn: "Xiaomi MiMo", group: "third", authStyle: "bearer", modelsAuth: "bearer",
+    label: "小米 MiMo", labelEn: "Xiaomi MiMo", labelId: "Xiaomi MiMo", group: "third", authStyle: "bearer", modelsAuth: "bearer",
     defaultModel: "mimo-v2.6-pro", fastModel: "mimo-v2.6-flash",
     endpoints: [
-      { id: "payg", label: "按量计费", labelEn: "Pay as you go", baseUrl: "https://api.xiaomimimo.com/anthropic",
+      { id: "payg", label: "按量计费", labelEn: "Pay as you go", labelId: "Bayar sesuai pemakaian", baseUrl: "https://api.xiaomimimo.com/anthropic",
         modelsUrl: "https://api.xiaomimimo.com/v1/models", keyUrl: "https://platform.xiaomimimo.com/#/console/api-keys" },
       { id: "plan", label: "Token Plan", baseUrl: "https://token-plan-cn.xiaomimimo.com/anthropic",
         keyUrl: "https://platform.xiaomimimo.com/#/console/plan-manage" },
     ],
     hint: "按量计费的 Key 以 sk- 开头，Token Plan 的以 tp- 开头，两者不通用。V2.5 已于 10 月 21 日下线。",
     hintEn: "Pay-as-you-go keys start with sk-, Token Plan keys with tp-; they aren't interchangeable. V2.5 was retired on Oct 21.",
+    hintId: "Kunci bayar sesuai pemakaian diawali sk-, kunci Token Plan diawali tp-; keduanya tidak bisa saling menggantikan. V2.5 dihentikan pada 21 Okt.",
     fallbackModels: [
       { id: "mimo-v2.6-pro", name: "MiMo V2.6 Pro", context_window: 1048576 },
       { id: "mimo-v2.6-flash", name: "MiMo V2.6 Flash", context_window: 1048576 },
     ],
   },
   stepfun: {
-    label: "阶跃星辰", labelEn: "StepFun", group: "third", authStyle: "bearer", modelsAuth: "bearer",
+    label: "阶跃星辰", labelEn: "StepFun", labelId: "StepFun", group: "third", authStyle: "bearer", modelsAuth: "bearer",
     defaultModel: "step-5-preview", fastModel: "step-3.7-flash",
     endpoints: [
-      { id: "cn", label: "国内 · 按量计费", labelEn: "China · Pay as you go", baseUrl: "https://api.stepfun.com",
+      { id: "cn", label: "国内 · 按量计费", labelEn: "China · Pay as you go", labelId: "Tiongkok · Bayar sesuai pemakaian", baseUrl: "https://api.stepfun.com",
         modelsUrl: "https://api.stepfun.com/v1/models", keyUrl: "https://platform.stepfun.com/interface-key" },
-      { id: "cn-plan", label: "国内 · Step Plan", labelEn: "China · Step Plan", baseUrl: "https://api.stepfun.com/step_plan",
+      { id: "cn-plan", label: "国内 · Step Plan", labelEn: "China · Step Plan", labelId: "Tiongkok · Step Plan", baseUrl: "https://api.stepfun.com/step_plan",
         keyUrl: "https://platform.stepfun.com/interface-key" },
-      { id: "intl", label: "国际 · 按量计费", labelEn: "International · Pay as you go", baseUrl: "https://api.stepfun.ai",
+      { id: "intl", label: "国际 · 按量计费", labelEn: "International · Pay as you go", labelId: "Internasional · Bayar sesuai pemakaian", baseUrl: "https://api.stepfun.ai",
         modelsUrl: "https://api.stepfun.ai/v1/models", keyUrl: "https://platform.stepfun.ai/interface-key" },
-      { id: "intl-plan", label: "国际 · Step Plan", labelEn: "International · Step Plan", baseUrl: "https://api.stepfun.ai/step_plan",
+      { id: "intl-plan", label: "国际 · Step Plan", labelEn: "International · Step Plan", labelId: "Internasional · Step Plan", baseUrl: "https://api.stepfun.ai/step_plan",
         keyUrl: "https://platform.stepfun.ai/interface-key" },
     ],
     hint: "Step Plan 要先订阅；组织空间的 Key 不能用在 Step Plan 线路上。",
     hintEn: "Step Plan needs an active subscription; organization keys don't work on the Step Plan lines.",
+    hintId: "Step Plan butuh langganan aktif; kunci organisasi tidak berfungsi di jalur Step Plan.",
     fallbackModels: [
       { id: "step-5-preview", name: "Step 5 Preview", context_window: 1048576 },
       { id: "step-3.7-flash", name: "Step 3.7 Flash" },
@@ -190,17 +196,18 @@ const PRESETS = {
     ],
   },
   qianfan: {
-    label: "百度千帆", labelEn: "Baidu Qianfan", group: "third", authStyle: "bearer", modelsAuth: "bearer",
+    label: "百度千帆", labelEn: "Baidu Qianfan", labelId: "Baidu Qianfan", group: "third", authStyle: "bearer", modelsAuth: "bearer",
     keyUrl: "https://console.bce.baidu.com/qianfan/ais/console/apiKey",
     extraEnv: { API_TIMEOUT_MS: "600000" },
     endpoints: [
-      { id: "payg", label: "按量计费", labelEn: "Pay as you go", baseUrl: "https://qianfan.baidubce.com/anthropic",
+      { id: "payg", label: "按量计费", labelEn: "Pay as you go", labelId: "Bayar sesuai pemakaian", baseUrl: "https://qianfan.baidubce.com/anthropic",
         modelsUrl: "https://qianfan.baidubce.com/v2/models", defaultModel: "deepseek-v3.2", fastModel: "deepseek-v3.2" },
-      { id: "tokenplan", label: "Token Plan 个人版", labelEn: "Token Plan (personal)", baseUrl: "https://qianfan.baidubce.com/anthropic/tokenplan/personal",
+      { id: "tokenplan", label: "Token Plan 个人版", labelEn: "Token Plan (personal)", labelId: "Token Plan (pribadi)", baseUrl: "https://qianfan.baidubce.com/anthropic/tokenplan/personal",
         defaultModel: "qianfan-code-latest", fastModel: "qianfan-code-latest" },
     ],
     hint: "千帆上的对话模型都能用。Token Plan 填 qianfan-code-latest，实际用哪个模型在千帆控制台里选；套餐 Key 和按量 Key 不通用。",
     hintEn: "Any chat model on Qianfan works. For Token Plan use qianfan-code-latest and pick the actual model in the Qianfan console; plan keys and pay-as-you-go keys aren't interchangeable.",
+    hintId: "Model chat apa pun di Qianfan bisa dipakai. Untuk Token Plan pakai qianfan-code-latest dan pilih model sebenarnya di konsol Qianfan; kunci paket dan kunci bayar sesuai pemakaian tidak bisa saling menggantikan.",
     fallbackModels: [
       { id: "deepseek-v3.2", name: "DeepSeek V3.2" },
       { id: "kimi-k2.5", name: "Kimi K2.5" },
@@ -208,24 +215,25 @@ const PRESETS = {
     ],
   },
   hunyuan: {
-    label: "腾讯混元", labelEn: "Tencent Hunyuan", group: "third", authStyle: "bearer", modelsAuth: "bearer",
+    label: "腾讯混元", labelEn: "Tencent Hunyuan", labelId: "Tencent Hunyuan", group: "third", authStyle: "bearer", modelsAuth: "bearer",
     defaultModel: "hy3-preview", fastModel: "hy3-preview",
     keyUrl: "https://console.cloud.tencent.com/tokenhub",
     extraEnv: { ENABLE_TOOL_SEARCH: "false" },
     endpoints: [
-      { id: "cn", label: "国内 · TokenHub（广州）", labelEn: "China · TokenHub (Guangzhou)", baseUrl: "https://tokenhub.tencentmaas.com",
+      { id: "cn", label: "国内 · TokenHub（广州）", labelEn: "China · TokenHub (Guangzhou)", labelId: "Tiongkok · TokenHub (Guangzhou)", baseUrl: "https://tokenhub.tencentmaas.com",
         modelsUrl: "https://tokenhub.tencentmaas.com/v1/models" },
-      { id: "intl", label: "国际 · TokenHub（新加坡）", labelEn: "International · TokenHub (Singapore)", baseUrl: "https://tokenhub-intl.tencentmaas.com",
+      { id: "intl", label: "国际 · TokenHub（新加坡）", labelEn: "International · TokenHub (Singapore)", labelId: "Internasional · TokenHub (Singapura)", baseUrl: "https://tokenhub-intl.tencentmaas.com",
         modelsUrl: "https://tokenhub-intl.tencentmaas.com/v1/models" },
     ],
     hint: "走腾讯云 TokenHub 按量计费（混元原平台已迁到这里）。TokenHub 上的其他模型也能在模型列表里选。",
     hintEn: "Uses Tencent Cloud TokenHub pay-as-you-go (Hunyuan moved here from its old platform). Other TokenHub models show up in the model list too.",
+    hintId: "Memakai TokenHub Tencent Cloud dengan bayar sesuai pemakaian (Hunyuan pindah ke sini dari platform lamanya). Model TokenHub lain juga muncul di daftar model.",
     fallbackModels: [
       { id: "hy3-preview", name: "Hy3 Preview" },
     ],
   },
   longcat: {
-    label: "美团 LongCat", labelEn: "Meituan LongCat", group: "third", authStyle: "bearer", modelsAuth: "bearer",
+    label: "美团 LongCat", labelEn: "Meituan LongCat", labelId: "Meituan LongCat", group: "third", authStyle: "bearer", modelsAuth: "bearer",
     baseUrl: "https://api.longcat.chat/anthropic", modelsUrl: "https://api.longcat.chat/openai/v1/models",
     keyUrl: "https://longcat.chat/platform/api_keys",
     defaultModel: "LongCat-2.5-Preview", fastModel: "LongCat-2.5-Preview",
@@ -255,6 +263,7 @@ const PRESETS = {
     extraEnv: { ENABLE_TOOL_SEARCH: "true" },
     hint: "Meta Model API 还在公开预览，能不能用看所在国家和地区（中国大陆用不了）。",
     hintEn: "Meta Model API is in public preview; availability depends on your country or region.",
+    hintId: "Meta Model API masih pratinjau publik; ketersediaannya tergantung negara atau wilayah Anda.",
     fallbackModels: [
       { id: "muse-wonder-1.0", name: "Muse Wonder 1.0", context_window: 1048576 },
       { id: "muse-spark-1.3", name: "Muse Spark 1.3", context_window: 1048576 },
@@ -275,13 +284,14 @@ export const LLAMA_KEY = !PREFIX ? "local" : (() => {
   return k;
 })();
 if (PREFIX) PRESETS.local = {
-  label: "端侧小模型（本机）", labelEn: "On-device model", group: "local", local: true,
+  label: "端侧小模型（本机）", labelEn: "On-device model", labelId: "Model di perangkat", group: "local", local: true,
   baseUrl: `http://127.0.0.1:${LLAMA_PORT}`, authStyle: "x-api-key", apiKey: LLAMA_KEY, defaultModel: null,
   // 手机上读一万多 token 的提示要几分钟：别让 claude 等两分钟就当超时。
   // 重试只给两次：本机服务挂了就是挂了，默认十次退避要白等三分钟
   extraEnv: { API_TIMEOUT_MS: "3000000", CLAUDE_CODE_MAX_RETRIES: "2" },
   hint: "用本机的 llama.cpp 跑小模型聊天，不联网、不花钱。手机算力有限，干活请用云端模型。",
   hintEn: "Chat with a small model running on this device via llama.cpp — offline and free. Phone hardware is limited; use a cloud model for real work.",
+    hintId: "Chat dengan model kecil yang berjalan di perangkat ini lewat llama.cpp — offline dan gratis. Perangkat keras ponsel terbatas; pakai model cloud untuk pekerjaan sungguhan.",
 };
 // 预置条目只从配置文件里取这些"属于用户"的字段；其余（名字、线路表、端点）以目录为准，
 // 这样旧配置里抄死的 label/baseUrl 不会把目录更新挡住。自定义条目则整条都是用户的。
@@ -342,12 +352,12 @@ export let PROVIDERS_CFG = loadProviders();
 function providerView(id, v) {
   const key = String(v.apiKey || "").trim();
   return {
-    id, label: v.label || id, labelEn: v.labelEn || "", group: v.group || "custom", custom: !!v.custom,
+    id, label: v.label || id, labelEn: v.labelEn || "", labelId: v.labelId || "", group: v.group || "custom", custom: !!v.custom,
     login: !!v.login, nativeModels: !!v.nativeModels, local: !!v.local,
     baseUrl: v.baseUrl || "", modelsUrl: v.modelsUrl || "", authStyle: v.authStyle || "bearer",
-    endpoints: (v.endpoints || []).map((e) => ({ id: e.id, label: e.label, labelEn: e.labelEn || "" })), endpoint: v.endpoint || null,
+    endpoints: (v.endpoints || []).map((e) => ({ id: e.id, label: e.label, labelEn: e.labelEn || "", labelId: e.labelId || "" })), endpoint: v.endpoint || null,
     defaultModel: v.defaultModel || null, fastModel: v.fastModel || null, inlineImages: !!v.inlineImages, contextWindow: Number(v.contextWindow) || 0,
-    keyUrl: v.keyUrl || null, hint: v.hint || "", hintEn: v.hintEn || "",
+    keyUrl: v.keyUrl || null, hint: v.hint || "", hintEn: v.hintEn || "", hintId: v.hintId || "",
     hasKey: !!key, keyTail: key ? key.slice(-4) : "",
     active: id === PROVIDER.id,
   };
@@ -694,7 +704,7 @@ export function providerBrief() {
   if (!ids.includes(PROVIDER.id)) ids.unshift(PROVIDER.id);
   return ids.map((id) => {
     const p = providerById(id);
-    return p && { id, label: p.label || id, labelEn: p.labelEn || "", login: !!p.login, local: !!p.local,
+    return p && { id, label: p.label || id, labelEn: p.labelEn || "", labelId: p.labelId || "", login: !!p.login, local: !!p.local,
       nativeModels: !!p.nativeModels, usable: !!(p.login || p.local || keyOf(p)), active: id === PROVIDER.id,
       keyMode: keyOf(p) ? "key" : p.login ? "login" : "none", defaultModel: p.defaultModel || null };
   }).filter(Boolean);

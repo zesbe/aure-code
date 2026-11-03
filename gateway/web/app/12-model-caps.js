@@ -22,7 +22,7 @@
   /** 这个会话用哪家：单独选过模型就是记下的那家，否则全局生效的那家 */
   function curProv() { if (state.sessEff && state.sessEff.provider) return state.sessEff.provider; const o = own(); return (o && o.model != null && o.provider) || globalProv(); }
   function provOf(id) { return (state.provList || []).find((p) => p.id === id) || null; }
-  function provLabel(id) { const p = provOf(id); return p ? (provEn() && p.labelEn) || p.label : id || ""; }
+  function provLabel(id) { const p = provOf(id); return p ? (/^id/.test((window.I18N && I18N.lang) || "") && p.labelId) || (provEn() && p.labelEn) || p.label : id || ""; }
   /** 模型：钉了就是钉的（"" = 那家的默认）；跟随就是全局默认 */
   function curModel() {
     if (state.sessEff) return state.sessEff.model || state.sessEff.defaultModel || "";

@@ -2595,3 +2595,5 @@
 2595	Format nama tidak valid
 2596	Parameter permintaan tidak valid
 2597	Membukanya di browser menghilangkan perlindungan penampil: skrip di halaman bisa mengirim file dari foldernya ke tempat lain dan menjangkau layanan lain di perangkat ini. Lakukan hanya untuk halaman yang Anda percayai.
+2598	Nama panggilan
+2599	{m} (terbaru)

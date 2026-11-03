@@ -5,20 +5,20 @@ import net from "node:net";
 // 私有目录里的文件套接字：别的应用抢不走（以前的抽象套接字 \0cc.codtest.priv 谁都能先绑 —— 审查 H2）
 const SOCKET = process.env.CCAPP_PRIV_SOCK || "/data/data/cc.codtest/files/.priv.sock";
 const args = process.argv.slice(2);
-const HELP = `用法:
-  priv '<命令>'           以 shell 身份执行（/system/bin/sh -c）
-  priv -- <程序> [参数…]   不经 sh，直接执行
-  priv --status           Shizuku 状态
-  priv --request          弹出 Shizuku 授权请求
-  priv --keepalive on|off 后台保活增强（幽灵进程上限、电池白名单等）
-标准输入会转给命令；退出码与命令一致。`;
+const HELP = `Penggunaan:
+  priv '<perintah>'        jalankan sebagai pengguna shell (/system/bin/sh -c)
+  priv -- <program> [arg…] jalankan langsung, tanpa sh
+  priv --status           status Shizuku
+  priv --request          tampilkan permintaan izin Shizuku
+  priv --keepalive on|off penguat keep-alive latar (batas phantom process, daftar putih baterai, dll.)
+Standard input diteruskan ke perintah; kode keluar sama dengan kode keluar perintahnya.`;
 
 function oneShot(req) {
   return new Promise((resolve, reject) => {
     const s = net.connect({ path: SOCKET }, () => s.write(JSON.stringify(req) + "\n"));
     let buf = "";
     s.on("data", (d) => (buf += d));
-    s.on("end", () => { try { resolve(JSON.parse(buf)); } catch { reject(new Error("回应无法解析：" + buf.slice(0, 200))); } });
+    s.on("end", () => { try { resolve(JSON.parse(buf)); } catch { reject(new Error("respons tidak bisa diurai: " + buf.slice(0, 200))); } });
     s.on("error", reject);
   });
 }
@@ -57,11 +57,11 @@ function exec(argv) {
   // 连上之后的写错误（对端先结束了，我们还在递 stdin）不算失败 —— 回应可能已经在缓冲里，等 close 时再判断
   s.on("error", (e) => {
     if (connected) return;
-    process.stderr.write(`priv: 连不上 Aure Code（${e.code || e.message}）。应用的后台服务在运行吗？\n`);
+    process.stderr.write(`priv: tidak bisa tersambung ke Aure Code (${e.code || e.message}). Apakah layanan latar aplikasi sedang berjalan?\n`);
     process.exit(125);
   });
   s.on("close", () => {
-    if (!gotExit) { process.stderr.write("priv: 连接中断，没有收到退出码\n"); process.exitCode = 125; }
+    if (!gotExit) { process.stderr.write("priv: koneksi terputus, kode keluar tidak diterima\n"); process.exitCode = 125; }
     process.stdin.destroy();
   });
 }

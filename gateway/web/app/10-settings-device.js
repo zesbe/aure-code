@@ -106,7 +106,7 @@
     if (busy && pageOn("settings")) privPoll = setTimeout(loadPriv, 1500);
   }
   // 经 priv 执行过的命令（谁发起、命令、退出码、用时）。再点一次收起
-  const privBy = (k) => ({ claude: "Claude", terminal: t("终端"), gateway: "cccodroid", "cc-mem": t("内存管家"), other: t("其他") })[k] || k;
+  const privBy = (k) => ({ claude: "Claude", terminal: t("终端"), gateway: "Aure Code", "cc-mem": t("内存管家"), other: t("其他") })[k] || k;
   async function togglePrivAudit() {
     const box = $("priv-audit");
     if (!box.classList.contains("hidden")) { box.classList.add("hidden"); return; }
@@ -308,7 +308,7 @@
       return;
     }
     if (act === "local") {
-      if (!confirm(t("从本地文件安装开发工具包？\n\n选一个 devkit-cc.codroid.tar.gz（或 .tar），可以在 GitHub 发布页或 cccodroid.net 下载。装之前会核对它是不是已发布的版本；装的时候暂停服务 1–2 分钟。\n你用 pip / npm -g 装进工具包的东西会被保留。"))) return;
+      if (!confirm(t("从本地文件安装开发工具包？\n\n选一个 devkit-cc.codtest.tar.gz（或 .tar），可以在 GitHub 发布页或 cccodroid.net 下载。装之前会核对它是不是已发布的版本；装的时候暂停服务 1–2 分钟。\n你用 pip / npm -g 装进工具包的东西会被保留。"))) return;
       CCApp.pickDevkit();
       return;
     }

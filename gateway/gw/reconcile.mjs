@@ -7,7 +7,7 @@
 //   · 组件（files/components/<id>.json）：没写完的记录、装在旧工具包上的、记录里的文件 / 命令不在、路径格式不对
 //   · 包清单（var/lib/dpkg/info/*.list）：前缀是不是本应用；列的文件在不在
 //   · 模块（libexec/devkit/modules/<id>/）：.ok 与 MANIFEST 是否成对；FILES 里的文件在不在
-//   · 自定义组件（~/.cccodroid/custom/<id>/）：程序和补的库在不在
+//   · 自定义组件（~/.aurecode/custom/<id>/）：程序和补的库在不在
 // 结果：GET /api/reconcile（?run=1 重核；?format=selftest 出 PASS/FAIL 行给 cccodroid-selftest），
 // 本机实况里告诉 Claude，问题有变化时记一笔修复账本。
 import fs from "node:fs";
@@ -19,7 +19,7 @@ import { modInstalled, modulesInfo } from "./modules.mjs";
 import { NEXT, sendJson } from "./http.mjs";
 
 const STATE = PREFIX ? path.join(CFG.home, ".cache", "cccodroid", "reconcile.json") : "";
-const CUSTOM_DIR = PREFIX ? path.join(CFG.home, ".cccodroid", "custom") : "";
+const CUSTOM_DIR = PREFIX ? path.join(CFG.home, ".aurecode", "custom") : "";
 let last = null, busy = null;
 try { last = JSON.parse(fs.readFileSync(STATE, "utf8")); } catch {}
 

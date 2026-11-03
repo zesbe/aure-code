@@ -14,7 +14,7 @@ process.env.ANTHROPIC_AUTH_TOKEN = "fixture-only-do-not-forward";
 process.env.CCAPP_RUN = "fixture-only-do-not-forward";
 const home = process.env.CCAPP_HOME, prefix = process.env.CCAPP_PREFIX;
 const root = fs.mkdtempSync(path.join(process.env.CCAPP_WORKSPACE, "managed-"));
-const reg = path.join(home, ".cccodroid/services/openai-bridge.json");
+const reg = path.join(home, ".aurecode/services/openai-bridge.json");
 const record = path.join(path.dirname(prefix), "components/openai-bridge.json");
 const component = path.join(prefix, "lib/openai-bridge/component.cjs");
 const lockFixture = registryFlockFixture();
@@ -47,7 +47,7 @@ if(args[0]==='ensure'){
   setTimeout(()=>{if(mode==='fail')process.exitCode=1;else console.log(JSON.stringify({schema:1,id:'openai-bridge',ready:true,endpoint,instanceId:mode==='wrong'?'wrong':instanceId}));},mode==='hang'||mode==='resident-hang'?70000:100);
 }else if(args[0]==='uninstall'){
   setTimeout(()=>{
-    const registration=path.join(process.env.HOME,'.cccodroid/services/openai-bridge.json');
+    const registration=path.join(process.env.HOME,'.aurecode/services/openai-bridge.json');
     if(mode==='fail'||mode==='uninstall-fail')process.exitCode=1;
     else if(mode==='replace-reg'){
       fs.rmSync(registration,{force:true});

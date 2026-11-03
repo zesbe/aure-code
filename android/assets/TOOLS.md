@@ -40,8 +40,8 @@
 所以**要在 `priv` 里跑的东西必须先放到共享目录**，否则报的是误导性的 `inaccessible or not found` / `Permission denied`：
 
 ```sh
-cp 脚本.sh /sdcard/cccodroid/            # 先中转
-priv 'sh /sdcard/cccodroid/脚本.sh'      # 再执行
+cp 脚本.sh /sdcard/AureCode/            # 先中转
+priv 'sh /sdcard/AureCode/脚本.sh'      # 再执行
 ```
 
 ## 设备工具：mcp__device__*

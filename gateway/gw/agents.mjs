@@ -6,7 +6,7 @@ import { forEachLine } from "./bigfile.mjs";
 
 // ── 子代理联络簿：状态外置 ───────────────────────────────────────────
 // 从 claude 的事件流里摘三类事——派出（task_started）、联络（SendMessage）、结束（task_notification / Agent 结果），
-// 落盘到 <项目目录>/.cccodroid/agents/<会话前 8 位>/，再给界面推一条很短的 ag 事件。
+// 落盘到 <项目目录>/.aurecode/agents/<会话前 8 位>/，再给界面推一条很短的 ag 事件。
 //   index.jsonl                  一行一件事（只有网关写）
 //   <序号>-<名字>-<id 前 6 位>/brief.md   交代：派出时的 prompt
 //                              report.md  汇报：结束时的最后一段正文
@@ -36,9 +36,9 @@ const stamp = () => new Date().toISOString().replace(/[-:]/g, "").replace(/\..*/
 const SHARED = /^\/(sdcard|storage|mnt)\//;
 const realCwd = (cwd) => { try { return fs.realpathSync(cwd); } catch { return path.resolve(cwd); } };
 export const onShared = (cwd) => SHARED.test(realCwd(cwd) + "/");
-const legacyDir = (cwd, sessionId) => path.join(cwd, ".cccodroid", "agents", String(sessionId).slice(0, 8));
+const legacyDir = (cwd, sessionId) => path.join(cwd, ".aurecode", "agents", String(sessionId).slice(0, 8));
 /** 共享存储上的项目，联络簿的私有根目录（run 把它 --add-dir 给 claude，读汇报不用再要授权） */
-export const privateAgentsBase = (cwd) => path.join(CFG.home, ".cccodroid", "agents", crypto.createHash("sha256").update(realCwd(cwd)).digest("hex").slice(0, 12));
+export const privateAgentsBase = (cwd) => path.join(CFG.home, ".aurecode", "agents", crypto.createHash("sha256").update(realCwd(cwd)).digest("hex").slice(0, 12));
 export const agentsDir = (cwd, sessionId) => !onShared(cwd) ? legacyDir(cwd, sessionId) : path.join(privateAgentsBase(cwd), String(sessionId).slice(0, 8));
 
 /** 读某会话的联络簿（界面翻历史用）。最多 n 行，取最后的 */
@@ -75,7 +75,7 @@ export function agentBook(run, { emit }) {
     try {
       fs.mkdirSync(d, { recursive: true });
       // 别把这堆文件带进用户的 git 仓库
-      const gi = path.join(run.cwd, ".cccodroid", ".gitignore");
+      const gi = path.join(run.cwd, ".aurecode", ".gitignore");
       if (!onShared(run.cwd) && !fs.existsSync(gi)) fs.writeFileSync(gi, "*\n");
       seq = fs.readdirSync(d).filter((x) => /^\d+-/.test(x)).length;   // 续上之前轮次的编号
       dir = d;

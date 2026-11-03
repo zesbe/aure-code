@@ -14,16 +14,16 @@ import { runEmit } from "./queue.mjs";
 import { privCall } from "./usage.mjs";
 
 // ── 端侧小模型：网关按需拉起 llama-server，空闲一阵自动停（模型常驻要占好几 GB 内存） ──
-// 模型放 /sdcard/cccodroid/models（和 llama-cpp 组件的 llama-run 同一个目录）或 home/models。
+// 模型放 /sdcard/AureCode/models（和 llama-cpp 组件的 llama-run 同一个目录）或 home/models。
 // claude 以 --bare --tools "" 跑：内置只有聊天，提示只有七十 token 左右（完整模式两万 token，手机上光读提示就要好几分钟）。
 // 实测 1.5B/3B 都撑不起工具调用（命令写成文字、读目录、选错命令），所以干活不内置；
-// 想折腾的用户写 ~/.cccodroid/local-mode.json 开「自定义模式」，配法见随包装进去的 local-model-mode 技能。
-const LOCAL_MODEL_DIRS = PREFIX ? ["/sdcard/cccodroid-test/models", path.join(CFG.home, "models")] : [];
+// 想折腾的用户写 ~/.aurecode/local-mode.json 开「自定义模式」，配法见随包装进去的 local-model-mode 技能。
+const LOCAL_MODEL_DIRS = PREFIX ? ["/sdcard/AureCode/models", "/sdcard/AureCode/models", path.join(CFG.home, "models")] : [];
 const LLAMA_IDLE_MS = 10 * 60e3;
 const LLAMA_LOG = path.join(CFG.home, ".cache", "llama-server.log");
 const llamaBin = () => PREFIX ? path.join(PREFIX, "bin", "llama-server") : "";
 export const LL = { child: null, file: "", id: "", sig: "", gpu: false, state: "off", since: 0, lastUse: 0, err: "", run: null, loadMs: 0 };
-const LOCAL_MODE_FILE = path.join(CFG.home, ".cccodroid", "local-mode.json");
+const LOCAL_MODE_FILE = path.join(CFG.home, ".aurecode", "local-mode.json");
 
 /** 自定义模式的配置：{ have, ok, cfg } 或 { have, ok:false, err }。每次现读，改完下一条消息就生效 */
 function localCustom() {

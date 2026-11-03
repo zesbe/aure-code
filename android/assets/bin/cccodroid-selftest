@@ -18,7 +18,7 @@ skip() { echo "SKIP $1 :: 「$2」模块没装"; }
 echo "== 环境"; echo "PREFIX=$PREFIX TMPDIR=$TMPDIR"; echo "PATH=$PATH"; echo "LD_PRELOAD=${LD_PRELOAD:-（无）}"
 echo "== 工作区"
 # 在工作区里另开一个独占的子目录试：用固定文件名会覆盖、删掉用户恰好同名的文件（审查 #49 P2-17）
-WD=$(mktemp -d "${CCAPP_WORKSPACE:-$HOME}/.cccodroid-selftest.XXXXXX") || WD=
+WD=$(mktemp -d "${CCAPP_WORKSPACE:-$HOME}/.aurecode-selftest.XXXXXX") || WD=
 if [ -z "$WD" ]; then NF=$((NF+1)); echo "FAIL 工作区可写 :: 建不了临时目录"
 else
 if has build; then t "工作区可执行" "cd \"$WD\" && printf 'int main(){return 0;}' > st.c && cc st.c -o st && ./st && echo ok"

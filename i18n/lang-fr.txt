@@ -156,24 +156,24 @@
 156	Ajouté
 157	Shizuku n'est pas installé
 158	Shizuku est installé mais son service ne tourne pas (relancez-le dans l'application Shizuku après un redémarrage)
-159	Shizuku tourne mais n'est pas autorisé pour cccodroid
+159	Shizuku tourne mais n'est pas autorisé pour Aure Code
 160	Impossible de joindre le service d'arrière-plan de l'application
 161	RedMagic / Nubia : Infos de l'appli → Consommation de la batterie → Optimisation de la batterie → <b>Exécution en arrière-plan : autoriser</b> (autorisez aussi le <b>démarrage automatique</b> : c'est ce qui réactive Shizuku au démarrage et restaure tout après une mise à jour)
 162	ZTE : Infos de l'appli → Consommation de la batterie → Optimisation de la batterie → <b>Exécution en arrière-plan : autoriser</b>, <b>démarrage automatique : autoriser</b>
 163	Xiaomi / Redmi : Infos de l'appli → <b>Économiseur de batterie : aucune restriction</b>, activez le <b>démarrage automatique</b> (chemin courant ; peut varier selon la version du système)
 164	OPPO / OnePlus / Realme : Infos de l'appli → Économie d'énergie → <b>Autoriser l'activité en arrière-plan</b>, <b>Autoriser le démarrage automatique</b> (chemin courant)
-165	vivo / iQOO : Réglages → Batterie → Gestion de la consommation en arrière-plan → autorisez la <b>consommation élevée en arrière-plan</b> pour cccodroid ; dans iManager, autorisez le <b>démarrage automatique</b> (chemin courant)
-166	Huawei / Honor : Réglages → Lancement des applications → désactivez « Gérer automatiquement » pour cccodroid, puis autorisez manuellement le <b>démarrage automatique</b> et l'<b>activité en arrière-plan</b> (chemin courant)
-167	cccodroid a été gelé en arrière-plan {n} fois (la dernière fois pendant environ {sec} s, {at}).
+165	vivo / iQOO : Réglages → Batterie → Gestion de la consommation en arrière-plan → autorisez la <b>consommation élevée en arrière-plan</b> pour Aure Code ; dans iManager, autorisez le <b>démarrage automatique</b> (chemin courant)
+166	Huawei / Honor : Réglages → Lancement des applications → désactivez « Gérer automatiquement » pour Aure Code, puis autorisez manuellement le <b>démarrage automatique</b> et l'<b>activité en arrière-plan</b> (chemin courant)
+167	Aure Code a été gelé en arrière-plan {n} fois (la dernière fois pendant environ {sec} s, {at}).
 168	Pendant le gel, la passerelle et les tâches en cours s'arrêtent net et ne reprennent qu'au retour au premier plan. Un service de premier plan n'empêche pas ce type de gel imposé par le constructeur.
-169	Dans les réglages système, autorisez l'exécution en arrière-plan, désactivez l'optimisation de la batterie et autorisez le démarrage automatique pour cccodroid (les libellés varient selon le constructeur).
+169	Dans les réglages système, autorisez l'exécution en arrière-plan, désactivez l'optimisation de la batterie et autorisez le démarrage automatique pour Aure Code (les libellés varient selon le constructeur).
 170	✓ Prêt · commandes exécutées en tant que {who}
 171	État inconnu
 172	 (la dernière demande a été refusée)
-173	L'appairage en débogage sans fil pour cccodroid a été révoqué : cela fonctionne encore, mais après un redémarrage la réactivation automatique ne sera plus possible.
-174	Shizuku n'a pas été démarré par cccodroid, donc cccodroid ne peut pas le réactiver après un redémarrage. Un appairage suffit.
-175	Le système n'a pas notifié cccodroid au démarrage (bloqué par la gestion du démarrage automatique) : l'activation automatique n'a donc pas eu lieu. Ouvrir cccodroid rattrapera le retard.
-176	Pour activer au démarrage : autorisez le démarrage automatique / en arrière-plan pour cccodroid dans les détails de l'application. Effectif au prochain démarrage.
+173	L'appairage en débogage sans fil pour Aure Code a été révoqué : cela fonctionne encore, mais après un redémarrage la réactivation automatique ne sera plus possible.
+174	Shizuku n'a pas été démarré par Aure Code, donc Aure Code ne peut pas le réactiver après un redémarrage. Un appairage suffit.
+175	Le système n'a pas notifié Aure Code au démarrage (bloqué par la gestion du démarrage automatique) : l'activation automatique n'a donc pas eu lieu. Ouvrir Aure Code rattrapera le retard.
+176	Pour activer au démarrage : autorisez le démarrage automatique / en arrière-plan pour Aure Code dans les détails de l'application. Effectif au prochain démarrage.
 177	Démarrez le service dans l'application Shizuku (activez « Démarrer au boot (débogage sans fil) ») et vérifiez que cette application est autorisée.
 178	Demandé
 179	Le code d'appairage comporte 6 chiffres
@@ -184,7 +184,7 @@
 184	Installer et activer
 185	Activer (débogage sans fil)
 186	Ouvrir Shizuku
-187	Autoriser cccodroid
+187	Autoriser Aure Code
 188	Télécharger manuellement
 189	Autoriser le démarrage auto
 190	Actualiser
@@ -192,7 +192,7 @@
 192	Ouvrir les réglages système
 193	C'est fait, masquer cet avis
 194	Shizuku (privilèges de débogage)
-195	Réactivation automatique après un redémarrage (nécessite le Wi-Fi ; démarre le service d'arrière-plan de cccodroid au boot)
+195	Réactivation automatique après un redémarrage (nécessite le Wi-Fi ; démarre le service d'arrière-plan de Aure Code au boot)
 196	Renfort de maintien en vie : relève la limite de « processus fantômes » d'Android (pour que les sous-processus des compilations parallèles ne soient pas tués), ajoute à la liste blanche de batterie, autorise l'exécution en arrière-plan
 197	Une fois activé, <code>priv 'commande'</code> s'exécute dans le terminal en tant qu'utilisateur shell (pm / am / settings / dumpsys / logcat / screencap…) et Claude peut aussi s'en servir. Sans Shizuku, les fonctions de développement de base restent disponibles — seules ces capacités de débogage manquent.
 198	À jour
@@ -592,7 +592,7 @@
 592	Le catalogue officiel est vide.
 593	Recherche dans le registre…
 594	Aussi proposé en {kinds}, inutilisable sur cet appareil
-595	Nécessite npx (fourni avec la boîte à outils cccodroid)
+595	Nécessite npx (fourni avec la boîte à outils Aure Code)
 596	Impossible à installer sur cet appareil
 597	Rien trouvé. Essayez d'autres mots-clés (l'anglais donne plus de résultats).
 598	Afficher 30 de plus
@@ -642,7 +642,7 @@
 642	Clé Anthropic, ou clé d'une API compatible comme DeepSeek, Zhipu GLM, Qwen ou Kimi ; paiement à l'usage.
 643	Choisir une API et saisir une clé
 644	Les deux sont dans ☰ → Réglages → API, modifiables à tout moment.
-645	Créer un paquet de diagnostic et l'envoyer via le partage du système.\n\nInclus :\n· Version et appareil : cccodroid / version d'Android, modèle, puce, espace libre\n· Kit de développement : version installée, état des mises à jour et de l'autotest\n· Journaux récents : journal système de l'app, fin du journal de la passerelle\n· Registre de réparation : installations, vérifications, réparations et leur résultat\n\nRetiré :\n· Clés, jetons, identifiants de connexion, adresses e-mail\n· Le contenu de vos messages à Claude\n· Les conversations elles-mêmes ne sont pas incluses\n\nContinuer ?
+645	Créer un paquet de diagnostic et l'envoyer via le partage du système.\n\nInclus :\n· Version et appareil : Aure Code / version d'Android, modèle, puce, espace libre\n· Kit de développement : version installée, état des mises à jour et de l'autotest\n· Journaux récents : journal système de l'app, fin du journal de la passerelle\n· Registre de réparation : installations, vérifications, réparations et leur résultat\n\nRetiré :\n· Clés, jetons, identifiants de connexion, adresses e-mail\n· Le contenu de vos messages à Claude\n· Les conversations elles-mêmes ne sont pas incluses\n\nContinuer ?
 646	Je suis bloqué · paquet de diagnostic
 647	Installation impossible, rien ne fonctionne ou erreur incompréhensible : créez un paquet de diagnostic et partagez-le avec la personne qui vous aide (ou joignez-le à une issue GitHub). Son contenu s'affiche avant la création ; clés, jetons, e-mails et contenu de vos messages sont retirés d'abord.
 648	Faites glisser pour redimensionner, double-touchez pour réinitialiser
@@ -694,7 +694,7 @@
 694	Méthode de compression non prise en charge : {name}
 695	Aucune session à exporter
 696	manifest.json manquant : ce n'est pas une archive de sessions
-697	Ce n'est pas une archive de sessions cccodroid
+697	Ce n'est pas une archive de sessions Aure Code
 698	(La conversation précédente a été condensée en résumé)
 699	Le kit de développement n'est pas complètement installé (ou vient d'un fichier local sans identité de version) : impossible d'installer des composants
 700	Composant inconnu
@@ -971,7 +971,7 @@
 971	Écran allumé
 972	App au premier plan
 973	L'enregistrement vient de commencer (un relevé toutes les 5 minutes). Revenez un peu plus tard.
-974	Cette version n'a pas de couche native : seul le temps CPU est enregistré (niveau de batterie, écran et premier plan nécessitent cccodroid).
+974	Cette version n'a pas de couche native : seul le temps CPU est enregistré (niveau de batterie, écran et premier plan nécessitent Aure Code).
 975	Batterie {p}
 976	En charge
 977	Sur batterie
@@ -1048,7 +1048,7 @@
 1048	« {q} » introuvable dans les messages chargés
 1049	Installer depuis un fichier de boîte à outils déjà téléchargé
 1050	Fichier local…
-1051	Installer la boîte à outils depuis un fichier local ?\n\nChoisissez un devkit-cc.codroid.tar.gz (ou .tar), téléchargeable depuis la page des versions GitHub ou cccodroid.net. Il est comparé aux versions publiées avant l’installation ; le service est suspendu 1 à 2 minutes pendant l’installation.\nCe que vous avez installé avec pip / npm -g est conservé.
+1051	Installer la boîte à outils depuis un fichier local ?\n\nChoisissez un devkit-cc.codtest.tar.gz (ou .tar), téléchargeable depuis la page des versions GitHub ou cccodroid.net. Il est comparé aux versions publiées avant l’installation ; le service est suspendu 1 à 2 minutes pendant l’installation.\nCe que vous avez installé avec pip / npm -g est conservé.
 1052	Journal des commandes privilégiées
 1053	Aucune commande n’a encore été exécutée via priv
 1054	{n} dernières entrées (les plus récentes d’abord). Conservées sur cet appareil uniquement, jamais envoyées.
@@ -1126,7 +1126,7 @@
 1126	Réfléchit d’abord
 1127	Orienté code
 1128	Volumineux
-1129	Les modèles vont dans /sdcard/cccodroid/models ; utilisez-les via Réglages → Service de modèle → Modèle local. Mémoire de l’appareil : {ram} Go. Tous en quantification Q4_K_M ; 1 à 4B est raisonnable sur téléphone, au-delà de 6B c’est très lent.
+1129	Les modèles vont dans /sdcard/AureCode/models ; utilisez-les via Réglages → Service de modèle → Modèle local. Mémoire de l’appareil : {ram} Go. Tous en quantification Q4_K_M ; 1 à 4B est raisonnable sur téléphone, au-delà de 6B c’est très lent.
 1130	{n} téléchargé(s)
 1131	Absent de la liste ? Collez le lien de téléchargement d’un fichier .gguf (HuggingFace, ModelScope…). Aucune somme de contrôle n’est vérifiée, seulement l’en-tête du fichier.
 1132	{name} compte environ {p}B paramètres ({size}). Ce sera très lent sur un téléphone et la mémoire risque de ne pas suffire. Télécharger quand même ?
@@ -1330,7 +1330,7 @@
 1330	Masquer le QR code
 1331	QR code du groupe QQ
 1332	Une question, une idée ? Venez en parler. Pour les bugs, passez plutôt par Réglages → Signaler sur GitHub : l’appareil et l’autodiagnostic sont remplis pour vous, et le signalement ne se perd pas dans la discussion.
-1333	cccodroid est maintenu par une seule personne et a vraiment besoin d’aide : corrections de traduction, retours sur les appareils, recettes de composants, documentation et code sont les bienvenus, même sans savoir coder. Le guide de contribution du dépôt explique comment faire.
+1333	Aure Code est maintenu par une seule personne et a vraiment besoin d’aide : corrections de traduction, retours sur les appareils, recettes de composants, documentation et code sont les bienvenus, même sans savoir coder. Le guide de contribution du dépôt explique comment faire.
 1334	Discussions
 1335	Signaler un problème
 1336	Contribuer
@@ -1357,7 +1357,7 @@
 1357	Service d’accessibilité : connecté
 1358	Service d’accessibilité : désactivé
 1359	Service d’accessibilité : désactivé pour l’instant (activé au besoin)
-1360	Shizuku n’est pas activé : l’appli ne peut pas activer elle-même le service d’accessibilité. Activez cccodroid dans les réglages d’accessibilité du système. Depuis Android 13, une appli installée hors store doit d’abord passer par Infos sur l’appli → menu en haut à droite → Autoriser les paramètres restreints.
+1360	Shizuku n’est pas activé : l’appli ne peut pas activer elle-même le service d’accessibilité. Activez Aure Code dans les réglages d’accessibilité du système. Depuis Android 13, une appli installée hors store doit d’abord passer par Infos sur l’appli → menu en haut à droite → Autoriser les paramètres restreints.
 1361	État de l’appareil
 1362	Notifications
 1363	Lire le presse-papiers
@@ -1574,7 +1574,7 @@
 1574	Rien d'enregistré ce mois-ci
 1575	CPU de l'app
 1576	La batterie indique la baisse de tout l'appareil aujourd'hui ; le CPU est le temps de travail réel de l'app (Claude et ses commandes compris).
-1577	Cette version n'a pas de couche native : seul le temps CPU est enregistré (batterie et écran allumé nécessitent cccodroid).
+1577	Cette version n'a pas de couche native : seul le temps CPU est enregistré (batterie et écran allumé nécessitent Aure Code).
 1578	Messages
 1579	Tours de réponse
 1580	Tokens d'entrée
@@ -2314,7 +2314,7 @@
 2314	Très grand
 2315	Pour empêcher d’autres applis d’usurper le service d’appairage, saisissez le code avec le port : c’est le nombre après les deux-points dans « Adresse IP et port » de la fenêtre, p. ex. {0}
 2316	Saisissez le code et le port ensemble, p. ex. {0} (le port est dans la fenêtre)
-2317	La première fois, il faut appairer : dans les Paramètres ouverts, allez dans Débogage sans fil → activez-le → Associer l’appareil avec un code. Une notification cccodroid reste en haut de l’écran ; touchez Saisir le code et tapez le code à 6 chiffres avec le port affiché dans la fenêtre, p. ex. 123456 37285 (ou saisissez-les ici)
+2317	La première fois, il faut appairer : dans les Paramètres ouverts, allez dans Débogage sans fil → activez-le → Associer l’appareil avec un code. Une notification Aure Code reste en haut de l’écran ; touchez Saisir le code et tapez le code à 6 chiffres avec le port affiché dans la fenêtre, p. ex. 123456 37285 (ou saisissez-les ici)
 2318	Port (dans la fenêtre)
 2319	Saisissez aussi le port de la fenêtre (le nombre après les deux-points)
 2320	Confirmer les actions sensibles
@@ -2577,7 +2577,7 @@
 2577	saisi dans les réglages
 2578	Utilisable aussi dans d'autres conversations : touchez l'étiquette du modèle sous la saisie et choisissez-le dans la ligne des fournisseurs.
 2579	Renseignez l'adresse, la clé et le modèle, c'est tout ; la fenêtre de contexte est facultative.
-2580	Créer un paquet de diagnostic et l'envoyer via le partage du système.\n\nInclus :\n· Version et appareil : cccodroid / version d'Android, modèle, puce, espace libre\n· Kit de développement : version installée, état des mises à jour et de l'autotest\n· Journaux récents : journal système de l'app, fin du journal de la passerelle\n· Registre de réparation : installations, vérifications, réparations et leur résultat\n· Réseau : VPN actif ou non, et si l'app peut joindre quelques sources de téléchargement (résultats seulement)\n\nRetiré :\n· Clés, jetons, identifiants de connexion, adresses e-mail\n· Le contenu de vos messages à Claude\n· Les conversations elles-mêmes ne sont pas incluses\n\nContinuer ?
+2580	Créer un paquet de diagnostic et l'envoyer via le partage du système.\n\nInclus :\n· Version et appareil : Aure Code / version d'Android, modèle, puce, espace libre\n· Kit de développement : version installée, état des mises à jour et de l'autotest\n· Journaux récents : journal système de l'app, fin du journal de la passerelle\n· Registre de réparation : installations, vérifications, réparations et leur résultat\n· Réseau : VPN actif ou non, et si l'app peut joindre quelques sources de téléchargement (résultats seulement)\n\nRetiré :\n· Clés, jetons, identifiants de connexion, adresses e-mail\n· Le contenu de vos messages à Claude\n· Les conversations elles-mêmes ne sont pas incluses\n\nContinuer ?
 2581	Liste des modèles
 2582	Contexte {used} · capacité inconnue
 2583	Afficher {n} lignes de plus ({total} au total)

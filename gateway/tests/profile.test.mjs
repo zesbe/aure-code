@@ -103,6 +103,7 @@ test("导出落盘：只认 cccodroid-lineage-*.svg/png/html，内容要对得�
   assert.equal(saveExport("cccodroid-lineage-a.html", "<html>").error, "bad_html");
   assert.equal(saveExport("cccodroid-lineage-a.png", Buffer.from("not a png at all, really not, padding padding padding padding padding padding padding padding padding").toString("base64")).error, "bad_png");
   assert.equal(saveExport("cccodroid-lineage-a.html", "<!doctype html><p>x").ok, true);
+  assert.equal(saveExport("aurecode-lineage-a.html", "<!doctype html><p>x").ok, true, "new prefix accepted");
   // 导出目录里放一个同名软链接指向别处：不跟过去写
   const victim = path.join(process.env.CCAPP_HOME, "victim.txt"); fs.writeFileSync(victim, "keep");
   const link = path.join(path.dirname(ok.file), "cccodroid-lineage-link.svg"); fs.rmSync(link, { force: true }); fs.symlinkSync(victim, link);

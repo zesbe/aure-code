@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="cc.codroid"
+    package="cc.codtest"
     android:versionCode="105"
     android:versionName="0.5.19">
 
@@ -31,7 +31,7 @@
     <!-- 设备工具 open(kind=alarm/timer)：只是把闹钟应用打开并预填，普通权限，装时自动给 -->
     <uses-permission android:name="com.android.alarm.permission.SET_ALARM" />
     <!-- 以下为 targetSdk 36：前台服务类型（34 起必须声明）、定时任务的精确闹钟（31 起要权限，用户在设置里给）、
-         共享目录 /sdcard/cccodroid（30 起分区存储，旧的存储权限不再管用，要「所有文件访问」） -->
+         共享目录 /sdcard/AureCode（30 起分区存储，旧的存储权限不再管用，要「所有文件访问」） -->
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE_SPECIAL_USE" />
     <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM" />
     <uses-permission android:name="android.permission.MANAGE_EXTERNAL_STORAGE" />

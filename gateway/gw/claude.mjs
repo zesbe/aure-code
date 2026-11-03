@@ -198,7 +198,7 @@ export function claudeEnv(o = {}) {
     TERMINFO_DIRS: PREFIX ? path.join(PREFIX, "share", "terminfo") : path.join(PATHS.toolchain, "dshtc", "prefix", "share", "terminfo"),
     // 工具链在前：这样 claude 调 git/gcc/rg/magick… 命中的是我们搬过来的包装脚本。
     // 最前面的 app/pre 只放 pkg / apt：工具包里有同名的旧说明替身，改它会被完整性校验判成"改动"，只能靠 PATH 顺序压过去
-    PATH: PREFIX ? [process.env.CCAPP_BIN && path.join(process.env.CCAPP_BIN, "..", "pre"), path.join(PREFIX, "bin"), path.join(CFG.home, ".cccodroid", "bin"), process.env.CCAPP_BIN, "/system/bin", "/system/xbin"].filter(Boolean).join(":") : [
+    PATH: PREFIX ? [process.env.CCAPP_BIN && path.join(process.env.CCAPP_BIN, "..", "pre"), path.join(PREFIX, "bin"), path.join(CFG.home, ".aurecode", "bin"), process.env.CCAPP_BIN, "/system/bin", "/system/xbin"].filter(Boolean).join(":") : [
       path.join(PATHS.toolchain, "payload", "bin"),
       // 开发端自己加的工具（python3/pip、java/javac/d8/apksigner、strace、adb…）：放在 tc.tar 之外，启动重新部署时不会被冲掉
       path.join(CFG.runtime, "..", "devbin"),

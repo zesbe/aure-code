@@ -644,10 +644,10 @@ export async function compRemove(id) {
   } finally { if (COMP_JOBS.get(id) === removal) COMP_JOBS.delete(id); }
 }
 
-// ── 组件的运行数据：约定放在 ~/.cccodroid/<id>/（blender 的 Debian 环境、下载缓存等），卸载组件不碰它。
+// ── 组件的运行数据：约定放在 ~/.aurecode/<id>/（blender 的 Debian 环境、下载缓存等），卸载组件不碰它。
 // 卸载后报出大小、问用户要不要一起删。目录名不一定等于 id（gpu-driver-glibc 用 gpu-driver 的目录），
 // 所以只认和 id 同名的目录，还装着 <id>-xxx 组件时当作共用、不提议删
-function compDataDir(id) { return path.join(CFG.home, ".cccodroid", id); }
+function compDataDir(id) { return path.join(CFG.home, ".aurecode", id); }
 function compDataShared(id) {
   try { return fs.readdirSync(COMP_DIR).some((f) => f.endsWith(".json") && f.startsWith(id + "-")); } catch { return false; }
 }
@@ -668,7 +668,7 @@ async function compDataInfo(id) {
   const dir = compDataDir(id);
   try { if (!fs.lstatSync(dir).isDirectory()) return null; } catch { return null; }
   if (compRecord(id) || compDataShared(id)) return null;
-  return { path: "~/.cccodroid/" + id, bytes: await compDuBytes(dir) };
+  return { path: "~/.aurecode/" + id, bytes: await compDuBytes(dir) };
 }
 async function compPurgeData(id) {
   if (compRecord(id)) return { ok: false, message: "still installed" };

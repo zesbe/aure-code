@@ -4,7 +4,7 @@
 // 官网生成器验过签才镜像到 https://cccodroid.net/notices.json。这里先取官网、取不到取 GitHub，
 // 两边都只认签名对得上的那份 —— 官网被人改了也推不出假通知。
 // 内容只当纯文本显示；链接只认 https。按 App 版本范围（minVer / maxVer）和有效期（from / until）筛选，
-// 「知道了」记在 home/.config/cccodroid/notices-seen.json，同一条不再显示。
+// 「知道了」记在 home/.config/aurecode/notices-seen.json，同一条不再显示。
 // 不发任何本机信息：就是一次普通的 GET，和检查更新一样。
 import fs from "node:fs";
 import path from "node:path";

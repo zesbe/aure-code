@@ -198,7 +198,7 @@ test("component UI: rejected or interrupted uninstall clears only the local lock
     const u = ui();
     u.post = async () => {
       if (rejectedRequest) throw new Error("connection lost");
-      return { ok: false, message: u.t(retainedError), data: { bytes: 100, path: "~/.cccodroid/openai-bridge" } };
+      return { ok: false, message: u.t(retainedError), data: { bytes: 100, path: "~/.aurecode/openai-bridge" } };
     };
     await u.load();
     await u.click("remove").done;

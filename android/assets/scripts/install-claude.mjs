@@ -38,7 +38,7 @@ const NPM_KEYS = {"SHA256:DhQ8wR5APBvFHLF/+Tc+AYvPOdTpcIDqOhxsBHRwC7U":"MFkwEwYH
 const PREFIX = process.env.PREFIX || "";
 const CURL = PREFIX ? path.join(PREFIX, "bin", "curl") : "curl";
 const TAR = PREFIX ? path.join(PREFIX, "bin", "tar") : "tar";
-const DEST = path.join(process.env.HOME, ".local/share/cccodroid/claude");
+const DEST = path.join(process.env.HOME, ".local/share/aurecode/claude");
 const CHANNEL = process.argv[2] || "stable";
 const say = (s) => console.log(s);
 const die = (s) => { console.log("✗ " + s); process.exit(1); };

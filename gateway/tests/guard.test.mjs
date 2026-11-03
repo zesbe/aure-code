@@ -6,7 +6,7 @@ import { judge } from "../guard/cc-guard.mjs";
 
 test("密钥、凭据、设备敏感工具：要问", () => {
   const hit = [
-    ["Read", { file_path: "/data/user/0/cc.codroid/files/home/.gateway-token" }],
+    ["Read", { file_path: "/data/user/0/cc.codtest/files/home/.gateway-token" }],
     ["Read", { file_path: "/x/home/ccapp-providers.json" }],
     ["Read", { file_path: "/x/home/.cache/ccapp-key" }],
     ["Bash", { command: "cat ~/.ssh/id_ed25519" }],

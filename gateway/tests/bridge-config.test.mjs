@@ -13,7 +13,7 @@ import { RUNS } from "../gw/runs.mjs";
 const home = process.env.CCAPP_HOME, prefix = process.env.CCAPP_PREFIX;
 const root = fs.mkdtempSync(path.join(process.env.CCAPP_WORKSPACE, "bridge-config-"));
 const target = path.join(home, ".local/share/ccr-bridge-kit");
-const registration = path.join(home, ".cccodroid/services/openai-bridge.json");
+const registration = path.join(home, ".aurecode/services/openai-bridge.json");
 const record = path.join(path.dirname(prefix), "components/openai-bridge.json");
 const component = path.join(prefix, "lib/openai-bridge/component.cjs");
 const marker = path.join(root, "calls");

@@ -199,10 +199,10 @@ function defaultConnection(model) {
   const home = HOME_ROOT(), target = path.join(home, ".local", "share", "ccr-bridge-kit");
   try {
     for (const dir of [home, path.join(home, ".local"), path.join(home, ".local", "share"), target,
-      path.join(home, ".cccodroid"), path.join(home, ".cccodroid", "services")]) {
+      path.join(home, ".aurecode"), path.join(home, ".aurecode", "services")]) {
       if (fs.realpathSync(dir) !== path.resolve(dir)) throw failure("RUNTIME_CONFLICT");
     }
-    const registration = regularJson(path.join(home, ".cccodroid", "services", ID + ".json"), 4096);
+    const registration = regularJson(path.join(home, ".aurecode", "services", ID + ".json"), 4096);
     const connection = regularJson(path.join(target, "connection.json"), 4096);
     if (!object(registration) || registration.schema !== 1 || registration.id !== ID || registration.runtimeDir !== target ||
         typeof registration.instanceId !== "string" || !/^[0-9a-f]{32}$/.test(registration.instanceId) ||
@@ -288,7 +288,7 @@ export async function handleBridgeModels(req, res, signal) {
   }
 }
 
-const providerStateFile = () => path.join(HOME_ROOT(), ".cccodroid", "services", "openai-bridge-app.json");
+const providerStateFile = () => path.join(HOME_ROOT(), ".aurecode", "services", "openai-bridge-app.json");
 
 export function clearBridgeConfigMapping(id) {
   if (id !== ID) return false;
@@ -296,7 +296,7 @@ export function clearBridgeConfigMapping(id) {
   try {
     fd = fs.openSync(HOME_ROOT(), fs.constants.O_RDONLY | fs.constants.O_DIRECTORY);
     // 只解开本桥的非秘密映射；不跟随父目录链接，也不删除保留的 provider 或运行配置。
-    for (const name of [".cccodroid", "services"]) {
+    for (const name of [".aurecode", "services"]) {
       const next = fs.openSync(`/proc/self/fd/${fd}/${name}`, fs.constants.O_RDONLY | fs.constants.O_DIRECTORY | fs.constants.O_NOFOLLOW);
       fs.closeSync(fd); fd = next;
     }

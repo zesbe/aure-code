@@ -3,7 +3,7 @@ import "../gw/config.mjs";   // 放最前：没走 scripts/test.mjs 就在这里
 import { test } from "node:test";
 import assert from "node:assert/strict";
 
-const W = "/data/user/0/cc.codroid/files/home/workspace";
+const W = "/data/user/0/cc.codtest/files/home/workspace";
 const asst = (content, extra = {}) => ({ type: "assistant", message: { role: "assistant", content }, ...extra });
 const write = (p, name = "Write") => ({ type: "tool_use", id: "t" + Math.random(), name, input: { file_path: p } });
 const say = (text) => ({ type: "text", text });
@@ -16,7 +16,7 @@ test("只提了文件名 / 相对路径：记下来，下一轮取一次就清",
   assert.deepEqual(w.lazy().map((x) => x.said), ["index.html", "game/main.js"]);
   settlePathNote("s1", w);
   const n = takePathNote("s1");
-  assert.match(n, /index\.html → \/data\/user\/0\/cc\.codroid\/files\/home\/workspace\/game\/index\.html/);
+  assert.match(n, /index\.html → \/data\/user\/0\/cc\.codtest\/files\/home\/workspace\/game\/index\.html/);
   assert.match(n, /starting with \//);
   assert.equal(takePathNote("s1"), "");
 });

@@ -13,7 +13,7 @@ import { deviceFacts } from "./device.mjs";
 // ── 本机实况：TOOLS.md 是打包时在测试机上测的，这里补上「这台设备上实际怎样」 ──
 // 自检（cccodroid-selftest）在本机跑一遍，失败项和 INFO（比如有没有硬件编码器）接在 TOOLS.md 后面；
 // 装了哪些组件、用 pkg 装了哪些包，每轮现读。自检只在工具包或应用版本变了之后、空闲时重跑（要一两分钟 CPU）
-export const ENV_FACTS = PREFIX ? path.join(CFG.home, ".cccodroid-env.json") : "";
+export const ENV_FACTS = PREFIX ? path.join(CFG.home, ".aurecode-env.json") : "";
 export function envFactsKey() {
   const dk = devkitIdentity() || {};
   let tag = ""; try { tag = fs.readFileSync(path.join(HERE, "TAG"), "utf8").trim(); } catch {}

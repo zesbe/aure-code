@@ -76,7 +76,7 @@ const CLASS_NAME = { pers: "常驻", sys: "系统", fg: "前台", vis: "可见",
 // 动了会出事的系统组件（多数本来就在常驻档，这里兜底）
 const CORE = [/^android$/, /^android\./, /^com\.android\.(systemui|phone|providers\..*|networkstack.*|bluetooth|nfc|se|shell|server\..*|inputdevices|location\.fused|externalstorage|mtp|settings|permissioncontroller|packageinstaller|vending)$/,
   /^com\.google\.android\.(permissioncontroller|packageinstaller)$/,      // 权限弹窗、安装确认被停掉会打断用户（审查 10-29 第六份 低1）
-  /^com\.google\.android\.(gms|gsf|ext\.services)$/, /^moe\.shizuku\.privileged\.api$/, /^cc\.codroid$/, /^li\.dsh\./];
+  /^com\.google\.android\.(gms|gsf|ext\.services)$/, /^moe\.shizuku\.privileged\.api$/, /^cc\.codtest$/, /^cc\.codroid$/, /^li\.dsh\./];
 
 /** 进程分档（lru）+ 每个进程加载了哪些包（processes）。
  *  后者要紧：停掉一个包，安卓会连带杀掉所有加载过它的进程 —— 停 WebView 包就把用 WebView 的应用全带走了，

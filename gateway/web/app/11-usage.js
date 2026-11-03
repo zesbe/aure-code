@@ -91,7 +91,7 @@
     c.fillStyle = glow; c.fillRect(0, 0, W, H);
     c.textBaseline = "alphabetic";
     let y = P + 34;
-    text("cccodroid · " + t("使用月报"), P, y, font(500, 30), FG2);
+    text("Aure Code · " + t("使用月报"), P, y, font(500, 30), FG2);
     // 导出才有：右上角 头像 + 昵称（和标题同一行）
     if (who) {
       const R0 = 34, cx = W - P - R0, cy = y - 11;
@@ -310,7 +310,7 @@
     const rows = [[t("日期"), t("消息"), t("回复轮数"), t("工具调用"), t("输入 tokens"), t("输出 tokens"), t("读缓存 tokens")].join(",")]
       .concat(keys.map((k) => { const x = us.days.get(k); return [k, x.m, x.t, x.tl, x.i, x.o, x.c].join(","); }));
     try {
-      const r = await post("/api/usage/csv", { name: "cccodroid-usage-" + usDayKey(new Date()) + ".csv", text: rows.join("\n") });
+      const r = await post("/api/usage/csv", { name: "aurecode-usage-" + usDayKey(new Date()) + ".csv", text: rows.join("\n") });
       if (canSaveAs()) saveAs(r.file, "text/csv"); else toast(t("已保存：{name}", { name: r.file }));
     } catch (e) { toast(e.message, true); }
   });
@@ -357,7 +357,7 @@
   });
   // 月报图片：先交给网关落成文件，再走「保存到」/ 系统分享；都没有就让浏览器自己下载
   async function usCardFile() {
-    const [y, m] = us.month, name = `cccodroid-usage-${y}-${String(m + 1).padStart(2, "0")}.png`;
+    const [y, m] = us.month, name = `aurecode-usage-${y}-${String(m + 1).padStart(2, "0")}.png`;
     // 导出的图另画一张：多了右上角的头像与昵称
     const p = profile(), cv = document.createElement("canvas");
     let img = null;

@@ -56,8 +56,16 @@ jobs:
       - name: 签名钥匙
         env:
           RELEASE_KEY: ${{ secrets.CCCODROID_RELEASE_KEY }}
+          AURE_KS_B64: ${{ secrets.AURE_KS_B64 }}
+          AURE_KS_PASS: ${{ secrets.AURE_KS_PASS }}
         run: |
-          if [ -n "$RELEASE_KEY" ]; then
+          if [ -n "$AURE_KS_B64" ] && [ -n "$AURE_KS_PASS" ]; then
+            # Fork（Aure Code）：固定钥匙，每次构建同一个签名 → 新包能直接覆盖安装旧包（不用卸载、数据不丢）
+            printf '%s' "$AURE_KS_B64" | base64 -d > "$RUNNER_TEMP/aure.jks"
+            echo "KS=$RUNNER_TEMP/aure.jks" >> "$GITHUB_ENV"
+            echo "KS_PASS=$AURE_KS_PASS" >> "$GITHUB_ENV"
+            echo "SIGNED=aure" >> "$GITHUB_ENV"
+          elif [ -n "$RELEASE_KEY" ]; then
             printf '%s' "$RELEASE_KEY" | base64 -d > "$RUNNER_TEMP/key.json"
             echo "KEY=$RUNNER_TEMP/key.json" >> "$GITHUB_ENV"
             echo "SIGNED=release" >> "$GITHUB_ENV"

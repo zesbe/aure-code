@@ -248,7 +248,7 @@ async function turnDetailRead(id, file, from, to, key) {
 /** 导出文件落盘：和用量月报同一个导出目录（共享存储有就放那儿，用户在文件管理里找得到） */
 const EXPORT_MAX = 48 << 20;
 export function saveExport(name, data) {
-  const m = /^cccodroid-lineage-[\w.-]{1,80}\.(svg|png|html)$/.exec(String(name || ""));
+  const m = /^(?:aurecode|cccodroid)-lineage-[\w.-]{1,80}\.(svg|png|html)$/.exec(String(name || ""));
   if (!m || name.includes("..")) return { error: "bad_name" };
   let buf;
   if (m[1] === "png") {

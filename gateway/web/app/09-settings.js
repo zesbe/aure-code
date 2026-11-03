@@ -136,7 +136,7 @@
         ${cu.have && !cu.ok ? `<div class="tiny err">${t("配置文件有误，已按聊天模式跑：{msg}", { msg: esc(cu.err) })}</div>` : ""}
       </div>
       <div class="local-custom tiny dim">
-        ${t("手机算力有限，小模型干不了活，所以只内置聊天。想自己折腾的话，可以写 {file} 开一个自定义模式（指定工具、系统提示、llama-server 参数）。最省事的办法：切到云端模型，把下面这句发给它：", { file: "<code>" + esc(cu.path || "~/.cccodroid/local-mode.json") + "</code>" })}
+        ${t("手机算力有限，小模型干不了活，所以只内置聊天。想自己折腾的话，可以写 {file} 开一个自定义模式（指定工具、系统提示、llama-server 参数）。最省事的办法：切到云端模型，把下面这句发给它：", { file: "<code>" + esc(cu.path || "~/.aurecode/local-mode.json") + "</code>" })}
         <div class="local-copy"><code>${esc(cmdText)}</code><button class="btn sm ghost" data-act="copy">${t("复制")}</button></div>
       </div>
       <div class="prov-state">${esc(svText)}${sv.loadMs ? ` · ${t("加载用了 {s} 秒", { s: (sv.loadMs / 1000).toFixed(1) })}` : ""}</div>

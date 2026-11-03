@@ -156,24 +156,24 @@
 156	Añadido
 157	Shizuku no está instalado
 158	Shizuku está instalado pero su servicio no se está ejecutando (vuelve a iniciarlo en la aplicación Shizuku tras reiniciar)
-159	Shizuku se está ejecutando pero no está autorizado para cccodroid
+159	Shizuku se está ejecutando pero no está autorizado para Aure Code
 160	No se puede contactar con el servicio en segundo plano de la aplicación
 161	RedMagic / Nubia: Información de la app → Consumo de batería → Optimización de batería → <b>Ejecución en segundo plano: permitir</b> (permite también el <b>inicio automático</b>: es lo que reactiva Shizuku al arrancar y lo restaura todo tras una actualización)
 162	ZTE: Información de la app → Consumo de batería → Optimización de batería → <b>Ejecución en segundo plano: permitir</b>, <b>inicio automático: permitir</b>
 163	Xiaomi / Redmi: Información de la app → <b>Ahorro de batería: sin restricciones</b>, activa el <b>inicio automático</b> (ruta habitual; puede variar según la versión)
 164	OPPO / OnePlus / Realme: Información de la app → Ahorro de energía → <b>Permitir actividad en segundo plano</b>, <b>Permitir inicio automático</b> (ruta habitual)
-165	vivo / iQOO: Ajustes → Batería → Gestión de consumo en segundo plano → permite <b>alto consumo en segundo plano</b> para cccodroid; en iManager permite el <b>inicio automático</b> (ruta habitual)
-166	Huawei / Honor: Ajustes → Gestión de inicio de apps → desactiva «Gestionar automáticamente» para cccodroid y permite manualmente el <b>inicio automático</b> y la <b>actividad en segundo plano</b> (ruta habitual)
-167	cccodroid se ha congelado en segundo plano {n} veces (la última durante unos {sec} s, {at}).
+165	vivo / iQOO: Ajustes → Batería → Gestión de consumo en segundo plano → permite <b>alto consumo en segundo plano</b> para Aure Code; en iManager permite el <b>inicio automático</b> (ruta habitual)
+166	Huawei / Honor: Ajustes → Gestión de inicio de apps → desactiva «Gestionar automáticamente» para Aure Code y permite manualmente el <b>inicio automático</b> y la <b>actividad en segundo plano</b> (ruta habitual)
+167	Aure Code se ha congelado en segundo plano {n} veces (la última durante unos {sec} s, {at}).
 168	Mientras está congelado, la pasarela y las tareas en curso se detienen por completo y solo siguen al volver al primer plano. Un servicio en primer plano no detiene este tipo de congelador del fabricante.
-169	En los ajustes del sistema, permite la ejecución en segundo plano, desactiva la optimización de batería y permite el inicio automático para cccodroid (los nombres varían según el fabricante).
+169	En los ajustes del sistema, permite la ejecución en segundo plano, desactiva la optimización de batería y permite el inicio automático para Aure Code (los nombres varían según el fabricante).
 170	✓ Listo · ejecutando comandos como {who}
 171	Estado desconocido
 172	 (la última petición fue denegada)
-173	El emparejamiento de depuración inalámbrica de cccodroid se revocó: ahora sigue funcionando, pero tras reiniciar no podrá reactivarse automáticamente.
-174	Shizuku no lo inició cccodroid, así que cccodroid no puede reactivarlo tras reiniciar. Basta con emparejarlo una vez.
-175	El sistema no avisó a cccodroid al arrancar (bloqueado por la gestión de inicio automático), así que no se pudo activar automáticamente; abrir cccodroid lo pondrá al día.
-176	Para activarlo al arrancar: permite el inicio automático / en segundo plano para cccodroid en los detalles de la aplicación. Se aplica a partir del próximo arranque.
+173	El emparejamiento de depuración inalámbrica de Aure Code se revocó: ahora sigue funcionando, pero tras reiniciar no podrá reactivarse automáticamente.
+174	Shizuku no lo inició Aure Code, así que Aure Code no puede reactivarlo tras reiniciar. Basta con emparejarlo una vez.
+175	El sistema no avisó a Aure Code al arrancar (bloqueado por la gestión de inicio automático), así que no se pudo activar automáticamente; abrir Aure Code lo pondrá al día.
+176	Para activarlo al arrancar: permite el inicio automático / en segundo plano para Aure Code en los detalles de la aplicación. Se aplica a partir del próximo arranque.
 177	Inicia el servicio en la aplicación Shizuku (activa «Iniciar al arrancar (depuración inalámbrica)») y comprueba que esta aplicación está autorizada.
 178	Solicitado
 179	El código de emparejamiento tiene 6 dígitos
@@ -184,7 +184,7 @@
 184	Instalar y activar
 185	Activar (depuración inalámbrica)
 186	Abrir Shizuku
-187	Autorizar cccodroid
+187	Autorizar Aure Code
 188	Descargar manualmente
 189	Permitir inicio automático
 190	Actualizar
@@ -192,7 +192,7 @@
 192	Abrir ajustes del sistema
 193	Hecho, ocultar este aviso
 194	Shizuku (privilegios de depuración)
-195	Reactivar automáticamente tras reiniciar (necesita Wi-Fi; inicia el servicio en segundo plano de cccodroid al arrancar)
+195	Reactivar automáticamente tras reiniciar (necesita Wi-Fi; inicia el servicio en segundo plano de Aure Code al arrancar)
 196	Refuerzo de keep-alive: sube el límite de «procesos fantasma» de Android (para que las compilaciones en paralelo no pierdan sus subprocesos), añade a la lista blanca de batería y permite la ejecución en segundo plano
 197	Una vez activado, <code>priv 'comando'</code> se ejecuta en el terminal como usuario shell (pm / am / settings / dumpsys / logcat / screencap…) y Claude también puede usarlo. Sin Shizuku, las funciones básicas de desarrollo siguen funcionando — solo faltan estas capacidades de depuración.
 198	Al día
@@ -592,7 +592,7 @@
 592	El catálogo oficial está vacío.
 593	Buscando en el registro…
 594	También disponible como {kinds}, que este dispositivo no puede usar
-595	Necesita npx (incluido en el kit de herramientas de cccodroid)
+595	Necesita npx (incluido en el kit de herramientas de Aure Code)
 596	No se puede instalar en este dispositivo
 597	No se encontró nada. Prueba con otras palabras (en inglés hay más resultados).
 598	Mostrar 30 más
@@ -642,7 +642,7 @@
 642	Usa una clave de Anthropic o de una API compatible como DeepSeek, Zhipu GLM, Qwen o Kimi; pago por uso.
 643	Elegir API e introducir clave
 644	Ambas están en ☰ → Ajustes → API y puedes cambiar cuando quieras.
-645	Crear un paquete de diagnóstico y enviarlo con el menú de compartir del sistema.\n\nIncluye:\n· Versión y dispositivo: cccodroid / versión de Android, modelo, chip, espacio libre\n· Kit de desarrollo: qué versión está instalada, estado de actualizaciones y autocomprobación\n· Registros recientes: registro del sistema de la app, final del registro de la pasarela\n· Registro de reparaciones: instalaciones, comprobaciones y reparaciones, y si funcionaron\n\nEliminado:\n· Claves, tokens, credenciales de inicio de sesión, correos\n· El contenido de tus mensajes a Claude\n· Las conversaciones no se incluyen\n\n¿Continuar?
+645	Crear un paquete de diagnóstico y enviarlo con el menú de compartir del sistema.\n\nIncluye:\n· Versión y dispositivo: Aure Code / versión de Android, modelo, chip, espacio libre\n· Kit de desarrollo: qué versión está instalada, estado de actualizaciones y autocomprobación\n· Registros recientes: registro del sistema de la app, final del registro de la pasarela\n· Registro de reparaciones: instalaciones, comprobaciones y reparaciones, y si funcionaron\n\nEliminado:\n· Claves, tokens, credenciales de inicio de sesión, correos\n· El contenido de tus mensajes a Claude\n· Las conversaciones no se incluyen\n\n¿Continuar?
 646	Estoy atascado · paquete de diagnóstico
 647	¿No se instala, nada funciona o un error que no entiendes? Crea un paquete de diagnóstico y compártelo con quien te ayude (o adjúntalo a una issue de GitHub). Verás su contenido antes de crearlo; claves, tokens, correos y el contenido de tus mensajes se eliminan primero.
 648	Arrastra para cambiar el ancho; toca dos veces para restablecer
@@ -694,7 +694,7 @@
 694	Método de compresión no compatible: {name}
 695	No hay sesiones para exportar
 696	Falta manifest.json: no es un paquete de sesiones
-697	No es un paquete de sesiones de cccodroid
+697	No es un paquete de sesiones de Aure Code
 698	(La conversación anterior se compactó en un resumen)
 699	El kit de desarrollo no está instalado del todo (o se instaló desde un archivo local sin versión identificable), así que no se pueden instalar componentes
 700	No existe ese componente
@@ -971,7 +971,7 @@
 971	Pantalla encendida
 972	App en primer plano
 973	El registro acaba de empezar (una muestra cada 5 minutos). Vuelve dentro de un rato.
-974	Esta versión no tiene capa nativa: solo se registra el tiempo de CPU (nivel de batería, pantalla y primer plano requieren cccodroid).
+974	Esta versión no tiene capa nativa: solo se registra el tiempo de CPU (nivel de batería, pantalla y primer plano requieren Aure Code).
 975	Batería {p}
 976	Cargando
 977	Con batería
@@ -1048,7 +1048,7 @@
 1048	No se encontró «{q}» en los mensajes cargados
 1049	Instalar desde un archivo de kit ya descargado
 1050	Archivo local…
-1051	¿Instalar el kit de desarrollo desde un archivo local?\n\nElige un devkit-cc.codroid.tar.gz (o .tar); puedes descargarlo de la página de versiones de GitHub o de cccodroid.net. Se compara con las versiones publicadas antes de instalar; el servicio se pausa 1–2 minutos durante la instalación.\nLo que instalaste en el kit con pip / npm -g se conserva.
+1051	¿Instalar el kit de desarrollo desde un archivo local?\n\nElige un devkit-cc.codtest.tar.gz (o .tar); puedes descargarlo de la página de versiones de GitHub o de cccodroid.net. Se compara con las versiones publicadas antes de instalar; el servicio se pausa 1–2 minutos durante la instalación.\nLo que instalaste en el kit con pip / npm -g se conserva.
 1052	Registro de comandos privilegiados
 1053	Todavía no se ha ejecutado ningún comando con priv
 1054	Últimas {n} entradas (las más recientes primero). Solo se guardan en este dispositivo; nunca se suben.
@@ -1126,7 +1126,7 @@
 1126	Piensa primero
 1127	Orientado a código
 1128	Grande
-1129	Los modelos se guardan en /sdcard/cccodroid/models; úsalos en Ajustes → Servicio de modelos → Modelo en el dispositivo. Memoria del dispositivo: {ram} GB. Todos en cuantización Q4_K_M; en un móvil lo práctico es 1–4B, por encima de 6B va muy lento.
+1129	Los modelos se guardan en /sdcard/AureCode/models; úsalos en Ajustes → Servicio de modelos → Modelo en el dispositivo. Memoria del dispositivo: {ram} GB. Todos en cuantización Q4_K_M; en un móvil lo práctico es 1–4B, por encima de 6B va muy lento.
 1130	{n} descargado(s)
 1131	¿No está en la lista? Pega el enlace de descarga de un archivo .gguf (HuggingFace, ModelScope, etc.). No se verifica la suma de comprobación, solo la cabecera del archivo.
 1132	{name} tiene unos {p}B parámetros ({size}). Irá muy lento en un móvil y puede que no quepa en memoria. ¿Descargar de todos modos?
@@ -1330,7 +1330,7 @@
 1330	Ocultar código QR
 1331	Código QR del grupo de QQ
 1332	¿Dudas o ideas? Pásate a charlar. Para errores, usa Ajustes → Informar en GitHub: el dispositivo y el autodiagnóstico se rellenan solos y el informe no se pierde en el chat.
-1333	cccodroid lo mantiene una sola persona y necesita ayuda: correcciones de traducción, informes de dispositivos, recetas de componentes, documentación y código son bienvenidos, y puedes ayudar sin programar. La guía de contribución del repositorio explica cómo.
+1333	Aure Code lo mantiene una sola persona y necesita ayuda: correcciones de traducción, informes de dispositivos, recetas de componentes, documentación y código son bienvenidos, y puedes ayudar sin programar. La guía de contribución del repositorio explica cómo.
 1334	Debates
 1335	Informar de un problema
 1336	Contribuir
@@ -1574,7 +1574,7 @@
 1574	Aún no hay registros este mes
 1575	CPU de la app
 1576	La batería es cuánto bajó todo el dispositivo hoy; la CPU es el tiempo que esta app (incluidos Claude y sus comandos) trabajó realmente.
-1577	Esta versión no tiene capa nativa: solo registra tiempo de CPU (batería y pantalla requieren cccodroid).
+1577	Esta versión no tiene capa nativa: solo registra tiempo de CPU (batería y pantalla requieren Aure Code).
 1578	Mensajes
 1579	Turnos de respuesta
 1580	Tokens de entrada
@@ -2314,7 +2314,7 @@
 2314	Muy grande
 2315	Para que otras apps no puedan suplantar el servicio de vinculación, escribe el código junto con el puerto: es el número tras los dos puntos en «Dirección IP y puerto» del cuadro, p. ej. {0}
 2316	Escribe el código y el puerto juntos, p. ej. {0} (el puerto está en el cuadro)
-2317	La primera vez hay que vincular: en los Ajustes que se abrieron, ve a Depuración inalámbrica → actívala → Vincular dispositivo con código. Una notificación de cccodroid queda fija arriba; toca Introducir código y escribe el código de 6 dígitos junto con el puerto que muestra el cuadro, p. ej. 123456 37285 (o escríbelos aquí)
+2317	La primera vez hay que vincular: en los Ajustes que se abrieron, ve a Depuración inalámbrica → actívala → Vincular dispositivo con código. Una notificación de Aure Code queda fija arriba; toca Introducir código y escribe el código de 6 dígitos junto con el puerto que muestra el cuadro, p. ej. 123456 37285 (o escríbelos aquí)
 2318	Puerto (del cuadro)
 2319	Escribe también el puerto del cuadro (el número tras los dos puntos)
 2320	Confirmar acciones sensibles
@@ -2577,7 +2577,7 @@
 2577	de los ajustes del proveedor
 2578	También sirve en otras conversaciones: toca la etiqueta del modelo bajo el cuadro de texto y elígelo en la fila de proveedores.
 2579	Rellena la dirección, la clave y el modelo y listo; la ventana de contexto es opcional.
-2580	Crear un paquete de diagnóstico y enviarlo con el menú de compartir del sistema.\n\nIncluye:\n· Versión y dispositivo: cccodroid / versión de Android, modelo, chip, espacio libre\n· Kit de desarrollo: qué versión está instalada, estado de actualizaciones y autocomprobación\n· Registros recientes: registro del sistema de la app, final del registro de la pasarela\n· Registro de reparaciones: instalaciones, comprobaciones y reparaciones, y si funcionaron\n· Red: si hay una VPN activa y si la app puede llegar a algunas fuentes de descarga (solo resultados)\n\nEliminado:\n· Claves, tokens, credenciales de inicio de sesión, correos\n· El contenido de tus mensajes a Claude\n· Las conversaciones no se incluyen\n\n¿Continuar?
+2580	Crear un paquete de diagnóstico y enviarlo con el menú de compartir del sistema.\n\nIncluye:\n· Versión y dispositivo: Aure Code / versión de Android, modelo, chip, espacio libre\n· Kit de desarrollo: qué versión está instalada, estado de actualizaciones y autocomprobación\n· Registros recientes: registro del sistema de la app, final del registro de la pasarela\n· Registro de reparaciones: instalaciones, comprobaciones y reparaciones, y si funcionaron\n· Red: si hay una VPN activa y si la app puede llegar a algunas fuentes de descarga (solo resultados)\n\nEliminado:\n· Claves, tokens, credenciales de inicio de sesión, correos\n· El contenido de tus mensajes a Claude\n· Las conversaciones no se incluyen\n\n¿Continuar?
 2581	Lista de modelos
 2582	Contexto {used} · capacidad desconocida
 2583	Mostrar {n} filas más ({total} en total)

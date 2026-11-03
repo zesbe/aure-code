@@ -28,7 +28,7 @@ test("派出、孙代理层级、交代落盘", () => {
   // 交代用 Agent 工具调用里的完整 prompt
   assert.match(fs.readFileSync(sp[0].file, "utf8"), /你的名字是 alpha/);
   assert.match(sp[1].file, /\/02-beta_[^/]*\/brief\.md$/, sp[1].file);
-  assert.ok(fs.existsSync(path.join(cwd, ".cccodroid", ".gitignore")));
+  assert.ok(fs.existsSync(path.join(cwd, ".aurecode", ".gitignore")));
   assert.equal(readAgentIndex(cwd, run.sessionId).length, out.length);
 });
 
@@ -102,7 +102,7 @@ test("共享存储上的项目：联络簿改放 home 私有目录", () => {
   assert.equal(onShared("/sdcard/proj"), true);
   assert.equal(onShared("/storage/emulated/0/proj"), true);
   assert.equal(onShared(process.env.CCAPP_TMP), false);
-  assert.ok(agentsDir("/sdcard/proj", "abcdef0123").startsWith(path.join(process.env.CCAPP_HOME, ".cccodroid", "agents") + path.sep));
+  assert.ok(agentsDir("/sdcard/proj", "abcdef0123").startsWith(path.join(process.env.CCAPP_HOME, ".aurecode", "agents") + path.sep));
   assert.ok(agentsDir("/sdcard/proj", "abcdef0123").endsWith(path.sep + "abcdef01"));
-  assert.equal(agentsDir("/data/x/proj", "abcdef0123"), path.join("/data/x/proj", ".cccodroid", "agents", "abcdef01"));
+  assert.equal(agentsDir("/data/x/proj", "abcdef0123"), path.join("/data/x/proj", ".aurecode", "agents", "abcdef01"));
 });

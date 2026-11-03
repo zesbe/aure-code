@@ -151,7 +151,7 @@
   // ── 头像与昵称：只存本机。没设昵称时用登录邮箱 @ 前面那段，再没有就叫 cccodroid ──
   const PROF_KEY = "cc.profile";
   const profile = () => { try { return JSON.parse(localStorage.getItem(PROF_KEY)) || {}; } catch { return {}; } };
-  const profName = () => profile().name || (acctEmail ? acctEmail.split("@")[0] : "") || "cccodroid";
+  const profName = () => profile().name || (acctEmail ? acctEmail.split("@")[0] : "") || "Aure Code";
   function paintAv(el, p) {
     p = p || profile();
     const av = typeof p.av === "string" && /^data:image\/[a-z+.-]+;base64,[A-Za-z0-9+\/=]+$/.test(p.av) ? p.av : "";   // 只认本机存的 data: 图片

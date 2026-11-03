@@ -48,11 +48,11 @@ function jsonSnapshot(file, max = 4096) {
 }
 
 function registryDirectory() {
-  // HOME 是宿主指定的信任根。逐级固定目录 fd，既不跟 .cccodroid/services 的链接，
+  // HOME 是宿主指定的信任根。逐级固定目录 fd，既不跟 .aurecode/services 的链接，
   // 也不让并发改名把 unlink 引到别处；最后的注册链接只会被 unlink，绝不跟随。
   let fd = fs.openSync(CFG.home, fs.constants.O_RDONLY | fs.constants.O_DIRECTORY);
   try {
-    for (const name of [".cccodroid", "services"]) {
+    for (const name of [".aurecode", "services"]) {
       const next = fs.openSync(`/proc/self/fd/${fd}/${name}`,
         fs.constants.O_RDONLY | fs.constants.O_DIRECTORY | fs.constants.O_NOFOLLOW);
       fs.closeSync(fd);

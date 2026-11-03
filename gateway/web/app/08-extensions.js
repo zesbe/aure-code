@@ -423,7 +423,7 @@
     const fams = [];
     for (const m of r.items || []) if (!m.custom && !fams.includes(m.fam)) fams.push(m.fam);
     const custom = (r.items || []).filter((m) => m.custom);
-    llmDl.html = '<div class="tiny dim">' + t("模型放在 /sdcard/cccodroid/models，下好后到 设置 → 模型服务 → 端侧小模型 使用。本机内存 {ram} GB。都是 Q4_K_M 量化；手机上 1–4B 比较实用，超过 6B 会很慢。", { ram: r.ram || "?" }) + "</div>" +
+    llmDl.html = '<div class="tiny dim">' + t("模型放在 /sdcard/AureCode/models，下好后到 设置 → 模型服务 → 端侧小模型 使用。本机内存 {ram} GB。都是 Q4_K_M 量化；手机上 1–4B 比较实用，超过 6B 会很慢。", { ram: r.ram || "?" }) + "</div>" +
       (r.err ? '<div class="tiny err">' + esc(r.err) + "</div>" : "") +
       fams.map((f) => {
         const list = r.items.filter((m) => !m.custom && m.fam === f);

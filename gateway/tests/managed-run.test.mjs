@@ -12,7 +12,7 @@ process.env.ANTHROPIC_API_KEY = "fixture-only-do-not-forward";
 process.env.ANTHROPIC_AUTH_TOKEN = "fixture-only-do-not-forward";
 const home = process.env.CCAPP_HOME, prefix = process.env.CCAPP_PREFIX;
 const root = fs.mkdtempSync(path.join(process.env.CCAPP_WORKSPACE, "managed-run-"));
-const reg = path.join(home, ".cccodroid/services/openai-bridge.json");
+const reg = path.join(home, ".aurecode/services/openai-bridge.json");
 const record = path.join(path.dirname(prefix), "components/openai-bridge.json");
 const component = path.join(prefix, "lib/openai-bridge/component.cjs");
 const providerFile = path.join(home, "ccapp-providers.json");
@@ -138,10 +138,10 @@ test("两个真实 run 共享 ensure，停止其中一个不取消另一个", as
 });
 
 const guiTarget = path.join(home, ".local/share/ccr-bridge-kit");
-const guiState = path.join(home, ".cccodroid/services/openai-bridge-app.json");
+const guiState = path.join(home, ".aurecode/services/openai-bridge-app.json");
 const guiSource = `const fs=require('node:fs'),path=require('node:path');
 const target=path.join(process.env.HOME,'.local/share/ccr-bridge-kit'),command=process.argv[2];
-const endpoint=${JSON.stringify(endpoint)},registration=path.join(process.env.HOME,'.cccodroid/services/openai-bridge.json');
+const endpoint=${JSON.stringify(endpoint)},registration=path.join(process.env.HOME,'.aurecode/services/openai-bridge.json');
 fs.appendFileSync(path.join(target,'calls'),command+'\\n');
 const view=(model='fixture-model',endpoint='https://fixture-upstream.example.invalid/v1/chat/completions')=>({schema:1,id:'openai-bridge',configured:true,hasKey:true,localReady:true,model,endpoint});
 if(command==='ensure')console.log(JSON.stringify({schema:1,id:'openai-bridge',ready:true,endpoint,instanceId:JSON.parse(fs.readFileSync(registration,'utf8')).instanceId}));

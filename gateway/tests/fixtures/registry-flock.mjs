@@ -64,7 +64,7 @@ a=""; for x in "$@"; do a="$a\${a:+,}\\"$x\\""; done
 printf '{"args":[%s],"mode":"%s","lock":"%s","regular":%s}\\n' "$a" "$mode" "$lock" "$reg" >> "$t.fixture.calls"
 # 照 toybox 的可移植写法：只认 -n 3，故意拒 util-linux 才有的 -w
 { [ $# -eq 2 ] && [ "$1" = -n ] && [ "$2" = 3 ]; } || exit 64
-{ [ "$reg" = true ] && [ "$lock" = "$HOME/.cccodroid/services/openai-bridge.lock" ]; } || exit 65
+{ [ "$reg" = true ] && [ "$lock" = "$HOME/.aurecode/services/openai-bridge.lock" ]; } || exit 65
 [ "$mode" = busy ] && exit 1
 [ "$mode" = missing-after-first-lock ] && rm -f "$t"
 exit 0

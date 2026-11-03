@@ -13,4 +13,4 @@ case "$CCAPP_KEY_FILE" in
   *) [ -r "$CCAPP_KEY_FILE" ] && set -- --settings "{\"apiKeyHelper\":\"cat '$CCAPP_KEY_FILE'\"}" "$@" ;;
 esac
 exec "${CCAPP_LD:-$PREFIX/glibc/lib/ld-linux-aarch64.so.1}" --library-path "$PREFIX/glibc/lib" ${PRE:+--preload "$PRE"} \
-  "$HOME/.local/share/cccodroid/claude/current/claude" "$@"
+  "$HOME/.local/share/aurecode/claude/current/claude" "$@"

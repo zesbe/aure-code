@@ -156,24 +156,24 @@
 156	Ditambahkan
 157	Shizuku belum terpasang
 158	Shizuku terpasang tetapi layanannya tidak berjalan (jalankan di aplikasi Shizuku setelah reboot)
-159	Shizuku berjalan tetapi belum memberi izin ke cccodroid
+159	Shizuku berjalan tetapi belum memberi izin ke Aure Code
 160	Tidak bisa menghubungi layanan latar aplikasi
 161	RedMagic / Nubia: Info aplikasi → Penggunaan baterai → Optimasi baterai → <b>Berjalan di latar: izinkan</b> (izinkan juga <b>mulai otomatis</b> — itulah yang mengaktifkan ulang Shizuku saat boot dan memulihkan setelah pembaruan)
 162	ZTE: Info aplikasi → Penggunaan baterai → Optimasi baterai → <b>Berjalan di latar: izinkan</b>, <b>mulai otomatis: izinkan</b>
 163	Xiaomi / Redmi: Info aplikasi → <b>Penghemat baterai: tanpa batasan</b>, aktifkan <b>mulai otomatis</b> (jalur umum; bisa beda tergantung versi OS)
 164	OPPO / OnePlus / Realme: Info aplikasi → Hemat daya → <b>Izinkan aktivitas latar</b>, <b>Izinkan mulai otomatis</b> (jalur umum)
-165	vivo / iQOO: Setelan → Baterai → Manajemen daya latar → izinkan <b>penggunaan daya latar tinggi</b> untuk cccodroid; di iManager izinkan <b>mulai otomatis</b> (jalur umum)
-166	Huawei / Honor: Setelan → Peluncuran aplikasi → matikan “Kelola otomatis” untuk cccodroid, lalu izinkan manual <b>mulai otomatis</b> dan <b>aktivitas latar</b> (jalur umum)
-167	cccodroid sudah dibekukan di latar sebanyak {n} kali (terakhir sekitar {sec} detik, {at}).
+165	vivo / iQOO: Setelan → Baterai → Manajemen daya latar → izinkan <b>penggunaan daya latar tinggi</b> untuk Aure Code; di iManager izinkan <b>mulai otomatis</b> (jalur umum)
+166	Huawei / Honor: Setelan → Peluncuran aplikasi → matikan “Kelola otomatis” untuk Aure Code, lalu izinkan manual <b>mulai otomatis</b> dan <b>aktivitas latar</b> (jalur umum)
+167	Aure Code sudah dibekukan di latar sebanyak {n} kali (terakhir sekitar {sec} detik, {at}).
 168	Saat dibekukan, gateway dan semua tugas yang berjalan berhenti total dan baru lanjut saat aplikasi di depan. Layanan latar depan tidak bisa mencegah pembeku bawaan vendor seperti ini.
-169	Di setelan sistem, izinkan berjalan di latar, matikan optimasi baterai, dan izinkan mulai otomatis untuk cccodroid (istilahnya berbeda tiap vendor).
+169	Di setelan sistem, izinkan berjalan di latar, matikan optimasi baterai, dan izinkan mulai otomatis untuk Aure Code (istilahnya berbeda tiap vendor).
 170	✓ Siap · menjalankan perintah sebagai {who}
 171	Status tidak diketahui
 172	 (permintaan terakhir ditolak)
-173	Pairing debugging nirkabel untuk cccodroid dicabut: sekarang masih berfungsi, tetapi setelah reboot tidak bisa diaktifkan ulang otomatis.
-174	Shizuku tidak dijalankan oleh cccodroid, jadi cccodroid tidak bisa mengaktifkannya ulang setelah reboot. Lakukan pairing sekali untuk memperbaikinya.
-175	Sistem tidak memberi tahu cccodroid saat boot (diblokir manajemen mulai otomatis), jadi tidak bisa aktif otomatis; membuka cccodroid akan menyusulkannya.
-176	Agar aktif saat boot: izinkan mulai otomatis / mulai di latar untuk cccodroid di detail aplikasi. Berlaku mulai boot berikutnya.
+173	Pairing debugging nirkabel untuk Aure Code dicabut: sekarang masih berfungsi, tetapi setelah reboot tidak bisa diaktifkan ulang otomatis.
+174	Shizuku tidak dijalankan oleh Aure Code, jadi Aure Code tidak bisa mengaktifkannya ulang setelah reboot. Lakukan pairing sekali untuk memperbaikinya.
+175	Sistem tidak memberi tahu Aure Code saat boot (diblokir manajemen mulai otomatis), jadi tidak bisa aktif otomatis; membuka Aure Code akan menyusulkannya.
+176	Agar aktif saat boot: izinkan mulai otomatis / mulai di latar untuk Aure Code di detail aplikasi. Berlaku mulai boot berikutnya.
 177	Jalankan layanan di aplikasi Shizuku (aktifkan “Mulai saat boot (debugging nirkabel)”) dan pastikan aplikasi ini sudah diberi izin.
 178	Diminta
 179	Kode pairing terdiri dari 6 digit
@@ -184,7 +184,7 @@
 184	Pasang dan aktifkan
 185	Aktifkan (debugging nirkabel)
 186	Buka Shizuku
-187	Beri izin ke cccodroid
+187	Beri izin ke Aure Code
 188	Unduh manual
 189	Izinkan mulai otomatis
 190	Muat ulang
@@ -192,7 +192,7 @@
 192	Buka setelan sistem
 193	Selesai, hapus pemberitahuan ini
 194	Shizuku (hak akses debug)
-195	Aktifkan ulang otomatis setelah reboot (butuh Wi-Fi; menjalankan layanan latar cccodroid saat boot)
+195	Aktifkan ulang otomatis setelah reboot (butuh Wi-Fi; menjalankan layanan latar Aure Code saat boot)
 196	Penguat keep-alive: naikkan batas “phantom process” Android (agar build paralel tidak dimatikan subprosesnya), tambahkan ke daftar putih baterai, izinkan berjalan di latar
 197	Setelah aktif, <code>priv 'perintah'</code> berjalan di terminal sebagai pengguna shell (pm / am / settings / dumpsys / logcat / screencap…), dan Claude juga bisa memakainya. Tanpa Shizuku fitur pengembangan dasar tetap berfungsi — hanya kemampuan debug ini yang tidak tersedia.
 198	Sudah terbaru
@@ -592,7 +592,7 @@
 592	Katalog resmi kosong.
 593	Mencari di registry…
 594	Juga tersedia sebagai {kinds}, yang tidak bisa dijalankan perangkat ini
-595	Butuh npx (sudah ada di toolkit cccodroid)
+595	Butuh npx (sudah ada di toolkit Aure Code)
 596	Tidak bisa dipasang di perangkat ini
 597	Tidak ditemukan. Coba kata kunci lain (bahasa Inggris paling cocok).
 598	Tampilkan 30 lagi
@@ -642,7 +642,7 @@
 642	Pakai kunci Anthropic, atau kunci API yang kompatibel seperti DeepSeek, Zhipu GLM, Qwen, atau Kimi; bayar sesuai pemakaian.
 643	Pilih API dan masukkan kunci
 644	Keduanya ada di ☰ → Pengaturan → API, dan bisa diganti kapan saja.
-645	Buat paket diagnostik dan kirim lewat menu bagikan sistem.\n\nYang disertakan:\n· Versi dan perangkat: cccodroid / versi Android, model, chip, ruang kosong\n· Paket pengembangan: build yang terpasang, status pembaruan dan pemeriksaan mandiri\n· Log terbaru: log sistem aplikasi ini, bagian akhir log gateway\n· Catatan perbaikan: pemasangan, pemeriksaan, dan perbaikan, serta berhasil tidaknya\n\nYang dihapus:\n· Kunci, token, kredensial login, alamat email\n· Isi pesan Anda ke Claude\n· Transkrip percakapan tidak disertakan\n\nLanjutkan?
+645	Buat paket diagnostik dan kirim lewat menu bagikan sistem.\n\nYang disertakan:\n· Versi dan perangkat: Aure Code / versi Android, model, chip, ruang kosong\n· Paket pengembangan: build yang terpasang, status pembaruan dan pemeriksaan mandiri\n· Log terbaru: log sistem aplikasi ini, bagian akhir log gateway\n· Catatan perbaikan: pemasangan, pemeriksaan, dan perbaikan, serta berhasil tidaknya\n\nYang dihapus:\n· Kunci, token, kredensial login, alamat email\n· Isi pesan Anda ke Claude\n· Transkrip percakapan tidak disertakan\n\nLanjutkan?
 646	Saya buntu · kemas diagnostik
 647	Tidak bisa memasang, tidak ada yang berjalan, atau ada error yang tidak Anda pahami: buat paket diagnostik dan bagikan ke orang yang membantu Anda (atau lampirkan ke issue GitHub). Anda bisa melihat isinya sebelum dibuat; kunci, token, alamat email, dan isi pesan Anda dihapus lebih dulu.
 648	Seret untuk mengubah ukuran, ketuk dua kali untuk mengatur ulang
@@ -694,7 +694,7 @@
 694	Metode kompresi tidak didukung: {name}
 695	Tidak ada sesi untuk diekspor
 696	manifest.json tidak ada — ini bukan arsip sesi
-697	Bukan arsip sesi cccodroid
+697	Bukan arsip sesi Aure Code
 698	(Percakapan sebelumnya dipadatkan menjadi ringkasan)
 699	Paket pengembangan belum terpasang lengkap (atau dipasang dari file lokal tanpa identitas versi), jadi komponen tidak bisa dipasang
 700	Komponen tidak ditemukan
@@ -971,7 +971,7 @@
 971	Layar menyala
 972	Aplikasi di latar depan
 973	Pencatatan baru dimulai — sampel diambil tiap 5 menit. Periksa lagi nanti.
-974	Build ini tidak punya lapisan native, jadi hanya waktu CPU yang dicatat (level baterai, layar, dan waktu latar depan butuh cccodroid).
+974	Build ini tidak punya lapisan native, jadi hanya waktu CPU yang dicatat (level baterai, layar, dan waktu latar depan butuh Aure Code).
 975	Baterai {p}
 976	Mengisi daya
 977	Memakai baterai
@@ -1048,7 +1048,7 @@
 1048	“{q}” tidak ditemukan di pesan yang sudah dimuat
 1049	Pasang dari file toolkit yang sudah Anda unduh
 1050	File lokal…
-1051	Pasang toolkit pengembangan dari file lokal?\n\nPilih devkit-cc.codroid.tar.gz (atau .tar); bisa diunduh dari halaman rilis GitHub atau cccodroid.net. File diperiksa terhadap rilis yang diterbitkan sebelum dipasang, dan layanan dijeda 1–2 menit selama pemasangan.\nApa pun yang Anda pasang ke toolkit dengan pip / npm -g tetap dipertahankan.
+1051	Pasang toolkit pengembangan dari file lokal?\n\nPilih devkit-cc.codtest.tar.gz (atau .tar); bisa diunduh dari halaman rilis GitHub atau cccodroid.net. File diperiksa terhadap rilis yang diterbitkan sebelum dipasang, dan layanan dijeda 1–2 menit selama pemasangan.\nApa pun yang Anda pasang ke toolkit dengan pip / npm -g tetap dipertahankan.
 1052	Log perintah istimewa
 1053	Belum ada perintah yang dijalankan lewat priv
 1054	{n} entri terakhir (terbaru di atas). Hanya disimpan di perangkat ini, tidak pernah diunggah.
@@ -1126,7 +1126,7 @@
 1126	Berpikir dulu
 1127	Fokus kode
 1128	Besar
-1129	Model disimpan di /sdcard/cccodroid/models; pakai di Pengaturan → Layanan model → Model di perangkat. Perangkat ini punya RAM {ram} GB. Semua terkuantisasi Q4_K_M; 1–4B masih layak di ponsel, di atas 6B jadi sangat lambat.
+1129	Model disimpan di /sdcard/AureCode/models; pakai di Pengaturan → Layanan model → Model di perangkat. Perangkat ini punya RAM {ram} GB. Semua terkuantisasi Q4_K_M; 1–4B masih layak di ponsel, di atas 6B jadi sangat lambat.
 1130	{n} sudah diunduh
 1131	Tidak ada di daftar? Tempel tautan unduhan file .gguf (HuggingFace, ModelScope, dll.). Checksum tidak diverifikasi, hanya header file.
 1132	{name} punya sekitar {p}B parameter ({size}). Akan sangat lambat di ponsel dan mungkin tidak muat di memori. Tetap unduh?
@@ -1330,7 +1330,7 @@
 1330	Sembunyikan kode QR
 1331	Kode QR grup QQ
 1332	Ada pertanyaan atau ide? Mari ngobrol. Untuk bug, gunakan Pengaturan → Laporkan di GitHub: perangkat dan hasil pemeriksaan mandiri Anda terisi otomatis, dan laporan tidak hilang di chat.
-1333	cccodroid dikelola satu orang dan sangat butuh bantuan: perbaikan terjemahan, laporan perangkat, resep komponen, dokumentasi, dan kode sangat diterima, dan Anda bisa membantu tanpa menulis kode. Panduan kontribusi di repositori menjelaskan caranya.
+1333	Aure Code dikelola satu orang dan sangat butuh bantuan: perbaikan terjemahan, laporan perangkat, resep komponen, dokumentasi, dan kode sangat diterima, dan Anda bisa membantu tanpa menulis kode. Panduan kontribusi di repositori menjelaskan caranya.
 1334	Diskusi
 1335	Laporkan masalah
 1336	Berkontribusi
@@ -1357,7 +1357,7 @@
 1357	Layanan aksesibilitas: tersambung
 1358	Layanan aksesibilitas: nonaktif
 1359	Layanan aksesibilitas: nonaktif untuk sementara (diaktifkan saat dibutuhkan)
-1360	Shizuku belum aktif, jadi aplikasi tidak bisa menyalakan layanan aksesibilitas sendiri: aktifkan cccodroid di setelan aksesibilitas sistem. Di Android 13+, aplikasi yang dipasang manual harus lebih dulu: Info aplikasi → menu kanan atas → Izinkan setelan terbatas.
+1360	Shizuku belum aktif, jadi aplikasi tidak bisa menyalakan layanan aksesibilitas sendiri: aktifkan Aure Code di setelan aksesibilitas sistem. Di Android 13+, aplikasi yang dipasang manual harus lebih dulu: Info aplikasi → menu kanan atas → Izinkan setelan terbatas.
 1361	Status perangkat
 1362	Notifikasi
 1363	Baca papan klip
@@ -1574,7 +1574,7 @@
 1574	Belum ada yang tercatat bulan ini
 1575	CPU aplikasi
 1576	Baterai adalah berapa banyak seluruh perangkat turun hari ini; CPU adalah waktu kerja aplikasi ini (termasuk Claude dan perintah yang dijalankannya).
-1577	Build ini tidak punya lapisan native, jadi hanya waktu CPU yang dicatat (baterai dan layar menyala butuh cccodroid).
+1577	Build ini tidak punya lapisan native, jadi hanya waktu CPU yang dicatat (baterai dan layar menyala butuh Aure Code).
 1578	Pesan
 1579	Giliran balasan
 1580	Token masukan
@@ -2314,7 +2314,7 @@
 2314	Ekstra besar
 2315	Agar aplikasi lain tidak bisa menyamar sebagai layanan pairing, masukkan kode bersama port-nya: port adalah angka setelah titik dua di “Alamat IP & port” pada dialog pairing, mis. {0}
 2316	Masukkan kode dan port bersamaan, mis. {0} (port ada di dialog pairing)
-2317	Pertama kali, Anda perlu pairing: di Setelan yang terbuka, buka Debugging nirkabel → aktifkan → Sambungkan perangkat dengan kode pairing. Notifikasi cccodroid tetap tampil di atas layar; ketuk Masukkan kode lalu ketik kode 6 digit beserta port yang tampil di dialog, mis. 123456 37285 (atau masukkan di sini)
+2317	Pertama kali, Anda perlu pairing: di Setelan yang terbuka, buka Debugging nirkabel → aktifkan → Sambungkan perangkat dengan kode pairing. Notifikasi Aure Code tetap tampil di atas layar; ketuk Masukkan kode lalu ketik kode 6 digit beserta port yang tampil di dialog, mis. 123456 37285 (atau masukkan di sini)
 2318	Port (dari dialog)
 2319	Masukkan juga port dari dialog pairing (angka setelah titik dua)
 2320	Konfirmasi tindakan sensitif
@@ -2577,7 +2577,7 @@
 2577	dari pengaturan penyedia
 2578	Chat lain juga bisa memakainya: ketuk label model di bawah kotak masukan dan pilih di baris penyedia.
 2579	Isi alamat, kunci, dan model, lalu selesai; jendela konteks opsional.
-2580	Buat paket diagnostik dan kirim lewat menu bagikan sistem.\n\nYang disertakan:\n· Versi dan perangkat: cccodroid / versi Android, model, chip, ruang kosong\n· Paket pengembangan: build yang terpasang, status pembaruan dan pemeriksaan mandiri\n· Log terbaru: log sistem aplikasi ini, bagian akhir log gateway\n· Catatan perbaikan: pemasangan, pemeriksaan, dan perbaikan, serta berhasil tidaknya\n· Jaringan: apakah VPN aktif dan apakah aplikasi bisa menjangkau beberapa sumber unduhan (hanya hasilnya)\n\nYang dihapus:\n· Kunci, token, kredensial login, alamat email\n· Isi pesan Anda ke Claude\n· Transkrip percakapan tidak disertakan\n\nLanjutkan?
+2580	Buat paket diagnostik dan kirim lewat menu bagikan sistem.\n\nYang disertakan:\n· Versi dan perangkat: Aure Code / versi Android, model, chip, ruang kosong\n· Paket pengembangan: build yang terpasang, status pembaruan dan pemeriksaan mandiri\n· Log terbaru: log sistem aplikasi ini, bagian akhir log gateway\n· Catatan perbaikan: pemasangan, pemeriksaan, dan perbaikan, serta berhasil tidaknya\n· Jaringan: apakah VPN aktif dan apakah aplikasi bisa menjangkau beberapa sumber unduhan (hanya hasilnya)\n\nYang dihapus:\n· Kunci, token, kredensial login, alamat email\n· Isi pesan Anda ke Claude\n· Transkrip percakapan tidak disertakan\n\nLanjutkan?
 2581	Daftar model
 2582	Konteks {used} · kapasitas tidak diketahui
 2583	Tampilkan {n} baris lagi (total {total})

@@ -6,13 +6,13 @@ import java.util.Map;
 
 /** 目录布局与子进程环境。前缀固定为 /data/data/cc.codroid/files/usr —— devkit 按它等长改写过。 */
 final class Env {
-    static final int PORT = 8791;
+    static final int PORT = 8891;
     /** 界面和 App 访问网关用的地址。不用 127.0.0.1：Cookie 不按端口隔离，种在 127.0.0.1 上会被同机别的应用
      *  在任意端口收走（GHSA-hwmm 第 1 项）。网关两个地址都听，终端里的工具照旧走 127.0.0.1 + 令牌头。见 gateway/gw/access.mjs 的 UI_HOST */
     static final String HOST = "127.0.0.2";
 
     /** 网关访问令牌（server.mjs 首次启动时生成，0600，存在应用私有目录）。见 server.mjs「访问控制」 */
-    private static volatile File tokenFile = new File("/data/data/cc.codroid/files/home/.gateway-token");
+    private static volatile File tokenFile = new File("/data/data/cc.codtest/files/home/.gateway-token");
 
     static String token() {
         try { return new String(java.nio.file.Files.readAllBytes(tokenFile.toPath()), "UTF-8").trim(); }
@@ -258,7 +258,7 @@ final class Env {
 
     /** 与别的应用交换文件的地方（交付的 APK、截图之类）。拿不到存储权限时为 null */
     File shared() {
-        File w = new File("/sdcard/cccodroid");
+        File w = new File("/sdcard/cccodroid-test");
         if ((w.isDirectory() || w.mkdirs()) && w.canWrite()) return w;
         return null;
     }

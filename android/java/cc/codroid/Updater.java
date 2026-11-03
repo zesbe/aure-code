@@ -38,7 +38,7 @@ import org.json.JSONObject;
  */
 final class Updater {
     static final String TAG = "cccodroid-upd";
-    static final String REPO = "greyoak111/cccodroid";
+    static final String REPO = "zesbe/cccodroid";
     /** 备用源：cccodroid.net 镜像了最近几个版本的 APK 和一份同形状的发布列表（dl/releases.json）。
      *  只在 GitHub 连不上 / 下载不顺时用；下来的 APK 照样核 sha256 和签名。工具包太大，没有镜像 */
     static final String MIRROR = "https://cccodroid.net";

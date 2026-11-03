@@ -18,7 +18,7 @@ import { privCall } from "./usage.mjs";
 // claude 以 --bare --tools "" 跑：内置只有聊天，提示只有七十 token 左右（完整模式两万 token，手机上光读提示就要好几分钟）。
 // 实测 1.5B/3B 都撑不起工具调用（命令写成文字、读目录、选错命令），所以干活不内置；
 // 想折腾的用户写 ~/.cccodroid/local-mode.json 开「自定义模式」，配法见随包装进去的 local-model-mode 技能。
-const LOCAL_MODEL_DIRS = PREFIX ? ["/sdcard/cccodroid/models", path.join(CFG.home, "models")] : [];
+const LOCAL_MODEL_DIRS = PREFIX ? ["/sdcard/cccodroid-test/models", path.join(CFG.home, "models")] : [];
 const LLAMA_IDLE_MS = 10 * 60e3;
 const LLAMA_LOG = path.join(CFG.home, ".cache", "llama-server.log");
 const llamaBin = () => PREFIX ? path.join(PREFIX, "bin", "llama-server") : "";

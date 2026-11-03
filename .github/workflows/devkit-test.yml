@@ -1,0 +1,39 @@
+# Fork 专用的测试工具包构建：目标包名 cc.codtest，只打整包（不需要 modules.json 签名，App 走「APK 钉住的版本」信任路径）。
+# 用法：Actions → devkit-test → Run workflow，target 默认 cc.codtest，tag 填 devkit-YYYY.MM.DD。
+# 产出：devkit-cc.codtest.tar.gz + devkit.lock.json 发到该 tag 的 Release。
+name: devkit-test
+
+on:
+  workflow_dispatch:
+    inputs:
+      target:
+        description: 包名（10 个字符）
+        default: cc.codtest
+      tag:
+        description: Release tag（以 devkit- 开头）
+        required: true
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 180
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: 冻结模块划分
+        run: node devkit/devkit.mjs modules --out out
+      - name: 构建整包
+        run: node devkit/devkit.mjs build --target "${{ inputs.target }}" --plan out/modules.plan.json --out out --cache cache
+      - name: 发布 Release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ inputs.tag }}
+          name: ${{ inputs.tag }}
+          files: |
+            out/devkit-${{ inputs.target }}.tar.gz
+            out/devkit.lock.json

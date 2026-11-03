@@ -111,7 +111,8 @@ if [ -n "$TARGET_SDK" ]; then
   echo "  targetSdk $TARGET_SDK"
 fi
 $AAPT2 link -o "$A/build/unsigned.apk" -I "$AJAR" \
-  --manifest "$MANIFEST" -A "$A/assets" "$A/build/res.zip"
+  --manifest "$MANIFEST" --rename-manifest-package cc.codtest \
+  -A "$A/assets" "$A/build/res.zip"
 if [ "$SIGN" = apksigner ]; then
   # SDK 的 apksigner：先把 classes.dex 塞进包、对齐，再签（最低 API 26，它自己决定出 v2 / v3）
   ( cd "$A/build" && zip -q unsigned.apk classes.dex && zip -q -0 unsigned.apk lib/arm64-v8a/libldlinux.so )

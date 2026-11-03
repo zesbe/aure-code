@@ -1,6 +1,6 @@
 {
  "tag": "devkit-2026.11.03",
- "base": "https://github.com/zesbe/cccodroid/releases/download/devkit-2026.11.03/",
+ "base": "https://github.com/zesbe/aure-code/releases/download/devkit-2026.11.03/",
  "target": "cc.codtest",
  "compat": 1,
  "gz": {

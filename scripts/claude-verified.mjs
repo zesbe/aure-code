@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 // ─────────────────────────────────────────────────────────────────────
-//  claude-verified.mjs —— 维护「哪些 Claude Code 版本在 cccodroid 上真机验过 / 哪些有问题」（经 cccodroid.net 发给所有用户）
+//  claude-verified.mjs —— 维护「哪些 Claude Code 版本在 Aure Code 上真机验过 / 哪些有问题」（经 cccodroid.net 发给所有用户）
 //
 //  node scripts/claude-verified.mjs list
 //  node scripts/claude-verified.mjs add <claude-verify-X.Y.Z.json …>     并进真机验证结果（scripts/verify-claude.mjs 在手机上跑出来的）
@@ -46,7 +46,7 @@ if (cmd === "add") {
     try { r = JSON.parse(fs.readFileSync(f, "utf8")); } catch (e) { die(`${f} 读不了：${e.message}`); }
     if (r.v !== 1 || !VER.test(r.version || "")) die(`${f} 不是 verify-claude.mjs 的结果`);
     if (!r.pass) die(`${f}：${r.version} 没通过验证（${Object.entries(r.steps).filter(([, s]) => !s.pass).map(([k, s]) => `${k}: ${s.detail}`).join("；")}），不能记成已验证`);
-    if (!r.app || !r.device?.targetSdk) die(`${f}：结果里没有 App 版本 / 安装包类型——不是在 cccodroid 的终端里跑的，不能当真机验证`);
+    if (!r.app || !r.device?.targetSdk) die(`${f}：结果里没有 App 版本 / 安装包类型——不是在 Aure Code 的终端里跑的，不能当真机验证`);
     if (r.npmOnly) console.log(`  注意：${r.version} 当时只靠 npm 签名装上，没按官方清单核过 sha256`);
     const rec = { at: r.at.slice(0, 10), device: [r.device.maker, r.device.model].filter(Boolean).join(" "), android: r.device.android, sdk: r.device.sdk,
       targetSdk: r.device.targetSdk, app: r.app, devkit: r.devkit, sha256: r.sha256 };

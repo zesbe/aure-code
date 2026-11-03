@@ -8,7 +8,7 @@
 //   · 包清单（var/lib/dpkg/info/*.list）：前缀是不是本应用；列的文件在不在
 //   · 模块（libexec/devkit/modules/<id>/）：.ok 与 MANIFEST 是否成对；FILES 里的文件在不在
 //   · 自定义组件（~/.aurecode/custom/<id>/）：程序和补的库在不在
-// 结果：GET /api/reconcile（?run=1 重核；?format=selftest 出 PASS/FAIL 行给 cccodroid-selftest），
+// 结果：GET /api/reconcile（?run=1 重核；?format=selftest 出 PASS/FAIL 行给 aurecode-selftest），
 // 本机实况里告诉 Claude，问题有变化时记一笔修复账本。
 import fs from "node:fs";
 import path from "node:path";
@@ -103,7 +103,7 @@ export function reconcileNow() {
   try { customs = fs.readdirSync(CUSTOM_DIR).filter((d) => !d.startsWith(".")); } catch {}
   for (const d of customs) {
     let r = null;
-    try { r = JSON.parse(fs.readFileSync(path.join(CUSTOM_DIR, d, "cccodroid-custom.json"), "utf8")); } catch {}
+    try { r = JSON.parse(fs.readFileSync(path.join(CUSTOM_DIR, d, "aurecode-custom.json"), "utf8")); } catch {}
     if (!r) { add("custom-rec:" + d, "warn", tz("自定义组件「{id}」的记录读不出来"), { id: d }, tz("到 扩展 → 自定义组件 删掉重新导入")); continue; }
     const app = path.join(r.dir || path.join(CUSTOM_DIR, d), "app");
     const gone = (r.entries || []).map((e) => e.rel).filter((rel) => rel && !exists(path.join(app, rel)));

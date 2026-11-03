@@ -44,7 +44,7 @@ public class Events extends BroadcastReceiver {
         String what = i.getStringExtra("what");
         int st = i.getIntExtra(PackageInstaller.EXTRA_STATUS, PackageInstaller.STATUS_FAILURE);
         String msg = i.getStringExtra(PackageInstaller.EXTRA_STATUS_MESSAGE);
-        Log.i("cccodroid", "安装结果 " + what + " status=" + st + " " + msg);
+        Log.i("aurecode", "安装结果 " + what + " status=" + st + " " + msg);
         if (st == PackageInstaller.STATUS_PENDING_USER_ACTION) {
             Intent confirm = i.getParcelableExtra(Intent.EXTRA_INTENT);
             if (confirm == null) return;
@@ -54,7 +54,7 @@ public class Events extends BroadcastReceiver {
             PendingIntent pi = PendingIntent.getActivity(c, 40, confirm, PendingIntent.FLAG_IMMUTABLE | PendingIntent.FLAG_UPDATE_CURRENT);
             c.getSystemService(NotificationManager.class).notify(40, new Notification.Builder(c, Updater.CH)
                 .setSmallIcon(android.R.drawable.stat_sys_download_done)
-                .setContentTitle("shizuku".equals(what) ? Tr.t("安装 Shizuku") : Tr.t("安装 cccodroid 新版本"))
+                .setContentTitle("shizuku".equals(what) ? Tr.t("安装 Shizuku") : Tr.t("安装 Aure Code 新版本"))
                 .setContentText(Tr.t("点此确认安装"))
                 .setContentIntent(pi).setAutoCancel(true).build());
             return;

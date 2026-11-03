@@ -36,7 +36,7 @@ import org.json.JSONObject;
  * 下一次 screen_read 换一批编号。
  */
 public class A11y extends AccessibilityService {
-    static final String TAG = "cccodroid";
+    static final String TAG = "aurecode";
     static volatile A11y self;
     private static final Object LOCK = new Object();
     private static final List<AccessibilityNodeInfo> nodes = new ArrayList<>();
@@ -92,7 +92,7 @@ public class A11y extends AccessibilityService {
     /** 打开并等它连上。返回 null = 好了；否则是说明为什么开不了 */
     static String enable(Context c, long waitMs) {
         if (self != null) return null;
-        if (!canToggle(c)) return Tr.t("无障碍没开。到 设置 → 设备工具 里打开（要先激活 Shizuku），或自己去系统的无障碍设置里打开 cccodroid");
+        if (!canToggle(c)) return Tr.t("无障碍没开。到 设置 → 设备工具 里打开（要先激活 Shizuku），或自己去系统的无障碍设置里打开 Aure Code");
         String me = component(c).flattenToString();
         android.content.ContentResolver cr = c.getContentResolver();
         String cur = Settings.Secure.getString(cr, Settings.Secure.ENABLED_ACCESSIBILITY_SERVICES);

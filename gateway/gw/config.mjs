@@ -21,7 +21,7 @@ export const CFG = {
   model: process.env.CCAPP_MODEL || "deepseek-flash",
 };
 
-// 前缀布局（cccodroid）：工具链是原生 Termux 前缀，claude 是官方原版二进制，
+// 前缀布局（Aure Code）：工具链是原生 Termux 前缀，claude 是官方原版二进制，
 // 由宿主 App 用环境变量告诉我们位置；没设就按旧布局（runtime/ 下）找。
 export const PREFIX = process.env.CCAPP_PREFIX || "";
 export const NO_BRIDGE = !!PREFIX || process.env.CCAPP_NO_BRIDGE === "1";
@@ -29,7 +29,7 @@ export const PATHS = {
   loader: process.env.CCAPP_LOADER || path.join(CFG.runtime, "glibc", "lib", "ld-linux-aarch64.so.1"),
   glibcLib: process.env.CCAPP_GLIBC_LIB || path.join(CFG.runtime, "glibc", "lib"),
   claude: process.env.CCAPP_CLAUDE || path.join(CFG.runtime, "claude"),
-  // cccodroid：给 claude 预加载的小库，把被安卓 seccomp 拦下的调用改成返回 ENOSYS
+  // Aure Code：给 claude 预加载的小库，把被安卓 seccomp 拦下的调用改成返回 ENOSYS
   // （Android 14 拦 epoll_pwait2，claude 不挂它一启动就被 SIGSYS 打死）
   preload: process.env.CCAPP_CLAUDE_PRELOAD || "",
   node: path.join(CFG.runtime, "node", "node"),

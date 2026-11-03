@@ -38,7 +38,7 @@ import rikka.shizuku.Shizuku;
 /**
  * Shizuku 一条龙：下载 → 安装 → 激活 → 授权 →（重启后）自动重新激活。
  *
- * 激活走"无线调试"（安卓 11+，不用电脑）。Shizuku 自己的做法也是这样，只是这里由 cccodroid 代劳：
+ * 激活走"无线调试"（安卓 11+，不用电脑）。Shizuku 自己的做法也是这样，只是这里由 Aure Code 代劳：
  *   1. 用户在 开发者选项 → 无线调试 → 使用配对码配对设备，弹出 6 位码；
  *      我们用 NSD 找到本机的配对服务端口（_adb-tls-pairing._tcp），用户在通知栏的输入框里填码 —— 不用来回切应用；
  *   2. 工具包里的 adb：adb pair 127.0.0.1:端口 码 → adb connect 127.0.0.1:连接端口（_adb-tls-connect._tcp）；
@@ -48,7 +48,7 @@ import rikka.shizuku.Shizuku;
  * 于是 2–4 步全自动重来（需要连着 Wi‑Fi —— 无线调试只在 Wi‑Fi 下工作）。
  */
 final class ShizukuSetup {
-    static final String TAG = "cccodroid-shz";
+    static final String TAG = "aurecode-shz";
     /** Shizuku 官方发布包的签名证书（CN=Rikka）sha256：GitHub 资产没有摘要，靠钉证书防掉包 */
     static final String PIN = "268b5590e868fb08bae7e0ac413564cd1ff88f5ccff74af9dbd0dc918e30db30";
     static final String CH = "shizuku";
@@ -165,7 +165,7 @@ final class ShizukuSetup {
                 PackageInfo p = Apk.archiveInfo(ctx, f);
                 if (p == null || !Priv.MANAGER.equals(p.packageName)) { f.delete(); throw new Exception(Tr.t("下载的不是 Shizuku 安装包")); }
                 if (!PIN.equals(Apk.signer(p))) { f.delete(); throw new Exception(Tr.t("Shizuku 安装包的签名不是官方的，拒绝安装")); }
-                set("installing", Tr.t("在系统弹窗里点「安装」（第一次需要先允许 cccodroid 安装应用）"));
+                set("installing", Tr.t("在系统弹窗里点「安装」（第一次需要先允许 Aure Code 安装应用）"));
                 Apk.install(ctx, f, "shizuku");
             } catch (Exception e) {
                 set("error", Tr.t("装 Shizuku 失败：") + e.getMessage() + Tr.t("。也可以去 https://shizuku.rikka.app/download/ 手动下载"));
@@ -264,7 +264,7 @@ final class ShizukuSetup {
         pairPort = -1;
         pairSeen.clear();
         startPairDiscovery();
-        set("pairing", Tr.t("第一次需要配对：在打开的设置里进「无线调试」→ 打开它 →「使用配对码配对设备」。屏幕顶部会一直悬着 cccodroid 的通知，点「填配对码」，把 6 位码和配对框里的端口一起填，如 123456 37285（也可以填在这里）"));
+        set("pairing", Tr.t("第一次需要配对：在打开的设置里进「无线调试」→ 打开它 →「使用配对码配对设备」。屏幕顶部会一直悬着 Aure Code 的通知，点「填配对码」，把 6 位码和配对框里的端口一起填，如 123456 37285（也可以填在这里）"));
         pairNote(Tr.t("在无线调试里点「使用配对码配对设备」，然后点下面的「填配对码」"), true);
         Intent i = new Intent(Settings.ACTION_APPLICATION_DEVELOPMENT_SETTINGS);
         Bundle b = new Bundle();

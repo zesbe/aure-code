@@ -1,6 +1,6 @@
 #!/system/bin/sh
 # ─────────────────────────────────────────────────────────────────────
-#  release.sh —— 发布 APK：建 GitHub Release（tag v<版本>）并上传 dist/cccodroid.apk
+#  release.sh —— 发布 APK：建 GitHub Release（tag v<版本>）并上传 dist/aurecode.apk
 #
 #  APK 在构建机上签名（发布钥匙不进 CI），所以 Release 也从这里建。
 #  token：fine-grained，只对本仓库有 Contents 读写，放在构建机私有目录（TOKEN），绝不进仓库。
@@ -13,9 +13,9 @@ set -e
 ROOT=$(cd "$(dirname "$0")/.." && pwd)
 TOKEN=${TOKEN:-/data/user/0/li.dsh.claudecli/files/bldtools/gh-token-cccodroid}
 REPO=greyoak111/cccodroid
-APK="$ROOT/dist/cccodroid.apk"
-# 双方案：cccodroid-36.apk（targetSdk 36）同版本一起发；没打出来就只发 28 的（旧流程）
-APK36="$ROOT/dist/cccodroid-36.apk"
+APK="$ROOT/dist/aurecode.apk"
+# 双方案：aurecode-36.apk（targetSdk 36）同版本一起发；没打出来就只发 28 的（旧流程）
+APK36="$ROOT/dist/aurecode-36.apk"
 [ -s "$TOKEN" ] || { echo "✗ 没有 token：$TOKEN"; exit 1; }
 [ -s "$APK" ] || { echo "✗ 没有 $APK，先跑 build.sh"; exit 1; }
 VER=$(sed -n 's/.*android:versionName="\([^"]*\)".*/\1/p' "$ROOT/android/AndroidManifest.xml")
@@ -52,27 +52,27 @@ const read = (p) => (p ? fs.readFileSync(p, "utf8").trim() + "\n\n" : "");
 const devkitLink = "[" + DEVKIT + "](https://github.com/" + REPO + "/releases/tag/" + DEVKIT + ")";
 const body = "**简体中文** · [English](#english)\n\n" + read(NOTES) + [
   "### 安装",
-  "下载 `cccodroid.apk` 安装（系统提示「与此版本的安卓不兼容」、装不上时，改装 `cccodroid-36.apk`）。首次打开先勾选要装的工具包模块（默认约 330 MB，全部约 700 MB，断点续传），再下载官方 Claude Code（约 275 MB）。",
+  "下载 `aurecode.apk` 安装（系统提示「与此版本的安卓不兼容」、装不上时，改装 `aurecode-36.apk`）。首次打开先勾选要装的工具包模块（默认约 330 MB，全部约 700 MB，断点续传），再下载官方 Claude Code（约 275 MB）。",
   "",
   "### 校验",
-  "- `cccodroid.apk` sha256：`" + SHA + "`",
-  ...(SHA36 ? ["- `cccodroid-36.apk`（targetSdk 36）sha256：`" + SHA36 + "`"] : []),
+  "- `aurecode.apk` sha256：`" + SHA + "`",
+  ...(SHA36 ? ["- `aurecode-36.apk`（targetSdk 36）sha256：`" + SHA36 + "`"] : []),
   "- 配套开发工具包：[" + DEVKIT + "](https://github.com/" + REPO + "/releases/tag/" + DEVKIT + ")",
   "- 源码提交：" + COMMIT,
 ].join("\n") + "\n\n---\n\n## English\n\n" + read(NOTES_EN) + [
   "### Install",
-  "Download and install `cccodroid.apk` (if Android says it isn’t compatible and won’t install it, use `cccodroid-36.apk` instead). On first launch you pick toolchain modules (about 330 MB by default, about 700 MB for all, resumable), then the official Claude Code is downloaded (about 275 MB).",
+  "Download and install `aurecode.apk` (if Android says it isn’t compatible and won’t install it, use `aurecode-36.apk` instead). On first launch you pick toolchain modules (about 330 MB by default, about 700 MB for all, resumable), then the official Claude Code is downloaded (about 275 MB).",
   "",
   "### Verification",
-  "- `cccodroid.apk` sha256: `" + SHA + "`",
-  ...(SHA36 ? ["- `cccodroid-36.apk` (targetSdk 36) sha256: `" + SHA36 + "`"] : []),
+  "- `aurecode.apk` sha256: `" + SHA + "`",
+  ...(SHA36 ? ["- `aurecode-36.apk` (targetSdk 36) sha256: `" + SHA36 + "`"] : []),
   "- Matching toolchain: " + devkitLink,
   "- Source commit: " + COMMIT,
 ].join("\n");
 let rel;
 try { rel = await api("GET", `https://api.github.com/repos/${REPO}/releases/tags/${TAG}`); console.log("  已有 Release " + TAG + "，更新附件"); }
-catch { rel = await api("POST", `https://api.github.com/repos/${REPO}/releases`, JSON.stringify({ tag_name: TAG, target_commitish: COMMIT, name: "cccodroid " + TAG, body, prerelease: TAG.includes("-") })); console.log("  已建 Release " + TAG); }
-const files = [["cccodroid.apk", APK], ...(SHA36 ? [["cccodroid-36.apk", APK36]] : [])];
+catch { rel = await api("POST", `https://api.github.com/repos/${REPO}/releases`, JSON.stringify({ tag_name: TAG, target_commitish: COMMIT, name: "Aure Code " + TAG, body, prerelease: TAG.includes("-") })); console.log("  已建 Release " + TAG); }
+const files = [["aurecode.apk", APK], ...(SHA36 ? [["aurecode-36.apk", APK36]] : [])];
 for (const [name, file] of files) {
   for (const a of rel.assets || []) if (a.name === name) await api("DELETE", a.url);
   const up = rel.upload_url.replace(/\{.*\}$/, "") + "?name=" + name;

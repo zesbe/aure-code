@@ -170,7 +170,7 @@ public final class Share extends ContentProvider {
     /** 包里有什么、去掉了什么 —— 「我卡住了」打包前给用户看的就是这份（README.txt 也放一份进包里） */
     static String contents() { return
         Tr.t("包里有：\n") +
-        Tr.t("· 版本与设备：cccodroid / Android 版本、机型、芯片、剩余空间\n") +
+        Tr.t("· 版本与设备：Aure Code / Android 版本、机型、芯片、剩余空间\n") +
         Tr.t("· 开发工具包：装的是哪一版（校验哈希）、更新与自检状态\n") +
         Tr.t("· 最近的日志：本应用的系统日志、网关日志的最后一段\n") +
         Tr.t("· 修复账本：安装、校验、修复做过哪些、成没成\n") +
@@ -191,7 +191,7 @@ public final class Share extends ContentProvider {
         File out = new File(dir, "aurecode-logs-" + stamp + ".zip");
         JSONObject parts = new JSONObject();
         try (ZipOutputStream z = new ZipOutputStream(new FileOutputStream(out))) {
-            parts.put("README.txt", put(z, "README.txt", Tr.t("cccodroid 诊断包（「我卡住了」）\n\n") + contents()));
+            parts.put("README.txt", put(z, "README.txt", Tr.t("Aure Code 诊断包（「我卡住了」）\n\n") + contents()));
             parts.put("diagnostics.txt", put(z, "diagnostics.txt", diagnostics(c, env)));
             parts.put("logcat.txt", put(z, "logcat.txt", scrub(logcat())));
             if (env.log.isFile()) parts.put("gateway.log", put(z, "gateway.log", scrub(tail(env.log, 1024 * 1024))));

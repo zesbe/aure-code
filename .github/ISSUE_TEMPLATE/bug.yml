@@ -17,7 +17,7 @@ body:
   - type: input
     id: version
     attributes:
-      label: cccodroid 版本 / Version
+      label: Aure Code 版本 / Version
       placeholder: 设置 → 更新 里能看到 / see Settings → Updates
     validations:
       required: true

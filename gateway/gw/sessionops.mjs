@@ -472,7 +472,7 @@ export async function exportSessions(ids) {
     list.push({ id, title: NAMES[id] || meta.title, renamed: !!NAMES[id], cwd: meta.cwd, mtime: fs.statSync(found.file).mtimeMs });
   }
   if (!list.length) throw new Error(tz("没有可导出的会话"));
-  entries.unshift({ name: "manifest.json", data: JSON.stringify({ format: "cccodroid-sessions", version: 1, exportedAt: Date.now(), sessions: list }, null, 1) });
+  entries.unshift({ name: "manifest.json", data: JSON.stringify({ format: "aurecode-sessions", version: 1, exportedAt: Date.now(), sessions: list }, null, 1) });
   const base = process.env.CCAPP_SHARED && fs.existsSync(process.env.CCAPP_SHARED) ? process.env.CCAPP_SHARED : CFG.home;
   const dir = path.join(base, "exports");
   fs.mkdirSync(dir, { recursive: true });
@@ -502,7 +502,8 @@ export async function importSessions(file) {
     await zipExtract(file, man, tmp, { left: 16 << 20 });
     try { manifest = JSON.parse(fs.readFileSync(tmp, "utf8")); } finally { fs.rmSync(tmp, { force: true }); }
   } catch { throw new Error(tz("缺少 manifest.json，不是会话包")); }
-  if (manifest.format !== "cccodroid-sessions") throw new Error(tz("不是 cccodroid 会话包"));
+  // 也认 cccodroid 官方版导出的包
+  if (manifest.format !== "aurecode-sessions" && manifest.format !== "cccodroid-sessions") throw new Error(tz("不是 Aure Code 会话包"));
   const ws = realWorkspace();
   const dir = path.join(PATHS.projects, projectSlug(ws));
   fs.mkdirSync(dir, { recursive: true });

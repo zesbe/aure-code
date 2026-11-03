@@ -261,7 +261,7 @@ const PRESETS = {
     ],
   },
 };
-// 端侧小模型（cccodroid）：llama.cpp 的 llama-server 自带 Anthropic Messages 端点（/v1/messages），claude 直连本机。
+// 端侧小模型（Aure Code）：llama.cpp 的 llama-server 自带 Anthropic Messages 端点（/v1/messages），claude 直连本机。
 // 模型清单就是模型目录里的 .gguf，服务由网关按需拉起，见「端侧小模型」一节
 export const LLAMA_PORT = Number(process.env.CCAPP_LLAMA_PORT) || 8811;
 // 端侧服务要密钥（审查 中9）：127.0.0.1 的端口全机共享，不设的话同机别的应用能白用算力、把 KV 缓存占满。
@@ -656,7 +656,7 @@ function loadApiKey(p) {
       if (k) return k;
     } catch {}
   }
-  // 共享区的种子只给开发端（claude-apk）用：cccodroid 从不往那里放密钥，却会在没配密钥时去读 ——
+  // 共享区的种子只给开发端（claude-apk）用：Aure Code 从不往那里放密钥，却会在没配密钥时去读 ——
   // 别的应用往那里写一把自己的 key，用户的对话就全走它的账、它在控制台看得到全部提示词（审查 中6）。
   // 显式给了 CCAPP_SEED 的照旧
   if (PREFIX && !process.env.CCAPP_SEED) return null;

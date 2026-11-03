@@ -11,7 +11,7 @@ import { BOOT, COOKIE, EMPTY_SHA, SESSION, TOKEN, UI_HOST, cookieHostOk, denyRea
 const req = (headers, local) => ({ headers, socket: { localAddress: local || (String(headers.host || "").startsWith(UI_HOST) ? UI_HOST : "127.0.0.1") } });
 const url = (p) => new URL("http://127.0.0.1:8799" + p);
 const HOST = "127.0.0.1:8799";
-// cccodroid（测试里设了 CCAPP_PREFIX）的界面走专用地址，会话 Cookie 只在这里认
+// Aure Code（测试里设了 CCAPP_PREFIX）的界面走专用地址，会话 Cookie 只在这里认
 const UIH = process.env.CCAPP_PREFIX ? UI_HOST + ":8799" : HOST;
 
 test("令牌：生成在 CCAPP_HOME 里，64 位十六进制、文件只有自己能读", () => {
@@ -60,7 +60,7 @@ test("/api/ 认请求头 X-CC-Token 或带端口的 Cookie", () => {
   assert.equal(denyReason(req({ host: HOST, "x-cc-token": "x".repeat(64) }), url("/api/state")), 403);
 });
 
-test("cccodroid 里 Cookie 是按这次启动派生的会话值，令牌本身当 Cookie 不认（审查 S1）", () => {
+test("Aure Code 里 Cookie 是按这次启动派生的会话值，令牌本身当 Cookie 不认（审查 S1）", () => {
   const mac = (x) => crypto.createHmac("sha256", TOKEN).update(x).digest("hex");
   if (process.env.CCAPP_PREFIX) {
     assert.equal(SESSION, mac("cookie:" + BOOT));
@@ -77,7 +77,7 @@ test("证明：回启动号和 HMAC，随机数不合格式就不答", () => {
   for (const bad of ["", "abc", "g".repeat(32), "a".repeat(129), null]) assert.equal(proof(bad), null);
 });
 
-test("界面专用地址（GHSA-hwmm 1）：cccodroid 里 Cookie 只在 127.0.0.2 上认，127.0.0.1 / localhost 上来的不认", () => {
+test("界面专用地址（GHSA-hwmm 1）：Aure Code 里 Cookie 只在 127.0.0.2 上认，127.0.0.1 / localhost 上来的不认", () => {
   assert.equal(denyReason(req({ host: UI_HOST + ":8799" }), url("/")), null);           // 这个地址本身放行
   assert.equal(denyReason(req({ host: UI_HOST + ":1234" }), url("/")), 421);
   if (!process.env.CCAPP_PREFIX) return;

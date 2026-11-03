@@ -50,7 +50,7 @@ public class BrowserActivity extends Activity implements BrowserPane.Host {
 
     @Override public void onPaneClose() { finish(); }
     // 单独开的浏览器没有对话界面可交：提示一下
-    @Override public void onPicked(String json) { android.widget.Toast.makeText(this, Tr.t("只有在 cccodroid 里打开的浏览器窗格能把选中的发给 Claude"), android.widget.Toast.LENGTH_SHORT).show(); }
+    @Override public void onPicked(String json) { android.widget.Toast.makeText(this, Tr.t("只有在 Aure Code 里打开的浏览器窗格能把选中的发给 Claude"), android.widget.Toast.LENGTH_SHORT).show(); }
 
     @Override protected void onSaveInstanceState(Bundle o) { super.onSaveInstanceState(o); pane.saveState(o); }
 

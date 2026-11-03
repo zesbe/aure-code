@@ -14,7 +14,7 @@
   工具包更新后，之前用 pkg 装的包会提示 `pkg restore` 装回。Python / Node 的库照常用 pip / npm 装（有 `python-<库>` 的预编译包时优先 pkg，省去现场编译）。
 - **Office 文档转换**：`pkg install libreoffice`（约 190 MB）后可无头转换，如 `soffice --headless --convert-to pdf --outdir <目录> <文件>`（docx/xlsx/pptx/doc/odt 互转同理）。没有 X11，别开图形界面。用户在查看器里看 PPT 时装过的话这里已经有了。
 
-## 可用工具（cccodroid-selftest 逐项实测）
+## 可用工具（aurecode-selftest 逐项实测）
 
 - **C/C++**：`cc`/`c++`/`clang`/`clang++` 21（`gcc` 也指向 clang），lld，C++20 可用。**只能动态链接**：没有静态 libc，别用 `-static`。产物由 `/system/bin/linker64` 加载，库在 `$PREFIX/lib`、头文件在 `$PREFIX/include`。
 - **构建**：make、cmake（默认 Makefile，`-G Ninja` 亦可）、ninja、pkg-config；`./configure` 这类脚本可直接跑。
@@ -78,7 +78,7 @@ priv 'sh /sdcard/AureCode/脚本.sh'      # 再执行
 
 ## 出问题时
 
-工具表现异常先跑 `cccodroid-selftest -q`（只列失败项），再据此判断，别凭印象认定"安卓上不行"。
+工具表现异常先跑 `aurecode-selftest -q`（只列失败项），再据此判断，别凭印象认定"安卓上不行"。
 
 **关于 `SIGSYS: bad system call`**：安卓的 seccomp 会拦一批比 targetSdk 新的系统调用
 （`clone3`、`faccessat2`、`openat2`、`epoll_pwait2`，以及 `mount` / `umount2` / `reboot` / `kcmp` 这类），

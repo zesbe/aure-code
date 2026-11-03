@@ -24,7 +24,7 @@ if (!curl) { console.error("找不到 curl"); process.exit(1); }
 const writable = (d) => { try { fs.accessSync(d, fs.constants.W_OK); return true; } catch { return false; } };
 const base = process.env.TMPDIR || (writable(os.tmpdir()) ? os.tmpdir() : path.join(os.homedir(), ".cache"));
 fs.mkdirSync(base, { recursive: true });
-const tmp = fs.mkdtempSync(path.join(base, "cccodroid-test-"));
+const tmp = fs.mkdtempSync(path.join(base, "aurecode-test-"));
 const home = path.join(tmp, "home"), prefix = path.join(tmp, "usr"), workspace = path.join(tmp, "workspace");
 fs.mkdirSync(home, { recursive: true });
 fs.mkdirSync(workspace, { recursive: true });
@@ -32,7 +32,7 @@ fs.mkdirSync(path.join(prefix, "bin"), { recursive: true });
 fs.symlinkSync(curl, path.join(prefix, "bin", "curl"));
 installRegistryFlock(prefix, home, tmp); // 只写本轮假 PREFIX；锁协议测试不依赖开发机 util-linux / toybox。
 
-// 在 cccodroid 里跑时环境里有二十几个 CCAPP_* 指着真数据：一个不留全删，再只设测试要的（审查 L18）。
+// 在 Aure Code 里跑时环境里有二十几个 CCAPP_* 指着真数据：一个不留全删，再只设测试要的（审查 L18）。
 // 网关给 claude 注入的 CLAUDE_CODE_* / ANTHROPIC_*（上下文窗口、接口地址…）也会漏进被测的 claudeEnv，一并去掉（11-01 独立审查）
 const clean = Object.fromEntries(Object.entries(process.env).filter(([k]) => !/^(CCAPP_|CLAUDE_CODE_|ANTHROPIC_)/.test(k)));
 const env = { ...clean, CCAPP_TEST: "1", CCAPP_HOME: home, HOME: home, CCAPP_WORKSPACE: workspace, CCAPP_PREFIX: prefix, CCAPP_PORT: "8799", CCAPP_LOG: path.join(tmp, "gateway.log"), CCAPP_TMP: tmp };

@@ -54,7 +54,7 @@ test("结束：汇报落盘，两个都完了才汇总，给主会话留话（�
   const sm = out.filter((e) => e.k === "summary");
   assert.equal(sm.length, 1);
   const note = takeAgentNote(cwd, run.sessionId);
-  assert.match(note, /^<cccodroid-agents>/);
+  assert.match(note, /^<aurecode-agents>/);
   assert.ok(note.includes(sm[0].file));
   assert.ok(note.includes("report.md"));
   assert.equal(takeAgentNote(cwd, run.sessionId), "");

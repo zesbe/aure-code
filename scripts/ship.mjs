@@ -4,7 +4,7 @@
 //
 //  用法:  node scripts/ship.mjs <版本> [--title "一句话"]       本地走到核包为止（改版本号、提交、打包），不碰网络
 //         node scripts/ship.mjs <版本> --publish                 接着推送、建 Release、下载回来核哈希、同步官网并清 CF 直链缓存
-//         node scripts/ship.mjs <版本> … --install               最后用 priv 覆盖安装到本机（会关掉正在用的 cccodroid）
+//         node scripts/ship.mjs <版本> … --install               最后用 priv 覆盖安装到本机（会关掉正在用的 Aure Code）
 //         node scripts/ship.mjs <版本> --from <步骤>             从某步重来（之前的步骤视为已完成）
 //         node scripts/ship.mjs <版本> --check                   只对账：清单、包、提交、Release 逐项核一遍，不改东西
 //         node scripts/ship.mjs dev [--install]                  只打包当前工作树（不改版本号、不提交），给装机自测用
@@ -26,9 +26,9 @@ const REPO = "greyoak111/cccodroid";
 const F = "/data/user/0/li.dsh.claudecli/files", P = `${F}/toolchain/dshtc/prefix`;
 const MANI = path.join(ROOT, "android/AndroidManifest.xml");
 const WN = path.join(ROOT, "android/assets/whatsnew");
-const APK = path.join(ROOT, "dist/cccodroid.apk");
-// 双方案：cccodroid.apk 是 targetSdk 28（默认、兼容最好），cccodroid-36.apk 给系统不让装 28 的机器。同版本号、同钥匙，互相覆盖安装
-const APK36 = path.join(ROOT, "dist/cccodroid-36.apk");
+const APK = path.join(ROOT, "dist/aurecode.apk");
+// 双方案：aurecode.apk 是 targetSdk 28（默认、兼容最好），aurecode-36.apk 给系统不让装 28 的机器。同版本号、同钥匙，互相覆盖安装
+const APK36 = path.join(ROOT, "dist/aurecode-36.apk");
 const STEPS = ["preflight", "bump", "changelog", "commit", "build", "verify", "push", "release", "check", "site", "install"];
 const PUBLIC = ["push", "release", "check", "site"];
 // 官网 cccodroid.net：VPS 上的 cccodroid-site.service 从 GitHub 生成静态站（含 /dl/ 直链），前面是 Cloudflare
@@ -83,7 +83,7 @@ const S = {
     // sh() 会 trim，第一行开头的空格没了，不能按固定 3 个字符切路径
     const dirty = git("status", "--porcelain").split("\n").filter(Boolean).map((l) => l.replace(/^[ MADRCUT?!]{1,2} /, "")).filter((f) => !allowed(f));
     if (dirty.length) throw new Error("工作区还有别的没提交的改动，先提交或收起：\n  " + dirty.join("\n  "));
-    for (const f of [`${F}/bldtools/cccodroid-release.json`, `${F}/bldtools/gh-token-cccodroid`]) if (!fs.existsSync(f)) throw new Error(`缺 ${f}`);
+    for (const f of [`${F}/bldtools/aurecode-release.json`, `${F}/bldtools/gh-token-cccodroid`]) if (!fs.existsSync(f)) throw new Error(`缺 ${f}`);
     run("node", [path.join(ROOT, "scripts/test.mjs")], { cwd: ROOT });      // 网关测试不过就不发
     console.log(`  当前 ${cur.name}（${cur.code}）→ ${VER}`);
   },
@@ -115,7 +115,7 @@ const S = {
     console.log("  " + git("log", "--oneline", "-1"));
   },
   build() {
-    // 先出 36 的、改名放一边，再出 28 的（build.sh 的产物固定叫 cccodroid.apk）。dev 只出 28，省一半时间
+    // 先出 36 的、改名放一边，再出 28 的（build.sh 的产物固定叫 aurecode.apk）。dev 只出 28，省一半时间
     fs.rmSync(APK36, { force: true });
     if (!DEV) {
       run("sh", [path.join(ROOT, "scripts/build.sh")], { cwd: ROOT, env: { ...process.env, TARGET_SDK: "36" } });
@@ -128,11 +128,11 @@ const S = {
     if (b.pkg !== "cc.codroid") throw new Error(`包名是 ${b.pkg}`);
     if (b.code !== m.code || b.name !== m.name) throw new Error(`包里是 ${b.name}（${b.code}），清单是 ${m.name}（${m.code}）`);
     if (!DEV && b.name !== VER) throw new Error(`包里版本 ${b.name}，要发的是 ${VER}`);
-    if (b.sdk !== 28) throw new Error(`cccodroid.apk 的 targetSdk 是 ${b.sdk}，应为 28`);
+    if (b.sdk !== 28) throw new Error(`aurecode.apk 的 targetSdk 是 ${b.sdk}，应为 28`);
     state.sha = shaFile(APK); state.size = fs.statSync(APK).size;
     if (fs.readFileSync(APK).length !== state.size) throw new Error("APK 的 stat 大小和实际不一致（FUSE），等几秒重跑 verify");
     if (!DEV) {
-      if (!fs.existsSync(APK36)) throw new Error("没有 dist/cccodroid-36.apk，重打：--from build");
+      if (!fs.existsSync(APK36)) throw new Error("没有 dist/aurecode-36.apk，重打：--from build");
       const c = badging(APK36);
       if (c.pkg !== b.pkg || c.code !== b.code || c.name !== b.name || c.sdk !== 36) throw new Error(`36 包不对：${c.pkg} ${c.name}（${c.code}）targetSdk ${c.sdk}`);
       state.sha36 = shaFile(APK36); state.size36 = fs.statSync(APK36).size;
@@ -152,7 +152,7 @@ const S = {
   async check() {
     const tag = "v" + VER;
     const rel = JSON.parse(sh("gh", ["api", `repos/${REPO}/releases/tags/${tag}`]));
-    for (const [name, size, sha] of [["cccodroid.apk", state.size, state.sha], ["cccodroid-36.apk", state.size36, state.sha36]]) {
+    for (const [name, size, sha] of [["aurecode.apk", state.size, state.sha], ["aurecode-36.apk", state.size36, state.sha36]]) {
       const a = (rel.assets || []).find((x) => x.name === name);
       if (!a) throw new Error(`Release 上没有 ${name}`);
       if (a.size !== size) throw new Error(`Release 上的 ${name} ${a.size} 字节，本地 ${size}`);

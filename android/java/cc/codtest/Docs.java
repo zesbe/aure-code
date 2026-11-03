@@ -20,7 +20,7 @@ import java.util.Locale;
 
 /**
  * 把应用私有目录借给别的文件管理器：MT 管理器、系统「文件」这些应用经系统文件访问框架
- * （SAF）主动选一次「cccodroid」，就能浏览、复制、改名、删除 workspace/ 里的东西。
+ * （SAF）主动选一次「Aure Code」，就能浏览、复制、改名、删除 workspace/ 里的东西。
  *
  * 为什么不直接 chmod：安卓上应用私有目录是 0700 加上 SELinux 的 untrusted_app 上下文，
  * 别的应用就算拿到路径也读不了，改权限没用。非 root 的唯一正路就是 DocumentsProvider。

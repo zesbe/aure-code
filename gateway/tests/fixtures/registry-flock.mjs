@@ -7,7 +7,7 @@ import childProcess from "node:child_process";
 import { syncBuiltinESMExports } from "node:module";
 
 function locations(prefix, home, temporary) {
-  assert.ok(temporary && path.basename(temporary).startsWith("cccodroid-test-"), "registry-flock fixture requires scripts/test.mjs temporary root");
+  assert.ok(temporary && path.basename(temporary).startsWith("aurecode-test-"), "registry-flock fixture requires scripts/test.mjs temporary root");
   assert.equal(prefix, path.join(temporary, "usr")); assert.equal(home, path.join(temporary, "home"));
   assert.equal(fs.realpathSync(prefix), prefix); assert.equal(fs.realpathSync(home), home);
   const tool = path.join(prefix, "bin/flock");

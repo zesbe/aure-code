@@ -186,18 +186,12 @@
   new ResizeObserver(() => document.documentElement.style.setProperty("--tbh", $("topbar").getBoundingClientRect().height + "px")).observe($("topbar"), { box: "border-box" });   // 外壳注入 --safe-t 只改内边距，内容盒不变；不看边框盒就漏掉，页面层会压住顶栏
 
 
-  // ── 交流群与参与：帮助页最后一节、更新说明卡片底部共用。群号为主，二维码点开才显示 ──
-  const COMMUNITY = { qq: "1062538743", repo: "https://github.com/greyoak111/cccodroid", discord: "https://discord.gg/jE6KW8kwpe" };
+  // ── 参与：帮助页最后一节、更新说明卡片底部共用。Aure Code 是 fork：只指向本仓库，上游的交流群 / Discord / 讨论区不再列 ──
+  const COMMUNITY = { repo: "https://github.com/zesbe/aure-code" };
   function communityHtml(compact) {
-    const R = COMMUNITY.repo, zh = isZh();
+    const R = COMMUNITY.repo;
     return `<div class="cm-box${compact ? " compact" : ""}">
-      <div class="cm-row"><span class="cm-k">${esc(t("QQ 交流群"))}</span>
-        <button type="button" class="cm-num" data-cm="copy" title="${esc(t("点一下复制群号"))}">${COMMUNITY.qq}</button>
-        <button type="button" class="btn ghost sm" data-cm="qr">${esc(t("二维码"))}</button></div>
-      <img class="cm-qr hidden" src="/qq-group.jpg" alt="${esc(t("QQ 交流群二维码"))}" loading="lazy">
-      ${compact ? "" : `<p>${esc(t("用起来有问题、有想法，欢迎进群聊。报 bug 最好走「设置 → 到 GitHub 反馈」，机型和自检结果会自动带上，群里消息一多就沉了。"))}</p>
-      <p>${esc(t("这个项目目前只有作者一个人在维护，非常需要帮手：译文校对、机型适配报告、组件配方、文档、代码都欢迎，不会写代码也能帮上忙。怎么参与见仓库里的贡献指南。"))}</p>`}
-      <div class="cm-links"><a href="${COMMUNITY.discord}">Discord</a> · <a href="${R}/discussions">${esc(t("讨论区"))}</a> · <a href="${R}/issues">${esc(t("反馈问题"))}</a> · <a href="${R}/blob/main/${zh ? "CONTRIBUTING.zh-CN.md" : "CONTRIBUTING.md"}">${esc(t("参与开发"))}</a></div>
+      <div class="cm-links"><a href="${R}/issues">${esc(t("反馈问题"))}</a> · <a href="${R}">GitHub</a></div>
     </div>`;
   }
   function communityBind(root) {
@@ -226,7 +220,7 @@
     return sv ? sv.outerHTML : "";
   }
   async function loadHelp() {
-    const lang = /^zh/.test((window.I18N && I18N.lang) || "zh") ? "zh" : "en";
+    const ul = (window.I18N && I18N.lang) || "zh", lang = /^zh/.test(ul) ? "zh" : /^id/.test(ul) ? "id" : "en";
     if (helpLang === lang) return spyHelp();
     const body = $("help-body"), toc = $("help-toc");
     body.innerHTML = `<p class="muted">${esc(t("加载中…"))}</p>`;
@@ -284,7 +278,7 @@
       });
     }
     // 已知问题：「状态 · 厂商 · **标题**：说明」→ 可折叠卡片
-    const ISSUE_OK = ["修好了", "Fixed"], ISSUE_ALT = ["有绕法", "Workaround"];   // 帮助只有中英两份
+    const ISSUE_OK = ["修好了", "Fixed", "Sudah diperbaiki"], ISSUE_ALT = ["有绕法", "Workaround", "Ada solusi"];   // 帮助有中 / 英 / 印尼三份
     body.querySelectorAll(".help-sec li").forEach((li) => {
       const m = li.innerHTML.match(/^\s*([^·<]+?)\s*·\s*([^·<]+?)\s*·\s*<strong>(.+?)<\/strong>\s*[：:]\s*([\s\S]*)$/);
       if (!m) return;
@@ -350,7 +344,7 @@
   // 离远了收回成量好高度的空壳 —— DOM 里任何时候只有眼前那几版。目录、滚动高亮、搜索和帮助页同一套，搜索查原文不用渲染。
   const CL = { lang: "", list: [], low: [], h: [], io: null };
   async function loadChangelog() {
-    const lang = /^zh/.test((window.I18N && I18N.lang) || "zh") ? "zh" : "en";
+    const ul = (window.I18N && I18N.lang) || "zh", lang = /^zh/.test(ul) ? "zh" : /^id/.test(ul) ? "id" : "en";
     if (CL.lang === lang) return spyToc("changelog");
     const body = $("cl-body"), toc = $("cl-toc");
     if (CL.io) { CL.io.disconnect(); CL.io = null; }

@@ -24,7 +24,7 @@ function toolEmit(flags, sse) {
 
 export function toolsHint() {
   if (PREFIX) {
-    // 随包的 TOOLS.md 是逐项实测过的工具清单与用法（cccodroid-selftest 验证），优先用它；后面接本机实况
+    // 随包的 TOOLS.md 是逐项实测过的工具清单与用法（aurecode-selftest 验证），优先用它；后面接本机实况
     try {
       const t = fs.readFileSync(path.join(HERE, "TOOLS.md"), "utf8")
         .replaceAll("{{WORKSPACE}}", CFG.workspace).replaceAll("{{SHARED}}", process.env.CCAPP_SHARED || "（无存储权限，不可用）");
@@ -38,7 +38,7 @@ export function toolsHint() {
       "/tmp 不可用，临时文件写 $TMPDIR；/sdcard 不支持符号链接、不可执行。",
       "需要系统权限（pm/am/settings/dumpsys/screencap/logcat 等）时用 priv '<命令>'，经 Shizuku 以 shell 身份执行；priv --status 看是否可用。",
       "只有查看类（带服务名的 dumpsys、pm list/path、settings get、getprop 等，不带变量、通配、子 shell，输出只能重定向到 /dev/null）直接执行；其余（打开界面 am start、装卸应用、改设置、截屏、input 点按、写文件、logcat、读共享存储里的文件…）会弹窗等用户点允许，Aure Code 不在前台时直接拒绝（退出码 126）——被拒就告诉用户，别换写法重试。",
-      "工具链出问题先跑 cccodroid-selftest（逐项检查编译器、Python、Node、Java、Git 等是否可用）。",
+      "工具链出问题先跑 aurecode-selftest（逐项检查编译器、Python、Node、Java、Git 等是否可用）。",
     ].join(" ");
   }
   // 开发端：TOOLS-dev.md 是按本机实测写的工具清单与用法（比公开版多 Blender/Godot/Wine/priv 等）

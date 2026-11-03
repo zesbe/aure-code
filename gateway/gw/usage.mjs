@@ -367,8 +367,8 @@ function energySystem() {
   });
 }
 
-/** 问应用进程里的提权中转（Priv.java）。只在 cccodroid 布局下存在 */
-/** 内存管家：跑 cc-mem 拿 JSON。cccodroid 里它和网关同在 app/bin；开发端在 files/opt/ccmem */
+/** 问应用进程里的提权中转（Priv.java）。只在 Aure Code 布局下存在 */
+/** 内存管家：跑 cc-mem 拿 JSON。Aure Code 里它和网关同在 app/bin；开发端在 files/opt/ccmem */
 export function ccMem(args, timeoutMs = 90000) {
   const bin = [path.join(HERE, "bin", "cc-mem.mjs"), path.join(CFG.home, "..", "opt", "ccmem", "cc-mem.mjs")].find((f) => fs.existsSync(f));
   if (!bin) return Promise.resolve({ ok: false, message: tz("找不到 cc-mem") });
@@ -383,7 +383,7 @@ export function ccMem(args, timeoutMs = 90000) {
   });
 }
 
-/** 设备工具 MCP 的配置（JSON 串）。不是 cccodroid 布局、或脚本不在就返回 null */
+/** 设备工具 MCP 的配置（JSON 串）。不是 Aure Code 布局、或脚本不在就返回 null */
 export function deviceMcpConfig() {
   const f = path.join(HERE, "bin", "device-mcp.mjs");
   if (!PREFIX || !fs.existsSync(f)) return null;

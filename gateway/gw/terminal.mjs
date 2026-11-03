@@ -8,7 +8,7 @@ import { claudeEnv, ensureShell, killTree, termKeyFile } from "./claude.mjs";
 import { NEXT, readBody, sendJson } from "./http.mjs";
 
 // ── 应用内终端 ────────────────────────────────────────────────────────
-// node 没有 pty：cccodroid 自带原生小程序 app/lib/ptyhost（源码 android/native/ptyhost.c）；
+// node 没有 pty：Aure Code 自带原生小程序 app/lib/ptyhost（源码 android/native/ptyhost.c）；
 // 开发端没有 lib/，退回到同一协议的 python3 pty 版。协议：
 //   ptyhost <rows> <cols> <程序> [参数…]；stdin→pty，pty→stdout，fd 3 一行 "rows cols" 改窗口大小。
 // 输出留一段环形缓冲：界面重开 / 断线重连时先回放，再接着推实时输出（SSE）。

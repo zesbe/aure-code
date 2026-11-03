@@ -944,7 +944,7 @@
         m.options.map((o) => `<span>${o.kind === "remote" ? esc(t("远程") + " · " + o.transport) : "npm"}</span>`).join("") +
         (m.other.length ? `<span class="warn">${t("另有 {kinds} 装法，本机用不了", { kinds: esc(m.other.join(" / ")) })}</span>` : "");
       const acts = usable.length ? `<button data-x="mcpcat-add" data-id="${esc(m.name)}">${t("添加")}</button>`
-        : `<span class="tiny warn">${m.options.length ? t("要 npx（cccodroid 的工具包里有）") : t("本机装不了")}</span>`;
+        : `<span class="tiny warn">${m.options.length ? t("要 npx（Aure Code 的工具包里有）") : t("本机装不了")}</span>`;
       return extItem(esc(m.title || m.name), meta, acts,
         `<div class="tiny mono">${esc(m.name)}</div><div class="tiny ext-desc">${esc(m.description)}</div>` +
         (webUrl(m.homepage) ? `<div class="tiny"><a class="weblink" href="${esc(m.homepage)}">${esc(m.homepage)}</a></div>` : "") + `<div class="mcpcat-form hidden"></div>`);
@@ -1157,7 +1157,7 @@
   $("upd-log").addEventListener("click", () => { closeSettings(); openPage("changelog"); });
   $("btn-share-logs").addEventListener("click", async () => {
     // 打包前给用户看清单：发出去的是什么、去掉了什么
-    if (!confirm(t("打一个诊断包，经系统分享发出去。\n\n包里有：\n· 版本与设备：cccodroid / Android 版本、机型、芯片、剩余空间\n· 开发工具包：装的是哪一版、更新与自检状态\n· 最近的日志：本应用的系统日志、网关日志的最后一段\n· 修复账本：安装、校验、修复做过哪些、成没成\n· 网络：开没开 VPN，应用连不连得上几个下载源（只记结果）\n\n已经去掉：\n· 密钥、令牌、登录凭据、邮箱\n· 你发给 Claude 的消息内容\n· 会话记录本身不在包里\n\n继续？"))) return;
+    if (!confirm(t("打一个诊断包，经系统分享发出去。\n\n包里有：\n· 版本与设备：Aure Code / Android 版本、机型、芯片、剩余空间\n· 开发工具包：装的是哪一版、更新与自检状态\n· 最近的日志：本应用的系统日志、网关日志的最后一段\n· 修复账本：安装、校验、修复做过哪些、成没成\n· 网络：开没开 VPN，应用连不连得上几个下载源（只记结果）\n\n已经去掉：\n· 密钥、令牌、登录凭据、邮箱\n· 你发给 Claude 的消息内容\n· 会话记录本身不在包里\n\n继续？"))) return;
     toast(t("正在打包日志…"));
     const r = await post("/api/app/share_logs").catch((e) => ({ ok: false, message: e.message }));
     if (!r.ok) toast(t("没分享成：{msg}", { msg: r.message || "" }), true);

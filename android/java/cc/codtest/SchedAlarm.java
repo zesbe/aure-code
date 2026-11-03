@@ -18,7 +18,7 @@ import java.nio.file.Files;
  * targetSdk 28：安卓 12 起的「精确闹钟要授权」「后台不许启动前台服务」都不约束我们，不用引导用户去开。
  */
 public class SchedAlarm extends BroadcastReceiver {
-    static final String TAG = "cccodroid";
+    static final String TAG = "aurecode";
     static final String ACTION = "cc.codtest.SCHED_ALARM";
     private static long lastAt = -1;
 

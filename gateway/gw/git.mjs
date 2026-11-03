@@ -88,7 +88,7 @@ async function gitRepo(p) {
   if (gitPrivate(root)) return { error: "forbidden", status: 403 };
   return { root, dir };
 }
-/** 仓库根落在私有目录（HOME / 运行时）里就不碰；但 cccodroid 的工作区本身就在 HOME 下面，工作区里的仓库放行 */
+/** 仓库根落在私有目录（HOME / 运行时）里就不碰；但 Aure Code 的工作区本身就在 HOME 下面，工作区里的仓库放行 */
 function gitPrivate(d) {
   const under = (a, b) => { const r = path.relative(b, a); return r === "" || (!r.startsWith("..") && !path.isAbsolute(r)); };
   const real = (s) => { try { return fs.realpathSync(s); } catch { return s; } };

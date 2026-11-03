@@ -1,1 +1,1 @@
-https://github.com/zesbe/cccodroid/releases/download/devkit-2026.11.03/
+https://github.com/zesbe/aure-code/releases/download/devkit-2026.11.03/

@@ -457,7 +457,7 @@ function compHealSkills() {
     if (!f.endsWith(".json")) continue;
     const id = f.slice(0, -5), rec = compRecord(id);
     if (!rec || rec.state !== "ok" || rec.skill || (COMP_JOBS.get(id) && !COMP_JOBS.get(id).finished)) continue;
-    const rel = `usr/share/cccodroid/components/${id}/skill`;
+    const rel = `usr/share/aurecode/components/${id}/skill`;
     if (!fs.existsSync(path.join(PREFIX, rel.slice(4), "SKILL.md"))) continue;
     try { fs.rmdirSync(path.join(SKILLS_DIR, id)); } catch {}     // 当时留下的空目录（只删空的）
     compInstallSkill(id, rel, rec);

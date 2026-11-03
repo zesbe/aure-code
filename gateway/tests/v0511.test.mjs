@@ -13,7 +13,7 @@ const ROOT = path.join(path.dirname(fileURLToPath(import.meta.url)), "..", "..")
 
 // 自检脚本「状态对账」那段 node：先核身份再签名，不发令牌原文（高2）
 function selftestSnippet() {
-  const s = fs.readFileSync(path.join(ROOT, "android/assets/bin/cccodroid-selftest"), "utf8");
+  const s = fs.readFileSync(path.join(ROOT, "android/assets/bin/aurecode-selftest"), "utf8");
   const m = /out=\$\(TF="\$TF" GP="\$GP" node -e '([\s\S]*?)' 2>&1\)/.exec(s);
   assert.ok(m, "自检脚本里找不到对账那段");
   return m[1];

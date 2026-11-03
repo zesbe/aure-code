@@ -158,8 +158,8 @@ public class MainActivity extends Activity {
 
     private void boot() {
         if (secondaryUser(this)) {
-            say(Tr.t("✗ cccodroid 只能装在手机的主空间里。"));
-            say(Tr.t("分身、第二空间、安全文件夹、工作资料里的应用目录路径不同，开发工具包跑不起来（Termux 也有同样的限制）。请卸载这里的 cccodroid，在主空间安装。"));
+            say(Tr.t("✗ Aure Code 只能装在手机的主空间里。"));
+            say(Tr.t("分身、第二空间、安全文件夹、工作资料里的应用目录路径不同，开发工具包跑不起来（Termux 也有同样的限制）。请卸载这里的 Aure Code，在主空间安装。"));
             ui.post(() -> stuck.setVisibility(View.VISIBLE));
             return;
         }
@@ -226,7 +226,7 @@ public class MainActivity extends Activity {
                 // 后台快速自检：只看文件在不在，缺了就提示修复
                 if (!upd.devkitMoving() && !upd.devkitStaged()) upd.verifyAsync(false);
             } catch (Exception e) {
-                android.util.Log.e("cccodroid-setup", "安装失败", e);
+                android.util.Log.e("aurecode-setup", "安装失败", e);
                 say("✗ " + humanize(e));
                 say(Tr.t("（下载过的部分都留着。处理好之后点「重试」，会从这一步接着来）"));
                 ui.post(() -> { retry.setVisibility(View.VISIBLE); stuck.setVisibility(View.VISIBLE); });
@@ -366,7 +366,7 @@ public class MainActivity extends Activity {
         a11yAskAt = now;
         android.app.AlertDialog d = new android.app.AlertDialog.Builder(this)
             .setTitle(screen ? Tr.t("允许 Claude 读屏和点按？") : Tr.t("打开设备工具？"))
-            .setMessage(screen ? Tr.t("打开后，Claude 能看到屏幕上的内容（包括别的应用里的），也能替你点按、输入。cccodroid 会直接打开无障碍服务，系统不会再提示。\n\n随时可以在 设置 → 设备工具 里关掉。")
+            .setMessage(screen ? Tr.t("打开后，Claude 能看到屏幕上的内容（包括别的应用里的），也能替你点按、输入。Aure Code 会直接打开无障碍服务，系统不会再提示。\n\n随时可以在 设置 → 设备工具 里关掉。")
                 : Tr.t("打开后，Claude 能读写剪贴板、发通知、打开应用、列出已装应用、分享文件。\n\n随时可以在 设置 → 设备工具 里关掉。"))
             .setPositiveButton(Tr.t("允许"), (x, w) -> DeviceTools.a11yConfirmed(this, screen ? mode : "", on))
             .setNegativeButton(Tr.t("取消"), null)
@@ -395,7 +395,7 @@ public class MainActivity extends Activity {
             @Override public void onViewDetachedFromWindow(android.view.View v) { if (!gone[0]) { gone[0] = true; GUARDED.decrementAndGet(); } }
         });
         // 弹不出来（Activity 正在销毁之类）：计数退回去，不然设备工具的屏幕操作会一直被挡着
-        try { d.show(); } catch (RuntimeException ex) { if (!gone[0]) { gone[0] = true; GUARDED.decrementAndGet(); } android.util.Log.w("cccodroid", "确认框弹不出来", ex); return false; }
+        try { d.show(); } catch (RuntimeException ex) { if (!gone[0]) { gone[0] = true; GUARDED.decrementAndGet(); } android.util.Log.w("aurecode", "确认框弹不出来", ex); return false; }
         return true;
     }
 
@@ -443,7 +443,7 @@ public class MainActivity extends Activity {
         String a = i == null ? null : i.getAction();
         if (a == null) return;
         if (Intent.ACTION_SEND.equals(a) || Intent.ACTION_SEND_MULTIPLE.equals(a)) { receiveShare(i); return; }
-        if (a.startsWith("cc.codtest.") && !fromUs(i)) { android.util.Log.w("cccodroid", "忽略外来的内部动作 " + a); return; }
+        if (a.startsWith("cc.codtest.") && !fromUs(i)) { android.util.Log.w("aurecode", "忽略外来的内部动作 " + a); return; }
         if (ACTION_APPLY_DEVKIT.equals(a) || ACTION_UPDATE.equals(a) && "devkit".equals(i.getStringExtra("item"))) applyDevkitUi();
         else if (ACTION_UPDATE.equals(a)) Updater.get(this).apply(i.getStringExtra("item"), true);
         else if (ACTION_SHIZUKU.equals(a)) ShizukuSetup.get(this).activate();
@@ -896,7 +896,7 @@ public class MainActivity extends Activity {
         say(Tr.t("对照已发布的工具包…"));
         org.json.JSONObject id = upd.identifyDevkit(scan[0]);
         if (id == null) {
-            if (!askBlocking(Tr.f("这个文件不是已发布的工具包（也可能是现在没网、查不到清单）。\n\nsha256 前 12 位：{0}\n\n只在它是你自己构建的、或者确定来源可靠时才继续：工具包里的程序能读写 cccodroid 里的一切。", scan[0].substring(0, 12)),
+            if (!askBlocking(Tr.f("这个文件不是已发布的工具包（也可能是现在没网、查不到清单）。\n\nsha256 前 12 位：{0}\n\n只在它是你自己构建的、或者确定来源可靠时才继续：工具包里的程序能读写 Aure Code 里的一切。", scan[0].substring(0, 12)),
                     Tr.t("仍然安装"))) { say(Tr.t("已取消")); return false; }
             say("⚠ " + Tr.t("没核对上来源，按你的确认继续"));
         } else {
@@ -1115,7 +1115,7 @@ public class MainActivity extends Activity {
         sp.edit().putBoolean("askedNotifySettings", true).apply();
         new android.app.AlertDialog.Builder(this)
             .setTitle(Tr.t("开启通知"))
-            .setMessage(Tr.t("cccodroid 在后台跑任务时靠一条常驻通知保活；任务完成或需要你确认时也通过通知提醒。\n\n系统目前屏蔽了本应用的通知，去设置里打开吧。"))
+            .setMessage(Tr.t("Aure Code 在后台跑任务时靠一条常驻通知保活；任务完成或需要你确认时也通过通知提醒。\n\n系统目前屏蔽了本应用的通知，去设置里打开吧。"))
             .setPositiveButton(Tr.t("去开启"), (d, w) -> {
                 try {
                     startActivity(new Intent(Settings.ACTION_APP_NOTIFICATION_SETTINGS).putExtra(Settings.EXTRA_APP_PACKAGE, getPackageName()));
@@ -1140,7 +1140,7 @@ public class MainActivity extends Activity {
         // Shizuku 授权了也先问（审查 v0.5.9 B2）：以前直接 appops 给，绕过了系统的专用同意界面
         new android.app.AlertDialog.Builder(this)
             .setTitle(Tr.t("允许访问共享存储"))
-            .setMessage(Tr.t("cccodroid 和其他应用交换文件（交付的 APK、截图、离线工具包）用的是 /sdcard/AureCode。这个版本的安卓要你在设置里打开「所有文件访问」才能读写它。\n\n不开也能用，只是这些文件只留在应用私有目录里。"))
+            .setMessage(Tr.t("Aure Code 和其他应用交换文件（交付的 APK、截图、离线工具包）用的是 /sdcard/AureCode。这个版本的安卓要你在设置里打开「所有文件访问」才能读写它。\n\n不开也能用，只是这些文件只留在应用私有目录里。"))
             .setPositiveButton(Tr.t("去开启"), (d, w) -> {
                 try { startActivity(new Intent("android.settings.MANAGE_APP_ALL_FILES_ACCESS_PERMISSION", Uri.parse("package:" + getPackageName()))); }
                 catch (Exception e) { try { startActivity(new Intent("android.settings.MANAGE_ALL_FILES_ACCESS_PERMISSION")); } catch (Exception ignored) {} }
@@ -1325,7 +1325,7 @@ public class MainActivity extends Activity {
     }
 
     private void say(String m) {
-        android.util.Log.i("cccodroid-setup", m);      // 安装 / 更新出问题时，logcat 里能看到走到了哪一步
+        android.util.Log.i("aurecode-setup", m);      // 安装 / 更新出问题时，logcat 里能看到走到了哪一步
         ui.post(() -> {
             if (splashStat != null) splashStat.setText(m);
             if (m.startsWith("✗")) expandSetup();
@@ -1498,7 +1498,7 @@ public class MainActivity extends Activity {
                 if (text == null) return false;
                 try {
                     android.content.ClipboardManager cm = (android.content.ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
-                    cm.setPrimaryClip(android.content.ClipData.newPlainText("cccodroid", text));
+                    cm.setPrimaryClip(android.content.ClipData.newPlainText("aurecode", text));
                     return true;
                 } catch (Exception e) { return false; }
             }
@@ -1739,11 +1739,11 @@ public class MainActivity extends Activity {
     private boolean squatShown;
     private static String css(int c) { return String.format("#%06x", c & 0xffffff); }
 
-    /** 预览里的网页弹的对话框标明出处：别让它冒充 cccodroid 要密钥、要密码（审查 v0513b 低-22） */
+    /** 预览里的网页弹的对话框标明出处：别让它冒充 Aure Code 要密钥、要密码（审查 v0513b 低-22） */
     private static String fromPage(String url, String msg) {
         if (url == null || isOwnGateway(url)) return msg;
         String h; try { h = Uri.parse(url).getHost(); } catch (Exception e) { h = null; }
-        return Tr.f("下面是预览中的网页（{0}）弹出的，不是 cccodroid 在问：", h == null ? "?" : h) + "\n\n" + msg;
+        return Tr.f("下面是预览中的网页（{0}）弹出的，不是 Aure Code 在问：", h == null ? "?" : h) + "\n\n" + msg;
     }
     private void jsDialog(String msg, boolean withCancel, String def, android.webkit.JsResult r, android.webkit.JsPromptResult pr) {
         final android.widget.EditText in = def == null ? null : new android.widget.EditText(this);
@@ -1787,7 +1787,7 @@ public class MainActivity extends Activity {
     private void openExternal(String url) {
         // 只放网页和邮件：别的协议（intent:、market:、content: …）整页跳转到这儿时一律不理（审查 低15）
         String sc = url == null ? "" : String.valueOf(Uri.parse(url).getScheme()).toLowerCase(java.util.Locale.ROOT);
-        if (!sc.equals("https") && !sc.equals("http") && !sc.equals("mailto")) { android.util.Log.w("cccodroid", "openExternal: 不放行 " + sc); return; }
+        if (!sc.equals("https") && !sc.equals("http") && !sc.equals("mailto")) { android.util.Log.w("aurecode", "openExternal: 不放行 " + sc); return; }
         try { startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(url)).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)); }
         catch (Exception e) { android.widget.Toast.makeText(this, Tr.t("没有可用的浏览器：") + url, android.widget.Toast.LENGTH_LONG).show(); }
     }
@@ -1883,7 +1883,7 @@ public class MainActivity extends Activity {
         if (text.length() > 100000) text = text.substring(0, 100000);
         Intent i = new Intent(Intent.ACTION_SEND).setType("text/plain").putExtra(Intent.EXTRA_TEXT, text);
         try { startActivity(Intent.createChooser(i, null)); }
-        catch (Exception e) { android.util.Log.w("cccodroid", "分享失败", e); }
+        catch (Exception e) { android.util.Log.w("aurecode", "分享失败", e); }
     }
     /** fromPane = 用户点了窗格自己的 ✕（或渲染进程崩了）：要告诉页面把占位撤掉 */
     private void closePane(boolean fromPane) {

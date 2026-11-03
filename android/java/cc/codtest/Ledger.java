@@ -40,8 +40,8 @@ final class Ledger {
                     if (lines.size() > KEEP) Files.write(f.toPath(), lines.subList(lines.size() - KEEP, lines.size()), StandardCharsets.UTF_8);
                 }
             }
-            Log.i("cccodroid-ledger", e.toString());
-        } catch (Exception ex) { Log.w("cccodroid-ledger", "记账失败: " + ex); }
+            Log.i("aurecode-ledger", e.toString());
+        } catch (Exception ex) { Log.w("aurecode-ledger", "记账失败: " + ex); }
     }
 
     /** 最近 n 条，新的在前 */

@@ -1,4 +1,4 @@
-// ── Claude Code 真机验证记录：哪些版本在 cccodroid 上验过、哪些有已知问题 ─────────────────────────
+// ── Claude Code 真机验证记录：哪些版本在 Aure Code 上验过、哪些有已知问题 ─────────────────────────
 //
 // 来源：仓库 claude-code/verified.json，维护者用 scripts/verify-claude.mjs 在真机上跑、scripts/claude-verified.mjs 签名发布
 // （与应用内通知同一把钥匙、同一条路：官网验过签才镜像）。这里先取官网、取不到取 GitHub，只认签名对得上的。

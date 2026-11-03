@@ -43,7 +43,7 @@ import android.widget.Toast;
  * 不用 lambda：开发端的构建链（同一份源码改包名）不支持。
  */
 public class BrowserPane extends LinearLayout {
-    static final String PREFS = "browser", LAST = "last", DEVTOOLS = "devtools", TAG = "cccodroid-browser";
+    static final String PREFS = "browser", LAST = "last", DEVTOOLS = "devtools", TAG = "aurecode-browser";
     /** 开发者工具（Eruda，MIT）：开着时每个页面载完往里注入。本体读网关目录里随包带的那份，不走网络 */
     private boolean devtools;
     private String erudaSrc, pickSrc;
@@ -308,7 +308,7 @@ public class BrowserPane extends LinearLayout {
     private boolean route(String url) {
         if (url == null) return true;
         if (forbidden(url)) {
-            Toast.makeText(act, Tr.t("这个地址是 cccodroid 自己用的，不能在内置浏览器里打开"), Toast.LENGTH_LONG).show();
+            Toast.makeText(act, Tr.t("这个地址是 Aure Code 自己用的，不能在内置浏览器里打开"), Toast.LENGTH_LONG).show();
             return true;
         }
         String l = url.toLowerCase(java.util.Locale.ROOT);

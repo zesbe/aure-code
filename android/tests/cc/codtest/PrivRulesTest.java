@@ -70,7 +70,7 @@ public final class PrivRulesTest {
         // 11-01 独立审查：裸 dumpsys、全机日志、读共享存储
         sh(true, "dumpsys");
         sh(true, "dumpsys 2>/dev/null");
-        sh(true, "logcat -d -t 200 | grep cccodroid");
+        sh(true, "logcat -d -t 200 | grep Aure Code");
         want(true, "/system/bin/logcat", "-d");
         sh(true, "cat /sdcard/DCIM/a.jpg");
         sh(true, "head -c 100 /storage/emulated/0/Download/x");

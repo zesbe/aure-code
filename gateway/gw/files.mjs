@@ -25,7 +25,7 @@ const SECRET_NAMES = new Set([
 ]);
 const SECRET_RE = /(^|\/)(\.ssh|\.gnupg|\.aws|\.config\/gcloud)(\/|$)/;
 
-/** 在不在工作区里（按真实路径）。cccodroid 的工作区就在 home 下面（files/home/workspace）——
+/** 在不在工作区里（按真实路径）。Aure Code 的工作区就在 home 下面（files/home/workspace）——
  *  只按 home 拦，工作区里的文件（附件、Claude 生成的图）就全成了 403，缩略图和查看器都打不开 */
 function inWorkspace(real) {
   let ws; try { ws = fs.realpathSync(CFG.workspace); } catch { ws = CFG.workspace; }
@@ -119,7 +119,7 @@ export function fileRoots() {
 }
 
 // ── 截屏 ──────────────────────────────────────────────────────────────
-/** 整屏截图（PNG）。cccodroid：priv 的 stdout 是干净的二进制通道，直接收；
+/** 整屏截图（PNG）。Aure Code：priv 的 stdout 是干净的二进制通道，直接收；
  *  开发端的 rish 会把输出随机拆到 stdout / stderr，二进制会坏 —— 先写到共享存储再读回来 */
 async function screencap(shot) {
   let last = "";

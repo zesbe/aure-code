@@ -22,7 +22,7 @@ for (const name of ["ANTHROPIC_API_KEY", "ANTHROPIC_AUTH_TOKEN", "OPENAI_API_KEY
 
 const home = process.env.CCAPP_HOME, prefix = process.env.CCAPP_PREFIX, temporary = process.env.CCAPP_TMP;
 assert.equal(process.env.CCAPP_TEST, "1");
-assert.ok(temporary && path.basename(temporary).startsWith("cccodroid-test-"), "必须由 scripts/test.mjs 创建临时根目录");
+assert.ok(temporary && path.basename(temporary).startsWith("aurecode-test-"), "必须由 scripts/test.mjs 创建临时根目录");
 assert.equal(home, path.join(temporary, "home")); assert.equal(prefix, path.join(temporary, "usr"));
 assert.equal(process.env.HOME, home); assert.equal(process.env.CCAPP_WORKSPACE, path.join(temporary, "workspace"));
 

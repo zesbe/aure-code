@@ -1,9 +1,9 @@
 ---
 name: chromium-browser
-description: 无头 Chromium（cccodroid 可选组件）：打开网页截图、导出 PDF、取渲染后的 DOM、跑页面 JS，或用 puppeteer-core 程序化操作网页。测试本机开发服务的页面、抓需要 JS 渲染的网页时使用。
+description: 无头 Chromium（Aure Code 可选组件）：打开网页截图、导出 PDF、取渲染后的 DOM、跑页面 JS，或用 puppeteer-core 程序化操作网页。测试本机开发服务的页面、抓需要 JS 渲染的网页时使用。
 ---
 
-# 无头 Chromium（cccodroid 组件）
+# 无头 Chromium（Aure Code 组件）
 
 本机装了 Chromium（Termux 官方包，已改写为本应用路径），**只能无头运行**：没有显示服务器，不会弹窗口。
 用户要亲眼看网页时，在回复里给出链接（如 `http://127.0.0.1:5173/`），他点开就在应用内浏览器里看；

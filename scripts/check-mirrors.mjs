@@ -11,7 +11,7 @@ let bad = 0;
 // APK：GitHub 最新正式版的两个安装包，在 cccodroid.net/dl/ 与 dl.cccodroid.net/dl/ 上都要在、大小一致；固定直链也要指向它
 try {
   const rel = await (await get("https://api.github.com/repos/greyoak111/cccodroid/releases/latest")).json();
-  for (const a of rel.assets.filter((x) => /^cccodroid(-36)?\.apk$/.test(x.name))) {
+  for (const a of rel.assets.filter((x) => /^aurecode(-36)?\.apk$/.test(x.name))) {
     const got = [];
     for (const u of [`https://cccodroid.net/dl/${rel.tag_name}/${a.name}`, `https://dl.cccodroid.net/dl/${rel.tag_name}/${a.name}`, `https://cccodroid.net/dl/${a.name}`, `https://dl.cccodroid.net/dl/${a.name}`])
       got.push(await get(u, "HEAD").then((r) => +r.headers.get("content-length"), () => 0));

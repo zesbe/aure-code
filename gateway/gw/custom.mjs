@@ -20,7 +20,7 @@ import { archiveProblem, parseTarListing, zipEntries } from "./archive-check.mjs
 // 静态（套 seccomp 监督器）；x86 / 32 位 / musl 跑不了，分析时如实说。缺的 glibc 库从 Termux 的 glibc 仓库补。
 const CUSTOM_DIR = PREFIX ? path.join(CFG.home, ".aurecode", "custom") : "";
 const CUSTOM_BIN = PREFIX ? path.join(CFG.home, ".aurecode", "bin") : "";
-const CUSTOM_REC = "cccodroid-custom.json";
+const CUSTOM_REC = "aurecode-custom.json";
 const CUSTOM_STAGES = new Map();          // 分析过、还没装的：stage → { dir, root, report, at }
 const GLIBC_REPO = "https://packages-cf.termux.dev/apt/termux-glibc/";
 const GLIBC_REPO_LIB = "data/data/com.termux/files/usr/glibc/lib/";
@@ -101,7 +101,7 @@ const CMD_RE = /^[A-Za-z0-9][A-Za-z0-9._+-]{0,63}$/;
 function customCmdClash(cmd, selfId) {
   if (fs.existsSync(path.join(PREFIX, "bin", cmd))) return "toolkit";
   const w = path.join(CUSTOM_BIN, cmd);
-  if (fs.existsSync(w)) { const m = /cccodroid-custom-id: ([a-z0-9-]+)/.exec(fs.readFileSync(w, "utf8").slice(0, 400)); if (!m || m[1] !== selfId) return "custom"; }
+  if (fs.existsSync(w)) { const m = /aurecode-custom-id: ([a-z0-9-]+)/.exec(fs.readFileSync(w, "utf8").slice(0, 400)); if (!m || m[1] !== selfId) return "custom"; }
   return "";
 }
 
@@ -338,7 +338,7 @@ function customWrapper(id, p, appDir, libs, opts) {
   const er = SETTINGS.staticCompat !== false ? enosysRun() : "";
   // 注释行里的名字来自用户导入的归档：换行抹掉，免得多出一行被当命令执行（审查 10-29 L3）
   const one = (s) => String(s).replace(/[\r\n]/g, " ");
-  const head = `#!${sh}\n# cccodroid-custom-id: ${one(id)}\n# 自定义组件「${one(id)}」的入口：${one(p.rel)}（${p.kind}）。由扩展页生成，卸载组件时一起删掉。\n`;
+  const head = `#!${sh}\n# aurecode-custom-id: ${one(id)}\n# 自定义组件「${one(id)}」的入口：${one(p.rel)}（${p.kind}）。由扩展页生成，卸载组件时一起删掉。\n`;
   const erLine = `ER=${shq(er)}; [ -n "$ER" ] && [ -x "$ER" ] || ER=\n`;
   if (p.kind === "glibc") {
     if (opts.gpu) { const own = libs.filter((l) => l !== PATHS.glibcLib); return head + `exec ${shq(path.join(PREFIX, "bin", "lgpu-run"))}${own.length ? " -L " + shq(own.join(":")) : ""} -- ${shq(prog)} "$@"\n`; }
@@ -485,7 +485,7 @@ function customRemove(id, quiet) {
   if (!/^[a-z0-9][a-z0-9-]{0,39}$/.test(id)) return { ok: false, message: "bad id" };
   const dir = path.join(CUSTOM_DIR, id);
   if (!fs.existsSync(dir)) return { ok: false, message: "not installed" };
-  try { for (const f of fs.readdirSync(CUSTOM_BIN)) { const w = path.join(CUSTOM_BIN, f); if (fs.readFileSync(w, "utf8").slice(0, 400).includes("cccodroid-custom-id: " + id + "\n")) fs.rmSync(w, { force: true }); } } catch {}
+  try { for (const f of fs.readdirSync(CUSTOM_BIN)) { const w = path.join(CUSTOM_BIN, f); if (fs.readFileSync(w, "utf8").slice(0, 400).includes("aurecode-custom-id: " + id + "\n")) fs.rmSync(w, { force: true }); } } catch {}
   fs.rmSync(dir, { recursive: true, force: true });
   fs.rmSync(path.join(SKILLS_DIR, "custom-" + id), { recursive: true, force: true });
   if (!quiet) log(`[custom] ${id} 已卸载`);

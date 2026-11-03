@@ -1,5 +1,5 @@
 #!/system/bin/sh
-# cccodroid 工具链自检：每项一行 PASS/FAIL；用法 cccodroid-selftest [-q 只看失败]
+# Aure Code 工具链自检：每项一行 PASS/FAIL；用法 aurecode-selftest [-q 只看失败]
 [ -n "$BASH_VERSION" ] || exec bash "$0" "$@"
 W=$(mktemp -d "${TMPDIR:-$PREFIX/tmp}/st.XXXXXX") || { echo "FAIL mktemp"; exit 1; }
 cd "$W"

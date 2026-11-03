@@ -414,7 +414,7 @@ function installLocalSkill() {
   try {
     const src = fs.readFileSync(path.join(HERE, "web", "skills", "local-model-mode", "SKILL.md"), "utf8");
     let cur = null; try { cur = fs.readFileSync(LOCAL_SKILL_FILE, "utf8"); } catch {}
-    if (cur === src || (cur != null && !cur.includes("cccodroid:managed"))) return;
+    if (cur === src || (cur != null && !cur.includes("aurecode:managed"))) return;
     fs.mkdirSync(path.dirname(LOCAL_SKILL_FILE), { recursive: true });
     fs.writeFileSync(LOCAL_SKILL_FILE, src);
     log("[local] 已装 local-model-mode 技能");
@@ -422,7 +422,7 @@ function installLocalSkill() {
 }
 if (PREFIX && LIVE) installLocalSkill();
 
-/** 把应用界面叫回前台。cccodroid 由 App 进程做（Shizuku 或通知）；开发端直接 priv am start */
+/** 把应用界面叫回前台。Aure Code 由 App 进程做（Shizuku 或通知）；开发端直接 priv am start */
 export function toFront(text) {
   if (PREFIX) return privCall({ op: "to_front", text }, 8000);
   return new Promise((ok) => execFile("priv", ["am start --activity-reorder-to-front -n li.dsh.claudecli/.MainActivity"],

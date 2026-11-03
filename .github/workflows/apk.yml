@@ -71,7 +71,7 @@ jobs:
             echo "SIGNED=release" >> "$GITHUB_ENV"
           else
             keytool -genkeypair -keystore "$RUNNER_TEMP/test.jks" -storepass android -keypass android \
-              -alias test -keyalg RSA -keysize 2048 -validity 3650 -dname "CN=cccodroid test build" 2> /dev/null
+              -alias test -keyalg RSA -keysize 2048 -validity 3650 -dname "CN=Aure Code test build" 2> /dev/null
             echo "KS=$RUNNER_TEMP/test.jks" >> "$GITHUB_ENV"
             echo "SIGNED=test" >> "$GITHUB_ENV"
           fi
@@ -89,14 +89,14 @@ jobs:
           export VERSION_NAME="${BASE_VER}.${GITHUB_RUN_NUMBER}"
           echo "VERSION_NAME=$VERSION_NAME" >> "$GITHUB_ENV"
           echo "Building versionCode=$VERSION_CODE versionName=$VERSION_NAME"
-          # 双方案：先出 targetSdk 36 的（cccodroid-36.apk），再出默认的 28
-          TARGET_SDK=36 sh scripts/build.sh && mv dist/cccodroid.apk dist/cccodroid-36.apk
+          # 双方案：先出 targetSdk 36 的（aurecode-36.apk），再出默认的 28
+          TARGET_SDK=36 sh scripts/build.sh && mv dist/aurecode.apk dist/aurecode-36.apk
           sh scripts/build.sh
           rm -f "$RUNNER_TEMP/key.json"
           # 证书指纹：正式包必须是 README 里写的那一张（B7:03…8F:E0），对不上就别出包——
           # 钥匙被意外换掉时不会静默发出别的证书签的「正式包」（审查 v0.5.7 L12）。测试包只打出来看
           EXPECT=b70361595dd3d8d704dd210ed596fc577014ce2272884fb6980bf69623338fe0
-          for a in dist/cccodroid.apk dist/cccodroid-36.apk; do
+          for a in dist/aurecode.apk dist/aurecode-36.apk; do
             got=$("$BT/apksigner" verify --print-certs "$a" | sed -n 's/.*certificate SHA-256 digest: //p' | head -1)
             echo "$a  $got"
             if [ "$SIGNED" = release ] && [ "$got" != "$EXPECT" ]; then echo "::error::$a 的签名证书不是正式钥匙（$got）"; exit 1; fi
@@ -107,6 +107,6 @@ jobs:
         with:
           name: aure-code-${{ env.VERSION_NAME }}-${{ env.SHORT_SHA }}
           path: |
-            dist/cccodroid.apk
-            dist/cccodroid-36.apk
+            dist/aurecode.apk
+            dist/aurecode-36.apk
           retention-days: 30

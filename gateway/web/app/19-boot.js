@@ -167,10 +167,10 @@
       paintAcct(s);
       paintSafeMode(s.safeMode);
       recheckSetup();
-      // 日志分享靠安卓壳（cccodroid）打包、弹分享面板；旧版应用没有
-      // 打包诊断、到 GitHub 反馈只有 cccodroid 有：整行藏起来
-      $("btn-share-logs").closest(".srow").classList.toggle("hidden", s.product !== "cccodroid");
-      $("btn-issue").closest(".srow").classList.toggle("hidden", s.product !== "cccodroid");
+      // 日志分享靠安卓壳（Aure Code）打包、弹分享面板；旧版应用没有
+      // 打包诊断、到 GitHub 反馈只有 Aure Code 有：整行藏起来
+      $("btn-share-logs").closest(".srow").classList.toggle("hidden", s.product !== "aurecode");
+      $("btn-issue").closest(".srow").classList.toggle("hidden", s.product !== "aurecode");
       $("btn-ledger").classList.toggle("hidden", !s.hasLedger);
       paintModel(curModel() || s.model || "—");
       state.model = s.model;

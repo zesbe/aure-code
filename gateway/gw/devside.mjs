@@ -9,8 +9,8 @@ import { NEXT, readBody, sendJson } from "./http.mjs";
 import { termEnv } from "./terminal.mjs";
 import { ccMem, privCall } from "./usage.mjs";
 
-// ── 开发端（非 cccodroid 布局）：没有 Java 那一层，更新和 Shizuku 状态由网关自己做 ──────────
-// cccodroid 里这些在 App 进程（Updater / ShizukuSetup）；开发端只有一个 runtime/claude 二进制，priv 走 rish。
+// ── 开发端（非 Aure Code 布局）：没有 Java 那一层，更新和 Shizuku 状态由网关自己做 ──────────
+// Aure Code 里这些在 App 进程（Updater / ShizukuSetup）；开发端只有一个 runtime/claude 二进制，priv 走 rish。
 
 const DEV_UPD_FILE = path.join(CFG.home, "ccapp-update.json");
 const CC_BASE = "https://downloads.claude.ai/claude-code-releases";
@@ -125,7 +125,7 @@ if (!PREFIX) {
   setInterval(tick, 30 * 60_000);
 }
 
-// cccodroid：Claude Code 若是官方清单拿不到时靠 npm 签名装上的（版本目录里有 .npm-only），
+// Aure Code：Claude Code 若是官方清单拿不到时靠 npm 签名装上的（版本目录里有 .npm-only），
 // 连得上官方清单时补核一次 sha256（install-claude.mjs --recheck）。启动 2 分钟后、之后每 6 小时看一眼
 if (PREFIX && process.env.CCAPP_BIN) {
   const dest = path.join(CFG.home, ".local", "share", "aurecode", "claude");
@@ -239,7 +239,7 @@ export async function routeDevside(req, res, u, p) {
   if (req.method === "GET" && p === "/api/priv/status") return sendJson(res, 200, await privCall({ op: "status" }));
   if (req.method === "POST" && p === "/api/priv/request") return sendJson(res, 200, await privCall({ op: "request" }));
   if (req.method === "POST" && p === "/api/priv/open") return sendJson(res, 200, await privCall({ op: "open_manager" }));
-  // 特权命令记录：cccodroid 的 Priv.java 每执行一条就往 home/priv-audit.jsonl 记一行。最新的在前
+  // 特权命令记录：Aure Code 的 Priv.java 每执行一条就往 home/priv-audit.jsonl 记一行。最新的在前
   if (req.method === "GET" && p === "/api/priv/audit") {
     const f = path.join(CFG.home, "priv-audit.jsonl"), items = [];
     for (const ff of [f, f + ".1"]) {

@@ -10,13 +10,13 @@
 //  状态记在 ~/.work/publish/<tag>/state.json：中途断了（网络、CI 失败）再跑同一条命令，从没做完的那步接着来。
 //  最后的 check 不信状态文件，从 GitHub / 市场 / 镜像 / APK 重新取一遍逐项核对，有一项不对就退出码 1。
 //
-//  要的东西（都不进仓库）：gh 已登录（cccodroid 与市场仓库可写）；
+//  要的东西（都不进仓库）：gh 已登录（Aure Code 与市场仓库可写）；
 //    INDEX_SIGNING_KEY_FILE  组件索引签名钥匙（缺省 bldtools/index-signing-ed25519.pem），重签浏览器组件索引用
 //    SITE_KICK               一个脚本，触发 cccodroid.net 生成器立刻同步（不给就等它的 30 分钟定时）
 //    MARKET                  市场仓库目录（缺省与本仓库同级的 cccodroid-components）
 //    TEST_WT                 test 分支的工作树（有就把 main 合过去，没有就跳过）
 //    CHROM_CACHE             浏览器组件的下载缓存（缺省 ~/.work/chrom22/cache）
-//  预览包只打不装；加 --install 才用 priv 覆盖安装（会关掉正在用的 cccodroid）。
+//  预览包只打不装；加 --install 才用 priv 覆盖安装（会关掉正在用的 Aure Code）。
 //  这个脚本只管工具包。App 正式发版仍是 build.sh + release.sh，且要用户点头。
 // ─────────────────────────────────────────────────────────────────────
 import fs from "node:fs";
@@ -107,10 +107,10 @@ step.preflight = async () => {
   gh("auth", "status");
   if (!fs.existsSync(KEYFILE)) fail(`没有索引签名钥匙 ${KEYFILE}（INDEX_SIGNING_KEY_FILE）`);
   if (!fs.existsSync(path.join(MARKET, "bases.json"))) fail(`市场仓库不在 ${MARKET}（MARKET）`);
-  if (git(ROOT, "rev-parse", "--abbrev-ref", "HEAD") !== "main") fail("cccodroid 不在 main 上");
-  if (git(ROOT, "status", "--porcelain")) fail("cccodroid 工作区有未提交的改动：工具包要对应一个确定的提交");
+  if (git(ROOT, "rev-parse", "--abbrev-ref", "HEAD") !== "main") fail("Aure Code 不在 main 上");
+  if (git(ROOT, "status", "--porcelain")) fail("Aure Code 工作区有未提交的改动：工具包要对应一个确定的提交");
   git(ROOT, "fetch", "-q", "origin", "main", "--tags");
-  if (git(ROOT, "rev-parse", "HEAD") !== git(ROOT, "rev-parse", "origin/main")) fail("cccodroid 的 main 和 origin/main 不一致：先推送或拉取");
+  if (git(ROOT, "rev-parse", "HEAD") !== git(ROOT, "rev-parse", "origin/main")) fail("Aure Code 的 main 和 origin/main 不一致：先推送或拉取");
   if (git(ROOT, "tag", "-l", TAG)) fail(`tag ${TAG} 已经有了（本地或远端）：换个号，或用 --from 接着之前那次`);
   if (git(MARKET, "status", "--porcelain")) fail("市场仓库工作区有未提交的改动");
   const prev = json(path.join(ROOT, "devkit-pin.json")).tag;
@@ -313,7 +313,7 @@ step.preview = async () => {
   writeFresh(mf, m0.replace(`android:versionName="${v}"`, `android:versionName="${pv}"`));
   try { run("sh", [path.join(ROOT, "scripts/build.sh")], { cwd: ROOT }); }
   finally { git(ROOT, "checkout", "-q", "android/AndroidManifest.xml"); }
-  const apk = path.join(ROOT, "dist/cccodroid.apk");
+  const apk = path.join(ROOT, "dist/aurecode.apk");
   const inApk = sh("unzip", ["-p", apk, "assets/devkit-pin.json"]);
   if (inApk !== fs.readFileSync(path.join(ROOT, "devkit-pin.json"), "utf8").trim()) fail("APK 里带的 devkit-pin.json 和仓库里的不一样");
   const out = `/sdcard/Download/cccodroid-${pv}.apk`;
@@ -385,7 +385,7 @@ step.check = async () => {
     say(`  ✓ 预览包 ${p.apk} 钉的是这版`);
   });
   if (bad) fail(`对账有 ${bad} 项不对`);
-  say(`\n✓ ${TAG} 全链对上了。下一步：在 cccodroid 里升级工具包，然后终端跑 node /sdcard/DeepSeekHarness/claude-workspace/verify.mjs`);
+  say(`\n✓ ${TAG} 全链对上了。下一步：在 Aure Code 里升级工具包，然后终端跑 node /sdcard/DeepSeekHarness/claude-workspace/verify.mjs`);
 };
 
 // ── 主流程 ──

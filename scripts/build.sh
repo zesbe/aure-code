@@ -1,6 +1,6 @@
 #!/bin/sh
 # ─────────────────────────────────────────────────────────────────────
-#  build.sh —— 构建 cccodroid APK：原生小库 → javac → d8 → aapt2 → 签名
+#  build.sh —— 构建 Aure Code APK：原生小库 → javac → d8 → aapt2 → 签名
 #
 #  在哪都能跑：默认用作者平板上的一套工具；别的机器（含 GitHub Actions，见 .github/workflows/apk.yml）
 #  用环境变量换掉 ——
@@ -16,7 +16,7 @@ ROOT=$(cd "$(dirname "$0")/.." && pwd)
 SRC=${SRC:-$ROOT/gateway}
 F=/data/user/0/li.dsh.claudecli/files
 B=$F/bldtools
-KEY=${KEY:-$B/cccodroid-release.json}
+KEY=${KEY:-$B/aurecode-release.json}
 P=$F/toolchain/dshtc/prefix
 J=$P/lib/jvm/java-17-openjdk/bin
 CC_ANDROID=${CC_ANDROID:-cc4}
@@ -133,24 +133,24 @@ if [ "$SIGN" = apksigner ]; then
   ( cd "$A/build" && zip -q unsigned.apk classes.dex && zip -q -0 unsigned.apk lib/arm64-v8a/libldlinux.so )
   ${ZIPALIGN:-zipalign} -p -f 4 "$A/build/unsigned.apk" "$A/build/aligned.apk"
   if [ -n "$KS" ]; then
-    ${APKSIGNER:-apksigner} sign --ks "$KS" --ks-pass "pass:${KS_PASS:-android}" --out "$OUT/cccodroid.apk" "$A/build/aligned.apk"
+    ${APKSIGNER:-apksigner} sign --ks "$KS" --ks-pass "pass:${KS_PASS:-android}" --out "$OUT/aurecode.apk" "$A/build/aligned.apk"
   else
     # 钥匙 JSON → PKCS#8 DER + 证书，只在构建目录里待一下，签完就删
     trap 'rm -f "$A/build/key.pk8" "$A/build/cert.pem"' EXIT
     node -e 'const fs=require("fs"),c=require("crypto"),j=JSON.parse(fs.readFileSync(process.argv[1],"utf8"));
       fs.writeFileSync(process.argv[2],c.createPrivateKey(j.key).export({type:"pkcs8",format:"der"}),{mode:0o600});
       fs.writeFileSync(process.argv[3],j.cert)' "$KEY" "$A/build/key.pk8" "$A/build/cert.pem"
-    ${APKSIGNER:-apksigner} sign --key "$A/build/key.pk8" --cert "$A/build/cert.pem" --out "$OUT/cccodroid.apk" "$A/build/aligned.apk"
+    ${APKSIGNER:-apksigner} sign --key "$A/build/key.pk8" --cert "$A/build/cert.pem" --out "$OUT/aurecode.apk" "$A/build/aligned.apk"
   fi
-  rm -f "$OUT/cccodroid.apk.idsig"
-  echo "  $(du -h "$OUT/cccodroid.apk" | cut -f1)"
+  rm -f "$OUT/aurecode.apk.idsig"
+  echo "  $(du -h "$OUT/aurecode.apk" | cut -f1)"
 else
 node --input-type=module -e "
 import fs from 'node:fs'; import { signApk } from '$B/apklib.mjs';
-const r = signApk('$A/build/unsigned.apk', '$OUT/cccodroid.apk',
+const r = signApk('$A/build/unsigned.apk', '$OUT/aurecode.apk',
   [{ name: 'classes.dex', data: fs.readFileSync('$A/build/classes.dex'), method: 8 },
    { name: 'lib/arm64-v8a/libldlinux.so', data: fs.readFileSync('$A/build/lib/arm64-v8a/libldlinux.so'), method: 0 }], '$KEY');
 console.log('  ' + r.entries + ' 个条目 · ' + (r.size / 1048576).toFixed(2) + ' MB');
 "
 fi
-echo "✓ $OUT/cccodroid.apk"
+echo "✓ $OUT/aurecode.apk"

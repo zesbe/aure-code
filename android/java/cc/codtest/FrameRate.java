@@ -15,7 +15,7 @@ import java.util.TreeSet;
  * 应用内刷新率（核心逻辑，无界面）。
  *
  * 普通应用想让系统提刷新率，是把窗口的 preferredRefreshRate 投上去。小米 / 红米（HyperOS）
- * 把 cccodroid 认成「游戏」之后（云端按包名判定，设置 → 刷新率里显示为「跟随应用内设置」），
+ * 把 Aure Code 认成「游戏」之后（云端按包名判定，设置 → 刷新率里显示为「跟随应用内设置」），
  * DisplayModeDirector 会忽略窗口投票（mIgnorePreferredRefreshRate: true）；游戏自己的帧率
  * 走的是 Joyose → PowerKeeper 的 com.xiaomi.joyose.OVERRIDE_GAME_FRESHRATE 广播。
  * 所以这里两条都发：别的系统没有这个接收器，多一条广播无害。

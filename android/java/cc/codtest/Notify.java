@@ -30,7 +30,7 @@ import org.json.JSONObject;
  * 跑在 GatewayService 里：界面被关了、只剩前台服务时也能发。
  */
 final class Notify {
-    static final String TAG = "cccodroid";
+    static final String TAG = "aurecode";
     static final String CH_DONE = "done", CH_ASK = "ask";
     static final String ACTION_DENY = "cc.codtest.PERM_DENY";
     static final String ACTION_OPEN = "cc.codtest.OPEN_SESSION";
@@ -267,7 +267,7 @@ final class Notify {
             // 请求码是哈希取模，会撞；FLAG_UPDATE_CURRENT 又会把撞上的那个改成新的 extras——点 A 的「拒绝」拒掉的是 B。
             // 带上各自的 data，系统就当成不同的 PendingIntent（审查 10-30 第九份 安卓低17）
             Intent deny = new Intent(ctx, Events.class).setAction(ACTION_DENY).putExtra("id", id)
-                .setData(android.net.Uri.parse("cccodroid-notify://deny/" + android.net.Uri.encode(id)));
+                .setData(android.net.Uri.parse("aurecode-notify://deny/" + android.net.Uri.encode(id)));
             PendingIntent pi = PendingIntent.getBroadcast(ctx, 20000 + Math.abs(id.hashCode() % 10000), deny,
                 PendingIntent.FLAG_IMMUTABLE | PendingIntent.FLAG_UPDATE_CURRENT);
             b.addAction(new Notification.Action.Builder(null, Tr.t("拒绝"), pi).build());
@@ -283,7 +283,7 @@ final class Notify {
         try { v = c.getPackageManager().getPackageInfo(c.getPackageName(), 0).versionName; } catch (Exception ignored) {}
         n.nm.notify(TAG_DONE, 0x5eed, new Notification.Builder(c, CH_DONE)
             .setSmallIcon(android.R.drawable.stat_notify_chat)
-            .setContentTitle(Tr.f("cccodroid 已更新到 v{0}", v))
+            .setContentTitle(Tr.f("Aure Code 已更新到 v{0}", v))
             .setContentText(Tr.t("点此打开即可继续使用"))
             .setContentIntent(n.openIntent("", 5))
             .setAutoCancel(true)
@@ -297,7 +297,7 @@ final class Notify {
         Intent i = MainActivity.internal(ctx, ACTION_OPEN)
             .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_SINGLE_TOP);
         if (sessionId != null && !sessionId.isEmpty()) i.putExtra("session", sessionId);
-        i.setData(android.net.Uri.parse("cccodroid-notify://open/" + req + "/" + android.net.Uri.encode(sessionId == null ? "" : sessionId)));   // 同上：撞码时别串会话
+        i.setData(android.net.Uri.parse("aurecode-notify://open/" + req + "/" + android.net.Uri.encode(sessionId == null ? "" : sessionId)));   // 同上：撞码时别串会话
         return PendingIntent.getActivity(ctx, 60000 + req, i, PendingIntent.FLAG_IMMUTABLE | PendingIntent.FLAG_UPDATE_CURRENT);
     }
 

@@ -142,7 +142,7 @@ export function agentBook(run, { emit }) {
     const rows = all.map((a) => `- ${a.name} (${a.id.slice(0, 6)}) — ${mark[a.status]}${a.dir ? ` — ${path.join(a.dir, "report.md")}` : ""}`);
     const sum = write(path.join(dir, "summary.md"), `# Sub-agent summary\n\n${rows.join("\n")}\n`);
     book({ k: "summary", ids: all.map((a) => a.id), file: sum });
-    try { fs.appendFileSync(path.join(dir, NOTE), `<cccodroid-agents>\nThe ${all.length} sub-agents of an earlier batch have finished. Their briefs and reports are saved as files; read them when you need details instead of digging through ~/.claude:\n${rows.join("\n")}\nSummary: ${sum}\n</cccodroid-agents>\n`); } catch {}
+    try { fs.appendFileSync(path.join(dir, NOTE), `<aurecode-agents>\nThe ${all.length} sub-agents of an earlier batch have finished. Their briefs and reports are saved as files; read them when you need details instead of digging through ~/.claude:\n${rows.join("\n")}\nSummary: ${sum}\n</aurecode-agents>\n`); } catch {}
   };
 
   const feed = (ev) => {

@@ -93,7 +93,7 @@ export async function routeCaps(req, res, u, p) {
   if (req.method === "GET" && p === "/api/status") {
     return sendJson(res, 200, {
       app: "claude-cli",
-      product: PREFIX ? "cccodroid" : "Claude CLI",   // 界面标题
+      product: PREFIX ? "aurecode" : "Claude CLI",   // 界面标题
       productName: PREFIX ? "Aure Code" : "Claude CLI",   // 界面上显示的名字（product 是功能开关用的标识，别改）
       pid: process.pid,
       ready: fs.existsSync(PATHS.claude) && fs.existsSync(PATHS.loader),

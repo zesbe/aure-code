@@ -22,7 +22,7 @@ import java.net.URL;
  *   网关是本服务的子进程 —— 服务活着，它就活着；它自己挂了，这里按退避重新拉起。
  */
 public class GatewayService extends Service {
-    static final String TAG = "cccodroid";
+    static final String TAG = "aurecode";
     static final String CH = "gateway";
     static final String ACTION_STOP = "cc.codtest.STOP";
     static final String ACTION_BOOT = "cc.codtest.BOOT";

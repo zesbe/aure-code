@@ -61,7 +61,7 @@ class CDP {
 
 const base = process.env.TMPDIR || path.join(os.homedir(), ".cache");
 await fs.mkdir(base, { recursive: true });
-const lock = path.join(base, "cccodroid-managed-ui-chromium.lock");
+const lock = path.join(base, "aurecode-managed-ui-chromium.lock");
 try { await fs.mkdir(lock); }
 catch (e) { if (e.code === "EEXIST") throw new Error(`Another managed UI Chromium test holds ${lock}; run only one browser at a time.`); throw e; }
 // Chromium's Unix singleton socket has a 108-byte pathname limit (Android's prefix is already long).

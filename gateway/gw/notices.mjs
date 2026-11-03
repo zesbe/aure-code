@@ -13,8 +13,9 @@ import { CFG, LIVE, PREFIX, log } from "./config.mjs";
 import { NEXT, readBody, sendJson } from "./http.mjs";
 import { privCall } from "./usage.mjs";
 
-const SOURCES = (process.env.CCAPP_NOTICES_URL ? [process.env.CCAPP_NOTICES_URL] : [])
-  .concat(["https://cccodroid.net/notices.json", "https://raw.githubusercontent.com/greyoak111/cccodroid/main/notices/notices.json"]);
+// Aure Code（fork）：不再拉上游的公告 —— 那是上游维护者对上游用户说的话，签名用的也是上游的钥匙。
+// 想发自己的公告时设 CCAPP_NOTICES_URL（同样的格式与签名规则）
+const SOURCES = process.env.CCAPP_NOTICES_URL ? [process.env.CCAPP_NOTICES_URL] : [];
 // 与组件索引同一把公钥（gw/components.mjs）；Claude Code 验证记录（gw/ccverified.mjs）也用它。测试（CCAPP_TEST=1）时可换成测试钥匙
 export const PUBKEY = crypto.createPublicKey(!LIVE && process.env.CCAPP_TEST_PUBKEY ? process.env.CCAPP_TEST_PUBKEY :
   "-----BEGIN PUBLIC KEY-----\nMCowBQYDK2VwAyEA4u1V3UuRVZgXwqXXQaQIBaefPf2PCGqKqvsna9Pgzzs=\n-----END PUBLIC KEY-----\n");
@@ -23,7 +24,7 @@ const CACHE = path.join(CFG.home, ".cache", "aurecode", "notices.json");
 const SEEN = path.join(CFG.home, ".config", "aurecode", "notices-seen.json");
 
 let data = null, fetchedAt = 0, lastError = "", appVer = "", busy = null;
-try { data = JSON.parse(fs.readFileSync(CACHE, "utf8")); } catch {}
+if (SOURCES.length) try { data = JSON.parse(fs.readFileSync(CACHE, "utf8")); } catch {}   // 没有来源就不用旧缓存（升级前缓存的上游公告不再显示）
 
 const readSeen = () => { try { return new Set(JSON.parse(fs.readFileSync(SEEN, "utf8")).dismissed || []); } catch { return new Set(); } };
 
@@ -93,7 +94,8 @@ if (LIVE) setInterval(() => refreshNotices().catch(() => {}), EVERY).unref?.();
 export async function routeNotices(req, res, u, p) {
   if (p === "/api/notices" && req.method === "GET") {
     await Promise.race([refreshNotices().catch(() => {}), new Promise((r) => setTimeout(r, 8000))]);
-    const lang = (u.searchParams.get("lang") || "zh").startsWith("zh") ? "zh" : "en";
+    const ql = u.searchParams.get("lang") || "zh";
+    const lang = ql.startsWith("zh") ? "zh" : ql.startsWith("id") ? "id" : "en";   // pick() 没有 id 时退回 zh / en
     const seen = readSeen(), all = active(lang);
     const items = u.searchParams.get("all") === "1" ? all.map((n) => ({ ...n, seen: seen.has(n.id) })) : all.filter((n) => !seen.has(n.id));
     return sendJson(res, 200, { ok: true, items, error: lastError, at: fetchedAt });

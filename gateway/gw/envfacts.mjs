@@ -11,7 +11,7 @@ import { reconcileFacts } from "./reconcile.mjs";
 import { deviceFacts } from "./device.mjs";
 
 // ── 本机实况：TOOLS.md 是打包时在测试机上测的，这里补上「这台设备上实际怎样」 ──
-// 自检（cccodroid-selftest）在本机跑一遍，失败项和 INFO（比如有没有硬件编码器）接在 TOOLS.md 后面；
+// 自检（aurecode-selftest）在本机跑一遍，失败项和 INFO（比如有没有硬件编码器）接在 TOOLS.md 后面；
 // 装了哪些组件、用 pkg 装了哪些包，每轮现读。自检只在工具包或应用版本变了之后、空闲时重跑（要一两分钟 CPU）
 export const ENV_FACTS = PREFIX ? path.join(CFG.home, ".aurecode-env.json") : "";
 export function envFactsKey() {
@@ -23,7 +23,7 @@ export function envFactsKey() {
 }
 let envFactsJob = null;
 function envFactsRun() {
-  const st = path.join(process.env.CCAPP_BIN || "", "cccodroid-selftest");
+  const st = path.join(process.env.CCAPP_BIN || "", "aurecode-selftest");
   if (!PREFIX || envFactsJob || !fs.existsSync(st)) return;
   const key = envFactsKey(), nice = path.join(PREFIX, "bin", "nice");
   // 经 Claude 用的同一个 shell 包装起（挂着 termux-exec）：直接调 bash 的话 #!/usr/bin/env 一类脚本全报 bad interpreter，

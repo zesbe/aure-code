@@ -133,17 +133,17 @@ Layout follows the window width, not orientation:
 ## Updates and repair
 
 - **Auto-update** (on by default): Claude Code updates silently; a new app version is signature-checked, then offered for install; toolkit updates download on Wi‑Fi and are applied the next time you open the app.
-- The toolkit can come from GitHub, the cccodroid.net mirror or a local file. If one source stalls, the other takes over and resumes; everything is checked against hashes shipped in the APK.
+- The toolkit is downloaded from GitHub (the Aure Code repository) or taken from a local file. An interrupted download resumes where it stopped; everything is checked against hashes shipped in the APK.
 - Updates are verified against the release manifest before anything is replaced. If one is interrupted, it finishes or rolls back on the next launch.
 - The Repair ledger under Settings → Troubleshooting records every install, check and repair.
-- **Two install packages**: the usual `cccodroid.apk` targets SDK 28 and runs on the widest range of devices; `cccodroid-36.apk` targets SDK 36 for newer phones whose system refuses apps with an old target SDK. Both have the same features and share data, and you can switch at any time under Settings → Updates → Install package. If the system ever refuses the 28 build, the app remembers it and only updates to 36 from then on; choosing 28 is then blocked. In the 36 build, toolkit programs are started through the system loader, so the odd program that locates its data relative to its own path may misbehave — please report it if you hit one.
+- **Two install packages**: the usual `aurecode.apk` targets SDK 28 and runs on the widest range of devices; `aurecode-36.apk` targets SDK 36 for newer phones whose system refuses apps with an old target SDK. Both have the same features and share data, and you can switch at any time under Settings → Updates → Install package. If the system ever refuses the 28 build, the app remembers it and only updates to 36 from then on; choosing 28 is then blocked. In the 36 build, toolkit programs are started through the system loader, so the odd program that locates its data relative to its own path may misbehave — please report it if you hit one.
 
 ## Known issues
 
 - Fixed · All · **Pinyin input not reaching the box on first launch**: fixed in 0.3.7. On older versions, tap outside the input box and back.
 - Workaround · All · **Nothing scrolls anywhere**: a bug in the system WebView. The app detects it and recovers in about a second, restoring unsent text; if it does not, press and hold the title in the top bar (the conversation name) for about a second; the title fades, the phone gives a short buzz and recovery starts.
 - Workaround · Red Magic / Nubia · **Frozen after about 90 s in the background**: App info → Battery usage → allow background activity, and allow auto-start.
-- Workaround · Xiaomi / OPPO / vivo / Huawei · **Aggressive background cleaning**: set battery saving to unrestricted, allow auto-start and lock the card in recents. Per-brand steps are on the website's Known issues page.
+- Workaround · Xiaomi / OPPO / vivo / Huawei · **Aggressive background cleaning**: set battery saving to unrestricted, allow auto-start and lock the card in recents.
 - Workaround · ZUI · **"Split screen not supported"**: the system's split-screen blocklist is stale. Reinstall over the top or reboot.
 - Investigating · All · **Top bar shows "UI script error: Script error."**: when code the Android shell runs in the page fails, WebView only gives this line, so you can't tell where it came from. From 0.3.13 it reads "<entry point>: <reason>", so a screenshot is enough to track it down. The app usually keeps working.
 - Investigating · Samsung · **Stuck on "Waiting for gateway…" after launch**: reported once; the gateway was actually running and the app opened after two to three minutes. The cause is still being looked into. Wait a little longer instead of swiping the app away and reopening it; once it opens, send a diagnostics bundle from Settings → Troubleshooting.

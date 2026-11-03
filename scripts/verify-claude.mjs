@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 // ─────────────────────────────────────────────────────────────────────
-//  verify-claude.mjs —— 在真机上验一版 Claude Code 能不能在 cccodroid 里正常用（在 cccodroid 的终端里跑）
+//  verify-claude.mjs —— 在真机上验一版 Claude Code 能不能在 Aure Code 里正常用（在 Aure Code 的终端里跑）
 //
 //  node verify-claude.mjs [版本号|stable|latest] [--model <型号>] [--out <目录>] [--keep] [--bin <claude 二进制>]
 //  （要验的正好是当前装的那一版就直接用它，不再下载；--bin 直接验给定的二进制，版本号以它 --version 报的为准）
@@ -31,7 +31,7 @@ const say = (s) => console.log(s);
 const die = (s) => { console.log("✗ " + s); process.exit(1); };
 
 const { PREFIX, HOME, CCAPP_BIN } = process.env;
-if (!PREFIX || !CCAPP_BIN) die("要在 cccodroid 的终端里跑（没有 PREFIX / CCAPP_BIN）");
+if (!PREFIX || !CCAPP_BIN) die("要在 Aure Code 的终端里跑（没有 PREFIX / CCAPP_BIN）");
 const APP = path.dirname(CCAPP_BIN);
 const ENOSYS = path.join(APP, "lib", "seccomp-enosys-run");
 const LD = process.env.CCAPP_LD || path.join(PREFIX, "glibc/lib/ld-linux-aarch64.so.1");
@@ -80,7 +80,7 @@ async function appInfo() {
 // ── 1. 装进临时目录 ───────────────────────────────────────────
 const info = await appInfo();
 say(`设备 ${device.maker} ${device.model} · Android ${device.android}（SDK ${device.sdk}）· App ${info.app || "?"} · ${info.devkit || "工具包 ?"}`);
-const installed = path.join(HOME, ".local/share/cccodroid/claude");
+const installed = path.join(HOME, ".local/share/aurecode/claude");
 let VER = "", BIN = "", npmOnly = false;
 if (GIVEN) {
   BIN = path.resolve(GIVEN);
@@ -103,7 +103,7 @@ if (!GIVEN && target && target === info.current && fs.existsSync(path.join(insta
   fs.mkdirSync(scratchHome, { recursive: true });
   say(`\n── 下载 ${WANT}${target ? `（${target}）` : ""}，装在临时目录，不动当前的 ${info.current || "版本"}${target && target !== info.current ? "" : info.current ? `（${info.current} 的程序文件不在，只好下载）` : ""}`);
   const inst = spawnSync(path.join(PREFIX, "bin/node"), [path.join(APP, "scripts/install-claude.mjs"), WANT], { env: { ...process.env, HOME: scratchHome }, stdio: ["ignore", "inherit", "inherit"] });
-  const dest = path.join(scratchHome, ".local/share/cccodroid/claude");
+  const dest = path.join(scratchHome, ".local/share/aurecode/claude");
   try { VER = path.basename(fs.readlinkSync(path.join(dest, "current"))); } catch {}
   if (inst.status !== 0 || !VER) die("下载没成功");
   BIN = path.join(dest, VER, "claude");

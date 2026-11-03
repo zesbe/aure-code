@@ -188,7 +188,7 @@ export function claudeEnv(o = {}) {
     // —— 那个目录在这台设备上根本不存在，回落过去就是一句 ENOENT。
     // 之前只靠从网关继承，网关怎么起的（MainActivity 还是 gw-swap.sh）就决定了有没有，
     // 太脆；这里自己钉死，claude 及其所有工具子进程就都有可写临时目录了。
-    // cccodroid：用 $PREFIX/tmp —— 等长改写后，二进制里写死的默认临时目录正好就是它
+    // Aure Code：用 $PREFIX/tmp —— 等长改写后，二进制里写死的默认临时目录正好就是它
     TMPDIR: PREFIX ? (fs.mkdirSync(path.join(PREFIX, "tmp"), { recursive: true }), path.join(PREFIX, "tmp")) : CFG.home,
     // 文件检查点：-p 模式默认不记，打开后每条用户消息前给 Edit/Write 要动的文件留底，「回退到这里」靠它（见 rewindFiles）
     CLAUDE_CODE_ENABLE_SDK_FILE_CHECKPOINTING: "1",
@@ -318,7 +318,7 @@ export function claudeArgv(extra) {
   return ["--library-path", PATHS.glibcLib, ...pre, PATHS.claude, ...extra];
 }
 
-/** seccomp 监督器：cccodroid 放在 seccomp-enosys.so 旁边（app/lib），开发端在 files/devbin */
+/** seccomp 监督器：Aure Code 放在 seccomp-enosys.so 旁边（app/lib），开发端在 files/devbin */
 let ENOSYS_RUN;
 export function enosysRun() {
   if (ENOSYS_RUN !== undefined) return ENOSYS_RUN;
@@ -361,7 +361,7 @@ export function killTree(child) {
  *  没人读它们的输出却还在干活：推提交、跑构建、占内存。新网关接不回它们，只能清掉。
  *  认法：本 uid、PPID=1，且环境里带 CCAPP_RUN=1（claudeEnv 打的标记，子孙都继承），
  *  或命令行就是我们的 claude（打标记之前的版本留下的）。连子孙一起、按进程组杀（同 killTree）。
- *  只在 cccodroid 做：开发端换网关（gw-swap.sh）时上一任的运行还要接着用。 */
+ *  只在 Aure Code 做：开发端换网关（gw-swap.sh）时上一任的运行还要接着用。 */
 export function reapOrphans() {
   if (!PREFIX) return;
   const uid = process.getuid(), victims = [];

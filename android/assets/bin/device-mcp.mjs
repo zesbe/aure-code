@@ -146,7 +146,7 @@ rl.on("line", async (line) => {
         return send({ id: m.id, result: {
           protocolVersion: m.params?.protocolVersion || "2025-06-18",
           capabilities: { tools: {} },
-          serverInfo: { name: "cccodroid-device", version: "1.0.0" },
+          serverInfo: { name: "aurecode-device", version: "1.0.0" },
           instructions: "Tools for the Android device Aure Code runs on. Things that open other apps only pre-fill; the user confirms in Aure Code first, then finishes in that app. Screen tools need the accessibility service, which the app switches on when needed.",
         } });
       case "ping": return send({ id: m.id, result: {} });

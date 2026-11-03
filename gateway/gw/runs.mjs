@@ -13,7 +13,7 @@ export const runOfSession = (sid) => (sid && runList().find((r) => r.sessionId =
 // 同时跑几轮：每个 claude 进程要占几百 MB 内存，开多大由用户自己把握
 export const MAX_PARALLEL_CAP = 16;
 export const maxParallel = () => Math.max(1, Math.min(MAX_PARALLEL_CAP, Math.round(Number(SETTINGS.maxParallel)) || 3));
-// 有任务在跑时落一个标记文件：cccodroid 的冻结检测只把「跑任务时被冻」算数 ——
+// 有任务在跑时落一个标记文件：Aure Code 的冻结检测只把「跑任务时被冻」算数 ——
 // 空闲时被厂商冻结器冻住无害，以前每次都记，设置页的提醒就老是弹
 const RUN_FLAG = path.join(CFG.home, ".run-active");
 export const runFlag = (on) => { try { on ? fs.writeFileSync(RUN_FLAG, String(process.pid)) : fs.rmSync(RUN_FLAG, { force: true }); } catch {} };

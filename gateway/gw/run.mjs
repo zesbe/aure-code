@@ -185,7 +185,7 @@ export async function startRun(item) {
   ];
   if (model) argv.push("--model", model);
   if (run.sessionId) argv.push("--resume", String(run.sessionId));
-  // 设备工具（通知、剪贴板、打开应用、读屏点按…）：只有 cccodroid 有 Java 那一层。开关在应用里，
+  // 设备工具（通知、剪贴板、打开应用、读屏点按…）：只有 Aure Code 有 Java 那一层。开关在应用里，
   // 这里只看总开关决定挂不挂；具体哪些工具出现由 device-mcp.mjs 现问应用。端侧小模型不挂（读不起）
   const devMcp = deviceMcpConfig();
   if (devMcp && !P.local && (await privCall({ op: "dev_status" }, 3000)).on) argv.push("--mcp-config", devMcp);
@@ -353,8 +353,8 @@ export async function startRun(item) {
         interactive: !!r.requires_user_interaction, agentId: r.agent_id || null, at: Date.now(),
         runId: run.id, sessionId: run.sessionId || null,   // 并行时通知要知道是哪个会话的
       };
-      // 敏感操作再确认（guard/cc-guard.mjs 的 ask）：reason 形如 cccodroid-guard|类别|说明
-      const gm = r.decision_reason_type === "hook" && /^cccodroid-guard\|([^|]+)\|(.*)$/s.exec(String(r.decision_reason || ""));
+      // 敏感操作再确认（guard/cc-guard.mjs 的 ask）：reason 形如 aurecode-guard|类别|说明
+      const gm = r.decision_reason_type === "hook" && /^aurecode-guard\|([^|]+)\|(.*)$/s.exec(String(r.decision_reason || ""));
       if (gm) { p.guard = { cat: gm[1].slice(0, 80), what: gm[2].slice(0, 200) }; p.reason = null; }
       if (run.unattended) {
         log(`✗ 无人值守，自动拒绝 ${p.tool} ${String(p.input.command || p.input.file_path || p.input.url || "").slice(0, 60)}`);

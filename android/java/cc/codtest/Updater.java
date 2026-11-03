@@ -37,8 +37,8 @@ import org.json.JSONObject;
  * 已装版本只认 .devkit-ok 里记的内容哈希，绝不拿本 APK 内置的钉子去猜（新 APK 的钉子会把旧工具包"认成"新版）。
  */
 final class Updater {
-    static final String TAG = "cccodroid-upd";
-    static final String REPO = "zesbe/cccodroid";
+    static final String TAG = "aurecode-upd";
+    static final String REPO = "zesbe/aure-code";
     /** 备用源：cccodroid.net 镜像了最近几个版本的 APK 和一份同形状的发布列表（dl/releases.json）。
      *  只在 GitHub 连不上 / 下载不顺时用；下来的 APK 照样核 sha256 和签名。工具包太大，没有镜像 */
     static final String MIRROR = null;   // fork: upstream's mirror lists upstream-signed APKs, not ours
@@ -159,7 +159,7 @@ final class Updater {
         String p = flavorPref();
         return "28".equals(p) || "36".equals(p) ? p : flavor();
     }
-    static String apkName(String flavor) { return "36".equals(flavor) ? "cccodroid-36.apk" : "cccodroid.apk"; }
+    static String apkName(String flavor) { return "36".equals(flavor) ? "aurecode-36.apk" : "aurecode.apk"; }
     /** 系统拒装 28 的报错：安卓 14 起有「最低可安装 targetSdk」，以后的版本可能抬过 28 */
     static boolean sdkTooOld(String msg) { return msg != null && msg.contains("DEPRECATED_SDK_VERSION"); }
     /** 装 28 被系统以 targetSdk 太旧拒掉：记下只能 36，改下 36 那套 */
@@ -216,7 +216,7 @@ final class Updater {
         }
         if (!switched) return;
         // 同一时间只换一次：上一次还在等确认就不接新的
-        if (!switching.compareAndSet(false, true)) { Log.i("cccodroid", "上一次换渠道还没完，这次不接"); return; }
+        if (!switching.compareAndSet(false, true)) { Log.i("aurecode", "上一次换渠道还没完，这次不接"); return; }
         final String toCh = ch, toPin = pin;
         // 换渠道是用户明说要哪个版本：马上按新渠道查，版本对不上就直接换（切回 stable 也会换回 stable 的版本）
         new Thread(() -> {
@@ -229,7 +229,7 @@ final class Updater {
                 boolean down = claudeDowngrade(to);
                 // 换渠道 / 固定版本落到比已装的旧：和 upd_apply 指定旧版本一样要用户点头（10-31 四轮复核：这是降级的另一条路）
                 if (down && !Priv.confirm(Tr.f("把 Claude Code 降级到 {0}", to), who, "upd:" + to)) {
-                    Log.i("cccodroid", "没有允许降级到 " + to + "，设置不变");
+                    Log.i("aurecode", "没有允许降级到 " + to + "，设置不变");
                 } else {
                     prefs().edit().putString("channel", toCh).putString("pin", toPin).commit();
                     keep = true;
@@ -318,7 +318,7 @@ final class Updater {
     String devkitIncompatible(JSONObject id) {
         if (id == null) return null;
         if (!ctx.getPackageName().equals(id.optString("target")) || id.optInt("compat", 1) != DEVKIT_COMPAT)
-            return Tr.f("{0} 与本版 cccodroid 不兼容", id.optString("tag"));
+            return Tr.f("{0} 与本版 Aure Code 不兼容", id.optString("tag"));
         return null;
     }
 
@@ -472,7 +472,7 @@ final class Updater {
                 app.size = a.optLong("size");
                 String d = a.optString("digest", "");
                 app.sha = d.startsWith("sha256:") ? d.substring(7) : null;
-                app.file = new File(env.files, "updates/cccodroid-" + app.latest + "-" + want + ".apk");
+                app.file = new File(env.files, "updates/aurecode-" + app.latest + "-" + want + ".apk");
                 String note = swap ? Tr.f("换成 targetSdk {0} 的安装包", want) : r.optBoolean("prerelease") ? Tr.t("预览版") : "";
                 if (!"downloading".equals(app.state) && !"installing".equals(app.state))
                     app.set(app.file.isFile() && app.file.length() == app.size ? "ready" : "available", note);
@@ -524,7 +524,7 @@ final class Updater {
             lock = new JSONObject(new String(lockBytes, StandardCharsets.UTF_8));
         }
         if (!ctx.getPackageName().equals(lock.optString("target")) || lock.optInt("compat", 1) != DEVKIT_COMPAT) {
-            devkit.set("uptodate", Tr.f("{0} 需要更新版本的 cccodroid", best)); return;
+            devkit.set("uptodate", Tr.f("{0} 需要更新版本的 Aure Code", best)); return;
         }
         JSONObject gz = lock.getJSONObject("gz");
         String sha = gz.getString("sha256");
@@ -858,7 +858,7 @@ final class Updater {
     private void checkApkSigner(File apk) throws Exception {
         PackageManager pm = ctx.getPackageManager();
         PackageInfo a = Apk.archiveInfo(ctx, apk);
-        if (a == null || !ctx.getPackageName().equals(a.packageName)) throw new IOException(Tr.t("下载的不是 cccodroid 安装包"));
+        if (a == null || !ctx.getPackageName().equals(a.packageName)) throw new IOException(Tr.t("下载的不是 Aure Code 安装包"));
         if (!Apk.signer(a).equals(Apk.signer(pm.getPackageInfo(ctx.getPackageName(), Apk.SIG_FLAGS))))
             throw new IOException(Tr.t("安装包签名与本应用不一致，拒绝安装"));
         String got = a.applicationInfo != null && a.applicationInfo.targetSdkVersion >= 29 ? "36" : "28";
@@ -1066,7 +1066,7 @@ final class Updater {
                 }
             }
             if (!ctx.getPackageName().equals(lock.optString("target")) || lock.optInt("compat", 1) != DEVKIT_COMPAT)
-                return r.put("ok", false).put("message", Tr.f("{0} 与本版 cccodroid 不兼容", tagOf(base)));
+                return r.put("ok", false).put("message", Tr.f("{0} 与本版 Aure Code 不兼容", tagOf(base)));
             JSONObject gz = lock.getJSONObject("gz"), tar = lock.optJSONObject("tar");
             devkit.base = base; devkit.latest = tagOf(base);
             devkit.sha = gz.getString("sha256"); devkit.size = gz.getLong("bytes");

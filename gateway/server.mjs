@@ -122,7 +122,7 @@ const server = http.createServer(async (req, res) => {
     return res.end(r);
   }
   // 宿主 WebView 首次加载首页时带 ?t=令牌：种 Cookie，之后同源请求自动带上
-  // cccodroid 里只在界面专用地址上种（见 access.mjs 的 UI_HOST）；App 现在直接用 CookieManager 种，这条留给开发端
+  // Aure Code 里只在界面专用地址上种（见 access.mjs 的 UI_HOST）；App 现在直接用 CookieManager 种，这条留给开发端
   if (req.method === "GET" && (p === "/" || p === "/index.html") && cookieHostOk(req) && tokenOk(u.searchParams.get("t") || "")) {
     res.setHeader("Set-Cookie", `${COOKIE}=${SESSION}; Path=/; HttpOnly; SameSite=Strict`);
   }
@@ -147,7 +147,7 @@ process.on("unhandledRejection", (e) => log(`未处理的 Promise 拒绝: ${(e &
 // ── 启动 ──────────────────────────────────────────────────────────────
 try { fs.mkdirSync(CFG.workspace, { recursive: true }); } catch {}
 // /sdcard 上的文件属主是系统（media_rw），git 会以 "dubious ownership" 拒绝操作那里的仓库。
-// 只对前缀布局（cccodroid 自己的 HOME）做，不碰别人的 git 配置。
+// 只对前缀布局（Aure Code 自己的 HOME）做，不碰别人的 git 配置。
 if (PREFIX) {
   try {
     const gc = path.join(CFG.home, ".gitconfig");

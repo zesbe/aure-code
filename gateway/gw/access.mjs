@@ -26,19 +26,19 @@ export const TOKEN = (() => {
   fs.renameSync(tmp, TOKEN_FILE);
   return t;
 })();
-// Cookie 不按端口隔离：同一个浏览器里开着两个网关（开发端 8790 + cccodroid 8791）时，同名 Cookie 会互相覆盖，
+// Cookie 不按端口隔离：同一个浏览器里开着两个网关（开发端 8790 + Aure Code 8791）时，同名 Cookie 会互相覆盖，
 // 所以名字里带上端口
 export const COOKIE = `cc_t_${CFG.port}`;
 // ── 界面专用地址（GHSA-hwmm 第 1 项）──
 // Cookie 不按端口隔离：种在 127.0.0.1 上，内置浏览器打开同机别的应用起的 127.0.0.1:任意端口、或者回复里一张
 // <img src="http://127.0.0.1:端口/…">，Cookie 都会跟着送过去，对方拿到就能用原生客户端重放 /api/*。
-// cccodroid 的界面因此改走 127.0.0.2（同样是回环，网关两个地址都听），会话 Cookie 只认这个地址上来的请求；
+// Aure Code 的界面因此改走 127.0.0.2（同样是回环，网关两个地址都听），会话 Cookie 只认这个地址上来的请求；
 // App 那边把内置浏览器里这个地址的所有端口、界面里这个地址的其他端口全拦掉，Cookie 就送不到别人手里。
 // 开发端的外壳还是 127.0.0.1，照旧
 export const UI_HOST = "127.0.0.2";
 const UI_HOSTPORT = `${UI_HOST}:${CFG.port}`;
 const ALLOWED_HOSTS = new Set([`127.0.0.1:${CFG.port}`, `localhost:${CFG.port}`, UI_HOSTPORT]);
-/** 这个请求能不能凭 Cookie 认、能不能种 Cookie：cccodroid 里只有界面专用地址可以 */
+/** 这个请求能不能凭 Cookie 认、能不能种 Cookie：Aure Code 里只有界面专用地址可以 */
 // Host 头谁都能写：再核一下连接实际进的是哪个监听地址。冒牌的占住 127.0.0.2、把界面请求转发到 127.0.0.1 上来时，这里就不认
 export const localAddr = (req) => String(req.socket?.localAddress || "").replace(/^::ffff:/, "");
 export const cookieHostOk = (req) => !PREFIX || (String(req.headers.host || "").toLowerCase() === UI_HOSTPORT && localAddr(req) === UI_HOST);
@@ -90,7 +90,7 @@ export function staticMac(nonce, url, body, local = UI_HOST) {
   if (!/^[0-9a-f]{32}$/.test(String(nonce || ""))) return null;
   return mac(`static:${nonce}:${local}:${url}:${crypto.createHash("sha256").update(body).digest("hex")}`);
 }
-// cccodroid 里 Cookie 不用令牌本身，用按这次启动派生的会话值：会话中途网关挂了、端口被抢，
+// Aure Code 里 Cookie 不用令牌本身，用按这次启动派生的会话值：会话中途网关挂了、端口被抢，
 // 界面重连时送出去的 Cookie 到了下一个真网关就作废。网关重启后 App 按新的 BOOT 种上新 Cookie（Env.proveGateway），
 // 界面的事件总线 2 秒一重连，自己就接上了。开发端照旧用令牌：gw-swap 热换网关时界面不能掉线
 export const SESSION = PREFIX ? mac("cookie:" + BOOT) : TOKEN;

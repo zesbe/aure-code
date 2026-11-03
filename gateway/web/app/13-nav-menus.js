@@ -148,7 +148,7 @@
   });
   $("side-new").addEventListener("click", () => { closePage(); closeDrawer(); newConversation(); });
   $("side-acct").addEventListener("click", () => acctMenu());
-  // ── 头像与昵称：只存本机。没设昵称时用登录邮箱 @ 前面那段，再没有就叫 cccodroid ──
+  // ── 头像与昵称：只存本机。没设昵称时用登录邮箱 @ 前面那段，再没有就叫 Aure Code ──
   const PROF_KEY = "cc.profile";
   const profile = () => { try { return JSON.parse(localStorage.getItem(PROF_KEY)) || {}; } catch { return {}; } };
   const profName = () => profile().name || (acctEmail ? acctEmail.split("@")[0] : "") || "Aure Code";

@@ -282,7 +282,7 @@
     const k = (v, l) => `<div><span class="num">${v}</span><small>${esc(l)}</small></div>`;
     $("en-kpis").innerHTML = e ? (e.native ? k(b && b.d != null ? (Math.round(b.d * 10) / 10) + "%" : "—", t("电量")) + k(b && b.s ? fmtDur(b.s * 1000) : "—", t("亮屏")) : "")
       + k(b && b.c ? fmtDur(b.c * 1000) : "—", t("本应用 CPU")) : "";
-    $("en-kpi-note").textContent = e ? (e.native ? t("电量是整机今天掉了多少；CPU 是本应用（含 Claude 和它跑的命令）实际干活的时间。") : t("这个版本没有原生层，只记 CPU 时间（电量、亮屏要 cccodroid）。")) : "";
+    $("en-kpi-note").textContent = e ? (e.native ? t("电量是整机今天掉了多少；CPU 是本应用（含 Claude 和它跑的命令）实际干活的时间。") : t("这个版本没有原生层，只记 CPU 时间（电量、亮屏要 Aure Code）。")) : "";
   }
   $("us-view").addEventListener("click", (e) => {
     const b = e.target.closest("[data-v]"); if (!b) return;

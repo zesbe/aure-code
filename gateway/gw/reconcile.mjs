@@ -12,7 +12,7 @@
 // 本机实况里告诉 Claude，问题有变化时记一笔修复账本。
 import fs from "node:fs";
 import path from "node:path";
-import { CFG, LIVE, PATHS, PREFIX, log, reqLang, tr, tz } from "./config.mjs";
+import { CFG, LIVE, PATHS, PREFIX, log, reqLang, tr, tz, L3 } from "./config.mjs";
 import { ledger } from "./claude.mjs";
 import { COMP_DIR, compRecord, devkitIdentity } from "./components.mjs";
 import { modInstalled, modulesInfo } from "./modules.mjs";
@@ -127,8 +127,8 @@ export function reconcileRun() {
     r.findings.sort((a, b) => levelRank[a.level] - levelRank[b.level]);
     const bad = r.findings.filter((f) => f.level !== "info");
     if (keysOf(r) !== keysOf(prev)) {
-      if (bad.length) ledger("verify", false, `状态对账：${bad.length} 处记录和磁盘对不上`, { samples: bad.slice(0, 5).map((f) => tzFill(f)) });
-      else if (prev && keysOf(prev)) ledger("verify", true, "状态对账：记录和磁盘重新对上了");
+      if (bad.length) ledger("verify", false, L3(`状态对账：${bad.length} 处记录和磁盘对不上`, `State check: ${bad.length} records do not match the disk`, `Pemeriksaan status: ${bad.length} catatan tidak cocok dengan disk`), { samples: bad.slice(0, 5).map((f) => tzFill(f)) });
+      else if (prev && keysOf(prev)) ledger("verify", true, L3("状态对账：记录和磁盘重新对上了", "State check: records match the disk again", "Pemeriksaan status: catatan kembali cocok dengan disk"));
     }
     last = r;
     try { fs.mkdirSync(path.dirname(STATE), { recursive: true }); fs.writeFileSync(STATE, JSON.stringify(r)); } catch {}

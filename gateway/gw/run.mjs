@@ -1,6 +1,6 @@
 import fs from "node:fs";
 import { spawn } from "node:child_process";
-import { CFG, LAST_LANG, PATHS, log, tr, tz } from "./config.mjs";
+import { CFG, LAST_LANG, PATHS, log, tr, tz, L3 } from "./config.mjs";
 import { SETTINGS, capList } from "./settings-store.mjs";
 import { PERM_MODES, PROVIDER, billAfterRun, keyOf, noteTokens, providerById } from "./providers.mjs";
 import { ALIAS_SEEN, effortLevelsOf, fetchModels, isLoginMode, modelsCached, normEffort } from "./models.mjs";
@@ -551,7 +551,7 @@ export async function startRun(item) {
         ...(run.sched ? { finalText: String(lastResult.result || "").slice(0, 4000), costRaw: Number(lastResult.total_cost_usd || 0) } : {}),
       });
     }
-    const hint = code !== 0 ? `生成失败（退出码 ${code}）` : "生成结束但没有返回结果";
+    const hint = code !== 0 ? L3(`生成失败（退出码 ${code}）`, `Generation failed (exit code ${code})`, `Gagal membuat jawaban (kode keluar ${code})`) : L3("生成结束但没有返回结果", "Generation ended without a result", "Pembuatan jawaban selesai tanpa hasil");
     log(`✖ ${hint}${stderr ? " :: " + stderr.trim().slice(0, 300) : ""}`);
     emit({ type: "error", message: hint, detail: stderr.trim().slice(0, 1200) });
     endRun(run, { failed: true, durationMs: ms });

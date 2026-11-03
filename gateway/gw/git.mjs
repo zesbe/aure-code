@@ -1,7 +1,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import { execFile, spawn } from "node:child_process";
-import { CFG, log, tz } from "./config.mjs";
+import { CFG, log, tz, L3 } from "./config.mjs";
 import { realWorkspace } from "./sessionops.mjs";
 import { NEXT, readBody, sendJson } from "./http.mjs";
 import { termEnv } from "./terminal.mjs";
@@ -38,7 +38,7 @@ function git(cwd, args, { input, timeout = 30000, max = GIT_MAX } = {}) {
       clearTimeout(timer);
       const errOut = Buffer.concat(errs).toString("utf8");
       const err = timedOut ? tz("git 超时（{s} 秒），已结束它和它启动的钩子", { s: Math.round(timeout / 1000) })
-        : spawnErr ? (spawnErr.code === "ENOENT" ? "找不到 git" : spawnErr.message) : over ? "输出太长" : errOut;
+        : spawnErr ? (spawnErr.code === "ENOENT" ? L3("找不到 git", "git not found", "git tidak ditemukan") : spawnErr.message) : over ? L3("输出太长", "output too long", "keluaran terlalu panjang") : errOut;
       resolve({ code: timedOut || spawnErr || over ? (code || 1) : (code ?? 1), out: Buffer.concat(out).toString("utf8"), err: String(err || "").trim() });
     });
     c.stdin.on("error", () => {});

@@ -2,7 +2,7 @@ import fs from "node:fs";
 import path from "node:path";
 import { execFile } from "node:child_process";
 import crypto from "node:crypto";
-import { CFG, GLIBC_PRELOAD, PATHS, PREFIX, glibcEnv, log, tz } from "./config.mjs";
+import { CFG, GLIBC_PRELOAD, PATHS, PREFIX, glibcEnv, log, tz, L3 } from "./config.mjs";
 import { verifiedInfo } from "./ccverified.mjs";
 import { ledger } from "./claude.mjs";
 import { NEXT, readBody, sendJson } from "./http.mjs";
@@ -51,7 +51,7 @@ async function devUpdCheck() {
     if (c.state !== "installing") {
       const d = cmpVer(v, c.current);
       c.state = d === 0 ? "uptodate" : "available";
-      c.message = d < 0 && c.current ? `切回 ${devUpd.channel} 渠道：将换成 ${v}（比当前的 ${c.current} 旧）` : devUpd.channel === "latest" ? "latest 渠道" : "";
+      c.message = d < 0 && c.current ? L3(`切回 ${devUpd.channel} 渠道：将换成 ${v}（比当前的 ${c.current} 旧）`, `Back to the ${devUpd.channel} channel: will switch to ${v} (older than the current ${c.current})`, `Kembali ke kanal ${devUpd.channel}: akan diganti ke ${v} (lebih lama dari ${c.current} saat ini)`) : devUpd.channel === "latest" ? L3("latest 渠道", "latest channel", "kanal latest") : "";
     }
     devUpd.lastCheck = Date.now();
   } catch (e) { devUpd.error = tz("连不上 downloads.claude.ai：{err}", { err: e.message }); }
@@ -85,12 +85,12 @@ async function devUpdInstall() {
         finally { fs.closeSync(out); }
       } catch (e) {
         if (attempt >= 8) throw e;
-        c.message = `网络中断（${e.message}），${attempt * 3} 秒后续传…`;
+        c.message = L3(`网络中断（${e.message}），${attempt * 3} 秒后续传…`, `Network interrupted (${e.message}), resuming in ${attempt * 3} s…`, `Jaringan terputus (${e.message}), dilanjutkan dalam ${attempt * 3} detik…`);
         await new Promise((ok) => setTimeout(ok, attempt * 3000));
         have = fs.existsSync(part) ? fs.statSync(part).size : 0;
       }
     }
-    c.message = "校验 sha256…";
+    c.message = L3("校验 sha256…", "Verifying sha256…", "Memverifikasi sha256…");
     const h = crypto.createHash("sha256");
     for await (const b of fs.createReadStream(part)) h.update(b);
     const got = h.digest("hex");
@@ -103,7 +103,7 @@ async function devUpdInstall() {
     fs.renameSync(part, PATHS.claude);
     fs.rmSync(tag, { force: true });
     log(`Claude Code 已更新 ${c.current} → ${v}`);
-    c.current = v; c.state = "uptodate"; c.message = `已更新到 ${v}（下一轮对话起生效；旧版留在 claude.prev）`;
+    c.current = v; c.state = "uptodate"; c.message = L3(`已更新到 ${v}（下一轮对话起生效；旧版留在 claude.prev）`, `Updated to ${v} (takes effect from the next turn; the old version is kept as claude.prev)`, `Diperbarui ke ${v} (berlaku mulai giliran berikutnya; versi lama disimpan sebagai claude.prev)`);
   } catch (e) {
     c.state = "error"; c.message = e.message;
   } finally { devUpdSave(); }
@@ -137,8 +137,8 @@ if (PREFIX && process.env.CCAPP_BIN) {
     execFile(path.join(PREFIX, "bin", "node"), [script, "--recheck"], { env: termEnv(), timeout: 600000 }, (e, out) => {
       const msg = String(out || "").trim();
       if (msg) log("[claude 补核] " + msg.replace(/\n/g, "；"));
-      if (e && e.code === 3) ledger("verify", false, "Claude Code 与官方清单不符（npm 来源）", msg);
-      else if (/^✓/m.test(msg)) ledger("verify", true, "Claude Code 已按官方清单补核", msg);
+      if (e && e.code === 3) ledger("verify", false, L3("Claude Code 与官方清单不符（npm 来源）", "Claude Code does not match the official manifest (npm source)", "Claude Code tidak cocok dengan manifes resmi (sumber npm)"), msg);
+      else if (/^✓/m.test(msg)) ledger("verify", true, L3("Claude Code 已按官方清单补核", "Claude Code re-verified against the official manifest", "Claude Code sudah diverifikasi ulang dengan manifes resmi"), msg);
     });
   };
   setTimeout(recheck, 120_000);

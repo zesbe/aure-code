@@ -9,7 +9,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import crypto from "node:crypto";
-import { CFG, LIVE, PREFIX, log } from "./config.mjs";
+import { CFG, LIVE, PREFIX, log, L3 } from "./config.mjs";
 import { NEXT, readBody, sendJson } from "./http.mjs";
 import { privCall } from "./usage.mjs";
 
@@ -35,9 +35,9 @@ function cmpVer(a, b) { const x = num(a), y = num(b); for (let i = 0; i < Math.m
 async function fetchOne(url) {
   const get = async (u) => { const r = await fetch(u, { signal: AbortSignal.timeout(20000), headers: { "cache-control": "no-cache" } }); if (!r.ok) throw new Error(`HTTP ${r.status}`); return Buffer.from(await r.arrayBuffer()); };
   const body = await get(url), sig = (await get(url + ".sig")).toString("utf8").trim();
-  if (!crypto.verify(null, body, PUBKEY, Buffer.from(sig, "base64"))) throw new Error("签名对不上");
+  if (!crypto.verify(null, body, PUBKEY, Buffer.from(sig, "base64"))) throw new Error(L3("签名对不上", "signature mismatch", "tanda tangan tidak cocok"));
   const j = JSON.parse(body.toString("utf8"));
-  if (!Array.isArray(j.notices)) throw new Error("格式不对");
+  if (!Array.isArray(j.notices)) throw new Error(L3("格式不对", "bad format", "format tidak valid"));
   return j;
 }
 

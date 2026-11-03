@@ -5,7 +5,7 @@
     try {
       const r = await api("/api/sessions");
       if (!ok()) return true;
-      state.sessions = r.sessions || [];
+      state.sessions = (r.sessions || []).map((s) => (s && s.title === "(无标题)" ? { ...s, title: t("（无标题）") } : s));
       if (sess.q.trim()) resessSearch(); else renderSessions();
       lineageDirty();
       return true;

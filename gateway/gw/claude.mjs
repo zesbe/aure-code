@@ -2,7 +2,7 @@ import http from "node:http";
 import fs from "node:fs";
 import path from "node:path";
 import { spawn } from "node:child_process";
-import { CFG, GLIBC_PRELOAD, NO_BRIDGE, PATHS, PREFIX, glibcEnv, log, sleep } from "./config.mjs";
+import { CFG, GLIBC_PRELOAD, NO_BRIDGE, PATHS, PREFIX, glibcEnv, log, sleep, L3 } from "./config.mjs";
 import { SETTINGS } from "./settings-store.mjs";
 import { PROVIDER, keyOf } from "./providers.mjs";
 import { cachedModels } from "./models.mjs";
@@ -424,7 +424,7 @@ export const safeMode = () => fs.existsSync(SAFE_FILE);
 function setSafeMode(on) {
   if (on) fs.writeFileSync(SAFE_FILE, String(Date.now()));
   else try { fs.unlinkSync(SAFE_FILE); } catch {}
-  ledger("safe-mode", true, on ? "进入安全模式（界面开启）" : "退出安全模式");
+  ledger("safe-mode", true, on ? L3("进入安全模式（界面开启）", "Entered safe mode (from the UI)", "Masuk mode aman (dari antarmuka)") : L3("退出安全模式", "Left safe mode", "Keluar dari mode aman"));
   log(on ? "进入安全模式" : "退出安全模式");
 }
 
@@ -508,7 +508,7 @@ export function runClaude(args, { cwd, timeoutMs = 60000 } = {}) {
     child.on("close", (code, signal) => {
       if (done) return;
       // 被信号杀掉时 code 是 null：把信号名带出去，不然调用方只看到一片空白
-      done = true; clearTimeout(timer); resolve({ out, err: err + (signal ? `（claude 被信号 ${signal} 终止）` : ""), code, signal });
+      done = true; clearTimeout(timer); resolve({ out, err: err + (signal ? L3(`（claude 被信号 ${signal} 终止）`, ` (claude was killed by signal ${signal})`, ` (claude dihentikan oleh sinyal ${signal})`) : ""), code, signal });
     });
   });
 }

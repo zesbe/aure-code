@@ -109,6 +109,8 @@ export function tz(k, v) {
 }
 const LANG_DICTS = new Map();
 export let LAST_LANG = "zh";
+/** 只在服务端拼、没进词典的长句（斜杠命令回复等）：按最近一次见到的界面语言挑中文 / 印尼语 / 英文 */
+export const L3 = (zh, en, id) => (/^zh/i.test(LAST_LANG) ? zh : /^id/i.test(LAST_LANG) ? id : en);
 function langDict(code) {
   if (!LANG_DICTS.has(code)) {
     let d = null;

@@ -11,7 +11,7 @@
 //   · 当前工具包装好之后才出现的文件 —— 用户自己放的
 import fs from "node:fs";
 import path from "node:path";
-import { PREFIX, log } from "./config.mjs";
+import { PREFIX, log, L3 } from "./config.mjs";
 import { ledger } from "./claude.mjs";
 import { compNeeds, compRecords } from "./components.mjs";
 import { NEXT, sendJson } from "./http.mjs";
@@ -145,7 +145,7 @@ export function cleanOrphans() {
       "升级开发工具包时被误当成用户文件留下的旧程序（旧工具包 / 旧组件的），已经没有人认领、大多跑不起来。\n" +
       "14 天后自动删除。真有要用的，挪回 usr/bin 即可；更好的办法是装对应的组件或 pkg install。\n\n" + moved.join("\n") + "\n");
     log(`[orphans] 隔离了 ${moved.length} 个旧工具包残留到 ${dst}`);
-    ledger("repair", true, `清理旧工具包残留：${moved.length} 个程序挪到 ${path.basename(dst)}（14 天后删除）`, { sample: moved.slice(0, 20) });
+    ledger("repair", true, L3(`清理旧工具包残留：${moved.length} 个程序挪到 ${path.basename(dst)}（14 天后删除）`, `Cleaned old toolkit leftovers: ${moved.length} programs moved to ${path.basename(dst)} (deleted after 14 days)`, `Sisa toolkit lama dibersihkan: ${moved.length} program dipindah ke ${path.basename(dst)} (dihapus setelah 14 hari)`), { sample: moved.slice(0, 20) });
   }
   fs.writeFileSync(MARK(), JSON.stringify({ at: Date.now(), moved: out.size }) + "\n");
 }
@@ -177,7 +177,7 @@ export async function routeOrphans(req, res, u, p) {
     const dirs = PREFIX ? orphanDirs() : [];
     for (const d of dirs) fs.rmSync(path.join(path.dirname(PREFIX), d.name), { recursive: true, force: true });
     const n = dirs.reduce((a, d) => a + d.count, 0);
-    if (dirs.length) { log(`[orphans] 立即删除隔离目录：${dirs.map((d) => d.name).join(" ")}`); ledger("repair", true, `立即删除了隔离的旧工具包残留（${n} 个程序）`); }
+    if (dirs.length) { log(`[orphans] 立即删除隔离目录：${dirs.map((d) => d.name).join(" ")}`); ledger("repair", true, L3(`立即删除了隔离的旧工具包残留（${n} 个程序）`, `Deleted quarantined toolkit leftovers now (${n} programs)`, `Sisa toolkit lama yang dikarantina langsung dihapus (${n} program)`)); }
     return sendJson(res, 200, { ok: true, removed: n });
   }
   return NEXT;

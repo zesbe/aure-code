@@ -1,6 +1,6 @@
 import fs from "node:fs";
 import path from "node:path";
-import { CFG, PATHS, PERM_MODES, log, tz } from "./config.mjs";
+import { CFG, PATHS, PERM_MODES, log, tz, L3 } from "./config.mjs";
 import { API_KEY, BUILTIN_PROVIDER, PROVIDER, PROVIDERS_CFG, applyProvider } from "./providers.mjs";
 import { setBridgeUpstream } from "./claude.mjs";
 import { MAX_PARALLEL_CAP, RUNS, maxParallel } from "./runs.mjs";
@@ -14,8 +14,8 @@ import { SETTINGS, saveSettings } from "./settings-store.mjs";
 /** claude 认的输出风格：内置两种 + ~/.claude/output-styles 与工作区 .claude/output-styles 里的 .md（名字取 frontmatter 的 name） */
 function outputStyles() {
   const out = [
-    { id: "Explanatory", desc: "边做边解释实现取舍" },
-    { id: "Learning", desc: "留 TODO 让你亲手写一部分" },
+    { id: "Explanatory", get desc() { return L3("边做边解释实现取舍", "Explains implementation choices as it works", "Menjelaskan pilihan implementasi sambil bekerja"); } },
+    { id: "Learning", get desc() { return L3("留 TODO 让你亲手写一部分", "Leaves TODOs for you to write parts yourself", "Menyisakan TODO agar Anda menulis sebagian sendiri"); } },
   ];
   for (const dir of [path.join(CFG.home, ".claude/output-styles"), path.join(CFG.workspace, ".claude/output-styles")]) {
     let files = [];

@@ -1,4 +1,5 @@
 import fs from "node:fs";
+import { L3 } from "./config.mjs";
 import { spawn } from "node:child_process";
 
 // ── 分段并行下载 ─────────────────────────────────────────────────────
@@ -57,7 +58,7 @@ export async function pget({ curl, url, file, total, n = 4, curlArgs = [], onPro
           c.on("close", (code) => {
             kids.delete(c);
             if (seg[2] >= seg[1] - seg[0] + 1) return resolve("");
-            resolve(code === 0 ? "连接提前结束" : (e.trim().split("\n").pop() || "curl " + code).replace(/^curl: \(\d+\) /, ""));
+            resolve(code === 0 ? L3("连接提前结束", "connection closed early", "koneksi berakhir terlalu cepat") : (e.trim().split("\n").pop() || "curl " + code).replace(/^curl: \(\d+\) /, ""));
           });
         });
         if (!err) return "";

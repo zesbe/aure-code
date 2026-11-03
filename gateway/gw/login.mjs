@@ -1,7 +1,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import { spawn } from "node:child_process";
-import { CFG, PATHS, log, tz } from "./config.mjs";
+import { CFG, PATHS, log, tz, L3 } from "./config.mjs";
 import { isLoginMode, noteLoggedIn } from "./models.mjs";
 import { claudeArgv, claudeEnv } from "./claude.mjs";
 import { RUNS } from "./runs.mjs";
@@ -49,7 +49,7 @@ function loginStart(flag) {
     L.ok = code === 0 && /success/i.test(L.out);
     log("登录：" + (L.ok ? "成功" : "结束（退出码 " + code + "）"));
     // 浏览器授权完停在 claude 的托管成功页上，用户不知道怎么回来 —— 主动把界面叫回前台
-    if (L.ok) toFront("登录成功").then((r) => log("登录：回到前台 → " + (r.via || r.message || "?")));
+    if (L.ok) toFront(L3("登录成功", "Signed in", "Berhasil masuk")).then((r) => log("登录：回到前台 → " + (r.via || r.message || "?")));
   });
   log("登录：已启动 claude auth login " + flag);
   return new Promise((resolve) => {

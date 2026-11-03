@@ -1,26 +1,21 @@
 {
- "tag": "devkit-2026.10.28",
- "base": "https://github.com/greyoak111/cccodroid/releases/download/devkit-2026.10.28/",
- "target": "cc.codroid",
+ "tag": "devkit-2026.11.03",
+ "base": "https://github.com/zesbe/cccodroid/releases/download/devkit-2026.11.03/",
+ "target": "cc.codtest",
  "compat": 1,
  "gz": {
-  "file": "devkit-cc.codroid.tar.gz",
-  "sha256": "3768afcf79a7cfb3b8db27d9d1d2951aaaade4caa79d5a1179cf495ebd14c67d",
-  "bytes": 687011283
+  "file": "devkit-cc.codtest.tar.gz",
+  "sha256": "2e699169eeeb55fbb00dfef178e05867a060a3f838e421f727ef62fa7bb1f9ce",
+  "bytes": 687357382
  },
  "tar": {
-  "file": "devkit-cc.codroid.tar",
-  "sha256": "243b4012f91d30f618e4f4d2c3f8021b924d5f298d31dd2e7e333973106e86cb",
-  "bytes": 1897737728
+  "file": "devkit-cc.codtest.tar",
+  "sha256": "dd6fe4598e8ee8e2d58c463d235abc8b48cecbf1988c352c73afaff9dd9701d8",
+  "bytes": 1898627584
  },
  "lock": {
   "file": "devkit.lock.json",
-  "sha256": "59fdc65aa72f3376eadf2314d24d6ff81580a1786169b2fba569c414f77bed6b",
-  "bytes": 113080
- },
- "modules": {
-  "file": "modules.json",
-  "sha256": "5a0521833f73bd7b8e5fa423ce4f7d96180afbacff9fa9710313bd87fcc64fcd",
-  "bytes": 72726
+  "sha256": "8ff73cd7acd16e27410071965ea40f361dc88ea2326bfddf3d668cc1328a7aff",
+  "bytes": 113090
  }
 }

@@ -3478,3 +3478,7 @@ html[data-motion="on"] .lin-prof .mo-ghost .mo-st,html[data-motion="on"] .lin-pr
 #bridge-config-panel .bc-pending{color:var(--fg2);font-weight:500}
 html[data-skin="goucheng"] #bridge-config-panel .bc-card{box-shadow:4px 4px 0 var(--gc-hard)}
 @media (max-width:420px){#bridge-config-panel .bc-card{padding:18px}#bridge-config-panel h2{font-size:19px}#bridge-config-panel .bc-summary > div{gap:10px}}
+/* Aure Code 标识：星星最后弹出来（略冲过头再回落）；减少动态效果时直接显示 */
+.wl-mark .wl-star{transform-box:view-box;transform-origin:24px 17px;animation:wl-pop .5s .45s cubic-bezier(.3,1.6,.5,1) forwards}
+@keyframes wl-pop{0%{opacity:0;transform:scale(.2)}to{opacity:1;transform:scale(1)}}
+@media (prefers-reduced-motion:reduce){.wl-mark .wl-star{animation:none;opacity:1;transform:none}}

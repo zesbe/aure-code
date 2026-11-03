@@ -1048,7 +1048,7 @@
 1048	“{q}” tidak ditemukan di pesan yang sudah dimuat
 1049	Pasang dari file toolkit yang sudah Anda unduh
 1050	File lokal…
-1051	Pasang toolkit pengembangan dari file lokal?\n\nPilih devkit-cc.codtest.tar.gz (atau .tar); bisa diunduh dari halaman rilis GitHub atau cccodroid.net. File diperiksa terhadap rilis yang diterbitkan sebelum dipasang, dan layanan dijeda 1–2 menit selama pemasangan.\nApa pun yang Anda pasang ke toolkit dengan pip / npm -g tetap dipertahankan.
+1051	Pasang toolkit pengembangan dari file lokal?\n\nPilih devkit-cc.codtest.tar.gz (atau .tar); bisa diunduh dari halaman rilis GitHub zesbe/aure-code. File diperiksa terhadap rilis yang diterbitkan sebelum dipasang, dan layanan dijeda 1–2 menit selama pemasangan.\nApa pun yang Anda pasang ke toolkit dengan pip / npm -g tetap dipertahankan.
 1052	Log perintah istimewa
 1053	Belum ada perintah yang dijalankan lewat priv
 1054	{n} entri terakhir (terbaru di atas). Hanya disimpan di perangkat ini, tidak pernah diunggah.

@@ -15,7 +15,7 @@ import org.json.JSONObject;
 
 /**
  * 更新说明：更新后第一次打开时，界面在主窗口正中显示这次更新了什么。
- * 说明随 APK 带在 assets/whatsnew/v<版本>.<zh|en>.md（发布时 release.sh 也用这两份当 Release 正文）。
+ * 说明随 APK 带在 assets/whatsnew/v<版本>.<zh|en|id>.md（发布时 release.sh 也用这两份当 Release 正文）。
  * 记账在 SharedPreferences "ui" 的 whatsNewSeen：上次看过说明的版本。
  *   全新安装（首次安装时间 == 最近更新时间）→ 直接记成当前版本，不显示；
  *   从没有这项功能的旧版升上来（没记过、但不是全新安装）→ 只显示当前版本的；
@@ -27,7 +27,7 @@ final class WhatsNew {
 
     private WhatsNew() {}
 
-    /** 要显示的说明：JSON 数组 [{v, md}]，没有就是 "[]"。lang 是界面最终用的语言（zh* 用中文，其余英文） */
+    /** 要显示的说明：JSON 数组 [{v, md}]，没有就是 "[]"。lang 是界面最终用的语言（zh* 用中文，id/in 用印尼语，其余英文） */
     static String pending(Context c, String lang) {
         try {
             PackageInfo p = c.getPackageManager().getPackageInfo(c.getPackageName(), 0);
@@ -38,7 +38,7 @@ final class WhatsNew {
             String[] files = c.getAssets().list(DIR);
             for (String f : files == null ? new String[0] : files) {
                 if (!f.startsWith("v") || !f.endsWith(".md")) continue;
-                String v = f.substring(1, f.length() - 3).replaceFirst("\\.(zh|en)$", "");
+                String v = f.substring(1, f.length() - 3).replaceFirst("\\.(zh|en|id)$", "");
                 if (vs.contains(v) || Updater.cmpVer(v, cur) > 0) continue;
                 if (seen == null ? Updater.cmpVer(v, cur) == 0 : Updater.cmpVer(v, seen) > 0) vs.add(v);
             }
@@ -46,10 +46,12 @@ final class WhatsNew {
                 @Override public int compare(String a, String b) { return Updater.cmpVer(b, a); }
             });
             boolean zh = lang != null && lang.startsWith("zh");
+            boolean id = lang != null && (lang.startsWith("id") || lang.startsWith("in"));
             JSONArray out = new JSONArray();
             for (String v : vs) {
                 if (out.length() >= MAX) break;
-                String md = read(c, "v" + v + (zh ? ".zh.md" : ".en.md"));
+                String md = id ? read(c, "v" + v + ".id.md") : null;
+                if (md == null) md = read(c, "v" + v + (zh ? ".zh.md" : ".en.md"));
                 if (md == null) md = read(c, "v" + v + (zh ? ".en.md" : ".zh.md"));
                 if (md != null && !md.trim().isEmpty()) out.put(new JSONObject().put("v", v).put("md", md));
             }

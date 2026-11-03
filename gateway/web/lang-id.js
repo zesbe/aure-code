@@ -1051,7 +1051,7 @@ window.I18N_DICT["id"] = {
   "没在加载的消息里找到「{q}」": "“{q}” tidak ditemukan di pesan yang sudah dimuat",
   "选一个已经下好的工具包文件来安装": "Pasang dari file toolkit yang sudah Anda unduh",
   "本地文件…": "File lokal…",
-  "从本地文件安装开发工具包？\n\n选一个 devkit-cc.codtest.tar.gz（或 .tar），可以在 GitHub 发布页或 cccodroid.net 下载。装之前会核对它是不是已发布的版本；装的时候暂停服务 1–2 分钟。\n你用 pip / npm -g 装进工具包的东西会被保留。": "Pasang toolkit pengembangan dari file lokal?\n\nPilih devkit-cc.codtest.tar.gz (atau .tar); bisa diunduh dari halaman rilis GitHub atau cccodroid.net. File diperiksa terhadap rilis yang diterbitkan sebelum dipasang, dan layanan dijeda 1–2 menit selama pemasangan.\nApa pun yang Anda pasang ke toolkit dengan pip / npm -g tetap dipertahankan.",
+  "从本地文件安装开发工具包？\n\n选一个 devkit-cc.codtest.tar.gz（或 .tar），可以在 zesbe/aure-code 的 GitHub 发布页下载。装之前会核对它是不是已发布的版本；装的时候暂停服务 1–2 分钟。\n你用 pip / npm -g 装进工具包的东西会被保留。": "Pasang toolkit pengembangan dari file lokal?\n\nPilih devkit-cc.codtest.tar.gz (atau .tar); bisa diunduh dari halaman rilis GitHub zesbe/aure-code. File diperiksa terhadap rilis yang diterbitkan sebelum dipasang, dan layanan dijeda 1–2 menit selama pemasangan.\nApa pun yang Anda pasang ke toolkit dengan pip / npm -g tetap dipertahankan.",
   "特权命令记录": "Log perintah istimewa",
   "还没有经 priv 执行过命令": "Belum ada perintah yang dijalankan lewat priv",
   "最近 {n} 条（最新的在前）。只记在本机，不上传。": "{n} entri terakhir (terbaru di atas). Hanya disimpan di perangkat ini, tidak pernah diunggah.",

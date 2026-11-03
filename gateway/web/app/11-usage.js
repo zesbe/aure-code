@@ -175,7 +175,7 @@
     // 页脚
     c.fillStyle = K.fg(0.08); c.fillRect(P, y, W - 2 * P, 2);
     text(t("{t} 轮回复 · 读了 {i} token", { t: usNum(st.tot.t), i: usCompact(st.tot.i) }), P, y + 56, font(500, 24), FG3);
-    text("cccodroid.net", W - P, y + 56, font(600, 24), FG2, "right");
+    text("Aure Code", W - P, y + 56, font(600, 24), FG2, "right");
   }
 
   // 换外观时重画月报（theme.js 只改 html 的 data-theme / data-skin，不发事件）

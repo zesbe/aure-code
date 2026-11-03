@@ -103,12 +103,27 @@ echo "▸ aapt2 + 签名"
 mkdir -p "$OUT"
 $AAPT2 compile --dir "$A/res" -o "$A/build/res.zip"
 # TARGET_SDK=36：出 targetSdk 36 的包（工具链全走「经加载器」，见 Env.applyLoader）。默认照清单里的 28
+# VERSION_CODE / VERSION_NAME（可选，CI 每次构建都给）：写进构建用的清单副本，源码里的清单不动。
+# versionCode 必须一次比一次大，否则系统（尤其是厂商的安装器）不肯覆盖安装，应用自己的更新检查也会拒装
 MANIFEST="$A/AndroidManifest.xml"
-if [ -n "$TARGET_SDK" ]; then
+if [ -n "$TARGET_SDK" ] || [ -n "$VERSION_CODE" ] || [ -n "$VERSION_NAME" ]; then
   MANIFEST="$A/build/AndroidManifest.xml"
-  sed "s/android:targetSdkVersion=\"[0-9]*\"/android:targetSdkVersion=\"$TARGET_SDK\"/" "$A/AndroidManifest.xml" > "$MANIFEST"
-  grep -q "android:targetSdkVersion=\"$TARGET_SDK\"" "$MANIFEST" || { echo "✗ 清单里改不动 targetSdkVersion"; exit 1; }
-  echo "  targetSdk $TARGET_SDK"
+  cp "$A/AndroidManifest.xml" "$MANIFEST"
+  if [ -n "$TARGET_SDK" ]; then
+    sed "s/android:targetSdkVersion=\"[0-9]*\"/android:targetSdkVersion=\"$TARGET_SDK\"/" "$MANIFEST" > "$MANIFEST.tmp" && mv "$MANIFEST.tmp" "$MANIFEST"
+    grep -q "android:targetSdkVersion=\"$TARGET_SDK\"" "$MANIFEST" || { echo "✗ 清单里改不动 targetSdkVersion"; exit 1; }
+    echo "  targetSdk $TARGET_SDK"
+  fi
+  if [ -n "$VERSION_CODE" ]; then
+    sed "s/android:versionCode=\"[0-9]*\"/android:versionCode=\"$VERSION_CODE\"/" "$MANIFEST" > "$MANIFEST.tmp" && mv "$MANIFEST.tmp" "$MANIFEST"
+    grep -q "android:versionCode=\"$VERSION_CODE\"" "$MANIFEST" || { echo "✗ 清单里改不动 versionCode"; exit 1; }
+    echo "  versionCode $VERSION_CODE"
+  fi
+  if [ -n "$VERSION_NAME" ]; then
+    sed "s/android:versionName=\"[^\"]*\"/android:versionName=\"$VERSION_NAME\"/" "$MANIFEST" > "$MANIFEST.tmp" && mv "$MANIFEST.tmp" "$MANIFEST"
+    grep -q "android:versionName=\"$VERSION_NAME\"" "$MANIFEST" || { echo "✗ 清单里改不动 versionName"; exit 1; }
+    echo "  versionName $VERSION_NAME"
+  fi
 fi
 $AAPT2 link -o "$A/build/unsigned.apk" -I "$AJAR" \
   --manifest "$MANIFEST" \

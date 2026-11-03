@@ -82,6 +82,13 @@ jobs:
           export CC_ANDROID="$ANDROID_SDK_ROOT/ndk/$NDK/toolchains/llvm/prebuilt/linux-x86_64/bin/aarch64-linux-android26-clang"
           export JAVAC=javac D8="$BT/d8" AAPT2="$BT/aapt2" ANDROID_JAR="$ANDROID_SDK_ROOT/platforms/$PLATFORM/android.jar"
           export SIGN=apksigner APKSIGNER="$BT/apksigner" ZIPALIGN="$BT/zipalign"
+          # 每次构建版本号都往上走：versionCode = 1000 + 运行序号（比旧包大才能覆盖安装），versionName = 清单里的基础版本 + 序号。
+          # 工具包钉子（devkit-pin.json）不随版本号变，所以覆盖安装后不会重新下载工具包
+          BASE_VER=$(sed -n 's/.*android:versionName="\([0-9.]*\)".*/\1/p' android/AndroidManifest.xml | head -1)
+          export VERSION_CODE=$((1000 + GITHUB_RUN_NUMBER))
+          export VERSION_NAME="${BASE_VER}.${GITHUB_RUN_NUMBER}"
+          echo "VERSION_NAME=$VERSION_NAME" >> "$GITHUB_ENV"
+          echo "Building versionCode=$VERSION_CODE versionName=$VERSION_NAME"
           # 双方案：先出 targetSdk 36 的（cccodroid-36.apk），再出默认的 28
           TARGET_SDK=36 sh scripts/build.sh && mv dist/cccodroid.apk dist/cccodroid-36.apk
           sh scripts/build.sh
@@ -98,7 +105,7 @@ jobs:
 
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02   # v4.6.2
         with:
-          name: cccodroid-${{ env.SIGNED }}-${{ env.SHORT_SHA }}
+          name: aure-code-${{ env.VERSION_NAME }}-${{ env.SHORT_SHA }}
           path: |
             dist/cccodroid.apk
             dist/cccodroid-36.apk

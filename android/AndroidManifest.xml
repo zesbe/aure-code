@@ -55,7 +55,7 @@
     </queries>
 
     <application
-        android:label="cccodroid Test"
+        android:label="Aure Code"
         android:icon="@mipmap/ic_launcher"
         android:roundIcon="@mipmap/ic_launcher"
         android:hasCode="true"

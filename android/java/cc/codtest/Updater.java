@@ -705,7 +705,7 @@ final class Updater {
      */
     private String knownBad(String v) {
         try {
-            File f = new File(env.home, ".cache/cccodroid/claude-verified.json");
+            File f = new File(env.home, ".cache/aurecode/claude-verified.json");
             if (!f.isFile()) return null;
             JSONObject bad = new JSONObject(new String(java.nio.file.Files.readAllBytes(f.toPath()), StandardCharsets.UTF_8)).optJSONObject("bad");
             JSONObject e = bad == null ? null : bad.optJSONObject(v);

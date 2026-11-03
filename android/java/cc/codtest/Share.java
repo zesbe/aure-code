@@ -180,15 +180,15 @@ public final class Share extends ContentProvider {
         Tr.t("· 你发给 Claude 的消息内容（日志里只留「提问了一次」）\n") +
         Tr.t("· 会话记录本身不在包里\n"); }
 
-    /** 打包：诊断信息 + 本应用 logcat + 网关日志尾部 + 修复账本 → files/cache/share/cccodroid-logs-*.zip */
+    /** 打包：诊断信息 + 本应用 logcat + 网关日志尾部 + 修复账本 → files/cache/share/aurecode-logs-*.zip */
     static File bundleLogs(Context c) throws Exception {
         Env env = new Env(c);
         File dir = new File(env.files, "cache/share");
         dir.mkdirs();
         File[] old = dir.listFiles();
-        if (old != null) for (File o : old) if (o.getName().startsWith("cccodroid-logs-")) o.delete();
+        if (old != null) for (File o : old) if (o.getName().startsWith("aurecode-logs-")) o.delete();
         String stamp = new SimpleDateFormat("yyyyMMdd-HHmmss-SSS", Locale.ROOT).format(new Date());
-        File out = new File(dir, "cccodroid-logs-" + stamp + ".zip");
+        File out = new File(dir, "aurecode-logs-" + stamp + ".zip");
         JSONObject parts = new JSONObject();
         try (ZipOutputStream z = new ZipOutputStream(new FileOutputStream(out))) {
             parts.put("README.txt", put(z, "README.txt", Tr.t("cccodroid 诊断包（「我卡住了」）\n\n") + contents()));
@@ -217,7 +217,7 @@ public final class Share extends ContentProvider {
     private static String diagnostics(Context c, Env env) {
         StringBuilder sb = new StringBuilder();
         try {
-            sb.append("cccodroid ").append(c.getPackageManager().getPackageInfo(c.getPackageName(), 0).versionName).append('\n');
+            sb.append("Aure Code ").append(c.getPackageManager().getPackageInfo(c.getPackageName(), 0).versionName).append('\n');
             sb.append("Android ").append(Build.VERSION.RELEASE).append(" (SDK ").append(Build.VERSION.SDK_INT).append(")  ")
               .append(Build.MANUFACTURER).append(' ').append(Build.MODEL).append("  ").append(Build.SUPPORTED_ABIS[0]).append('\n');
             sb.append("user=").append(android.os.Process.myUid() / 100000).append("  files=").append(c.getFilesDir().getAbsolutePath())

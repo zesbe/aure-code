@@ -150,7 +150,7 @@ async function unpackedSize(sp, zip) {
 
 /** 分析：解开（压缩包）或拷进（单个文件）暂存区，逐个看 ELF，列出程序、缺的库、能补的库 */
 async function customAnalyze(src) {
-  if (!PREFIX) return { ok: false, message: "only available in cccodroid" };
+  if (!PREFIX) return { ok: false, message: "only available in Aure Code" };
   let sp = String(src || "").trim();
   if (!sp) return { ok: false, message: tz("没给文件") };
   if (!path.isAbsolute(sp)) sp = path.join(CFG.workspace, sp);
@@ -361,12 +361,12 @@ function customSkill(rec) {
   const lines = rec.entries.map((e) => `- \`${e.cmd}\` → \`${path.join(rec.dir, "app", e.rel)}\`：${kindZh[e.kind] || e.kind}${e.gpu ? "，经 gpu-driver-glibc 的 lgpu-run 用 GPU（Vulkan / Turnip）" : ""}${e.patchelf ? "，已用 patchelf 改了解释器和 RUNPATH" : ""}`);
   return `---
 name: custom-${rec.id}
-description: 用户自己导入的程序「${rec.name.replace(/\n/g, " ")}」${rec.desc ? "：" + rec.desc.replace(/\n/g, " ") : ""}（cccodroid 自定义组件）。命令：${rec.entries.map((e) => e.cmd).join("、")}。用户提到它或要用这些命令时使用。
+description: 用户自己导入的程序「${rec.name.replace(/\n/g, " ")}」${rec.desc ? "：" + rec.desc.replace(/\n/g, " ") : ""}（Aure Code 自定义组件）。命令：${rec.entries.map((e) => e.cmd).join("、")}。用户提到它或要用这些命令时使用。
 ---
 
 # ${rec.name}（自定义组件）
 
-用户在扩展页「自定义组件」里自己导入的 Linux arm64 程序（来源：\`${rec.source}\`）。**没经过 cccodroid 验证**，能不能用以实际运行为准。
+用户在扩展页「自定义组件」里自己导入的 Linux arm64 程序（来源：\`${rec.source}\`）。**没经过 Aure Code 验证**，能不能用以实际运行为准。
 ${rec.desc ? "\n用户的说明：" + rec.desc + "\n" : ""}
 ## 运行链路
 
@@ -387,7 +387,7 @@ ${lines.join("\n")}
 }
 
 async function customInstall(b) {
-  if (!PREFIX) return { ok: false, message: "only available in cccodroid" };
+  if (!PREFIX) return { ok: false, message: "only available in Aure Code" };
   const s = CUSTOM_STAGES.get(String(b.stage || ""));
   if (!s) return { ok: false, message: tz("分析结果过期了，重新导入一次") };
   const id = String(b.id || "");
@@ -513,7 +513,7 @@ async function handleCustom(req, res, p, u) {
   if (req.method !== "POST") return sendJson(res, 405, { error: "method" });
   if (p === "/api/custom/upload") {
     // 程序可能很大（几百 MB）：流式落盘到暂存目录，不走 /api/upload 的 64 MB 内存缓冲
-    if (!PREFIX) return sendJson(res, 200, { ok: false, message: "only available in cccodroid" });
+    if (!PREFIX) return sendJson(res, 200, { ok: false, message: "only available in Aure Code" });
     const name = path.basename(u.searchParams.get("name") || "program").replace(/[^\w.+-]/g, "_").slice(0, 120) || "program";
     const up = path.join(CUSTOM_DIR, ".uploads"); fs.mkdirSync(up, { recursive: true });
     try { for (const f of fs.readdirSync(up)) if (Date.now() - fs.statSync(path.join(up, f)).mtimeMs > 3600000) fs.rmSync(path.join(up, f), { force: true }); } catch {}

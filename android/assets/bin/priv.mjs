@@ -1,4 +1,4 @@
-// priv —— 经 cccodroid 应用进程里的 Shizuku binder，以 shell 身份（uid 2000）执行命令。
+// priv —— 经 Aure Code 应用进程里的 Shizuku binder，以 shell 身份（uid 2000）执行命令。
 // 协议见 android/java/cc/codtest/Priv.java。
 import net from "node:net";
 
@@ -57,7 +57,7 @@ function exec(argv) {
   // 连上之后的写错误（对端先结束了，我们还在递 stdin）不算失败 —— 回应可能已经在缓冲里，等 close 时再判断
   s.on("error", (e) => {
     if (connected) return;
-    process.stderr.write(`priv: 连不上 cccodroid（${e.code || e.message}）。应用的后台服务在运行吗？\n`);
+    process.stderr.write(`priv: 连不上 Aure Code（${e.code || e.message}）。应用的后台服务在运行吗？\n`);
     process.exit(125);
   });
   s.on("close", () => {

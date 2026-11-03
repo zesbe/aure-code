@@ -36,7 +36,7 @@ async function issueDraft(lang) {
   const row = (k, v) => (v ? `| ${k} | ${String(v).replace(/[|\n]/g, " ")} |` : "");
   const dev = [
     "| | |", "|---|---|",
-    row("cccodroid", ver("app") || (PREFIX ? "?" : "dev")),
+    row("Aure Code", ver("app") || (PREFIX ? "?" : "dev")),
     row("Toolchain", ver("devkit") || dk.tag),
     row("Claude Code", ver("claude")),
     row("Android", `${g("ro.build.version.release")} (SDK ${g("ro.build.version.sdk")})`),
@@ -67,7 +67,7 @@ async function issueDraft(lang) {
     "### Device", "", dev, "",
     "### Self-test", "", stx, "",
     comps ? "### Components\n\n" + comps + "\n" : "",
-    "<sub>Filled in by cccodroid. No logs, keys, account or conversation content.</sub>",
+    "<sub>Filled in by Aure Code. No logs, keys, account or conversation content.</sub>",
   ].join("\n");
   let body = build(st);
   if (encodeURIComponent(body).length > 7000) body = build(r ? `Passed ${r.pass}, failed ${r.fail.length}` + (r.fail.length ? "\n\n" + r.fail.slice(0, 5).map((x) => "- " + x.slice(0, 120)).join("\n") : "") : st);

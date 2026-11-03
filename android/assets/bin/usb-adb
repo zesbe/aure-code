@@ -6,7 +6,7 @@
   usb-adb list             列出 USB 设备（JSON）
 
 普通进程打不开 /dev/bus/usb，必须经系统 UsbManager 授权（平板上会弹对话框，点「确定」）。
-cccodroid 拿到设备后把 fd 递过来，这里带着 TERMUX_USB_FD 启动 adb 服务；之后照常 adb devices / install / shell。
+Aure Code 拿到设备后把 fd 递过来，这里带着 TERMUX_USB_FD 启动 adb 服务；之后照常 adb devices / install / shell。
 一次接管一台设备；拔插后重新运行。被测设备上第一次连接还要点「允许 USB 调试」。
 """
 import json, os, socket, subprocess, sys
@@ -20,7 +20,7 @@ def call(req, want_fd=False):
     try:
         s.connect(SOCK)
     except OSError as e:
-        sys.exit(f"usb-adb: 连不上 cccodroid（{e}）—— 只能在 cccodroid 的终端里用")
+        sys.exit(f"usb-adb: 连不上 Aure Code（{e}）—— 只能在 Aure Code 的终端里用")
     s.sendall((json.dumps(req) + "\n").encode())
     buf, fds = b"", []
     while not buf.endswith(b"\n"):
@@ -33,7 +33,7 @@ def call(req, want_fd=False):
             break
         buf += data
     s.close()
-    return (json.loads(buf) if buf else {"ok": False, "message": "cccodroid 没有回复"}), fds
+    return (json.loads(buf) if buf else {"ok": False, "message": "Aure Code 没有回复"}), fds
 
 
 def main(argv):

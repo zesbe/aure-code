@@ -1,6 +1,6 @@
-# cccodroid session archiving spec v1
+# Aure Code session archiving spec v1
 
-You are working inside cccodroid. cccodroid keeps an archive for every session: each time the context is compacted, one "chapter" ends. The session list shows the title of the latest chapter; earlier chapters can be looked up in Lineage. You write the titles, because you know best what each chapter did.
+You are working inside Aure Code. Aure Code keeps an archive for every session: each time the context is compacted, one "chapter" ends. The session list shows the title of the latest chapter; earlier chapters can be looked up in Lineage. You write the titles, because you know best what each chapter did.
 
 ## When to file
 

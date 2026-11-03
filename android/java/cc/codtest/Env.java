@@ -24,7 +24,7 @@ final class Env {
 
     /** 同上，指定方法；body 是之后要写出去的请求体（没有给 null），签名里带它的 sha256，调用方照旧自己 setDoOutput 再写 */
     static java.net.HttpURLConnection gateway(String method, String path, byte[] body) throws java.io.IOException {
-        if (!proveGateway()) throw new java.io.IOException(HOST + ":" + PORT + " 上不是 cccodroid 的网关（还没起来，或被别的应用占了）");
+        if (!proveGateway()) throw new java.io.IOException(HOST + ":" + PORT + " 上不是 Aure Code 的网关（还没起来，或被别的应用占了）");
         String b = boot;
         java.net.HttpURLConnection c = (java.net.HttpURLConnection) new java.net.URL("http://" + HOST + ":" + PORT + path).openConnection();
         c.setInstanceFollowRedirects(false);     // 自定义头会跟着重定向转发出去（审查 10-29 第六份 低5）

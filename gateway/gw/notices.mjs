@@ -19,8 +19,8 @@ const SOURCES = (process.env.CCAPP_NOTICES_URL ? [process.env.CCAPP_NOTICES_URL]
 export const PUBKEY = crypto.createPublicKey(!LIVE && process.env.CCAPP_TEST_PUBKEY ? process.env.CCAPP_TEST_PUBKEY :
   "-----BEGIN PUBLIC KEY-----\nMCowBQYDK2VwAyEA4u1V3UuRVZgXwqXXQaQIBaefPf2PCGqKqvsna9Pgzzs=\n-----END PUBLIC KEY-----\n");
 const EVERY = 3 * 3600e3;
-const CACHE = path.join(CFG.home, ".cache", "cccodroid", "notices.json");
-const SEEN = path.join(CFG.home, ".config", "cccodroid", "notices-seen.json");
+const CACHE = path.join(CFG.home, ".cache", "aurecode", "notices.json");
+const SEEN = path.join(CFG.home, ".config", "aurecode", "notices-seen.json");
 
 let data = null, fetchedAt = 0, lastError = "", appVer = "", busy = null;
 try { data = JSON.parse(fs.readFileSync(CACHE, "utf8")); } catch {}

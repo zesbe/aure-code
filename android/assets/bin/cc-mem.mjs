@@ -1,5 +1,5 @@
 // cc-mem —— 内存管家：重活之前清场，跑的时候压住「杀了又活」的后台应用。
-// 经 priv（Shizuku，shell 身份）调 am / dumpsys；默认关闭，在 cccodroid 设置里打开。
+// 经 priv（Shizuku，shell 身份）调 am / dumpsys；默认关闭，在 Aure Code 设置里打开。
 //
 // 保护谁（不碰）：
 //   1. 安卓自己判为前台 / 可见 / 可感知 / 常驻的进程（分屏另一半、挂前台通知的代理、正在播放的音乐……）
@@ -32,7 +32,7 @@ const HELP = `用法:
 
 // ── 基础 ──────────────────────────────────────────────────────────────
 function privArgv() {
-  // cccodroid：priv.mjs 和本文件同在 app/bin，直接用 node 跑（解包出来的文件不一定带可执行位）
+  // Aure Code：priv.mjs 和本文件同在 app/bin，直接用 node 跑（解包出来的文件不一定带可执行位）
   const sib = path.join(HERE, "priv.mjs");
   return fs.existsSync(sib) ? [process.execPath, sib] : ["priv"];   // 开发端：PATH 上的 priv
 }
@@ -40,7 +40,7 @@ function priv(cmd, timeout = 30000) {
   // 两路合成一路再读：开发端的 rish 客户端会把输出随机拆到 stdout / stderr 两个管道，分开接收各得一半
   const r = spawnSync("/system/bin/sh", ["-c", `exec "$@" 2>&1`, "sh", ...privArgv(), `{ ${cmd}\n} 2>&1`], { encoding: "utf8", timeout, maxBuffer: 64 << 20 });
   if (r.error) throw new Error(`priv 调用失败：${r.error.message}`);
-  // 125 连不上 cccodroid、126 Shizuku 没运行/没授权、127 起进程失败：都不能当成「没有输出」往下走，否则会显示「可停的应用 0 个」
+  // 125 连不上 Aure Code、126 Shizuku 没运行/没授权、127 起进程失败：都不能当成「没有输出」往下走，否则会显示「可停的应用 0 个」
   if (r.status >= 125 && r.status <= 127) throw new Error((r.stdout || "").replace(/^priv: /gm, "").trim() || "priv 不可用（Shizuku 没启动或没授权）");
   return { out: r.stdout || "", err: r.stdout || "", code: r.status };
 }
@@ -207,7 +207,7 @@ function stopPkgs(pkgs, hard) {
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 function requireEnabled(cfg) {
   if (cfg.enabled) return;
-  console.error("cc-mem: 内存管家没有打开。到 cccodroid「设置 → 内存管家」里打开后再用（status / protected / clear --dry-run 不受限）。");
+  console.error("cc-mem: 内存管家没有打开。到 Aure Code「设置 → 内存管家」里打开后再用（status / protected / clear --dry-run 不受限）。");
   process.exit(3);
 }
 

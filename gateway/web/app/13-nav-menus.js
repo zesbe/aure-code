@@ -195,7 +195,7 @@
     $("acct-name").textContent = profName();
     $("acct-sub").textContent = provName(s);
     paintProf();
-    if (s.product) $("side-title").textContent = s.product;
+    if (s.product) $("side-title").textContent = s.productName || s.product;
     // 官方账户：名字换成登录邮箱（问一次，之后十分钟内沿用）
     if (s.keyMode === "login" && Date.now() - acctEmailAt > 600000) {
       acctEmailAt = Date.now();

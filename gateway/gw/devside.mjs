@@ -128,7 +128,7 @@ if (!PREFIX) {
 // cccodroid：Claude Code 若是官方清单拿不到时靠 npm 签名装上的（版本目录里有 .npm-only），
 // 连得上官方清单时补核一次 sha256（install-claude.mjs --recheck）。启动 2 分钟后、之后每 6 小时看一眼
 if (PREFIX && process.env.CCAPP_BIN) {
-  const dest = path.join(CFG.home, ".local", "share", "cccodroid", "claude");
+  const dest = path.join(CFG.home, ".local", "share", "aurecode", "claude");
   const script = path.join(process.env.CCAPP_BIN, "..", "scripts", "install-claude.mjs");
   const recheck = () => {
     let pending = false;

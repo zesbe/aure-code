@@ -90,7 +90,7 @@ function hint(ws) {
   const all = (re) => ws.length && ws.every((w) => re.test(w || ""));
   if (ws.length && ws.every((w) => !w)) return "每个来源都回了内容，但都不是版本号：要装的版本可能不存在，或渠道写错了（每个来源的情况见上面）";
   if (all(/找不到 curl|curl 起不来/)) return "curl 跑不起来：开发工具包可能没装好，先到设置里修复工具包再装";
-  if (all(/域名解析|代理地址/)) return "所有域名都解析不了。多半是应用被禁止联网，或 VPN / 代理的 DNS 没接上：到系统设置里确认 cccodroid 可以用 WLAN 和移动数据，关掉 VPN 或切到全局模式后重试";
+  if (all(/域名解析|代理地址/)) return "所有域名都解析不了。多半是应用被禁止联网，或 VPN / 代理的 DNS 没接上：到系统设置里确认 Aure Code 可以用 WLAN 和移动数据，关掉 VPN 或切到全局模式后重试";
   if (all(/证书|TLS|根证书/)) return "所有来源的 HTTPS 都校验不过。多半是系统时间不对，或网络里有抓包 / 代理替换了证书：校准时间、关掉抓包软件后重试";
   if (all(/超时|连不上|中断|没回应/)) return "所有来源都连不上。检查网络是否通畅，开着 VPN 的话试试关掉或换个节点后重试";
   return "检查网络后重试（每个来源的原因见上面）";

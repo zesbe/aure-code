@@ -1,6 +1,6 @@
-# cccodroid help
+# Aure Code help
 
-cccodroid runs the **official, unmodified Claude Code** on your phone, wraps it in a graphical interface and ships a full developer toolchain. Claude can read and write files, run commands and start local servers, just as it would in a terminal on a computer.
+Aure Code runs the **official, unmodified Claude Code** on your phone, wraps it in a graphical interface and ships a full developer toolchain. Claude can read and write files, run commands and start local servers, just as it would in a terminal on a computer.
 
 ## Getting started
 
@@ -41,7 +41,7 @@ These choices are stored in the app's own data, so clearing the WebView cache wo
 ## Conversations
 
 - **Enter sends.** Sending while Claude is busy queues the message; ⚡ interjects into the running turn without stopping it.
-- `/` opens slash commands and `@` references a file. Use Share → cccodroid in other apps to attach files directly.
+- `/` opens slash commands and `@` references a file. Use Share → Aure Code in other apps to attach files directly.
 - The top row of ＋ next to the input box: Attach file, Take photo, Screenshot, Browse files. Photos are scaled to 2048 px on the long side before they're attached. **Long-press Screenshot to take it in 5 seconds**: switch to the app you want to capture in the meantime, and you'll be brought back afterwards.
 - Tool calls collapse into one line such as "3 steps · done"; tap to see each step. Steps that need you, or that failed, open on their own.
 - **Subagents** get their own card below the steps that launched them: one row per subagent with its status, step count and what it's doing; tap a row to open its steps. At the bottom, the message log shows "who → whom · what about". Each subagent's brief and report are saved under `.aurecode/agents/` in the project folder; tap "Brief" or "Report" to read them.

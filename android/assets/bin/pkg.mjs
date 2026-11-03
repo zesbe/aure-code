@@ -1,4 +1,4 @@
-// pkg —— 在 cccodroid 里装 Termux 仓库的包。
+// pkg —— 在 Aure Code 里装 Termux 仓库的包。
 //
 // Termux 的包把路径写死成 /data/data/com.termux/…，而 cc.codtest 和 com.termux 一样长（10 个字符），
 // 所以和打工具包时一样，逐字节把 /data/data/com.termux/ 换成 /data/data/cc.codtest/ 就能原样跑，
@@ -608,10 +608,10 @@ function install(names, { unverified = false, auto = false, upgrade = false } = 
   for (const n of names) {
     const real = ix.pkgs.has(n) ? n : (ix.provides.get(n) || [])[0];
     if (!real) { const near = [...ix.pkgs.keys()].filter((k) => k.includes(n)).slice(0, 6); die(`仓库里没有 ${n}${near.length ? "。相近的：" + near.join(" ") : ""}`); }
-    if (EXCLUDE.has(real)) die(`${real} 是给 Termux App 本身用的，在 cccodroid 里没有意义`);
+    if (EXCLUDE.has(real)) die(`${real} 是给 Termux App 本身用的，在 Aure Code 里没有意义`);
     if (have.has(real) && !mine[real]) { console.log(`${real} 已在工具包里（${baseVersions().get(real) || "版本未知"}），不用装`); continue; }
     if (have.has(real) && mine[real] && !upgrade) { console.log(`${real} ${mine[real].version} 已经装了`); continue; }
-    if (!VERIFIED[real] && !unverified && !auto) die(`${real} 还没在 cccodroid 上验证过。确定要试就加 --unverified：pkg install --unverified ${real}\n本机实测过的：${Object.keys(VERIFIED).join(" ")}`);
+    if (!VERIFIED[real] && !unverified && !auto) die(`${real} 还没在 Aure Code 上验证过。确定要试就加 --unverified：pkg install --unverified ${real}\n本机实测过的：${Object.keys(VERIFIED).join(" ")}`);
     roots.push(real);
   }
   if (!roots.length) return;

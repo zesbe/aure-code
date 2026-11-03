@@ -102,7 +102,7 @@ function modList() {
 
 // ── 装 ────────────────────────────────────────────────────────────────
 async function modInstall(id) {
-  if (!PREFIX) return { ok: false, message: "only available in cccodroid" };
+  if (!PREFIX) return { ok: false, message: "only available in Aure Code" };
   const mj = modulesInfo();
   if (!mj) return { ok: false, message: tz("当前是整包工具包，没有模块可装") };
   const m = blockOf(mj, id);
@@ -226,7 +226,7 @@ function modCancel(id) {
 // ── 卸 ────────────────────────────────────────────────────────────────
 /** 卸 id；它依赖的共享层没有别的已装模块在用时一并卸掉 */
 function modRemove(id) {
-  if (!PREFIX) return { ok: false, message: "only available in cccodroid" };
+  if (!PREFIX) return { ok: false, message: "only available in Aure Code" };
   const mj = modulesInfo();
   if (!mj) return { ok: false, message: tz("当前是整包工具包，没有模块可卸") };
   const m = blockOf(mj, id);

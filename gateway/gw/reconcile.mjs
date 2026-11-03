@@ -18,7 +18,7 @@ import { COMP_DIR, compRecord, devkitIdentity } from "./components.mjs";
 import { modInstalled, modulesInfo } from "./modules.mjs";
 import { NEXT, sendJson } from "./http.mjs";
 
-const STATE = PREFIX ? path.join(CFG.home, ".cache", "cccodroid", "reconcile.json") : "";
+const STATE = PREFIX ? path.join(CFG.home, ".cache", "aurecode", "reconcile.json") : "";
 const CUSTOM_DIR = PREFIX ? path.join(CFG.home, ".aurecode", "custom") : "";
 let last = null, busy = null;
 try { last = JSON.parse(fs.readFileSync(STATE, "utf8")); } catch {}

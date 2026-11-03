@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-// device-mcp.mjs —— cccodroid 的设备工具（MCP，stdio）。网关起 claude 时用 --mcp-config 挂上，名字叫 device。
+// device-mcp.mjs —— Aure Code 的设备工具（MCP，stdio）。网关起 claude 时用 --mcp-config 挂上，名字叫 device。
 //
 // 自己不碰安卓：每次调用都经应用进程的套接字（私有目录里的 .priv.sock，只认同一个 uid）转给 DeviceTools.java。
 // 哪些工具出现在 tools/list 里由应用决定 —— 用户在 设置 → 设备工具 里关掉的，模型根本看不到。
@@ -17,32 +17,32 @@ function app(req, timeoutMs = 20000) {
     const t = setTimeout(() => { s.destroy(); resolve({ ok: false, message: "timeout" }); }, timeoutMs);
     s.on("data", (d) => (buf += d));
     s.on("end", () => { clearTimeout(t); try { resolve(JSON.parse(buf)); } catch { resolve({ ok: false, message: buf.slice(0, 300) }); } });
-    s.on("error", (e) => { clearTimeout(t); resolve({ ok: false, message: "cccodroid app unreachable: " + e.message }); });
+    s.on("error", (e) => { clearTimeout(t); resolve({ ok: false, message: "Aure Code app unreachable: " + e.message }); });
   });
 }
 
 const node = { type: "integer", description: "Element number from the latest screen_read" };
 const TOOLS = {
   device_status: {
-    description: "Battery, charging, network (wifi/cellular, VPN, metered), screen on, free storage, device model and Android version, whether cccodroid is in the foreground.",
+    description: "Battery, charging, network (wifi/cellular, VPN, metered), screen on, free storage, device model and Android version, whether Aure Code is in the foreground.",
     inputSchema: { type: "object", properties: {} },
     annotations: { readOnlyHint: true },
   },
   notify: {
-    description: "Post a system notification to the user (e.g. when a long task finishes). Tapping it opens cccodroid.",
+    description: "Post a system notification to the user (e.g. when a long task finishes). Tapping it opens Aure Code.",
     inputSchema: { type: "object", properties: { title: { type: "string" }, text: { type: "string" } } },
   },
   clipboard_read: {
-    description: "Read the text on the clipboard. The user confirms each read in cccodroid; refused when cccodroid is not in the foreground.",
+    description: "Read the text on the clipboard. The user confirms each read in Aure Code; refused when Aure Code is not in the foreground.",
     inputSchema: { type: "object", properties: {} },
     annotations: { readOnlyHint: true },
   },
   clipboard_write: {
-    description: "Put text on the clipboard so the user can paste it elsewhere. The user confirms each write in cccodroid; refused when cccodroid is not in the foreground.",
+    description: "Put text on the clipboard so the user can paste it elsewhere. The user confirms each write in Aure Code; refused when Aure Code is not in the foreground.",
     inputSchema: { type: "object", properties: { text: { type: "string" } }, required: ["text"] },
   },
   open: {
-    description: "Open another app pre-filled for the user to finish: a web page, a map search, the dialer (does not call), an email or SMS draft (does not send), a new calendar event (user taps save), an alarm or timer, the share sheet for text, or launch an installed app by package name (see app_list). If cccodroid is in the background Android blocks this, so a notification is posted for the user to tap instead.",
+    description: "Open another app pre-filled for the user to finish: a web page, a map search, the dialer (does not call), an email or SMS draft (does not send), a new calendar event (user taps save), an alarm or timer, the share sheet for text, or launch an installed app by package name (see app_list). If Aure Code is in the background Android blocks this, so a notification is posted for the user to tap instead.",
     inputSchema: {
       type: "object",
       properties: {
@@ -118,7 +118,7 @@ async function listTools() {
 
 async function callTool(name, args) {
   if (!TOOLS[name]) return { isError: true, content: [{ type: "text", text: "unknown tool " + name }] };
-  // 读写剪贴板、打开要等用户在 cccodroid 里点头（应用那头最多等 60 秒）：这边先超时报错、那边随后点了允许，就成了「报错了却做了」
+  // 读写剪贴板、打开要等用户在 Aure Code 里点头（应用那头最多等 60 秒）：这边先超时报错、那边随后点了允许，就成了「报错了却做了」
   const ask = name === "clipboard_read" || name === "clipboard_write" || name === "open";
   const r = await app({ op: "dev", tool: name, args: args || {} }, ask ? 70000 : name.startsWith("screen") || name === "screenshot" ? 30000 : 20000);
   if (!r.ok) return { isError: true, content: [{ type: "text", text: r.message || "failed" }] };
@@ -147,7 +147,7 @@ rl.on("line", async (line) => {
           protocolVersion: m.params?.protocolVersion || "2025-06-18",
           capabilities: { tools: {} },
           serverInfo: { name: "cccodroid-device", version: "1.0.0" },
-          instructions: "Tools for the Android device cccodroid runs on. Things that open other apps only pre-fill; the user confirms in cccodroid first, then finishes in that app. Screen tools need the accessibility service, which the app switches on when needed.",
+          instructions: "Tools for the Android device Aure Code runs on. Things that open other apps only pre-fill; the user confirms in Aure Code first, then finishes in that app. Screen tools need the accessibility service, which the app switches on when needed.",
         } });
       case "ping": return send({ id: m.id, result: {} });
       case "tools/list": return send({ id: m.id, result: { tools: await listTools() } });

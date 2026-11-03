@@ -25,7 +25,7 @@ import { baseOwnedPaths } from "./orphans.mjs";
 //   · 已装记录在 files/components/<id>.json（$PREFIX 之外：工具包整体替换时不会把记录一起换掉）；
 //     记录里列着装进去的每个文件，卸载就按它删，不会误删工具包自己的东西。
 //   · 状态：absent / downloading / verifying / installing / ok / outdated（工具包变了）/ damaged / error
-// 只在 cccodroid（有 Termux 前缀）上可用；开发端没有 $PREFIX，接口返回 supported:false。
+// 只在 Aure Code（有 Termux 前缀）上可用；开发端没有 $PREFIX，接口返回 supported:false。
 const COMP_INDEX = process.env.CCAPP_COMPONENTS_INDEX ||
   "https://github.com/greyoak111/cccodroid/releases/download/components/components.json";
 // 社区组件（v0.2.0 起）：greyoak111/cccodroid-components 仓库，CI 按配方打包、出签名索引
@@ -90,7 +90,7 @@ async function compFetchIndex(src, mirror) {
   return { ...JSON.parse(String(body)), signed: !!ok };
 }
 
-/** 两个来源合并：预置（cccodroid 仓库）在前，社区（cccodroid-components）在后；id 撞了以预置为准。
+/** 两个来源合并：预置（Aure Code 仓库）在前，社区（cccodroid-components）在后；id 撞了以预置为准。
  *  共享目录里放了 components/components.json、且私有目录有 use-local-index 开关，就代替预置来源（离线 / 测试），同样要签名。 */
 // 磁盘缓存：上回验过签的合并索引存一份，重开 App 后扩展页先拿它出列表，不用等网络（群友：每次重开组件栏都要等好久）。
 // 文件在私有目录（和已装记录同处、同等可信）；名字别以 .json 结尾——COMP_DIR 里的 *.json 都当已装记录读
@@ -206,7 +206,7 @@ async function compList(force) {
       error: job && job.error ? tr(LAST_LANG, job.error) : "",
       bin: (b && b.bin) || (rec && rec.bin) || [],
       selftest: (b && b.selftest) || "",
-      // 来源与可信度：预置组件由 cccodroid 发布、随版本测过；社区组件看 verified（真机验证记录）
+      // 来源与可信度：预置组件由 Aure Code 发布、随版本测过；社区组件看 verified（真机验证记录）
       source: e ? e.source : (rec && rec.source) || "", signed: e ? !!e.signed : true,
       verified: e ? e.source === "preset" || !!(b && b.verified) : true,
       license: (e && e.license) || "", homepage: (e && e.homepage) || "", needs: (e && e.needs) || {},
@@ -395,7 +395,7 @@ function compRemoveFiles(id, rec) {
 }
 
 async function compInstall(id) {
-  if (!PREFIX) return { ok: false, message: "only available in cccodroid" };
+  if (!PREFIX) return { ok: false, message: "only available in Aure Code" };
   const cur = COMP_JOBS.get(id);
   if (cur && !cur.finished) return { ok: false, message: "busy" };
   const dk = devkitIdentity();
@@ -607,7 +607,7 @@ function compRemovalRecord(id) {
 }
 
 export async function compRemove(id) {
-  if (!PREFIX) return { ok: false, message: "only available in cccodroid" };
+  if (!PREFIX) return { ok: false, message: "only available in Aure Code" };
   if (typeof id !== "string" || !/^[a-z0-9-]{1,40}$/.test(id)) return { ok: false, message: "bad id" };
   const job = COMP_JOBS.get(id);
   if (job && !job.finished) return { ok: false, message: "busy" };
@@ -695,7 +695,7 @@ async function compPurgeData(id) {
 // 令牌只由 gh 自己存（~/.config/gh/hosts.yml）：网关不读那个文件、不转发、不记 gh 的输出，
 // 对外只给账号名与状态。登录成功后跑 gh auth setup-git，git 走 https 推送就能用
 const GH = { job: null };
-// cccodroid：gh 组件装在 $PREFIX/bin；开发端没有组件这一层，用终端 PATH 里的 gh（devbin/gh）
+// Aure Code：gh 组件装在 $PREFIX/bin；开发端没有组件这一层，用终端 PATH 里的 gh（devbin/gh）
 function ghBin() {
   if (PREFIX) return path.join(PREFIX, "bin", "gh");
   for (const d of String(termEnv().PATH || "").split(":")) if (d && fs.existsSync(path.join(d, "gh"))) return path.join(d, "gh");

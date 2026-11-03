@@ -3,7 +3,7 @@
 // 来源：仓库 claude-code/verified.json，维护者用 scripts/verify-claude.mjs 在真机上跑、scripts/claude-verified.mjs 签名发布
 // （与应用内通知同一把钥匙、同一条路：官网验过签才镜像）。这里先取官网、取不到取 GitHub，只认签名对得上的。
 // 用处：版本选单标「已验证」/ 有问题的原因（/api/claude/versions 带上）；验过签的那份存到
-// home/.cache/cccodroid/claude-verified.json，Java 的自动更新读它——渠道走到有问题的版本时先不自动装。
+// home/.cache/aurecode/claude-verified.json，Java 的自动更新读它——渠道走到有问题的版本时先不自动装。
 import fs from "node:fs";
 import path from "node:path";
 import crypto from "node:crypto";
@@ -14,7 +14,7 @@ import { PUBKEY } from "./notices.mjs";
 const SOURCES = process.env.CCAPP_CLAUDE_VERIFIED_URL ? [process.env.CCAPP_CLAUDE_VERIFIED_URL]
   : ["https://cccodroid.net/claude-code/verified.json", "https://raw.githubusercontent.com/greyoak111/cccodroid/main/claude-code/verified.json"];
 const EVERY = 3 * 3600e3;
-export const VERIFIED_CACHE = path.join(CFG.home, ".cache", "cccodroid", "claude-verified.json");
+export const VERIFIED_CACHE = path.join(CFG.home, ".cache", "aurecode", "claude-verified.json");
 
 let data = null, fetchedAt = 0, lastError = "", busy = null;
 try { data = JSON.parse(fs.readFileSync(VERIFIED_CACHE, "utf8")); } catch {}

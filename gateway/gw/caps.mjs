@@ -94,6 +94,7 @@ export async function routeCaps(req, res, u, p) {
     return sendJson(res, 200, {
       app: "claude-cli",
       product: PREFIX ? "cccodroid" : "Claude CLI",   // 界面标题
+      productName: PREFIX ? "Aure Code" : "Claude CLI",   // 界面上显示的名字（product 是功能开关用的标识，别改）
       pid: process.pid,
       ready: fs.existsSync(PATHS.claude) && fs.existsSync(PATHS.loader),
       // 登录态厂商也算"就绪"：它不用密钥，用的是 claude 自己的 OAuth 登录

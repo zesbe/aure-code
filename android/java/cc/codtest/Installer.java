@@ -29,7 +29,7 @@ final class Installer {
 
     // ── devkit 下载 ────────────────────────────────────────────────────
     /** 工具包镜像（VPS 直连，不过 Cloudflare 代理）：dl.cccodroid.net/devkit/<tag>/ 与 GitHub Release 里的文件逐字节相同 */
-    static final String DEVKIT_MIRROR = "https://dl.cccodroid.net/devkit/";
+    static final String DEVKIT_MIRROR = null;   // fork: cccodroid.net only mirrors upstream's cc.codroid devkit, never ours
 
     /**
      * 首次安装：按 APK 自带的清单（assets/devkit-pin.json：gz 的文件名、大小、sha256）下载 .tar.gz 到私有目录 ——
@@ -598,7 +598,7 @@ final class Installer {
         java.util.List<File> gzs = new java.util.ArrayList<>();
         for (JSONObject m : order) {
             JSONObject gz = m.optJSONObject("gz");
-            String file = gz.optString("file"), gh = base + file, mirror = DEVKIT_MIRROR + tag + "/" + file;
+            String file = gz.optString("file"), gh = base + file, mirror = DEVKIT_MIRROR == null ? null : DEVKIT_MIRROR + tag + "/" + file;
             ui.step(Tr.f("下载模块「{0}」{1} MB…", moduleName(m), String.valueOf(gz.optLong("bytes") >> 20)));
             gzs.add(download(mirrorFirst ? mirror : gh, mirrorFirst ? gh : mirror, new File(env.files, file), gz.optLong("bytes"), gz.optString("sha256")));
         }

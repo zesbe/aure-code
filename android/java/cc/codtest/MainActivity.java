@@ -718,7 +718,7 @@ public class MainActivity extends Activity {
             chooser.addView(q);
             String[][] opts = {
                 {"github", Tr.t("从 GitHub 下载"), Tr.t("海外网络一般最快")},
-                {"mirror", Tr.t("从 cccodroid.net 镜像下载"), Tr.t("GitHub 慢或连不上时用；文件与 GitHub 上的一致，照样核对 sha256")},
+                Installer.DEVKIT_MIRROR == null ? null : new String[]{"mirror", Tr.t("从 cccodroid.net 镜像下载"), Tr.t("GitHub 慢或连不上时用；文件与 GitHub 上的一致，照样核对 sha256")},
                 {"local", Tr.t("选择本地文件…"), Tr.t("已经下好的 devkit-cc.codtest.tar.gz（或 .tar）；装之前核对是不是发布版")},
                 local != null ? new String[]{"path", Tr.t("用共享目录里的文件"), local} : null,
             };
@@ -1225,13 +1225,13 @@ public class MainActivity extends Activity {
         setupCol = col;
         col.setOrientation(LinearLayout.VERTICAL);
         col.setPadding(dp(20), dp(40), dp(20), dp(20));
-        // 标题行：标识（一直在扫，表示还在忙）+ cccodroid
+        // 标题行：标识（光标一直在闪，表示还在忙）+ Aure Code
         LinearLayout head = new LinearLayout(this);
         head.setGravity(android.view.Gravity.CENTER_VERTICAL);
         head.setPadding(0, 0, 0, dp(12));
         head.addView(new Mark(this, BrowserPane.pal(this, dark, "fg"), Mark.dotColor(this, dark)), new LinearLayout.LayoutParams(dp(34), dp(34)));
         TextView title = new TextView(this);
-        title.setText("cccodroid");
+        title.setText("Aure Code");
         title.setTextSize(24);
         title.setTypeface(android.graphics.Typeface.create("sans-serif-medium", android.graphics.Typeface.NORMAL));
         title.setPadding(dp(12), 0, 0, 0);

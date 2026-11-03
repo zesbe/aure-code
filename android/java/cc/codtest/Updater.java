@@ -41,9 +41,9 @@ final class Updater {
     static final String REPO = "zesbe/cccodroid";
     /** 备用源：cccodroid.net 镜像了最近几个版本的 APK 和一份同形状的发布列表（dl/releases.json）。
      *  只在 GitHub 连不上 / 下载不顺时用；下来的 APK 照样核 sha256 和签名。工具包太大，没有镜像 */
-    static final String MIRROR = "https://cccodroid.net";
+    static final String MIRROR = null;   // fork: upstream's mirror lists upstream-signed APKs, not ours
     /** 同一份 APK 与发布列表的直连线路（不经 Cloudflare；国内有的网络只通其中一条） */
-    static final String DL = "https://dl.cccodroid.net";
+    static final String DL = null;
     /** 工具包与本 APK 的接口版本：lock.json 里的 compat（缺省 1）对不上就不装，防止新工具包配旧外壳 */
     static final int DEVKIT_COMPAT = 1;
     static final String CH = "updates";
@@ -263,7 +263,7 @@ final class Updater {
     String installedDevkitBase() { return env.devkitInfo().optString("base", ""); }
     private String installedDevkitSha() { return env.devkitInfo().optString("sha256", ""); }
     /** 同一个文件在 dl.cccodroid.net 上的地址：GitHub 下得不顺时接着续传（内容照样核 sha256） */
-    static String devkitMirror(String base, String file) { return Installer.DEVKIT_MIRROR + tagOf(base) + "/" + file; }
+    static String devkitMirror(String base, String file) { return Installer.DEVKIT_MIRROR == null ? null : Installer.DEVKIT_MIRROR + tagOf(base) + "/" + file; }
 
     /** 本 APK 绑定的那一版工具包的清单（assets/devkit-pin.json，打包时从 Release 的 devkit.lock.json 摘出来）。
      *  首装从镜像下、本地文件认身份，都拿它当准：校验值跟着 APK 走，不靠下载来源 */
@@ -404,7 +404,7 @@ final class Updater {
      * 返回 {GitHub 的列表, 镜像的列表}，没取到的是 null
      */
     private JSONArray[] fetchLists(String[] ghErr) {
-        final String[] urls = { feed(), MIRROR + "/dl/releases.json", DL + "/dl/releases.json" };
+        final String[] urls = { feed(), MIRROR == null ? null : MIRROR + "/dl/releases.json", DL == null ? null : DL + "/dl/releases.json" };
         final JSONArray[] got = new JSONArray[3];
         final String[] err = new String[3];
         final boolean[] fin = new boolean[3];
@@ -413,7 +413,7 @@ final class Updater {
             final int k = i;
             Thread t = new Thread(() -> {
                 JSONArray a = null; String e = null;
-                try { a = new JSONArray(new String(Installer.httpGetSmall(urls[k]), StandardCharsets.UTF_8)); }
+                try { if (urls[k] == null) throw new IOException("no mirror"); a = new JSONArray(new String(Installer.httpGetSmall(urls[k]), StandardCharsets.UTF_8)); }
                 catch (Exception x) { e = String.valueOf(x.getMessage()); }
                 synchronized (lk) { got[k] = a; err[k] = e; fin[k] = true; lk.notifyAll(); }
             }, "upd-feed-" + i);
@@ -467,8 +467,8 @@ final class Updater {
                 app.url = a.getString("browser_download_url");
                 // 三处都是同一份文件，谁先谁后由下载前测速定（Installer.rank），这里只管都列上
                 String gh = "https://github.com/" + REPO + "/releases/download/" + tag + "/" + name;
-                app.alt = app.url.equals(gh) ? MIRROR + "/dl/" + tag + "/" + name : gh;
-                app.alt2 = DL + "/dl/" + tag + "/" + name;
+                app.alt = app.url.equals(gh) ? (MIRROR == null ? null : MIRROR + "/dl/" + tag + "/" + name) : gh;
+                app.alt2 = DL == null ? null : DL + "/dl/" + tag + "/" + name;
                 app.size = a.optLong("size");
                 String d = a.optString("digest", "");
                 app.sha = d.startsWith("sha256:") ? d.substring(7) : null;
@@ -568,7 +568,9 @@ final class Updater {
     private static boolean fetchDevkitFile(String base, String name, byte[][] out) throws IOException {
         try { out[0] = Installer.httpGetSmall(base + name); return false; }
         catch (IOException e) {
-            try { out[0] = Installer.httpGetSmall(devkitMirror(base, name)); return true; }
+            String mir = devkitMirror(base, name);
+            if (mir == null) throw new IOException(Tr.t("连不上 GitHub：") + e.getMessage());
+            try { out[0] = Installer.httpGetSmall(mir); return true; }
             catch (IOException e2) { throw new IOException(Tr.t("GitHub 和 cccodroid.net 镜像都连不上：") + e.getMessage()); }
         }
     }

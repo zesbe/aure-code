@@ -69,12 +69,18 @@ public final class AskActivity extends Activity {
     private static final String[] LABELS = { "解释", "翻译", "总结", "润色", "写回复", "解释代码", "修代码" };
     private static final String[] ICONS = { "✨", "🌐", "📝", "✍️", "💬", "🧑‍💻", "🛠️" };
     private static final int TEXT_MAX = 60000;
+    /** 磁贴 / 桌面快捷方式：拿剪贴板里的文字（WhatsApp 这类不给系统文字菜单的应用，先复制再问） */
+    static final String ACTION_CLIP = "cc.codtest.ASK_CLIPBOARD";
 
     private final Handler ui = new Handler(Looper.getMainLooper());
     private SharedPreferences prefs;
     private boolean dark, readOnly;
     private int cBg, cCard, cField, cLine, cFg, cDim, cHint, cAccent;
     private String text = "", app;
+    /** 等窗口拿到焦点再读剪贴板（安卓 10 起，没焦点的应用读不到）；autoRun：读到了就直接开始（只有自己的磁贴带口令时） */
+    private boolean waitClip, autoRun = true;
+    private TextView srcView, metaView;
+    private View chipScroll;
 
     private FrameLayout root;
     private LinearLayout sheet, turns, chipRow, actRow;
@@ -111,7 +117,13 @@ public final class AskActivity extends Activity {
         readOnly = getIntent().getBooleanExtra(Intent.EXTRA_PROCESS_TEXT_READONLY, false);
         if (!Intent.ACTION_PROCESS_TEXT.equals(getIntent().getAction())) readOnly = true;
         app = callerLabel();
-        if (text.isEmpty()) { Toast.makeText(this, Tr.t("没有收到文字"), Toast.LENGTH_SHORT).show(); finish(); return; }
+        if (text.isEmpty()) {
+            // 没递文字进来（磁贴、快捷方式，或者分享了个空的）：改读剪贴板。
+            // 这个 Activity 是导出的，谁都能用这个 action 叫起它：只有带了我们自己口令的（磁贴）才一读到就开问，其余的等用户点一个动作
+            waitClip = true;
+            String k = getIntent().getStringExtra(MainActivity.IK);
+            autoRun = k != null && java.security.MessageDigest.isEqual(k.getBytes(), MainActivity.intentKey(this).getBytes());
+        }
         if (text.length() > TEXT_MAX) {
             text = text.substring(0, TEXT_MAX);
             Toast.makeText(this, Tr.f("文字太长，只取前 {0} 字", TEXT_MAX), Toast.LENGTH_LONG).show();
@@ -125,7 +137,45 @@ public final class AskActivity extends Activity {
         setContentView(root);
         sheet.setTranslationY(dp(600));
         sheet.animate().translationY(0).setDuration(240).setInterpolator(new android.view.animation.DecelerateInterpolator(2f)).start();
-        start(suggest(), null);
+        if (waitClip) { showSource(false); setStatus(Tr.t("正在读取复制的文字…")); }
+        else start(suggest(), null);
+    }
+
+    @Override public void onWindowFocusChanged(boolean has) {
+        super.onWindowFocusChanged(has);
+        if (!has || !waitClip) return;
+        waitClip = false;
+        String clip = "";
+        try {
+            ClipboardManager cm = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
+            ClipData d = cm == null ? null : cm.getPrimaryClip();
+            if (d != null && d.getItemCount() > 0) { CharSequence c = d.getItemAt(0).coerceToText(this); if (c != null) clip = c.toString().trim(); }
+        } catch (Exception ignored) {}
+        setStatus(null);
+        if (clip.isEmpty()) { noClip(); return; }
+        if (clip.length() > TEXT_MAX) clip = clip.substring(0, TEXT_MAX);
+        text = clip;
+        app = Tr.t("剪贴板");
+        srcView.setText(text);
+        metaView.setText(Tr.f("来自「{0}」", app) + "  ·  " + Tr.f("{0} 字", text.length()));
+        showSource(true);
+        if (autoRun) start(suggest(), null);
+        else setStatus(Tr.t("选一个动作开始"));
+    }
+
+    private void showSource(boolean on) {
+        int v = on ? View.VISIBLE : View.GONE;
+        srcView.setVisibility(v); metaView.setVisibility(v); chipScroll.setVisibility(v);
+    }
+
+    /** 剪贴板是空的：说清楚怎么复制（WhatsApp 的做法），也可以直接在下面打字提问 */
+    private void noClip() {
+        turns.removeAllViews();
+        TextView m = label(Tr.t("还没有复制的文字。先复制要问的内容（WhatsApp：长按消息 → 复制），再打开「问 Aure」；也可以直接在下面输入问题。"), 15, cFg, false);
+        m.setLineSpacing(dp(3), 1f);
+        turns.addView(m);
+        input.requestFocus();
+        showActions(false);
     }
 
     // ── 窗口：透明、压暗背后的应用，面板贴底；键盘和导航栏让面板往上让 ─────────────────
@@ -183,6 +233,7 @@ public final class AskActivity extends Activity {
 
         // 选中的文字：默认三行，点一下展开
         TextView src = label(text, 14, cDim, false);
+        srcView = src;
         src.setMaxLines(3);
         src.setEllipsize(TextUtils.TruncateAt.END);
         src.setLineSpacing(dp(2), 1f);
@@ -199,6 +250,7 @@ public final class AskActivity extends Activity {
         sheet.addView(src, srcLp);
         String meta = (app != null ? Tr.f("来自「{0}」", app) + "  ·  " : "") + Tr.f("{0} 字", text.length());
         TextView metaV = label(meta, 12, cHint, false);
+        metaView = metaV;
         LinearLayout.LayoutParams mlp = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         mlp.topMargin = dp(5); mlp.leftMargin = dp(4);
         sheet.addView(metaV, mlp);
@@ -223,6 +275,7 @@ public final class AskActivity extends Activity {
             chips[i] = c;
         }
         hs.addView(chipRow);
+        chipScroll = hs;
         LinearLayout.LayoutParams hsLp = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         hsLp.topMargin = dp(12);
         sheet.addView(hs, hsLp);

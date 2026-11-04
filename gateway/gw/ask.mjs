@@ -77,13 +77,15 @@ export async function routeAsk(req, res, u, p) {
   const question = String(b.question || "").trim().slice(0, Q_MAX);
   const sessionId = typeof b.sessionId === "string" && /^[A-Za-z0-9_-]{1,80}$/.test(b.sessionId) ? b.sessionId : null;
   // 第一轮要有文字；接着问（带会话号）要有问题
-  if (sessionId ? !question : !text.trim()) return sendJson(res, 400, { error: "empty", message: L3("没有要处理的文字", "There is no text to work on", "Tidak ada teks untuk diproses") });
+  // 没有选中文字、只有问题（剪贴板是空的，用户直接打字问）：照常提问，不包资料段
+  const bare = !sessionId && !text.trim() && action === "ask" && !!question;
+  if (sessionId ? !question : !text.trim() && !bare) return sendJson(res, 400, { error: "empty", message: L3("没有要处理的文字", "There is no text to work on", "Tidak ada teks untuk diproses") });
   if (action === "ask" && !sessionId && !question) return sendJson(res, 400, { error: "empty", message: L3("先写下你的问题", "Write your question first", "Tulis pertanyaan Anda dulu") });
   const P = pickProvider({ sessionId }).P;
   if (!keyOf(P) && !P.login) return sendJson(res, 503, { error: "no_api_key", message: tz("「{name}」还没填 Key。到 设置 → 接口 里填好保存，或换一个接口。", { name: P.label || P.id }) });
   if (QUEUE.length >= 50) return sendJson(res, 429, { error: "queue_full", message: tz("排队的消息太多了。") });
 
-  const message = sessionId ? question : askMessage({ text, action, question, lang });
+  const message = sessionId || bare ? question : askMessage({ text, action, question, lang });
   res.writeHead(200, { "content-type": "application/x-ndjson; charset=utf-8", "cache-control": "no-store", "x-accel-buffering": "no" });
   res.socket?.setNoDelay?.(true);
   const send = (o) => { try { if (!res.writableEnded) res.write(JSON.stringify(o) + "\n"); } catch {} };

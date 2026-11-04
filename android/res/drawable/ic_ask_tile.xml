@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 「问 Aure」快捷设置磁贴 / 桌面快捷方式的图标：标识里那颗四角星（单色，系统按状态上色） -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="24dp" android:height="24dp" android:viewportWidth="48" android:viewportHeight="48">
+    <path android:fillColor="#FFFFFFFF"
+        android:pathData="M24,5Q26,16 37,18Q26,20 24,31Q22,20 11,18Q22,16 24,5Z" />
+    <path android:fillColor="#FFFFFFFF"
+        android:pathData="M37,30Q37.8,34.2 42,35Q37.8,35.8 37,40Q36.2,35.8 32,35Q36.2,34.2 37,30Z" />
+    <path android:fillColor="#FFFFFFFF"
+        android:pathData="M12,33Q12.6,36.4 16,37Q12.6,37.6 12,41Q11.4,37.6 8,37Q11.4,36.4 12,33Z" />
+</vector>

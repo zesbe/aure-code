@@ -55,6 +55,11 @@ Semua pilihan ini disimpan di data aplikasi sendiri, jadi menghapus cache WebVie
 
 - **Blok teks di aplikasi apa saja** (WhatsApp, Chrome, PDF, catatan…), lalu pilih **Tanya Aure** di menu yang muncul (kadang ada di balik ⋮). Panel Aure muncul di atas aplikasi itu, jadi Anda tidak perlu pindah aplikasi.
 - Aure langsung menebak yang Anda perlukan: kode → *Jelaskan kode*, teks sangat panjang → *Ringkas*, sisanya memakai pilihan terakhir Anda. Ketuk tombol lain (**Jelaskan, Terjemahkan, Ringkas, Perbaiki tulisan, Buat balasan, Jelaskan kode, Perbaiki kode**) untuk mengganti; jawaban lama langsung dihentikan.
+- **WhatsApp dan aplikasi chat lain** tidak memunculkan menu teks Android pada pesan yang diterima. Caranya: **tekan lama pesan → Salin**, lalu buka Tanya Aure dengan salah satu cara ini:
+  - **Tombol Quick Settings:** tarik panel notifikasi, ketuk **Tanya Aure**. Pasang dulu sekali lewat ✏️ (edit) di panel Quick Settings, lalu seret tombol Tanya Aure ke daftar.
+  - **Pintasan ikon:** tekan lama ikon Aure Code → **Tanya teks disalin**.
+  - **Bagikan → Tanya Aure** untuk aplikasi yang bisa membagikan teks.
+  Kalau belum ada teks yang disalin, ketik pertanyaan langsung di panel.
 - Ketik di **Tanya lanjutan…** untuk bertanya lagi soal teks yang sama.
 - **Ganti teks** menulis jawaban kembali ke kotak teks asal (muncul hanya kalau teksnya bisa diedit, misalnya saat mengetik pesan). **Salin**, **Bagikan**, dan **Lanjut di Aure** (membuka percakapan ini di aplikasi) ada di bawah jawaban.
 - Tutup dengan mengetuk di luar panel, menyeret panel ke bawah, atau tombol kembali. Jawaban yang belum selesai langsung dihentikan supaya kuota tidak terbuang.

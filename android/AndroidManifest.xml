@@ -91,6 +91,8 @@
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+            <!-- 长按桌面图标的快捷方式（问剪贴板里的文字） -->
+            <meta-data android:name="android.app.shortcuts" android:resource="@xml/shortcuts" />
             <!-- 「分享到 Aure Code」：相册 / 文件管理器 / 浏览器把东西递进来，变成输入框里的附件。
                  content:// 是按次授予读权限的，不需要存储权限 -->
             <intent-filter>
@@ -124,7 +126,26 @@
                 <category android:name="android.intent.category.DEFAULT" />
                 <data android:mimeType="text/plain" />
             </intent-filter>
+            <!-- 分享文字（「分享」菜单里的「Tanya Aure」）：只收纯文字，文件照旧分享给主界面 -->
+            <intent-filter>
+                <action android:name="android.intent.action.SEND" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:mimeType="text/plain" />
+            </intent-filter>
         </activity>
+
+        <!-- 快捷设置里的「Tanya Aure」磁贴：先在 WhatsApp 之类的应用里复制，下拉点它，问剪贴板里的文字（AskTile.java） -->
+        <service
+            android:name=".AskTile"
+            android:label="@string/ask_label"
+            android:icon="@drawable/ic_ask_tile"
+            android:exported="true"
+            android:permission="android.permission.BIND_QUICK_SETTINGS_TILE">
+            <intent-filter>
+                <action android:name="android.service.quicksettings.action.QS_TILE" />
+            </intent-filter>
+            <meta-data android:name="android.service.quicksettings.TOGGLEABLE_TILE" android:value="false" />
+        </service>
 
         <!-- Shizuku-API（MIT）：Shizuku 经这个 provider 把 binder 递给我们 -->
         <meta-data android:name="moe.shizuku.client.V3_SUPPORT" android:value="true" />

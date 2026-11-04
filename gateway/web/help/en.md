@@ -55,6 +55,11 @@ These choices are stored in the app's own data, so clearing the WebView cache wo
 
 - **Select text in any app** (WhatsApp, Chrome, a PDF, notes…) and pick **Ask Aure** in the menu that appears (sometimes behind ⋮). The Aure panel opens over that app, so you don't need to switch apps.
 - Aure guesses what you need right away: code → *Explain code*, very long text → *Summarize*, otherwise your last choice. Tap another button (**Explain, Translate, Summarize, Improve writing, Draft reply, Explain code, Fix code**) to switch; the previous answer stops at once.
+- **WhatsApp and other chat apps** don't show Android's text menu on received messages. Instead: **long-press the message → Copy**, then open Ask Aure in one of these ways:
+  - **Quick Settings tile:** pull down the notification shade and tap **Ask Aure**. Add it once via ✏️ (edit) in Quick Settings by dragging the Ask Aure tile into the list.
+  - **App icon shortcut:** long-press the Aure Code icon → **Ask copied text**.
+  - **Share → Ask Aure** in apps that can share text.
+  If nothing is copied, just type your question in the panel.
 - Type in **Ask a follow-up…** to ask more about the same text.
 - **Replace text** writes the answer back into the original text box (shown only when the text is editable, e.g. while typing a message). **Copy**, **Share** and **Continue in Aure** (opens this conversation in the app) sit under the answer.
 - Close by tapping outside the panel, dragging it down, or pressing back. An unfinished answer stops right away so no quota is wasted.

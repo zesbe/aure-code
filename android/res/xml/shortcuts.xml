@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 桌面上长按图标出现的快捷方式：「问 Aure（剪贴板里的文字）」—— 微信 / WhatsApp 这类不给系统文字菜单的应用，先复制再从这里问 -->
+<shortcuts xmlns:android="http://schemas.android.com/apk/res/android">
+    <shortcut
+        android:shortcutId="ask_clip"
+        android:enabled="true"
+        android:icon="@mipmap/ic_launcher"
+        android:shortcutShortLabel="@string/ask_clip_short"
+        android:shortcutLongLabel="@string/ask_clip_long">
+        <intent
+            android:action="cc.codtest.ASK_CLIPBOARD"
+            android:targetPackage="cc.codtest"
+            android:targetClass="cc.codtest.AskActivity" />
+    </shortcut>
+</shortcuts>

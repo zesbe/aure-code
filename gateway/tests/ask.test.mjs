@@ -137,3 +137,16 @@ test("问 Aure：资料里冒充的收尾标签被拆开；未知动作按「解
   assert.equal((m.match(/<\/selected_text>/g) || []).length, 1, "只能有网关自己那一个收尾标签");
   assert.match(askPrompt("zh", null), /reply in Simplified Chinese/);
 });
+
+test("问 Aure：剪贴板是空的、直接打字问：不包资料段，只发问题", async () => {
+  const r = await ask({ text: "", action: "ask", question: "Apa ibu kota Kalimantan Timur?" });
+  assert.equal(r.status, 200);
+  assert.ok(r.lines.some((l) => l.t === "end"));
+  const first = JSON.parse(fs.readFileSync(stdinFile, "utf8"));
+  const c = first.message.content;
+  const txt = typeof c === "string" ? c : c.map((x) => x.text || "").join("\n");
+  assert.match(txt, /^Apa ibu kota Kalimantan Timur\?/);
+  assert.doesNotMatch(txt, /selected_text/);
+  const args = fs.readFileSync(argsFile, "utf8").split("\n");
+  assert.equal(args[args.indexOf("--tools") + 1], "", "照样不给工具");
+});

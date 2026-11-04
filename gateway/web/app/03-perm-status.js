@@ -440,7 +440,8 @@
     if (!hasText && sys) return;
     const acts = document.createElement("div");
     acts.className = "msg-acts";
-    acts.innerHTML = (hasText ? actBtn("copy", t("复制")) + actBtn("share", t("转发")) : "") +
+    // 「朗读」只在外壳有语音时出（05b-voice.js）
+    acts.innerHTML = (hasText ? actBtn("copy", t("复制")) + actBtn("share", t("转发")) + (voiceHas() ? actBtn("speak", t("朗读")) : "") : "") +
       (sys ? "" : (hasText ? actBtn("fork", t("从这里分叉")) + actBtn("mark", t("书签")) : "") + actBtn("del", t("删除")));
     acts.addEventListener("click", (e) => {
       const a = e.target.closest("button")?.dataset.a, text = getText();
@@ -450,6 +451,7 @@
         else if (navigator.share) navigator.share({ text }).catch(() => {});
         else { copyText(text); toast(t("这里没有系统分享，已复制到剪贴板")); }
       }
+      if (a === "speak") voiceToggleRead(e.target.closest("button"), text);
       if (a === "fork") forkFrom(msgEl);
       if (a === "mark") toggleMark(msgEl);
       if (a === "del") deleteMsg(msgEl, "bot");

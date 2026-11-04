@@ -3482,3 +3482,29 @@ html[data-skin="goucheng"] #bridge-config-panel .bc-card{box-shadow:4px 4px 0 va
 .wl-mark .wl-star{transform-box:view-box;transform-origin:24px 17px;animation:wl-pop .5s .45s cubic-bezier(.3,1.6,.5,1) forwards}
 @keyframes wl-pop{0%{opacity:0;transform:scale(.2)}to{opacity:1;transform:scale(1)}}
 @media (prefers-reduced-motion:reduce){.wl-mark .wl-star{animation:none;opacity:1;transform:none}}
+
+/* ── 语音（05b-voice.js）：麦克风键、听写 / 语音对话浮层、朗读中的按钮 ── */
+#btn-mic svg{fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+#btn-mic.on{color:var(--accent)}
+#voice-ov{display:flex;align-items:center;gap:var(--g3);margin:0 0 var(--g2);padding:10px 12px;border-radius:20px;background:var(--bg2,var(--card));border:1px solid var(--line);box-shadow:0 4px 18px var(--shadow);animation:vo-in .22s ease-out}
+#voice-ov.hidden{display:none}
+@keyframes vo-in{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.vo-orb{position:relative;flex:none;width:52px;height:52px;border:0;border-radius:50%;padding:0;background:none;cursor:pointer;--lv:0}
+#voice-ov{--lv:0}
+.vo-orb .vo-ring{position:absolute;inset:0;border-radius:50%;background:radial-gradient(circle,#22d3ee55,#a78bfa22 60%,transparent 70%);transform:scale(calc(1 + var(--lv) * .55));transition:transform .09s linear}
+.vo-orb .vo-core{position:absolute;inset:7px;border-radius:50%;display:grid;place-items:center;color:#fff;background:linear-gradient(135deg,#34d399,#22d3ee 50%,#a78bfa)}
+.vo-orb .vo-core svg{width:20px;height:20px;fill:none;stroke:#fff;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+#voice-ov[data-phase="proc"] .vo-core,#voice-ov[data-phase="wait"] .vo-core{animation:vo-spin 1.4s linear infinite}
+#voice-ov[data-phase="speak"] .vo-ring{animation:vo-breathe 1.2s ease-in-out infinite}
+@keyframes vo-spin{to{filter:hue-rotate(360deg)}}
+@keyframes vo-breathe{0%,100%{transform:scale(1)}50%{transform:scale(1.35)}}
+.vo-mid{flex:1;min-width:0}
+.vo-phase{font-size:12.5px;color:var(--fg2);font-weight:600}
+.vo-text{font-size:15px;color:var(--fg);line-height:1.4;max-height:4.2em;overflow:hidden;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;margin-top:2px}
+.vo-acts{display:flex;flex-direction:column;gap:6px;flex:none}
+.vo-acts button{border:1px solid var(--line);background:var(--bg);color:var(--fg);border-radius:14px;padding:5px 10px;font-size:12.5px;white-space:nowrap}
+.vo-acts .vo-end{color:var(--accent)}
+.vo-acts .hidden{display:none}
+.msg-acts [data-a="speak"].speaking{color:var(--accent)}
+.msg-acts [data-a="speak"].speaking svg{animation:vo-breathe 1s ease-in-out infinite}
+@media (prefers-reduced-motion:reduce){.vo-orb .vo-ring,.vo-orb .vo-core,.msg-acts [data-a="speak"].speaking svg{animation:none!important;transition:none}}

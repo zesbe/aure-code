@@ -59,6 +59,7 @@
   const ICONS = {
     copy: '<rect x="8" y="8" width="12" height="12" rx="2.5"/><path d="M16 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2"/>',
     share: '<path d="M4 12v6a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-6"/><path d="M12 15V3"/><path d="m7 8 5-5 5 5"/>',
+    speak: '<path d="M4 9.5v5h3.5L12 18.5v-13L7.5 9.5z"/><path d="M15.5 9a4 4 0 0 1 0 6"/><path d="M18.3 6.5a7.5 7.5 0 0 1 0 11"/>',
     resend: '<path d="M3 12a9 9 0 0 1 15.5-6.2L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-15.5 6.2L3 16"/><path d="M3 21v-5h5"/>',
     fork: '<circle cx="6" cy="5" r="2"/><circle cx="6" cy="19" r="2"/><circle cx="18" cy="7" r="2"/><path d="M6 7v10"/><path d="M18 9c0 5-7 4-11.2 8.6"/>',
     rewind: '<path d="M3 12a9 9 0 1 0 3-6.7"/><path d="M3 4v5h5"/><path d="M12 8v4l3 2"/>',
@@ -67,7 +68,7 @@
   };
   // 消息底下按钮行里藏哪几个（0.4.20，设置 → 通用 → 消息下面的按钮；存 ccapp-ui.json 的 msgActs = { user: [...], bot: [...] }）。
   // 只用一段样式藏起来，不改渲染：长对话里成百上千个按钮行不用重画
-  const ACTS = { user: ["copy", "resend", "rewind", "mark", "del"], bot: ["copy", "share", "fork", "mark", "del"] };
+  const ACTS = { user: ["copy", "resend", "rewind", "mark", "del"], bot: ["copy", "share", "speak", "fork", "mark", "del"] };
   function msgActsHidden() {
     const v = uiGet("msgActs") || {}, ok = (w, a) => (Array.isArray(a) ? a.filter((k) => ACTS[w].includes(k)) : []);
     return { user: ok("user", v.user), bot: ok("bot", v.bot) };

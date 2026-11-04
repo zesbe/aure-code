@@ -136,10 +136,12 @@ public class MainActivity extends Activity {
 
     @Override protected void onDestroy() {
         if (fold != null) fold.stop();
+        if (voice != null) voice.destroy();
         super.onDestroy();
     }
 
     @Override public void onRequestPermissionsResult(int code, String[] p, int[] r) {
+        if (code == Voice.REQ_MIC) { if (voice != null) voice.onPermission(r.length > 0 && r[0] == PackageManager.PERMISSION_GRANTED); return; }
         if (code == 1) boot();   // 没给也照样跑：工作区退回私有目录
         else if (code == 2) askAllFiles();   // 通知权限问完，接着问共享存储（两个系统框别叠在一起）
     }
@@ -276,6 +278,15 @@ public class MainActivity extends Activity {
         pushWall();
         getSystemService(android.app.NotificationManager.class).cancel(41);    // Priv.toFront 的「点此回来」
         Notify.get(this).onForeground(); }                                    // 确认卡就在眼前，通知撤掉
+    // ── 语音（Voice.java）：麦克风听写、朗读回复。第一次用时才建；事件经 ccapp-voice 推给页面 ──
+    private Voice voice;
+    private Voice voice() {
+        if (voice == null) voice = new Voice(this, ev -> toPage("ccapp-voice", ev.toString()));
+        return voice;
+    }
+    /** 看不见了（切走、锁屏）：听写和朗读都停 —— 后台拿不到麦克风，也别在没人看时出声。用 onStop 不用 onPause：弹麦克风权限框时也会 onPause */
+    @Override protected void onStop() { if (voice != null) voice.pause(); super.onStop(); }
+
     @Override protected void onPause() { ui.removeCallbacks(fpsBeat); visible = false; Battery.foreground(false); super.onPause();
         if (pane != null) pane.pause();
         Notify.get(this).onBackground(); }                                    // 还有没答的确认：现在补发通知
@@ -1515,6 +1526,16 @@ public class MainActivity extends Activity {
             /** 更新说明（见 WhatsNew）：页面启动时来取，显示出来后调 whatsNewSeen */
             @android.webkit.JavascriptInterface public String whatsNew(String lang) { return WhatsNew.pending(MainActivity.this, lang); }
             @android.webkit.JavascriptInterface public void whatsNewSeen(String k) { if (!Env.bridgeOk(k)) return; WhatsNew.seen(MainActivity.this); }
+            // ── 语音（Voice.java）：listen 的 lang 是 BCP-47（id-ID、en-US…）；结果走 ccapp-voice 事件 ──
+            @android.webkit.JavascriptInterface public boolean voiceOk() { try { return android.speech.SpeechRecognizer.isRecognitionAvailable(MainActivity.this); } catch (Exception e) { return false; } }   // 桥线程上调：别在这里建 Voice
+            @android.webkit.JavascriptInterface public void voiceListen(String k, String lang) { if (!Env.bridgeOk(k)) return;
+                ui.post(() -> voice().listen(lang == null || !lang.matches("[A-Za-z]{2,3}(-[A-Za-z0-9]{2,8})*") ? "id-ID" : lang)); }
+            @android.webkit.JavascriptInterface public void voiceStop(String k) { if (!Env.bridgeOk(k)) return; ui.post(() -> voice().stop()); }
+            @android.webkit.JavascriptInterface public void voiceCancel(String k) { if (!Env.bridgeOk(k)) return; ui.post(() -> voice().cancel()); }
+            @android.webkit.JavascriptInterface public void speak(String k, String text, String lang, float rate, String id) { if (!Env.bridgeOk(k)) return;
+                if (text == null || text.length() > 200000) return;
+                ui.post(() -> voice().speak(text, lang, rate, id == null ? "" : id.replaceAll("[^A-Za-z0-9_-]", "").replaceAll("^$", "s"))); }
+            @android.webkit.JavascriptInterface public void speakStop(String k) { if (!Env.bridgeOk(k)) return; ui.post(() -> voice().stopSpeaking(false)); }
             @android.webkit.JavascriptInterface public boolean nightMode() { return systemNight(); }
             @android.webkit.JavascriptInterface public String wallColor() { return MainActivity.this.wallColor(); }
             /** 拾色外观算好的外壳配色：浅色、深色各 8 个 #rrggbb，顺序同 BrowserPane.pal 的键 */

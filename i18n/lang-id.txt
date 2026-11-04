@@ -2597,3 +2597,24 @@
 2597	Membukanya di browser menghilangkan perlindungan penampil: skrip di halaman bisa mengirim file dari foldernya ke tempat lain dan menjangkau layanan lain di perangkat ini. Lakukan hanya untuk halaman yang Anda percayai.
 2598	Nama panggilan
 2599	{m} (terbaru)
+2600	(kode dilewati)
+2601	Mendengarkan…
+2602	Mengenali…
+2603	Claude sedang menjawab…
+2604	Membacakan…
+2605	Ketuk lingkaran untuk bicara
+2606	Mode ngobrol
+2607	Ketuk untuk memotong dan bicara
+2608	Selesai
+2609	Lama tidak ada suara; mode ngobrol berhenti
+2610	Tidak terdengar suara
+2611	Perlu izin mikrofon untuk input suara
+2612	Perangkat ini tidak punya pengenal suara (pasang atau aktifkan pengetikan suara di aplikasi Google)
+2613	Pengenal suara butuh internet, dan koneksi sedang tidak tersedia
+2614	Pengenal suara belum mendukung bahasa ini
+2615	Pengenal suara gagal; coba lagi
+2616	Suara pembaca untuk bahasa ini belum terpasang: unduh di Setelan sistem → Text-to-speech
+2617	Gagal membacakan
+2618	Bacakan
+2619	Input suara
+2620	Tekan lama mikrofon untuk mode ngobrol: pesan terkirim saat Anda berhenti bicara, dan jawabannya dibacakan

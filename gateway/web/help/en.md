@@ -51,6 +51,15 @@ These choices are stored in the app's own data, so clearing the WebView cache wo
 - `/goal <condition>` keeps Claude working turn after turn until the condition is met. Background tasks and the task list appear above the input box, and each can be stopped; several background tasks fold into one line, tap it to expand.
 - The Chats page searches message content, filters, and exports or imports zips. Deleted chats stay in the trash for 30 days.
 
+## Talk by voice
+
+- **Tap 🎤** next to the send button and speak. Your words appear live in the input box; check them, then send. Tap again to cancel.
+- **Long-press 🎤 = Voice chat** (hands-free): speak → it sends when you stop talking → Claude's answer is **read aloud** → the mic turns on again. The circle moves with your voice. While an answer is being read, **tap the circle to interrupt** and talk. Tap **End** to stop.
+- While listening, tap the circle when you're done talking (no need to wait for the pause).
+- A **🔊 Read aloud** button sits under every Claude reply; tap again to stop. Code blocks are skipped. You can hide it in Settings → General → Buttons under messages.
+- The voice language follows the interface language. Recognition uses the phone's built-in service (usually Google); the microphone permission is asked the first time.
+- If you hear nothing, download a voice for your language in **System settings → Text-to-speech**. Voice chat stops when you leave the app or lock the screen.
+
 ## Ask Aure from any app
 
 - **Select text in any app** (WhatsApp, Chrome, a PDF, notes…) and pick **Ask Aure** in the menu that appears (sometimes behind ⋮). The Aure panel opens over that app, so you don't need to switch apps.

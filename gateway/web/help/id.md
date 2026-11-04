@@ -51,6 +51,15 @@ Semua pilihan ini disimpan di data aplikasi sendiri, jadi menghapus cache WebVie
 - `/goal <syarat>` membuat Claude terus bekerja giliran demi giliran sampai syaratnya terpenuhi. Tugas latar dan daftar tugas tampil di atas kotak masukan, dan masing-masing bisa dihentikan; beberapa tugas latar diringkas menjadi satu baris, ketuk untuk membukanya.
 - Halaman Chat bisa mencari isi pesan, menyaring, serta mengekspor atau mengimpor zip. Chat yang dihapus disimpan di tempat sampah selama 30 hari.
 
+## Ngobrol pakai suara
+
+- **Ketuk 🎤** di sebelah tombol kirim lalu bicara. Kata-kata Anda langsung muncul di kotak ketik; periksa dulu, lalu kirim. Ketuk lagi untuk membatalkan.
+- **Tekan lama 🎤 = Mode ngobrol** (tanpa tangan): bicara → pesan terkirim otomatis saat Anda berhenti bicara → jawaban Claude **dibacakan** → mikrofon menyala lagi. Lingkaran bergerak mengikuti suara Anda. Saat jawaban dibacakan, **ketuk lingkaran untuk memotong** dan langsung bicara. Ketuk **Selesai** untuk berhenti.
+- Saat mendengarkan, ketuk lingkaran kalau Anda sudah selesai bicara (tidak perlu menunggu jeda).
+- Tombol **🔊 Bacakan** ada di bawah setiap jawaban Claude; ketuk lagi untuk berhenti. Blok kode dilewati saat dibacakan. Tombol ini bisa disembunyikan di Pengaturan → Umum → Tombol di bawah pesan.
+- Bahasa suara mengikuti bahasa antarmuka (Bahasa Indonesia → id-ID). Pengenalan suara memakai layanan bawaan HP (biasanya Google); izin mikrofon diminta saat pertama dipakai.
+- Kalau jawaban tidak terdengar, unduh suara bahasa Indonesia di **Setelan sistem → Text-to-speech**. Mode ngobrol berhenti sendiri saat aplikasi ditutup atau layar terkunci.
+
 ## Tanya Aure dari aplikasi mana pun
 
 - **Blok teks di aplikasi apa saja** (WhatsApp, Chrome, PDF, catatan…), lalu pilih **Tanya Aure** di menu yang muncul (kadang ada di balik ⋮). Panel Aure muncul di atas aplikasi itu, jadi Anda tidak perlu pindah aplikasi.

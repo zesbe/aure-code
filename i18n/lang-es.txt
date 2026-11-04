@@ -2597,3 +2597,24 @@
 2597	Abrirla en el navegador quita la protección del visor: los scripts de la página pueden enviar a otro sitio los archivos de su carpeta y acceder a otros servicios de este dispositivo. Hazlo solo con páginas de confianza.
 2598	Apodo
 2599	{m} (más reciente)
+2600	(code skipped)
+2601	Listening…
+2602	Recognizing…
+2603	Claude is answering…
+2604	Reading aloud…
+2605	Tap the circle to talk
+2606	Voice chat
+2607	Tap to interrupt and talk
+2608	End
+2609	No speech for a while; voice chat ended
+2610	Didn't hear anything
+2611	Microphone permission is needed for voice input
+2612	No speech recognition on this device (install or enable voice typing in the Google app)
+2613	Speech recognition needs the network, which is unavailable
+2614	Speech recognition doesn't support this language
+2615	Speech recognition failed; try again
+2616	No text-to-speech voice for this language: download one in System settings → Text-to-speech
+2617	Couldn't read aloud
+2618	Read aloud
+2619	Voice input
+2620	Long-press the mic for voice chat: it sends when you stop talking and reads the answer aloud

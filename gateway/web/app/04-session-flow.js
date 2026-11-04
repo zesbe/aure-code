@@ -740,6 +740,7 @@
   // 这一轮画出来的消息记下 run 号；收尾时标上存没存稳（加书签时数「后面同样的话」要用，审查 #52 S2-02）
   function tagRun(el, runId) { if (el && el.classList.contains("msg")) el.dataset.run = runId; }
   function onRunEnd(ev) {
+    voiceRunEnd(ev);                    // 语音对话在等这一轮的回答（05b-voice.js）
     for (const m of chatEl.querySelectorAll(`.msg[data-run="${CSS.escape(ev.runId)}"]`)) m.dataset.done = ev.failed || ev.aborted ? "bad" : "ok";
     if (view.goalClearAfter && view.goalClearAfter.runId === ev.runId) {
       const sid = view.goalClearAfter.sid || ev.sessionId;

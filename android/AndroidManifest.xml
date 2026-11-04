@@ -9,6 +9,8 @@
     <uses-sdk android:minSdkVersion="26" android:targetSdkVersion="28" />
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <!-- 语音输入（麦克风键 / 语音对话，见 Voice.java）：用时才弹框要 -->
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <!-- 保活：前台服务 + 部分唤醒锁 + 申请忽略电池优化 -->
@@ -38,6 +40,9 @@
 
     <!-- 软件包可见性（30 起）：查 Shizuku 装没装、设备工具列应用 / 打开别的应用 -->
     <queries>
+        <!-- 语音：targetSdk 30+ 要声明才看得见系统的语音识别、朗读引擎 -->
+        <intent><action android:name="android.speech.RecognitionService" /></intent>
+        <intent><action android:name="android.intent.action.TTS_SERVICE" /></intent>
         <package android:name="moe.shizuku.privileged.api" />
         <!-- 可选集成「工作岛」：设置里开启后，网关用 pm list packages 检测它装没装 -->
         <package android:name="com.dafeiyu.workisland" />

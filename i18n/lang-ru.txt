@@ -2636,3 +2636,17 @@
 2636	Connected to ElevenLabs
 2637	Remove the ElevenLabs key? The system voice will be used instead.
 2638	Hi! I'm Aure. From now on I'll read my answers to you in this voice.
+2639	Free: uses the phone's built-in Google voices. Voices marked "Natural" sound the most human (need internet); if one sounds robotic, try another.
+2640	System voice
+2641	Get more voices
+2642	Read with ElevenLabs
+2643	ElevenLabs voices (paid, uses credits per character)
+2644	Tap the gear next to "Preferred engine" → Install voice data to download voices (e.g. Indonesian), then reopen this page
+2645	Couldn't read the system text-to-speech engine
+2646	Natural · online
+2647	High quality · offline
+2648	Standard · offline
+2649	not downloaded
+2650	Auto (most human-like)
+2651	No system voice for this language: tap "Get more voices" to install one
+2652	No "Natural" voice found: tap "Get more voices" and install your language in Google's speech services

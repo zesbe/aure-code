@@ -12,6 +12,7 @@ import android.speech.RecognizerIntent;
 import android.speech.SpeechRecognizer;
 import android.speech.tts.TextToSpeech;
 import android.speech.tts.UtteranceProgressListener;
+import org.json.JSONArray;
 import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
@@ -40,8 +41,13 @@ final class Voice {
     private boolean ttsReady, ttsFailed;
     private final List<Runnable> ttsWait = new ArrayList<>();
     private String speakingId;
+    /** 用户在设置里挑的系统声音（TextToSpeech.Voice 的 name）；空 = 自动挑最好的 */
+    private String prefVoice;
 
-    Voice(Activity a, Sink s) { act = a; sink = s; }
+    Voice(Activity a, Sink s) {
+        act = a; sink = s;
+        prefVoice = a.getSharedPreferences("ui", Activity.MODE_PRIVATE).getString("tts_voice", "");
+    }
 
     boolean available() {
         try { return SpeechRecognizer.isRecognitionAvailable(act); } catch (Exception e) { return false; }
@@ -141,20 +147,21 @@ final class Voice {
     /** text 是已经去掉 Markdown 的纯文字；id 由页面给，结束时原样带回 */
     void speak(String text, String lang, float rate, String id) {
         if (text == null || text.trim().isEmpty()) return;
-        Runnable go = () -> speakNow(text, lang, rate, id);
+        withTts(() -> speakNow(text, lang, rate, id), () -> emitTts("tts_error", id, "engine"));
+    }
+
+    /** 引擎好了就跑 go，起不来跑 fail */
+    private void withTts(Runnable go, Runnable fail) {
         if (ttsReady) { go.run(); return; }
-        if (ttsFailed) { emitTts("tts_error", id, "engine"); return; }
-        ttsWait.add(go);
+        if (ttsFailed) { fail.run(); return; }
+        ttsWait.add(() -> { if (ttsReady) go.run(); else fail.run(); });
         if (tts == null) {
             tts = new TextToSpeech(act.getApplicationContext(), status -> h.post(() -> {
                 ttsReady = status == TextToSpeech.SUCCESS;
                 ttsFailed = !ttsReady;
                 List<Runnable> w = new ArrayList<>(ttsWait);
                 ttsWait.clear();
-                for (Runnable r : w) {
-                    if (ttsReady) r.run();
-                    else emitTts("tts_error", id, "engine");
-                }
+                for (Runnable r : w) r.run();
             }));
             tts.setOnUtteranceProgressListener(new UtteranceProgressListener() {
                 @Override public void onStart(String u) { if (u.endsWith("#0")) h.post(() -> emitTts("tts_start", base(u), null)); }
@@ -174,6 +181,10 @@ final class Voice {
             Locale loc = Locale.forLanguageTag(lang == null || lang.isEmpty() ? "id-ID" : lang);
             int ok = tts.setLanguage(loc);
             if (ok == TextToSpeech.LANG_MISSING_DATA || ok == TextToSpeech.LANG_NOT_SUPPORTED) { emitTts("tts_error", id, "lang"); return; }
+            // setLanguage 只给这个语言的默认声音（常常是最机械的那个）：换成挑过的
+            android.speech.tts.Voice v = pick(loc);
+            if (v != null) try { tts.setVoice(v); } catch (Exception ignored) {}
+            tts.setPitch(1f);
             tts.setSpeechRate(rate > 0.3f && rate < 3f ? rate : 1f);
             speakingId = id;
             // 引擎一次收的字数有上限（多数约 4000）：按句子切成几段排队念，最后一段的 id 带 #end，念完它才算念完
@@ -188,6 +199,64 @@ final class Voice {
                 tts.speak(parts.get(i), i == 0 ? TextToSpeech.QUEUE_FLUSH : TextToSpeech.QUEUE_ADD, null, uid);
             }
         } catch (Exception e) { emitTts("tts_error", id, "speak"); }
+    }
+
+    /** 这个语言最像真人的声音：设置里挑过的优先；不然按质量 → 联网时优先「网络」声音 → 已装好的 → 延迟低 */
+    private android.speech.tts.Voice pick(Locale loc) {
+        java.util.Set<android.speech.tts.Voice> all;
+        try { all = tts.getVoices(); } catch (Exception e) { return null; }
+        if (all == null || all.isEmpty()) return null;
+        String lang = loc.getLanguage();
+        boolean online = online();
+        android.speech.tts.Voice best = null;
+        int bestScore = Integer.MIN_VALUE;
+        for (android.speech.tts.Voice v : all) {
+            if (v.getLocale() == null || !normLang(v.getLocale().getLanguage()).equals(normLang(lang))) continue;
+            boolean missing = v.getFeatures() != null && v.getFeatures().contains(TextToSpeech.Engine.KEY_FEATURE_NOT_INSTALLED);
+            if (!prefVoice.isEmpty() && v.getName().equals(prefVoice) && (!v.isNetworkConnectionRequired() || online)) return v;
+            if (missing && !v.isNetworkConnectionRequired()) continue;
+            if (v.isNetworkConnectionRequired() && !online) continue;
+            int score = v.getQuality() * 10 + (v.isNetworkConnectionRequired() ? 5 : 0) - v.getLatency()
+                + (loc.getCountry().isEmpty() || loc.getCountry().equalsIgnoreCase(v.getLocale().getCountry()) ? 3 : 0);
+            if (score > bestScore) { bestScore = score; best = v; }
+        }
+        return best;
+    }
+    private static String normLang(String l) { return "in".equals(l) ? "id" : l; }   // 旧代码 in = 印尼语
+    private boolean online() {
+        try {
+            android.net.ConnectivityManager cm = act.getSystemService(android.net.ConnectivityManager.class);
+            android.net.NetworkCapabilities nc = cm.getNetworkCapabilities(cm.getActiveNetwork());
+            return nc != null && nc.hasCapability(android.net.NetworkCapabilities.NET_CAPABILITY_VALIDATED);
+        } catch (Exception e) { return false; }
+    }
+
+    /** 设置页要声音列表：推 tts_voices {list:[{name, label, quality, network, installed}], current} */
+    void listVoices(String lang) {
+        withTts(() -> {
+            try {
+                Locale loc = Locale.forLanguageTag(lang == null || lang.isEmpty() ? "id-ID" : lang);
+                JSONArray arr = new JSONArray();
+                List<android.speech.tts.Voice> vs = new ArrayList<>();
+                for (android.speech.tts.Voice v : tts.getVoices())
+                    if (v.getLocale() != null && normLang(v.getLocale().getLanguage()).equals(normLang(loc.getLanguage()))) vs.add(v);
+                java.util.Collections.sort(vs, (a, b) -> a.getQuality() != b.getQuality() ? b.getQuality() - a.getQuality() : a.getName().compareTo(b.getName()));
+                for (android.speech.tts.Voice v : vs) {
+                    boolean missing = v.getFeatures() != null && v.getFeatures().contains(TextToSpeech.Engine.KEY_FEATURE_NOT_INSTALLED);
+                    arr.put(new JSONObject().put("name", v.getName()).put("quality", v.getQuality())
+                        .put("network", v.isNetworkConnectionRequired()).put("installed", !missing)
+                        .put("country", v.getLocale().getCountry()));
+                }
+                android.speech.tts.Voice auto = pick(loc);
+                sink.emit(new JSONObject().put("type", "tts_voices").put("list", arr).put("current", prefVoice)
+                    .put("auto", auto == null ? "" : auto.getName()).put("engine", tts.getDefaultEngine()));
+            } catch (Exception e) { emit("tts_voices_error", "code", "list"); }
+        }, () -> emit("tts_voices_error", "code", "engine"));
+    }
+
+    void setVoice(String name) {
+        prefVoice = name == null ? "" : name;
+        act.getSharedPreferences("ui", Activity.MODE_PRIVATE).edit().putString("tts_voice", prefVoice).apply();
     }
 
     private static List<String> split(String s, int max) {

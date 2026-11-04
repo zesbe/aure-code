@@ -3508,3 +3508,5 @@ html[data-skin="goucheng"] #bridge-config-panel .bc-card{box-shadow:4px 4px 0 va
 .msg-acts [data-a="speak"].speaking{color:var(--accent)}
 .msg-acts [data-a="speak"].speaking svg{animation:vo-breathe 1s ease-in-out infinite}
 @media (prefers-reduced-motion:reduce){.vo-orb .vo-ring,.vo-orb .vo-core,.msg-acts [data-a="speak"].speaking svg{animation:none!important;transition:none}}
+#tts-field details.tts-el{margin-top:var(--g3);border-top:1px solid var(--line);padding-top:var(--g2)}
+#tts-field details.tts-el summary{cursor:pointer;color:var(--fg2);font-size:13.5px;padding:4px 0}

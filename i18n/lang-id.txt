@@ -2636,3 +2636,17 @@
 2636	Terhubung ke ElevenLabs
 2637	Hapus kunci ElevenLabs? Setelah itu pakai suara sistem.
 2638	Halo! Aku Aure. Mulai sekarang jawabanku akan dibacakan dengan suara ini.
+2639	Gratis: memakai suara Google bawaan HP. Suara bertanda "Natural" paling mirip manusia (butuh internet); kalau terdengar robot, coba ganti yang lain.
+2640	Suara sistem
+2641	Unduh suara lain
+2642	Bacakan dengan ElevenLabs
+2643	Suara ElevenLabs (berbayar, memotong kredit per karakter)
+2644	Ketuk ikon gerigi di samping "Mesin pilihan" → Instal data suara untuk mengunduh suara (mis. Bahasa Indonesia), lalu buka lagi halaman ini
+2645	Mesin text-to-speech sistem tidak terbaca
+2646	Natural · butuh internet
+2647	Kualitas tinggi · offline
+2648	Standar · offline
+2649	belum diunduh
+2650	Otomatis (paling mirip manusia)
+2651	Belum ada suara sistem untuk bahasa ini: ketuk "Unduh suara lain" untuk memasangnya
+2652	Suara "Natural" tidak ditemukan: ketuk "Unduh suara lain" lalu pasang Bahasa Indonesia di layanan suara Google

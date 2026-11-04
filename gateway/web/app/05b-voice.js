@@ -254,6 +254,8 @@
         break;
       case "paused": voiceStopSpeak(); voiceEnd(false); break;
       case "tts_start": break;
+      case "tts_voices": sysVoicesPaint(ev); break;
+      case "tts_voices_error": { const n = document.getElementById("sys-note"); if (n) n.textContent = t("读不到系统的朗读引擎"); break; }
       case "tts_done":
       case "tts_error":
         if (ev.type === "tts_error") toast(t(ev.code === "lang" ? "这台设备没装这个语言的朗读语音：到 系统设置 → 文字转语音 里下载" : "朗读出错了"), true);
@@ -291,6 +293,31 @@
     });
   })();
 
+  /** 不管有没有 ElevenLabs，都用系统声音念（设置页试听系统声音用） */
+  function voiceSpeakSys(text, btn) {
+    voiceStopSpeak();
+    const id = "s" + Date.now().toString(36);
+    VOICE.speakId = id; VOICE.actBtn = btn || null;
+    if (btn) btn.classList.add("speaking");
+    try { CCApp.speak(text, voiceLang(), 1.05, id); } catch { voiceSpeakEnded(id); }
+  }
+  /** Google 的声音名像 id-id-x-dfz-network：取中间那段当编号，按质量 / 网络起个好懂的名字 */
+  function sysVoicesPaint(ev) {
+    const sel = document.getElementById("sys-voice"); if (!sel) return;
+    const list = ev.list || [];
+    const lab = (v, i) => {
+      const tag = (v.name.match(/-x-([a-z0-9]+)-/i) || [])[1] || String(i + 1);
+      const kind = v.network ? t("自然 · 要联网") : v.quality >= 400 ? t("高音质 · 离线") : t("标准 · 离线");
+      return `${t("声音")} ${tag.toUpperCase()} — ${kind}${v.installed ? "" : " · " + t("未下载")}`;
+    };
+    const autoName = list.find((v) => v.name === ev.auto);
+    sel.innerHTML = `<option value="">${esc(t("自动（选最像真人的）"))}${autoName ? " — " + esc(lab(autoName, list.indexOf(autoName))) : ""}</option>` +
+      list.map((v, i) => `<option value="${esc(v.name)}" ${v.name === ev.current ? "selected" : ""}>${esc(lab(v, i))}</option>`).join("");
+    const note = document.getElementById("sys-note");
+    if (note) note.textContent = !list.length ? t("没有这个语言的系统声音：点「下载更多声音」装一个")
+      : list.some((v) => v.network) ? "" : t("没找到「自然」声音：点「下载更多声音」，在 Google 语音里装上印尼语");
+  }
+
   // ── 设置 → 设备与权限 → 朗读声音（ElevenLabs）：Key 只交给网关，界面只看末 4 位 ──
   (function ttsSettingsMount() {
     if (!voiceHas()) return;
@@ -305,17 +332,23 @@
     function paint() {
       const c = EL.cfg || { hasKey: false, models: [] };
       const MN = { eleven_flash_v2_5: t("Flash v2.5（最快，省额度）"), eleven_multilingual_v2: t("Multilingual v2（最自然）"), eleven_turbo_v2_5: "Turbo v2.5", eleven_v3: t("v3（最有感情，较慢）") };
-      box.innerHTML = `<div class="srow head"><div class="sl"><b>${esc(t("朗读声音"))}</b>
-          <p>${esc(t("系统朗读听起来很机械：填上 ElevenLabs 的 API Key，回复和语音对话就用 ElevenLabs 的真人声音念。Key 只存在本机网关里。"))}</p></div>
-          ${c.hasKey ? `<div class="sc"><input type="checkbox" class="sw" id="tts-on" ${c.enabled ? "checked" : ""}></div>` : ""}</div>
-        <div class="prov-state">${c.hasKey ? esc(t("已连接 ElevenLabs（Key 末 4 位 {k}）", { k: c.keyTail })) : esc(t("现在用的是系统朗读"))}</div>
+      const sys = `<div class="srow head"><div class="sl"><b>${esc(t("朗读声音"))}</b>
+          <p>${esc(t("免费：用手机自带的 Google 语音。选带「自然」的声音最像真人（要联网）；觉得机械就换一个试试。"))}</p></div></div>
+        <div class="srow sub"><div class="sl"><p>${esc(t("系统声音"))}</p></div><div class="sc"><select id="sys-voice"><option value="">${esc(t("加载中…"))}</option></select></div></div>
+        <div class="row-actions"><button class="btn sm" id="sys-test">${esc(t("试听"))}</button><button class="btn sm" id="sys-dl">${esc(t("下载更多声音"))}</button></div>
+        <p class="prov-state" id="sys-note"></p>`;
+      const elPart = `<div class="prov-state">${c.hasKey ? esc(t("已连接 ElevenLabs（Key 末 4 位 {k}）", { k: c.keyTail })) : esc(t("现在用的是系统朗读"))}</div>
         ${c.hasKey ? `
+        <div class="srow sub"><div class="sl"><p>${esc(t("用 ElevenLabs 朗读"))}</p></div><div class="sc"><input type="checkbox" class="sw" id="tts-on" ${c.enabled ? "checked" : ""}></div></div>
         <div class="srow sub"><div class="sl"><p>${esc(t("声音"))}</p></div><div class="sc"><select id="tts-voice"><option value="${esc(c.voiceId)}">${esc(c.voiceName || t("加载中…"))}</option></select></div></div>
         <div class="srow sub"><div class="sl"><p>${esc(t("模型"))}</p></div><div class="sc"><select id="tts-model">${c.models.map((m) => `<option value="${m}" ${m === c.model ? "selected" : ""}>${esc(MN[m] || m)}</option>`).join("")}</select></div></div>
         <div class="row-actions"><button class="btn sm" id="tts-test">${esc(t("试听"))}</button><button class="btn sm" id="tts-del">${esc(t("删除 Key"))}</button></div>`
         : `<div class="sinline"><input id="tts-key" type="password" autocomplete="off" spellcheck="false" placeholder="${esc(t("粘贴 ElevenLabs API Key"))}"><button class="btn sm" id="tts-save">${esc(t("保存"))}</button></div>
         <div class="row-actions"><button class="btn sm" id="tts-get">${esc(t("去 ElevenLabs 拿 Key"))}</button></div>
         <p class="prov-state">${esc(t("在 ElevenLabs 网站：头像 → API Keys → Create API Key，至少勾上 Text to Speech 和 Voices（读取），复制后粘贴到这里。"))}</p>`}`;
+      // ElevenLabs 收在折叠里：要花额度，默认不展开（已经接上了就展开）
+      box.innerHTML = sys + `<details class="tts-el"${c.hasKey ? " open" : ""}><summary>${esc(t("ElevenLabs 声音（付费，按字数扣额度）"))}</summary>${elPart}</details>`;
+      try { CCApp.ttsVoices(voiceLang()); } catch {}
       if (c.hasKey) loadVoices();
     }
     async function loadVoices() {
@@ -329,6 +362,8 @@
     }
     box.addEventListener("click", async (e) => {
       const id = e.target.closest("button")?.id;
+      if (id === "sys-test") voiceSpeakSys(t("你好！我是 Aure。以后我的回答就用这个声音读给你听。"), e.target);
+      if (id === "sys-dl") { try { CCApp.ttsSettings(); } catch {} toast(t("在「首选引擎」旁的齿轮 → 安装语音数据 里下载印尼语等声音，回来后重新打开这一页")); }
       if (id === "tts-get") { const u = "https://elevenlabs.io/app/settings/api-keys"; if (window.CCApp && CCApp.openUrl) CCApp.openUrl(u); else window.open(u, "_blank"); }
       if (id === "tts-save") {
         const k = box.querySelector("#tts-key").value.trim(); if (!k) return;
@@ -344,6 +379,7 @@
     });
     box.addEventListener("change", async (e) => {
       try {
+        if (e.target.id === "sys-voice") { try { CCApp.ttsSetVoice(e.target.value); } catch {} voiceSpeakSys(t("你好！我是 Aure。以后我的回答就用这个声音读给你听。")); return; }
         if (e.target.id === "tts-on") EL.cfg = await post({ enabled: e.target.checked });
         if (e.target.id === "tts-model") EL.cfg = await post({ model: e.target.value });
         if (e.target.id === "tts-voice") { const o = e.target.selectedOptions[0]; EL.cfg = await post({ voiceId: e.target.value, voiceName: (o?.textContent || "").split(" — ")[0] }); }

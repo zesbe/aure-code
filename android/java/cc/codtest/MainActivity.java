@@ -1536,6 +1536,15 @@ public class MainActivity extends Activity {
                 if (text == null || text.length() > 200000) return;
                 ui.post(() -> voice().speak(text, lang, rate, id == null ? "" : id.replaceAll("[^A-Za-z0-9_-]", "").replaceAll("^$", "s"))); }
             @android.webkit.JavascriptInterface public void speakStop(String k) { if (!Env.bridgeOk(k)) return; ui.post(() -> voice().stopSpeaking(false)); }
+            /** 设置页：列出系统朗读声音（结果走 ccapp-voice 的 tts_voices）、选一个（空 = 自动）、打开系统的文字转语音设置下载声音 */
+            @android.webkit.JavascriptInterface public void ttsVoices(String k, String lang) { if (!Env.bridgeOk(k)) return; ui.post(() -> voice().listVoices(lang)); }
+            @android.webkit.JavascriptInterface public void ttsSetVoice(String k, String name) { if (!Env.bridgeOk(k)) return;
+                if (name != null && name.length() < 200) ui.post(() -> voice().setVoice(name)); }
+            @android.webkit.JavascriptInterface public void ttsSettings(String k) { if (!Env.bridgeOk(k)) return;
+                ui.post(() -> {
+                    try { startActivity(new Intent("com.android.settings.TTS_SETTINGS").addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)); }
+                    catch (Exception e) { try { startActivity(new Intent(android.provider.Settings.ACTION_SETTINGS)); } catch (Exception ignored) {} }
+                }); }
             @android.webkit.JavascriptInterface public boolean nightMode() { return systemNight(); }
             @android.webkit.JavascriptInterface public String wallColor() { return MainActivity.this.wallColor(); }
             /** 拾色外观算好的外壳配色：浅色、深色各 8 个 #rrggbb，顺序同 BrowserPane.pal 的键 */

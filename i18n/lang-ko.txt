@@ -2618,3 +2618,21 @@
 2618	Read aloud
 2619	Voice input
 2620	Long-press the mic for voice chat: it sends when you stop talking and reads the answer aloud
+2621	ElevenLabs couldn't read it; using the system voice: {msg}
+2622	Flash v2.5 (fastest, cheapest)
+2623	Multilingual v2 (most natural)
+2624	v3 (most expressive, slower)
+2625	Read-aloud voice
+2626	The system voice sounds robotic: add an ElevenLabs API key and replies and voice chat are read in ElevenLabs' natural voices. The key stays in this device's gateway.
+2627	Connected to ElevenLabs (key ending {k})
+2628	Using the system voice
+2629	Voice
+2630	Preview
+2631	Remove key
+2632	Paste your ElevenLabs API key
+2633	Get a key from ElevenLabs
+2634	On the ElevenLabs site: avatar → API Keys → Create API Key, enable at least Text to Speech and Voices (read), then copy and paste it here.
+2635	Checking…
+2636	Connected to ElevenLabs
+2637	Remove the ElevenLabs key? The system voice will be used instead.
+2638	Hi! I'm Aure. From now on I'll read my answers to you in this voice.

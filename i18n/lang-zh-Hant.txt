@@ -2618,3 +2618,21 @@
 2618	朗读
 2619	语音输入
 2620	长按麦克风进入语音对话：说完自动发送，回答会读给你听
+2621	ElevenLabs 朗读失败，改用系统朗读：{msg}
+2622	Flash v2.5（最快，省额度）
+2623	Multilingual v2（最自然）
+2624	v3（最有感情，较慢）
+2625	朗读声音
+2626	系统朗读听起来很机械：填上 ElevenLabs 的 API Key，回复和语音对话就用 ElevenLabs 的真人声音念。Key 只存在本机网关里。
+2627	已连接 ElevenLabs（Key 末 4 位 {k}）
+2628	现在用的是系统朗读
+2629	声音
+2630	试听
+2631	删除 Key
+2632	粘贴 ElevenLabs API Key
+2633	去 ElevenLabs 拿 Key
+2634	在 ElevenLabs 网站：头像 → API Keys → Create API Key，至少勾上 Text to Speech 和 Voices（读取），复制后粘贴到这里。
+2635	验证中…
+2636	已连接 ElevenLabs
+2637	删除 ElevenLabs 的 Key？之后改用系统朗读。
+2638	你好！我是 Aure。以后我的回答就用这个声音读给你听。

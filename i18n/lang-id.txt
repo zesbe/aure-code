@@ -2618,3 +2618,21 @@
 2618	Bacakan
 2619	Input suara
 2620	Tekan lama mikrofon untuk mode ngobrol: pesan terkirim saat Anda berhenti bicara, dan jawabannya dibacakan
+2621	ElevenLabs gagal membacakan; pakai suara sistem: {msg}
+2622	Flash v2.5 (paling cepat, hemat kredit)
+2623	Multilingual v2 (paling natural)
+2624	v3 (paling ekspresif, lebih lambat)
+2625	Suara pembaca
+2626	Suara sistem terdengar seperti robot: isi kunci API ElevenLabs agar jawaban dan mode ngobrol dibacakan dengan suara alami ElevenLabs. Kuncinya hanya disimpan di gateway perangkat ini.
+2627	Terhubung ke ElevenLabs (kunci berakhiran {k})
+2628	Sekarang memakai suara sistem
+2629	Suara
+2630	Coba dengar
+2631	Hapus kunci
+2632	Tempel kunci API ElevenLabs
+2633	Ambil kunci di ElevenLabs
+2634	Di situs ElevenLabs: avatar → API Keys → Create API Key, centang minimal Text to Speech dan Voices (read), lalu salin dan tempel di sini.
+2635	Memeriksa…
+2636	Terhubung ke ElevenLabs
+2637	Hapus kunci ElevenLabs? Setelah itu pakai suara sistem.
+2638	Halo! Aku Aure. Mulai sekarang jawabanku akan dibacakan dengan suara ini.

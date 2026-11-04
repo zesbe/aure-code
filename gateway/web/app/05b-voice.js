@@ -126,6 +126,69 @@
   };
 
   // ── 朗读 ──
+  //  有 ElevenLabs（设置 → 设备与权限 → 朗读声音）就经网关 /api/tts 合成 mp3 播（念下一段时预取再下一段）；
+  //  没有、或者出错，退回外壳的系统朗读（CCApp.speak）。两条路结束都走 voiceSpeakEnded。
+  const EL = { cfg: null, audio: null, ac: null, url: "", warned: false };
+  async function elLoad() { try { EL.cfg = await api("/api/tts/config"); } catch { EL.cfg = null; } return EL.cfg; }
+  const elOn = () => !!(EL.cfg && EL.cfg.enabled);
+  /** 按句子切段：第一段短一点，先响起来 */
+  function elChunks(s) {
+    const out = []; let rest = s;
+    while (rest) {
+      const max = out.length ? 1400 : 320;
+      if (rest.length <= max) { out.push(rest); break; }
+      let cut = -1;
+      for (const sep of ["\n\n", ". ", "! ", "? ", "。", "\n", ", ", " "]) { const k = rest.lastIndexOf(sep, max); if (k > max / 3) { cut = k + sep.length; break; } }
+      if (cut <= 0) cut = max;
+      out.push(rest.slice(0, cut).trim()); rest = rest.slice(cut).trim();
+    }
+    return out.filter(Boolean);
+  }
+  function elFetch(text, signal) {
+    return fetch("/api/tts", { method: "POST", signal, headers: { "content-type": "application/json", "X-CC-Lang": I18N.lang },
+      body: JSON.stringify({ text, lang: String(I18N.lang).slice(0, 2) }) })
+      .then(async (r) => {
+        if (!r.ok) { let m = "HTTP " + r.status; try { const j = await r.json(); m = j.message || j.error || m; } catch {} throw new Error(m); }
+        return r.blob();
+      });
+  }
+  async function elSpeak(s, id) {
+    const ac = new AbortController(); EL.ac = ac;
+    const parts = elChunks(s);
+    let next = elFetch(parts[0], ac.signal);
+    for (let i = 0; i < parts.length; i++) {
+      let blob;
+      try { blob = await next; }
+      catch (e) {
+        if (ac.signal.aborted || VOICE.speakId !== id) return;
+        // 第一段就失败：整段改用系统朗读；中途失败：剩下的用系统朗读接着念
+        if (!EL.warned) { EL.warned = true; toast(t("ElevenLabs 朗读失败，改用系统朗读：{msg}", { msg: e.message }), true); }
+        try { CCApp.speak(parts.slice(i).join(" "), voiceLang(), 1.05, id); } catch { voiceSpeakEnded(id, true); }
+        return;
+      }
+      if (ac.signal.aborted || VOICE.speakId !== id) return;
+      if (i + 1 < parts.length) next = elFetch(parts[i + 1], ac.signal);
+      const url = URL.createObjectURL(blob);
+      const a = new Audio(url);
+      EL.audio = a; EL.url = url;
+      const ok = await new Promise((done) => {
+        a.onended = () => done(true);
+        a.onerror = () => done(false);
+        a.play().catch(() => done(false));
+      });
+      URL.revokeObjectURL(url);
+      if (EL.audio === a) { EL.audio = null; EL.url = ""; }
+      if (ac.signal.aborted || VOICE.speakId !== id) return;
+      if (!ok) { toast(t("朗读出错了"), true); return voiceSpeakEnded(id, true); }
+    }
+    voiceSpeakEnded(id, false);
+  }
+  function elStop() {
+    if (EL.ac) { try { EL.ac.abort(); } catch {} EL.ac = null; }
+    if (EL.audio) { try { EL.audio.pause(); } catch {} EL.audio = null; }
+    if (EL.url) { URL.revokeObjectURL(EL.url); EL.url = ""; }
+  }
+
   function voiceSpeak(text, id, btn) {
     const s = speakable(text);
     if (!s) return false;
@@ -133,14 +196,23 @@
     VOICE.speakId = id;
     VOICE.actBtn = btn || null;
     if (btn) btn.classList.add("speaking");
+    if (elOn()) { elSpeak(s, id); return true; }
     try { CCApp.speak(s, voiceLang(), 1.05, id); } catch (e) { VOICE.speakId = null; toast(e.message, true); return false; }
     return true;
   }
   function voiceStopSpeak() {
+    elStop();
     if (VOICE.speakId) { try { CCApp.speakStop(); } catch {} }
     VOICE.speakId = null;
     if (VOICE.actBtn) VOICE.actBtn.classList.remove("speaking");
     VOICE.actBtn = null;
+  }
+  /** 念完 / 念不下去：语音对话里接着听 */
+  function voiceSpeakEnded(id) {
+    if (!id || id !== VOICE.speakId) return;
+    VOICE.speakId = null;
+    if (VOICE.actBtn) { VOICE.actBtn.classList.remove("speaking"); VOICE.actBtn = null; }
+    if (VOICE.mode === "chat" && VOICE.phase === "speak") voiceListen();
   }
   /** 回复底下的「朗读」键（03-perm-status.js 的 replyActs 调） */
   function voiceToggleRead(btn, text) {
@@ -185,11 +257,7 @@
       case "tts_done":
       case "tts_error":
         if (ev.type === "tts_error") toast(t(ev.code === "lang" ? "这台设备没装这个语言的朗读语音：到 系统设置 → 文字转语音 里下载" : "朗读出错了"), true);
-        if (ev.id && ev.id === VOICE.speakId) {
-          VOICE.speakId = null;
-          if (VOICE.actBtn) { VOICE.actBtn.classList.remove("speaking"); VOICE.actBtn = null; }
-          if (VOICE.mode === "chat" && VOICE.phase === "speak") voiceListen();      // 念完了：接着听
-        }
+        voiceSpeakEnded(ev.id);           // 念完了：语音对话里接着听
         break;
     }
   });
@@ -199,6 +267,7 @@
     let ok = false;
     try { ok = voiceHas() && CCApp.voiceOk(); } catch {}
     if (!ok) return;
+    elLoad();
     const b = document.createElement("button");
     b.id = "btn-mic";
     b.className = "mini-btn";
@@ -220,4 +289,66 @@
       // 第一次用：顺便说一下长按能语音对话
       try { if (!localStorage.getItem("cc.voiceTip")) { localStorage.setItem("cc.voiceTip", "1"); setTimeout(() => toast(t("长按麦克风进入语音对话：说完自动发送，回答会读给你听")), 1800); } } catch {}
     });
+  })();
+
+  // ── 设置 → 设备与权限 → 朗读声音（ElevenLabs）：Key 只交给网关，界面只看末 4 位 ──
+  (function ttsSettingsMount() {
+    if (!voiceHas()) return;
+    const cat = document.querySelector('.set-cat[data-cat="device"]');
+    if (!cat) return;
+    const box = document.createElement("div");
+    box.className = "sblock";
+    box.id = "tts-field";
+    cat.appendChild(box);
+    let voices = null;
+    const post = (body) => api("/api/tts/config", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify(body) });
+    function paint() {
+      const c = EL.cfg || { hasKey: false, models: [] };
+      const MN = { eleven_flash_v2_5: t("Flash v2.5（最快，省额度）"), eleven_multilingual_v2: t("Multilingual v2（最自然）"), eleven_turbo_v2_5: "Turbo v2.5", eleven_v3: t("v3（最有感情，较慢）") };
+      box.innerHTML = `<div class="srow head"><div class="sl"><b>${esc(t("朗读声音"))}</b>
+          <p>${esc(t("系统朗读听起来很机械：填上 ElevenLabs 的 API Key，回复和语音对话就用 ElevenLabs 的真人声音念。Key 只存在本机网关里。"))}</p></div>
+          ${c.hasKey ? `<div class="sc"><input type="checkbox" class="sw" id="tts-on" ${c.enabled ? "checked" : ""}></div>` : ""}</div>
+        <div class="prov-state">${c.hasKey ? esc(t("已连接 ElevenLabs（Key 末 4 位 {k}）", { k: c.keyTail })) : esc(t("现在用的是系统朗读"))}</div>
+        ${c.hasKey ? `
+        <div class="srow sub"><div class="sl"><p>${esc(t("声音"))}</p></div><div class="sc"><select id="tts-voice"><option value="${esc(c.voiceId)}">${esc(c.voiceName || t("加载中…"))}</option></select></div></div>
+        <div class="srow sub"><div class="sl"><p>${esc(t("模型"))}</p></div><div class="sc"><select id="tts-model">${c.models.map((m) => `<option value="${m}" ${m === c.model ? "selected" : ""}>${esc(MN[m] || m)}</option>`).join("")}</select></div></div>
+        <div class="row-actions"><button class="btn sm" id="tts-test">${esc(t("试听"))}</button><button class="btn sm" id="tts-del">${esc(t("删除 Key"))}</button></div>`
+        : `<div class="sinline"><input id="tts-key" type="password" autocomplete="off" spellcheck="false" placeholder="${esc(t("粘贴 ElevenLabs API Key"))}"><button class="btn sm" id="tts-save">${esc(t("保存"))}</button></div>
+        <div class="row-actions"><button class="btn sm" id="tts-get">${esc(t("去 ElevenLabs 拿 Key"))}</button></div>
+        <p class="prov-state">${esc(t("在 ElevenLabs 网站：头像 → API Keys → Create API Key，至少勾上 Text to Speech 和 Voices（读取），复制后粘贴到这里。"))}</p>`}`;
+      if (c.hasKey) loadVoices();
+    }
+    async function loadVoices() {
+      const sel = box.querySelector("#tts-voice"); if (!sel) return;
+      try {
+        if (!voices) voices = (await api("/api/tts/voices")).voices || [];
+        const cur = EL.cfg.voiceId;
+        if (voices.length && !voices.some((v) => v.id === cur)) voices.unshift({ id: cur, name: EL.cfg.voiceName || cur, desc: "" });
+        sel.innerHTML = voices.map((v) => `<option value="${esc(v.id)}" ${v.id === cur ? "selected" : ""}>${esc(v.name + (v.desc ? " — " + v.desc : ""))}</option>`).join("");
+      } catch (e) { toast(e.message, true); }
+    }
+    box.addEventListener("click", async (e) => {
+      const id = e.target.closest("button")?.id;
+      if (id === "tts-get") { const u = "https://elevenlabs.io/app/settings/api-keys"; if (window.CCApp && CCApp.openUrl) CCApp.openUrl(u); else window.open(u, "_blank"); }
+      if (id === "tts-save") {
+        const k = box.querySelector("#tts-key").value.trim(); if (!k) return;
+        const b = e.target; b.disabled = true; b.textContent = t("验证中…");
+        try { EL.cfg = await post({ apiKey: k }); EL.warned = false; voices = null; toast(t("已连接 ElevenLabs")); paint(); }
+        catch (err) { toast(err.message, true); b.disabled = false; b.textContent = t("保存"); }
+      }
+      if (id === "tts-del") {
+        if (!confirm(t("删除 ElevenLabs 的 Key？之后改用系统朗读。"))) return;
+        try { EL.cfg = await post({ clearKey: true }); voices = null; paint(); } catch (err) { toast(err.message, true); }
+      }
+      if (id === "tts-test") voiceSpeak(t("你好！我是 Aure。以后我的回答就用这个声音读给你听。"), "t" + Date.now().toString(36), e.target);
+    });
+    box.addEventListener("change", async (e) => {
+      try {
+        if (e.target.id === "tts-on") EL.cfg = await post({ enabled: e.target.checked });
+        if (e.target.id === "tts-model") EL.cfg = await post({ model: e.target.value });
+        if (e.target.id === "tts-voice") { const o = e.target.selectedOptions[0]; EL.cfg = await post({ voiceId: e.target.value, voiceName: (o?.textContent || "").split(" — ")[0] }); }
+        EL.warned = false;
+      } catch (err) { toast(err.message, true); }
+    });
+    elLoad().then(paint);
   })();

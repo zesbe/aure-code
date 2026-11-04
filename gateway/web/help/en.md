@@ -58,6 +58,7 @@ These choices are stored in the app's own data, so clearing the WebView cache wo
 - While listening, tap the circle when you're done talking (no need to wait for the pause).
 - A **🔊 Read aloud** button sits under every Claude reply; tap again to stop. Code blocks are skipped. You can hide it in Settings → General → Buttons under messages.
 - The voice language follows the interface language. Recognition uses the phone's built-in service (usually Google); the microphone permission is asked the first time.
+- **More natural voices (ElevenLabs):** open **Settings → Device & permissions → Read-aloud voice**, tap *Get a key from ElevenLabs*, create an API key (enable at least *Text to Speech* and *Voices*), and paste it. Pick a voice from your account and a model (*Flash v2.5* is fastest and cheapest; *Multilingual v2* sounds most natural), then tap *Preview*. The key stays in the phone's gateway. If credits run out or there's no internet, it falls back to the system voice.
 - If you hear nothing, download a voice for your language in **System settings → Text-to-speech**. Voice chat stops when you leave the app or lock the screen.
 
 ## Ask Aure from any app

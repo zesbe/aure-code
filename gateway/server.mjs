@@ -61,6 +61,7 @@ import { customRefresh, routeCustom } from "./gw/custom.mjs";
 import { routeBus } from "./gw/bus.mjs";
 import { routeQueue } from "./gw/queue.mjs";
 import { routeAsk } from "./gw/ask.mjs";
+import { routeTts } from "./gw/tts.mjs";
 import { routeLogin } from "./gw/login.mjs";
 import { routeRun } from "./gw/run.mjs";
 import { routeOffice } from "./gw/office.mjs";
@@ -87,7 +88,7 @@ import { COOKIE, SESSION, UI_HOST, cookieHostOk, denyLog, denyReason, localAddr,
 import { startWorkIsland, stopWorkIslandSync } from "./gw/work-island.mjs";
 
 // 各模块的路由函数，按原来分支的先后排；返回 NEXT 表示不归它管
-const ROUTES = [routeClaude, routeFeedback, routeUsage, routeCaps, routeProviders, routeSettings, routeProjects, routeBookmarks, routeFonts, commandRoutes(builtinCommands), routeUi, routeSched, routeSessModel, routeBackfill, routeMerge, routeProfile, routeLineage, routeArchive, routeSessions, routeExtensions, routeModels, routeTerminal, routeComponents, routeModules, routeOrphans, routeCustom, routeGit, routeLocal, routeOffice, routeFiles, routePreview, routeBus, routeAsk, routeQueue, routeDevside, routeLogin, routeRun, routeNotices, routeReconcile];
+const ROUTES = [routeClaude, routeFeedback, routeUsage, routeCaps, routeProviders, routeSettings, routeProjects, routeBookmarks, routeFonts, commandRoutes(builtinCommands), routeUi, routeSched, routeSessModel, routeBackfill, routeMerge, routeProfile, routeLineage, routeArchive, routeSessions, routeExtensions, routeModels, routeTerminal, routeComponents, routeModules, routeOrphans, routeCustom, routeGit, routeLocal, routeOffice, routeFiles, routePreview, routeBus, routeAsk, routeTts, routeQueue, routeDevside, routeLogin, routeRun, routeNotices, routeReconcile];
 
 // ── 路由 ──────────────────────────────────────────────────────────────
 const server = http.createServer(async (req, res) => {

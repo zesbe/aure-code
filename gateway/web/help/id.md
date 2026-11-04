@@ -58,6 +58,7 @@ Semua pilihan ini disimpan di data aplikasi sendiri, jadi menghapus cache WebVie
 - Saat mendengarkan, ketuk lingkaran kalau Anda sudah selesai bicara (tidak perlu menunggu jeda).
 - Tombol **🔊 Bacakan** ada di bawah setiap jawaban Claude; ketuk lagi untuk berhenti. Blok kode dilewati saat dibacakan. Tombol ini bisa disembunyikan di Pengaturan → Umum → Tombol di bawah pesan.
 - Bahasa suara mengikuti bahasa antarmuka (Bahasa Indonesia → id-ID). Pengenalan suara memakai layanan bawaan HP (biasanya Google); izin mikrofon diminta saat pertama dipakai.
+- **Suara lebih natural (ElevenLabs):** buka **Pengaturan → Perangkat & izin → Suara pembaca**, ketuk *Ambil kunci di ElevenLabs*, buat API Key (centang minimal *Text to Speech* dan *Voices*), lalu tempel. Pilih suara dari akun Anda, pilih model (*Flash v2.5* paling cepat dan hemat; *Multilingual v2* paling natural), lalu ketuk *Coba dengar*. Kunci hanya disimpan di gateway HP. Kalau kredit habis atau tidak ada internet, otomatis kembali ke suara sistem.
 - Kalau jawaban tidak terdengar, unduh suara bahasa Indonesia di **Setelan sistem → Text-to-speech**. Mode ngobrol berhenti sendiri saat aplikasi ditutup atau layar terkunci.
 
 ## Tanya Aure dari aplikasi mana pun

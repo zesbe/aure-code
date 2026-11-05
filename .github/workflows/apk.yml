@@ -109,4 +109,4 @@ jobs:
           path: |
             dist/aurecode.apk
             dist/aurecode-36.apk
-          retention-days: 30
+          retention-days: 7
